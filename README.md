@@ -1,0 +1,2 @@
+# onfocus
+my weblog
