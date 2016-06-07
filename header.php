@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php $page = $_SERVER["PHP_SELF"]; ?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -17,15 +17,13 @@
 	<title><?php print $pagetitle ?></title>
 	<script src="//www.onfocus.com/swfobject.js"></script>
 	<style>
+		<?php if ($page == "/archive.php") { ?>@import url( //www.google.com/cse/api/branding.css);<?php } ?>
 		.twitter {
 			padding-left:22px;
 			background:url(http://www.onfocus.com/images/twitterbird.gif) no-repeat 0px 7px;
 		}
 	</style>
 </head>
-<?php 
-$page = $_SERVER["PHP_SELF"];
-?>
 <body>
 <div id="header" onclick="document.location='/';">
 	<div id="infobox">
