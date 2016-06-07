@@ -231,7 +231,7 @@ else {
 </div>
 <div id="bottom"></div>
 <?php if ($thisToken != '') { ?><script type="text/javascript" language="javascript">var token = '<?php print $thisToken; ?>';</script><?php } ?>
-<script type="text/javascript" src="http://www.onfocus.com/post030609-min.js"></script>
+<script type="text/javascript" src="//www.onfocus.com/post030609-min.js"></script>
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
