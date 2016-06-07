@@ -16,7 +16,7 @@ require("header.php");
 		</div>
 		<br />
 		<div style="margin-top:5px;">
-		From 2006-22016 I worked at <a href="//www.metafilter.com/">MetaFilter</a>, an amazing online community. If you want to know more about MetaFilter, start with <a href="//vimeo.com/11916466">this talk by Matt Haughey</a>&mdash;it's a great introduction.
+		From 2006-2016 I worked at <a href="//www.metafilter.com/">MetaFilter</a>, an amazing online community. If you want to know more about MetaFilter, start with <a href="//vimeo.com/11916466">this talk by Matt Haughey</a>&mdash;it's a great introduction.
 		</div>
 		<br />
 		From 2008-2013, I co-developed <a href="//www.fuelly.com/">Fuelly</a> which helps people share and compare their vehicle fuel economy.
