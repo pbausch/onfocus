@@ -12,11 +12,11 @@ require("header.php");
 		<!-- <img src="//www.onfocus.com/images/pb-tripod-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
 		<!-- <img src="//www.onfocus.com/images/pb-fall-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> -->
 		<div style="margin-top:15px;">
-		Hi, how's it going? I'm Paul&mdash;a Web developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>. I'm also a husband, father, photo taker, and general Web enthusiast.
+		Hi, how's it going? I'm Paul&mdash;a freelance Web developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>. I'm also a husband, father, photo taker, and general Web enthusiast.
 		</div>
 		<br />
 		<div style="margin-top:5px;">
-		I work at <a href="//www.metafilter.com/">MetaFilter</a>, an amazing online community. If you want to know more about MetaFilter, start with <a href="//vimeo.com/11916466">this talk by Matt Haughey</a>&mdash;it's a great introduction.
+		From 2006-22016 I worked at <a href="//www.metafilter.com/">MetaFilter</a>, an amazing online community. If you want to know more about MetaFilter, start with <a href="//vimeo.com/11916466">this talk by Matt Haughey</a>&mdash;it's a great introduction.
 		</div>
 		<br />
 		From 2008-2013, I co-developed <a href="//www.fuelly.com/">Fuelly</a> which helps people share and compare their vehicle fuel economy.
