@@ -12,22 +12,24 @@ require("header.php");
 		<!-- <img src="//www.onfocus.com/images/pb-tripod-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
 		<!-- <img src="//www.onfocus.com/images/pb-fall-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> -->
 		<div style="margin-top:15px;">
-		Hi, how's it going? I'm Paul&mdash;a freelance Web developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>. I'm also a husband, father, photo taker, and general Web enthusiast.
+		Hi, how's it going? I'm Paul&mdash;a Web Developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>. I'm also a husband, father, photo taker, and general Web enthusiast.
 		</div>
 		<br />
 		<div style="margin-top:5px;">
 		From 2006-2016 I worked at <a href="//www.metafilter.com/">MetaFilter</a>, an amazing online community. If you want to know more about MetaFilter, start with <a href="//vimeo.com/11916466">this talk by Matt Haughey</a>&mdash;it's a great introduction.
 		</div>
 		<br />
-		From 2008-2013, I co-developed <a href="//www.fuelly.com/">Fuelly</a> which helps people share and compare their vehicle fuel economy.
+		From 2008-2013 I co-developed <a href="//www.fuelly.com/">Fuelly</a> which helps people share and compare their vehicle fuel economy.
 		<br /><br />
-		In the past I helped create the weblog application <a href="//www.blogger.com/home">Blogger</a> and I wrote <a href="//www.amazon.com/gp/redirect.html?ie=UTF8&amp;location=http%3A%2F%2Fwww.amazon.com%2Fs%3Fie%3DUTF8%26redirect%3Dtrue%26search-type%3Dss%26index%3Dbooks%26ref%3Dntt%255Fathr%255Fdp%255Fsr%255F1%26field-author%3DPaul%2520Bausch&amp;tag=onfocus&amp;linkCode=ur2&amp;camp=1789&amp;creative=390957">some books</a><img src="https://www.assoc-amazon.com/e/ir?t=onfocus&amp;l=ur2&amp;o=1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> about web applications. 
+		From 2003-2008 I developed and ran ORblogs.com, an Oregon weblog directory.
 		<br /><br />
-		From 2003-2008 I ran ORblogs.com, an Oregon weblog directory.
+		From 2002-2006 I wrote <a href="//www.amazon.com/gp/redirect.html?ie=UTF8&amp;location=http%3A%2F%2Fwww.amazon.com%2Fs%3Fie%3DUTF8%26redirect%3Dtrue%26search-type%3Dss%26index%3Dbooks%26ref%3Dntt%255Fathr%255Fdp%255Fsr%255F1%26field-author%3DPaul%2520Bausch&amp;tag=onfocus&amp;linkCode=ur2&amp;camp=1789&amp;creative=390957">some books</a><img src="https://www.assoc-amazon.com/e/ir?t=onfocus&amp;l=ur2&amp;o=1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> about web applications. 
 		<br /><br />
-		Here's a <a href="https://makerba.se/m/ffatkg/pbausch">summary of projects on Makerbase</a>.
+		From 1999-2001 I helped create an early weblog tool called <a href="//www.blogger.com/home">Blogger</a> at Pyra Labs.
 		<br /><br />
 		I also have a retired <a href="//photos.onfocus.com/">photoblog</a>. I post pictures on <a href="//www.flickr.com/photos/pb">Flickr</a>, <a href="https://instagram.com/paul.bausch/">Instagram</a>, and <a href="https://onfocus.vsco.co/grid/1">VSCO</a> these days.
+		<br /><br />
+		(Here are <a href="https://makerba.se/m/ffatkg/pbausch">a few of my projects on Makerbase</a>.)
 	</div></div>
 		<h2>About Onfocus</h2>
 		<div class="post" style="margin-top:18px;">
