@@ -21,7 +21,9 @@ require("header.php");
 		<br />
 		From 2008-2013, I co-developed <a href="//www.fuelly.com/">Fuelly</a> which helps people share and compare their vehicle fuel economy.
 		<br /><br />
-		In the past I helped create the weblog application <a href="//www.blogger.com/home">Blogger</a> and I wrote <a href="//www.amazon.com/gp/redirect.html?ie=UTF8&amp;location=http%3A%2F%2Fwww.amazon.com%2Fs%3Fie%3DUTF8%26redirect%3Dtrue%26search-type%3Dss%26index%3Dbooks%26ref%3Dntt%255Fathr%255Fdp%255Fsr%255F1%26field-author%3DPaul%2520Bausch&amp;tag=onfocus&amp;linkCode=ur2&amp;camp=1789&amp;creative=390957">some books</a><img src="https://www.assoc-amazon.com/e/ir?t=onfocus&amp;l=ur2&amp;o=1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> about web applications. From 2003-2008 I ran ORblogs.com, an Oregon weblog directory.
+		In the past I helped create the weblog application <a href="//www.blogger.com/home">Blogger</a> and I wrote <a href="//www.amazon.com/gp/redirect.html?ie=UTF8&amp;location=http%3A%2F%2Fwww.amazon.com%2Fs%3Fie%3DUTF8%26redirect%3Dtrue%26search-type%3Dss%26index%3Dbooks%26ref%3Dntt%255Fathr%255Fdp%255Fsr%255F1%26field-author%3DPaul%2520Bausch&amp;tag=onfocus&amp;linkCode=ur2&amp;camp=1789&amp;creative=390957">some books</a><img src="https://www.assoc-amazon.com/e/ir?t=onfocus&amp;l=ur2&amp;o=1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> about web applications. 
+		<br /><br />
+		From 2003-2008 I ran ORblogs.com, an Oregon weblog directory.
 		<br /><br />
 		Here's a <a href="https://makerba.se/m/ffatkg/pbausch">summary of projects on Makerbase</a>.
 		<br /><br />
