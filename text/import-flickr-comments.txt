@@ -1,0 +1,139 @@
+<?php
+// import-flickr-comments.php
+//
+// A PHP5 script to download all comments from a Flickr account
+// and store them in a database.
+//
+// by pb, http://www.onfocus.com/
+//
+// Use at your own risk.
+
+set_time_limit(4800);
+
+//Add your MySQL details
+$mysql_server = "localhost";
+$mysql_user = "[user]";
+$mysql_pass = "[password]";
+$mysql_db = "[db name]";
+
+//Add your Flickr photostream URL (with trailing slash)
+$photostreamURL = "[Flickr photostream URL]";
+$username = "[Flickr username]";
+$password = "[Flickr password]";
+
+//Log into Flickr
+$loginFields = "done=1&cf=&acf=&email=".urlencode($username)."&password=".urlencode($password)."&remember_me=1&Submit=GET+IN+THERE";
+$login = post("http://flickr.com/signin/flickr/",$loginFields);
+	
+//Get this db started
+if (!$connection = @ mysql_connect($mysql_server, $mysql_user, $mysql_pass))
+   die("Can't connect to the database!");
+if (!mysql_select_db($mysql_db, $connection))
+   die("Error " . mysql_errno() . " : " . mysql_error());
+
+//Grab the FlickrID of all photos
+$query = "SELECT PhotoID, FlickrID, DateCreated FROM Photos";
+if (!$result = @ mysql_query ($query, $connection))
+   	printMySQLerror();
+if (mysql_num_rows($result) == 0) {
+	die("Couldn't find your photos!");
+} 
+else {
+	while ($photo = mysql_fetch_array($result)) {
+		$msg = "";
+		$photoID = $photo["PhotoID"];
+		$dateCreated = $photo["DateCreated"];
+		$photoFlickrID = $photo["FlickrID"];
+		$photoFlickrURL = $photostreamURL . $photoFlickrID . "/";
+		
+		//Download the HTML of the photo detail
+		$page = get($photoFlickrURL);
+		
+		//See if this page has comments
+		if (preg_match("/\<h3>Comments\<\/h3>/",$page)) {
+			$msg .= "photo $photoID has comments! ";
+			//Find the comments within the HTML
+			preg_match("/\<h3>Comments\<\/h3>(.*?)\<\/table>/is",$page,$section);
+			preg_match_all("/class=\"Said\".*?\<h4>\<a href=\"(.*?)\">(.*?)\<\/a>.*?\<\/h4>.*?\<p>(.*?)\<small>.*?Posted(.*?)\..*?\(.*?#comment(.*?)\"/is",$section[1],$comments);
+			//Loop through the comments
+			for ($i=0;$i<count($comments[1]);$i++) {
+				$userURL = "http://www.flickr.com".$comments[1][$i];
+				$userName = $comments[2][$i];
+				$commentBody = $comments[3][$i];
+				$commentDate = $comments[4][$i];
+				$commentFlickrID = $comments[5][$i];
+				preg_match("/(\d{1,2}) (.*?) ago/",$commentDate,$datepart);
+				$time = $datepart[1];
+				$unit = $datepart[2];
+				$date = new DateTime();
+				$date->modify("-$time $unit");
+				$commentDate_f = $date->format("Y-m-d H:i:s");
+				
+				//Throw them into the db
+				$selquery = "SELECT CommentID FROM comments WHERE FlickrID = $commentFlickrID";
+				if (!$commentexists = @ mysql_query ($selquery, $connection))
+					printMySQLerror();
+				if (mysql_num_rows($commentexists) == 0) {
+					$userURL = mysql_real_escape_string($userURL, $connection);
+					$userName = mysql_real_escape_string($userName, $connection);
+					$commentBody = mysql_real_escape_string($commentBody, $connection);
+					$insquery = "INSERT INTO comments SET FlickrID = $commentFlickrID,
+									       PhotoID = $photoID,
+									       UserName = '$userName',
+									       UserURL = '$userURL',
+									       Comment = '$commentBody',
+									       DateCreated = '$commentDate_f'";
+			        if (!$add = @ mysql_query ($insquery, $connection)) {
+			        	printMySQLerror();
+					}
+					else {
+						$msg .= " comments added!";
+					}
+				}
+			}
+		} 
+		else {
+		 	$msg = "photo $photoID does not have comments.";
+		}
+		print "$msg<br />";
+		flush();
+	    ob_flush();
+		sleep(1); #take a breather
+	}
+}
+
+
+//Sean Huber's CURL library (slightly modified), http://us2.php.net/curl
+function doRequest($method, $url, $vars) {
+   $ch = curl_init();
+   curl_setopt($ch, CURLOPT_URL, $url);
+   curl_setopt($ch, CURLOPT_HEADER, 0);
+   curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+   curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt');
+   curl_setopt($ch, CURLOPT_COOKIEFILE, 'cookie.txt');
+   if ($method == 'POST') {
+       curl_setopt($ch, CURLOPT_POST, 1);
+       curl_setopt($ch, CURLOPT_POSTFIELDS, $vars);
+   }
+   $data = curl_exec($ch);
+   curl_close($ch);
+   if ($data) {
+       return $data;
+   } else {
+       return curl_error($ch);
+   }
+}
+
+function get($url) {
+   return doRequest('GET', $url, 'NULL');
+}
+
+function post($url, $vars) {
+   return doRequest('POST', $url, $vars);
+}
+
+function printMySQLerror() {
+	print "Error: " . mysql_errno() . " : " . mysql_error() . "<br />";
+}

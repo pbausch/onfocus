@@ -1,0 +1,17 @@
+<SearchPlugin xmlns="http://www.mozilla.org/2006/browser/search/">
+<ShortName>CF8</ShortName>
+<Description>ColdFusion</Description>
+<InputEncoding>UTF-8</InputEncoding>
+<Image width="16" height="16">data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAMAUExURfv7/O/z9+nt8fL09rfH1MjT3ODn7dvi6BRBYxVBZBVCZBZDZhZDZRZCZBZDZBdDZhdEZhdEZRhFZxhFZhlGaBpHahlGZxpHaBxLbxtIaxtHahxIaxxJax1Jax5KbSBPch5KbB5LbCFRdR9Mbh9MbSBMbyBNbyNTeCBNbiFOcCJQciFNbyFObyNQciRSdCNQcSVTdSRRciVSdCZUdidVdylXeSpXeSxafC5cfy1bfS5cfjBegTNhhTlskjZkiDVjhTVihDxulDZjhTtskDhmiT9zmUF0mj5ukkFzmEV3nUJylkl9o0V1mUp8okl7oUl6oEd4nEZ2mkFuj0yApkp7oEl6nkh3nEh4nEBqikx+o0p6nkl5nUx8oE5+o019oUl3mU5+olGCplCApE9/o059oVKBplSFqV6LrGiTs1d7lnKZtmWFnXCPpo2sxIWiuH+arp+zw6W5yK7C0rvO3LfJ17jK2MXU4MLR3L7M18jW4cDN18rX4cXR2tbg6PD09+nt8B5Pch5MbSFPcCVUdiRScydXeSZVdidWdyZUdSlYejBkhy1cfi5dfzRoizNkhjdqjjVmiThoijlpizhniTtsjTdjgzxrjUJ1mjxrjEBxlEFylUJzlkFwkUNyk0Nykkp7nkFsi1GCpVaKrlWHq1WHqlqOs1aHqlmLr1mLrliKrVuNsVyPsl2PslyOsWGUt2CStV+RtGKVuGGTtmKUt26cu3WhwGSLpWaJonmivomsxYKgtZCsv5asvKO5ybLI17nL2LTF0c7a4uPs8u/y9F2Ut1+Ut2GWuWSZu2OXuWKWuGacvWabvGWZu2Wau2ecvWidvmidvYmvyGedvWmfv2uiwWqgwGqhwGmgvm6lxG2kw3Cnxm+mxWykwm2lw////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJQtAPgAAADfdFJOU////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wA8JjrVAAABHUlEQVR42gAQAe/+Ac4HBP8B/fn9/eb8/f6/+f0CCQcCAgQAA/voAQIBwP3+/AL5+vn69vT0/v78+vo7Avn6BPf9/gL3BO///vz8vv8/svkC6+Ho2A36yU0Mo6voN635/QL4/+8TL/zqaa4iKDAoE/lNA0/8sO7N9+306huNMSQSIrEDEdr8GjTfEQL0GIcG8fas+wT0+fj+AvdB/vQwAmq5fP//AZoA9SxIs9QG/uOUm7g0q/8DSQD+rFDngC403EKZRq3++wFC/QD8BSxQsybUAhiw+/z8BPYCUa5JmRQR7rb5Ffz8+fsCT/r7T6lisa//DAvx8/D08gEsAPz8XaD//f7/+v79/vwAARcA//0A/QH7Avz+AAEAAAADANbFnIWoFW/lAAAAAElFTkSuQmCC</Image>
+<Url type="application/x-suggestions+json" method="GET" template="http://suggestqueries.google.com/complete/search?output=firefox&amp;client=firefox&amp;hl={moz:locale}&amp;q={searchTerms}"/>
+<Url type="text/html" method="GET" template="http://www.google.com/search">
+  <Param name="q" value="{searchTerms} site:livedocs.adobe.com inurl:coldfusion inurl:8"/>
+  <Param name="ie" value="utf-8"/>
+  <Param name="oe" value="utf-8"/>
+  <Param name="aq" value="t"/>
+  <!-- Dynamic parameters -->
+  <Param name="rls" value="{moz:distributionID}:{moz:locale}:{moz:official}"/>
+  <MozParam name="client" condition="defaultEngine" trueValue="firefox-a" falseValue="firefox"/>
+</Url>
+<SearchForm>http://www.google.com/</SearchForm>
+</SearchPlugin>

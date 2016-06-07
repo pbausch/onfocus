@@ -1,0 +1,275 @@
+<%
+'-----------------------------------------------------------
+' trackhours.asp
+'
+' A simple project/hours tracking script.
+' by pb
+' http://www.onfocus.com/
+'-----------------------------------------------------------
+Set oConn = Server.CreateObject("ADODB.Connection")
+oConn.Open "[insert a connection string for your db]"
+%>
+<html>
+<head>
+	<script language="javascript" type="text/javascript">
+	var editing = 0;
+	function newform(s){
+		if(s[s.selectedIndex].value == "new"){
+			document.getElementById("new_project").style.display='block';
+			document.getElementById("new_rate").style.display='block';
+		} else {
+			document.getElementById("new_project").style.display='none';
+			document.getElementById("new_rate").style.display='none';
+		}	
+	}
+	function restoreNotes(sid) {
+		editing = 0;
+		var n = document.getElementById("NotesLog"+sid);
+		var t = document.getElementById("notes");
+		var td = document.getElementById("NotesTd"+sid);
+		n.removeChild(n.firstChild);
+		n.appendChild(document.createTextNode(t.value));
+		n.onclick = function(){editNotes(sid)}; 
+		td.onmouseover = function(){this.style.backgroundColor='#ffffcc'};
+	}
+	function editNotes(sid) {
+		if (!editing) {
+			editing = 1;
+			var td = document.getElementById("NotesTd"+sid);
+			var n = document.getElementById("NotesLog"+sid);
+			var f = document.createElement("form");
+			f.action = "trackhours.asp"; 
+			f.method = "post"; 
+			f.id = "notesform"+sid;
+			var t = document.createElement("textarea");
+			t.cols = 40;
+			t.rows = 2;
+			t.value = n.innerHTML;
+			t.style.width = "300px";
+			t.style.backgroundColor = "#ffffcc";
+			t.name = "notes"
+			t.id = "notes";
+			var s = document.createElement("input"); 
+			s.type = "submit"; 
+			s.value = "edit"; 
+			var b = document.createElement("input"); 
+			b.type = "button";
+			b.value = "cancel";
+			b.style.marginLeft = "2px";
+			b.onclick = function(){restoreNotes(sid)};
+			var h = document.createElement("input");
+			h.type = "hidden";
+			h.name = "action";
+			h.value = "notesup";
+			var h2 = document.createElement("input");
+			h2.type = "hidden";
+			h2.name = "sessionid";
+			h2.value = sid; 
+			f.appendChild(t); 
+			f.appendChild(s);
+			f.appendChild(b);
+			f.appendChild(h);
+			f.appendChild(h2);
+			n.removeChild(n.firstChild);
+			n.appendChild(f);
+			td.onmouseover = "return false";
+			n.onclick = "return false";
+		}
+	}
+	</script>
+	<style type="text/css">
+	BODY {
+		font-family:verdana;
+		font-size:8pt;
+	}
+	TABLE {
+		border:solid #ddd 1px;
+	}
+	TD {
+		font-size:8pt;
+		border-top:solid #ddd 1px;
+		padding:10px;
+	}
+	TH {
+		font-family:tahoma;
+		font-size:8pt;
+		padding:5px;
+	}
+	H1 {
+		margin-top:0px;
+		margin-bottom:0px;
+		font-size:20pt;
+		font-weight:normal;
+		font-family:Georgia;
+		color:#003300;
+		font-style:italic;
+		
+	}
+	H2 {
+		margin-top:35px;
+		margin-bottom:5px;
+		font-size:16pt;
+		font-weight:normal;
+		font-family:Georgia;
+		color:#336633;
+	}
+	B {
+		color:#336633;
+	}
+	LI {
+		font-size:10pt;
+		line-height:150%;
+	}
+	.stoplink {
+		background-color:#990000;
+		color: #fff;
+		padding:3px;
+		text-decoration:none;
+		border:solid #000 1px;
+		font-family:trebuchet ms,tahoma;
+	}
+	.startbutton {
+		background-color:#006600;
+		color: #fff;
+		padding:3px;
+		text-decoration:none;
+		border:solid #000 1px;
+		cursor:pointer;
+		font-family:trebuchet ms,tahoma;
+	}
+	</style>
+</head>
+<body>
+<h1>TrackHours</h1>
+<%
+strAction = request("action")
+intProjectID = request("projectid")
+intSessionID = request("sessionid")
+strProjectName = Trim(request("projname"))
+strProjectRate = Trim(request("rate"))
+If strProjectRate = "" Then
+	strProjectRate = "NULL"
+End If
+strNotes = Trim(request("notes"))
+If Len(strNotes) > 255 Then
+	strNotes = Left(strNotes,255)
+End If
+If strAction = "start" Then
+	If strProjectName <> "" Then
+		sql = "INSERT INTO time_projects (ProjectName, ProjectRate) VALUES ('" & strProjectName & "'," & strProjectRate & ")"
+		oConn.Execute(sql)
+		
+		sql = "SELECT Max(ProjectID) As MaxID FROM time_projects"
+		Set rsMaxID = oConn.Execute(sql)
+			intProjectID = rsMaxID("MaxID")
+		Set rsMaxID = Nothing
+	End If
+
+	strNotes = Replace(strNotes,"'","''")
+	sql = "INSERT INTO time_hours (ProjectID, startTime, endTime, notes) VALUES (" & intProjectID & ",getDate(),NULL,'" & strNotes & "')"
+	oConn.Execute(sql)
+	
+	response.redirect "trackhours.asp"
+ElseIf strAction = "stop" Then
+	sql = "UPDATE time_hours SET endTime = getDate() WHERE SessionID = " & intSessionID
+	oConn.Execute(sql)
+
+	response.redirect "trackhours.asp"
+ElseIf strAction = "delete" Then
+	sql = "DELETE FROM time_hours WHERE sessionID = " & intSessionID
+	oConn.Execute(sql)
+	
+	response.redirect "trackhours.asp"
+ElseIf strAction = "notesup" Then
+	strNotes = Replace(strNotes,"'","''")
+	sql = "UPDATE time_hours SET notes = '" & strNotes & "' WHERE SessionID = " & intSessionID
+	oConn.Execute(sql)
+
+	response.redirect "trackhours.asp"
+End If
+
+sql = "SELECT sessionID, time_hours.projectID, startTime, endTime, Notes, projectName FROM time_hours INNER JOIN time_projects ON time_hours.ProjectID = time_projects.ProjectID WHERE endTime IS NULL"
+Set rsOpenSessions = oConn.Execute(sql)
+If NOT rsOpenSessions.EOF Then
+	response.write "<h2 style=""margin-top:10px;"">&raquo; Open Session</h2>"
+	response.write "<ul>"
+	Do While Not rsOpenSessions.EOF
+		intProjectID = rsOpenSessions("projectID")
+		intSessionID = rsOpenSessions("sessionID")
+		strProjectName = rsOpenSessions("projectName")
+		dtmStartTime = rsOpenSessions("startTime")
+		strNotes = rsOpenSessions("Notes")
+		response.write "<li><b>" & strProjectName & "</b> - started: " & dtmStartTime & "<br />Notes: """ & strNotes & """<div style=""margin-top:10px;""><a href=""trackhours.asp?sessionid=" & intSessionID & "&action=stop"" class=""stoplink"">stop timing</a></div>"
+	rsOpenSessions.MoveNext
+	Loop
+	response.write "</ul>"
+	blnNoSessions = 0
+Else
+	blnNosessions = 1
+End If
+Set rsOpenSessions = Nothing
+
+If blnNoSessions Then
+	sql = "SELECT projectID, projectName FROM time_projects"
+	Set rsProjects = oConn.Execute(sql)
+	'If NOT rsProjects.EOF Then
+		response.write "<h2 style=""margin-top:10px;"">&raquo; Start a Session</h2>" & vbCrLf
+		response.write "<form action=""trackhours.asp"" method=""post"">" & vbCrLf
+		response.write "<select name=""projectid"" onchange=""newform(this);"" id=""selProject"">" & vbCrLf
+		Do While Not rsProjects.EOF
+			response.write "<option value=""" & rsProjects("ProjectID") & """>" & rsProjects("projectName") & "</option>" & vbCrLf
+		rsProjects.MoveNext
+		Loop
+		response.write "<option value=""new"">Create a New Project</option>" & vbCrLf
+		response.write "</select>" & vbCrLf
+		response.write "<div id=""new_project"" style=""display:none;margin-top:10px;""><input type=""text"" size=""25"" name=""projname"" /> (Project Title)</div>"
+		response.write "<div id=""new_rate"" style=""display:none;margin-top:10px;""><input type=""text"" size=""3"" name=""rate"" /> (Project Hourly Rate)</div>"
+		response.write "<div style=""margin-top:10px;""><textarea cols=""40"" rows=""8"" name=""notes""></textarea></div>" & vbCrLf
+		response.write "<div style=""margin-top:10px;""><input type=""submit"" value=""start timing"" class=""startbutton""/></div>" & vbCrLf
+		response.write "<input type=""hidden"" name=""action"" value=""start"" />" & vbCrLf
+		response.write "</form>" & vbCrLf
+	'End If
+	Set rsProjects = Nothing
+	%>
+<script type="text/javascript">
+	newform(document.getElementById("selProject"));
+</script>
+	<%
+End If
+sql = "SELECT TOP 15 sessionID, time_hours.projectID, startTime, endTime, Notes, projectName, projectRate FROM time_hours INNER JOIN time_projects ON time_hours.ProjectID = time_projects.ProjectID WHERE endTime IS NOT NULL ORDER BY sessionID DESC"
+Set rsSessionLog = oConn.Execute(sql)
+If Not rsSessionLog.EOF Then
+	response.write "<h2>&raquo; Recent Sessions</h2>"
+	response.write "<table cellpadding=""0"" cellspacing=""0"" border=""0"">"
+	response.write "<tr style=""background-color:#eee""><th>Project</th><th>Date</th><th>Hours</th><th>Notes</th><th>Approx.</th><th>Delete</th></tr>"
+	Do While Not rsSessionLog.EOF
+		strNotes = rsSessionLog("Notes")
+		intMinutes = FormatNumber((DateDiff("n",rsSessionLog("startTime"),rsSessionLog("endTime")) / 60),2)
+		intRate = rsSessionLog("ProjectRate")
+		If intRate = "" OR IsNull(intRate) Then
+			intRate = 0
+		End If
+		If IsNull(strNotes) OR strNotes = "" Then
+			strNotes = "&nbsp;"
+		End If
+		response.write "<tr>"
+		response.write "<td valign=""top"">" & rsSessionLog("projectName") & "</td>"
+		response.write "<td valign=""top"">" & FormatDateTime(rsSessionLog("startTime"),2) & "</td>"
+		response.write "<td valign=""top"" align=""center"">" & intMinutes & "</td>"
+		response.write "<td width=""300"" id=""NotesTd" & rsSessionLog("sessionID") & """ onmouseover=""this.style.backgroundColor='#ffffcc'"" onmouseout=""this.style.backgroundColor='#fff'""><div id=""NotesLog" & rsSessionLog("sessionID") & """ style=""font-style:italic"" onclick=""editNotes(" & rsSessionLog("sessionID") & ")"">" & strNotes & "</div></td>"
+		response.write "<td>" & FormatCurrency(intMinutes * intRate) & "</td>"
+		response.write "<td valign=""top"" align=""center"">[<a href=""#"" onclick=""if (confirm('Are you sure you want to delete this session?')){document.location='trackhours.asp?action=delete&sessionid=" & rsSessionLog("sessionID") & "'}else{return false;}"">x</a>]</td>"
+		response.write "</tr>"
+	rsSessionLog.MoveNext
+	Loop
+	response.write "</table>"
+End If
+Set rsSessionLog = Nothing
+
+%>
+</body>
+</html>
+<%
+oConn.Close
+Set oConn = Nothing
+%>

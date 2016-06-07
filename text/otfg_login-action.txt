@@ -1,0 +1,44 @@
+<?php
+// login-action.php
+
+require("ini.inc");
+
+if (isset($_POST['username']) && isset($_POST['password'])) {
+	$username = $_POST['username'];
+	$username = mysql_real_escape_string($username);
+	$password = md5(SALT.$_POST['password']);
+
+	$query = "SELECT UserID, CookieID FROM Users WHERE UserName = '$username' AND Password = '$password'";
+	if (!$result = @ mysql_query ($query, $connection))
+	  bail();
+
+	if (mysql_num_rows($result) == 1) {
+		if (!$user = mysql_fetch_array($result)) {
+			bail();
+		}
+		else {
+			//Update login key
+			$newLoginKey = md5(uniqid(rand(), TRUE));
+			$newLoginExp = time() + (7 * 24 * 60 * 60);
+			$query = "UPDATE users SET LoginIP = '".$_SERVER['REMOTE_ADDR']."', LoginKey = '$newLoginKey', LoginExp = $newLoginExp WHERE UserID = {$user['UserID']}";
+		  	if (!$update = @ mysql_query ($query, $connection)) {
+				bail();
+		    }
+			//set new login key in a cookie
+			setcookie('noodlemush', "{$user['CookieID']}:$newLoginKey", $newLoginExp);
+		
+			//set the admin session variable
+			$_SESSION['admin'] = 1;
+		    session_write_close();
+			print "You are logged in as the administrator.";
+		}
+	}
+	else {
+		bail();
+	}
+}
+
+function bail() {
+	print "Login unsuccessful.";
+}
+?>

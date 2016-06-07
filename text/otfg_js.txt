@@ -1,0 +1,45 @@
+var b_txt = '';
+<?php
+// js.php
+
+require("ini.inc");
+
+//Grab the PhotoID and File Location of all photos
+$query = "SELECT PhotoID, File, Title, Description, DateCreated, Stub FROM Photos WHERE Public = 1 ORDER BY DateCreated DESC LIMIT 5";
+if (!$result = @ mysql_query ($query, $connection))
+   	printMySQLerror();
+if (mysql_num_rows($result) == 0) {
+	die("Couldn't find any photos!");
+} 
+else {
+	$cntPhoto = 0;
+	while ($photo = mysql_fetch_array($result)) {
+		$cntPhoto++;
+		$photoID = $photo['PhotoID'];
+		$photoFile = $photo['File'];
+		$photoSRC = str_replace(PHOTO_DIR, PHOTO_URL, $photoFile);
+		$photoSRC = str_replace("\\", "/", $photoSRC);
+		$photoTitle = $photo['Title'];
+		$photoDescription = $photo['Description'];
+		$photoDate = $photo['DateCreated'];
+		$photoStub = $photo['Stub'];
+		$photoDateTitle = date("l, F jS",strtotime($photoDate));
+		$photoDateTime = date("g:i A",strtotime($photoDate));
+		$photoDateTimeMore = date("n/j",strtotime($photoDate))." at ".$photoDateTime;
+		$photoYear = date("Y",strtotime($photoDate));
+		$thumbYearDir = THUMB_DIR . $photoYear;
+		$thumbBaseFile = $thumbYearDir . "\\" . md5(SALT.$photoID);
+		$thumbFile_t = $thumbBaseFile . "_t.jpg";
+		$thumbSRC_t = str_replace(THUMB_DIR, THUMB_URL, $thumbFile_t);
+		$thumbSRC_t = str_replace("\\", "/", $thumbSRC_t);
+		list($width, $height, $type, $attr) = @getimagesize($photoFile);
+		list($width_t, $height_t, $type_t, $attr_t) = @getimagesize($thumbFile_t);
+		$baseURL = BASE_URL;
+		print <<<PHOTOEND
+b_txt+= '<div class="photos_image"><a href="{$baseURL}{$photoStub}"><img src="{$thumbSRC_t}" alt="photo" title="{$photoTitle}" {$attr_t}></a></div>';
+
+PHOTOEND;
+	}
+}
+?>
+document.write(b_txt)

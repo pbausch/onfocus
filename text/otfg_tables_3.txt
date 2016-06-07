@@ -1,0 +1,12 @@
+CREATE TABLE `comments` (
+  `CommentID` int(11) NOT NULL auto_increment,
+  `FlickrID` bigint(11) NOT NULL default '0',
+  `PhotoID` int(11) NOT NULL,
+  `UserName` varchar(100) NOT NULL,
+  `UserEmail` varchar(200) NOT NULL,
+  `UserURL` varchar(200) NOT NULL,
+  `Comment` longtext NOT NULL,
+  `DateCreated` datetime NOT NULL,
+  `IP` varchar(15) NOT NULL,
+  PRIMARY KEY  (`CommentID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

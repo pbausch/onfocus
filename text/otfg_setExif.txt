@@ -1,0 +1,30 @@
+<?php
+// setExif.php
+
+set_time_limit(48000);
+
+require("ini.inc");
+require("auth.inc");
+require("addExif.inc");
+
+authSession($connection);
+
+if (!$_SESSION['admin']) {
+	exit;
+} 
+
+//Grab the PhotoID of all photos
+$query = "SELECT PhotoID, File, DateCreated FROM Photos ORDER BY PhotoID ASC";
+if (!$result = @ mysql_query ($query, $connection))
+   	logError();
+if (mysql_num_rows($result) == 0) {
+	die("Couldn't find any photos!");
+} 
+else {
+	while ($photo = mysql_fetch_array($result)) {
+		$photoID = $photo["PhotoID"];
+		addExif($photoID,$connection);
+		print "Exif added/updated for photo $photoID.<br />";
+	}
+}
+?>

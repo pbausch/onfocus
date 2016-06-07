@@ -1,0 +1,131 @@
+#!/usr/bin/perl# reading_levels.pl# Gathers reading-level statistics of sites 
+# given a list of RSS feeds.
+#
+# by pb. http://www.onfocus.com/
+
+use strict;
+use Lingua::EN::Fathom;
+use LWP::Simple;
+use XML::RSS::Parser;
+use Math::Round::Var;
+
+# Set the list of feeds
+my @feeds = qw(
+    http://feeds.engadget.com/weblogsinc/engadget
+    http://feeds.feedburner.com/boingboing/iBag
+    http://feeds.gawker.com/gizmodo/full
+    http://feeds.huffingtonpost.com/huffingtonpost/TheBlog
+    http://feeds.feedburner.com/Techcrunch
+    http://feeds.dailykos.com/dailykos/index.xml
+    http://feeds.gawker.com/lifehacker/full
+    http://feeds.feedburner.com/crooksandliars/YaCP
+    http://thinkprogress.org/feed/
+    http://feeds.gawker.com/gawker/full
+);
+
+# Initialize total arrays
+my @fogtotal;
+my @fleschtotal;
+my @kincaidtotal;
+
+# Initialize some counters
+my ($blogs,$posts) = (0,0);
+
+# Loop through feeds
+foreach my $feed(@feeds) {
+    my $content = get($feed);
+    if ($content) {
+	my $p = XML::RSS::Parser->new;
+	my $f = $p->parse_string($content);
+	if ($f) {
+            # Count the blog
+            $blogs++;
+
+            # Grab the feed info
+	    my $f_title = $f->query('/channel/title');
+            if (defined $f_title) {
+                $f_title = $f_title->text_content;
+            }
+            my $f_description = $f->query('/channel/description');
+            if (defined $f_description) {
+                $f_description = $f_description->text_content;
+            }
+            my $f_link = $f->query('/channel/link');
+            if (defined $f_link) {
+                $f_link = $f_link->text_content;
+            }
+            print "=== Site ===\n",                  "Site: $f_title\n",                  "Desc:  $f_description\n",                  "Link:  $f_link\n\n";
+
+            # Fire up Fathom with accumulation on
+            my $fathom = new Lingua::EN::Fathom;
+            my $accumulate = 1;
+
+            # Loop through the posts
+	    foreach my $i ($f->query('//item')) { 
+                my $i_title = $i->query('title');
+                if (defined $i_title) {
+                    $i_title = $i_title->text_content;
+                }
+                my $i_description = $i->query('description');
+                if (defined $i_description) {
+                    $i_description = $i_description->text_content;
+                }
+
+                # Strip out HTML
+                $i_title =~ s/&lt;/</gs;
+                $i_title =~ s/&gt;/>/gs;
+                $i_title =~ s/<(.|\n)+?>//gs;
+                $i_description =~ s/&lt;/</gs;
+		$i_description =~ s/&gt;/>/gs;
+		$i_description =~ s/<(.|\n)+?>//gs;
+
+                # Analyze text
+                $fathom->analyse_block($i_title.". ".$i_description,$accumulate);
+
+                # Count the post
+                $posts++;
+            }
+            # Uncomment to print built-in fathom report
+            # print $fathom->report;
+
+            # Grab the three scores for this blog
+            my $fog = $fathom->fog;
+            my $flesch = $fathom->flesch;
+            my $kincaid = $fathom->kincaid;
+
+            # Round
+            my $rnd = Math::Round::Var->new(0.01);
+            $fog = $rnd->round($fog);
+            $flesch = $rnd->round($flesch);
+            $kincaid = $rnd->round($kincaid);
+
+            # Save to totals arrays
+            push(@fogtotal,$fog);
+            push(@fleschtotal,$flesch);
+            push(@kincaidtotal,$kincaid);
+
+            # Print out the results
+            print "Gunning-Fog Index: $fog\n";
+            print "Flesch Reading Ease: $flesch\n";
+            print "Flesch Kincaid Grade Level: $kincaid";
+            print "\n\n";
+        }
+        else {
+            print "Couldn't fetch $feed\n\n";
+        }
+    }
+    else {
+	print "Couldn't fetch $feed\n\n";
+    }
+}
+
+# Find the averages and print 
+my $fogavg = average(\@fogtotal);
+my $fleschavg = average(\@fleschtotal);
+my $kincaidavg = average(\@kincaidtotal);
+print "===== AVERAGES =====\n",
+      "Total Blogs Analyzed: $blogs\n",
+      "Total Posts Analyzed: $posts\n",      "Gunning-Fog Index: $fogavg\n",      "Flesch Reading Ease:  $fleschavg\n",      "Flesch Kincaid Grade Level:  $kincaidavg\n\n";
+
+# Grab the average of array items
+sub average {    my $ref   = shift;    my $total = 0;    my $count = @$ref;    return 0 if ($count == 0);    foreach my $entry (@$ref) {        $total += $entry;    }    return $total / $count;}

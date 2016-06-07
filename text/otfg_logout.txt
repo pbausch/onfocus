@@ -1,0 +1,13 @@
+<?php
+setcookie('noodlemush', "adieu!", time());
+
+if (session_id() == "") {
+    session_start();
+	session_unset();
+	session_destroy();
+	session_start();
+	session_regenerate_id();
+}
+
+print "You are logged out. Be sure to close your browser.";
+?>

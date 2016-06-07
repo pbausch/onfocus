@@ -1,0 +1,83 @@
+<?php
+// addExif.inc
+
+function addExif($photoID, $connection) {
+	//Grab the PhotoID and File Location of all photos
+	$query = "SELECT PhotoID, File, DateCreated FROM Photos WHERE PhotoID = $photoID";
+	if (!$exifquery = @ mysql_query ($query, $connection))
+	   	logError();
+	if (mysql_num_rows($exifquery) == 0) {
+		return;
+	} 
+	else {
+		while ($photo = mysql_fetch_array($exifquery)) {
+			$photoID = $photo["PhotoID"];
+			$photoFile = $photo["File"];
+		
+			$photoFile_o = str_replace(".jpg", "_o.jpg", $photoFile);
+			if (file_exists($photoFile_o)) {
+				$photoFile = $photoFile_o;
+			}
+			$exif = exif_read_data($photoFile, 0, true);
+			if (array_key_exists("EXIF", $exif)) {
+				$cameraMake = grabExifValue($exif['IFD0'],'Make');
+				$cameraModel = grabExifValue($exif['IFD0'],'Model');
+				$software = grabExifValue($exif['IFD0'],'Software');
+				$dateTime = grabExifValue($exif['IFD0'],'DateTime');
+			
+				$exposureTime = grabExifValue($exif['EXIF'],'ExposureTime');
+				$fStop = grabExifValue($exif['EXIF'],'FNumber');
+				$isoSpeed = grabExifValue($exif['EXIF'],'ISOSpeedRatings');
+				$focalLength = grabExifValue($exif['EXIF'],'FocalLength');
+				$flash = grabExifValue($exif['EXIF'],'Flash');
+				$exposureMode = grabExifValue($exif['EXIF'],'ExposureProgram');
+				$exposureBias = grabExifValue($exif['EXIF'],'ExposureBiasValue');
+				$whiteBalance = grabExifValue($exif['EXIF'],'ExposureTime');
+				$dateTimeOriginal = grabExifValue($exif['EXIF'],'DateTimeOriginal');
+			
+				//Set the insert/update query guts
+				$sql = "
+				ExposureTime = '$exposureTime',
+				FStop = '$fStop',
+				ISOSpeed = '$isoSpeed',
+				FocalLength = '$focalLength',
+				CameraMake = '$cameraMake',
+				CameraModel = '$cameraModel',
+				Flash = '$flash',
+				ExposureMode = '$exposureMode',
+				ExposureBias = '$exposureBias',
+				DateTimeOriginal = '$dateTimeOriginal',
+				DateTime = '$dateTime',
+				Software = '$software'
+				";
+
+				//See if the Exif data already exists for this photo
+				$selquery = "SELECT PhotoID FROM exif WHERE PhotoID = $photoID";
+				if (!$photoexists = @ mysql_query ($selquery, $connection))
+					logError();
+				if (mysql_num_rows($photoexists) == 0) {
+					$sql = "INSERT INTO exif SET PhotoID = $photoID, $sql";
+				}
+				else {
+					$sql = "UPDATE exif SET $sql WHERE PhotoID = $photoID";
+				}
+				if (!$add = @ mysql_query ($sql, $connection))
+			        logError();
+			}
+		
+		}
+	}
+}
+
+function grabExifValue($exifArray,$value) {
+	if (!array_key_exists($value, $exifArray)) {
+		return "";
+	}
+	$thisValue = $exifArray[$value];
+	if (is_array($thisValue)) {
+		$thisValue = $thisValue[0];
+	}
+	$thisValue = mysql_real_escape_string($thisValue);
+	return $thisValue;
+}
+?>

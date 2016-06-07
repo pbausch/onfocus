@@ -1,0 +1,16 @@
+<?php
+// login-status.php
+
+require("ini.inc");
+require("auth.inc");
+
+authSession($connection);
+
+if ($_SESSION['admin']) {
+	print "You're logged in as an administrator.";
+} 
+else {
+	print "You're a guest.";
+}
+
+?>

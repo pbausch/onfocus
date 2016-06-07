@@ -1,0 +1,186 @@
+<?php
+// import-flickr-photos.php
+//
+// A PHP5 script to download all photos from a Flickr account
+// and store information about those photos in a database.
+//
+// by pb, http://www.onfocus.com/
+//
+// Use at your own risk.
+
+set_time_limit(48000);
+require_once 'phpFlickr.php';
+ob_start();
+
+//Add your MySQL details
+$mysql_server = "localhost";
+$mysql_user = "[user]";
+$mysql_pass = "[password]";
+$mysql_db = "[db name]";
+
+//Add your Flickr details
+$api_key = '[application key]';
+$api_secret = '[application secret]';
+
+//Add your local photos folder (include a trailing slash)
+$photodir = "[full path to photo directory]";
+
+//Fiddle with this if you want
+$max_per_page = 100;
+
+//Get this session started (if necessary)
+if (session_id() == "") {
+    session_start();
+}
+
+//Get this Flickr started
+$api = new phpFlickr($api_key, $api_secret, FALSE);
+$api->auth("read");
+$userData = $api->auth_checkToken($_SESSION['phpFlickr_auth_token']);
+if ($api->getErrorMsg() !== false) {
+	die("Error: ".$api->getErrorMsg());
+}
+//Don't need user details, but it's fun to have anyway
+$userNSID = $userData['user']['nsid'];
+$userName = $userData['user']['username'];
+$userFullName = $userData['user']['fullname'];
+$userToken = $userData['token'];
+
+//Find the total number of pages we'll need to request
+$userInfo = $api->people_getInfo($userNSID);
+if ($api->getErrorMsg() !== false) {
+	die("Error: ".$api->getErrorMsg());
+}
+$userPhotoCount = $userInfo['photos']['count'];
+$pages = ceil($userPhotoCount / $max_per_page);
+
+//Get this db started
+if (!$connection = @ mysql_connect($mysql_server, $mysql_user, $mysql_pass))
+   die("Can't connect to the database!");
+if (!mysql_select_db($mysql_db, $connection))
+   die("Error " . mysql_errno() . " : " . mysql_error());
+
+//Set a loop for the total number of pages
+for ( $page = 1; $page <= $pages; $page += 1) {
+	$photos = $api->photos_search(array("user_id"=>$userNSID, "per_page"=>$max_per_page, "page"=>$page, "sort"=>"date-posted-asc", "extras"=>"date_upload,date_taken,geo"));
+	if ($api->getErrorMsg() !== false) {
+		print "Error: ".$api->getErrorMsg()."<br /><br />";
+		next;
+	}
+	if (isset($photos['photo'])) {
+		foreach ($photos['photo'] as $photo) {
+			$photoID = 0;
+			$msg = "";
+			$photoFlickrID = $photo['id'];
+			$photoServer = $photo['server'];
+			$photoSecret = $photo['secret'];
+			$photoTitle = $photo['title'];
+			$photoTitle_f = $photoTitle;
+			$photoTitle_f = preg_replace('/\s+/', '-', $photoTitle_f);
+			$photoTitle_f = preg_replace('/[^-\w]/', '', $photoTitle_f);
+			$photoDateTaken = $photo['datetaken'];
+			$photoDateAdded = $photo['dateupload'];
+			$photoDateAdded_f = date("Y-m-d H:i:s",$photoDateAdded);
+			$photoLatitude = $photo['latitude'];
+			$photoLongitude = $photo['longitude'];
+			$isPublic = $photo['ispublic'];
+			$photoDescription = "";
+			$photoURL = "http://static.flickr.com/{$photoServer}/{$photoFlickrID}_{$photoSecret}_o.jpg";
+
+			//Insert this photo into the db, grab the photoID
+			$selquery = "SELECT PhotoID FROM photos WHERE FlickrID = '{$photoFlickrID}'";
+			if (!$photoexists = @ mysql_query ($selquery, $connection))
+				print "Error " . mysql_errno() . " : " . mysql_error();
+			if (mysql_num_rows($photoexists) == 0) {
+				$photoTitle = mysql_real_escape_string($photoTitle, $connection);
+				$insquery = "INSERT INTO Photos SET FlickrID = '$photoFlickrID',
+                                                                    Title = '$photoTitle',
+                                                                    DateCreated = '$photoDateAdded_f',
+                                                                    DateTaken = '$photoDateTaken',
+                                                                    Latitude = $photoLatitude,
+                                                                    Longitude = $photoLongitude,
+                                                                    Public = $isPublic";
+		        if (!$add = @ mysql_query ($insquery, $connection))
+			        print "Error " . mysql_errno() . " : " . mysql_error();
+				$selmax = "SELECT MAX(PhotoID) AS MaxID FROM photos";
+				if (!$result = @ mysql_query ($selmax, $connection))
+				   	print "Error " . mysql_errno() . " : " . mysql_error();
+				while($newID = mysql_fetch_row($result)) {
+					$photoID = $newID[0];
+				}
+				$msg .= "Added photo $photoTitle to the db. ";				
+
+			}
+			else {
+				while($oldID = mysql_fetch_row($photoexists)) {
+					$photoID = $oldID[0];
+					//ignore this one for now
+				}
+				next;
+			}
+			if ($photoID == 0) {
+				print "Error. PhotoID wasn't found.";
+				next;
+			}
+			
+			//Save the file to disk
+			$photoMonth = date("m",$photoDateAdded);
+			$photoYear = date("Y",$photoDateAdded);
+			$photoYearDir = $photodir . $photoYear;
+			$photoMonthDir =  $photoYearDir . "\\" . $photoMonth . "\\";
+			if (!is_dir($photoYearDir)) {
+				mkdir($photoYearDir, 0777, TRUE);
+			}
+			if (!is_dir($photoFileDir)) {
+				mkdir($photoMonthDir, 0777, TRUE);
+			}
+			if ($photoTitle_f == "") {
+				$photoTitle_f = $photoID;
+			}
+			$photoFile = $photoMonthDir . $photoTitle_f . ".jpg";
+			if(!file_exists($photoFile)) {
+				file_put_contents($photoFile, file_get_contents($photoURL));
+				$msg .= "Saved file $photoFile to disk. "; 
+			}
+		
+			//Capture the caption
+			$photoinfo = $api->photos_getInfo($photoFlickrID);
+			if ($api->getErrorMsg() !== false) {
+				print "Error: ".$api->getErrorMsg()."<br /><br />";
+				next;
+			}
+			$photoDescription = $photoinfo['description'];
+			
+			//Save file location and caption to db
+			$photoDescription_f = mysql_real_escape_string($photoDescription, $connection);
+			$photoFile_f = mysql_real_escape_string($photoFile, $connection);
+			$upquery = "UPDATE photos SET Description = '$photoDescription_f', File = '$photoFile_f' WHERE PhotoID = $photoID";
+			if (!$update = @ mysql_query ($upquery, $connection))
+				print "Error " . mysql_errno() . " : " . mysql_error();
+			
+			//Save the tags
+			if (isset($photoinfo['tags'])) {
+				foreach ($photoinfo['tags']['tag'] as $tag) {
+					$thisTag = $tag['_content'];
+					$isMachineTag = $tag['machine_tag'];
+					$selquery = "SELECT TagID FROM tags WHERE PhotoID = $photoID AND Tag = '$thisTag'";
+					if (!$tagexists = @ mysql_query ($selquery, $connection))
+						print "Error " . mysql_errno() . " : " . mysql_error();
+					if (mysql_num_rows($tagexists) == 0) {
+						$insquery = "INSERT INTO tags SET PhotoID = $photoID,
+                                                                                  Tag = '$thisTag',
+                                                                                  MachineTag = $isMachineTag";
+			        	   if (!$add = @ mysql_query ($insquery, $connection))
+				              print "Error " . mysql_errno() . " : " . mysql_error();
+					}
+				}
+			}
+			print $msg."<br />"; //print out what just happened with this photo
+			flush();
+			ob_flush(); //flush output buffer, doesn't work on Windows :(
+			sleep(1); //take a breather
+		}
+	}
+}
+
+?>

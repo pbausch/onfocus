@@ -1,0 +1,49 @@
+'----------------------------------
+' now-playing.vbs
+'
+' Sends the album and artist 
+' currently playing in iTunes to 
+' a remote script
+'----------------------------------
+
+' Set the location of your remote script
+strURL = "http://www.example.com/getAlbum.cgi"
+
+'Make sure iTunes is running
+iTunesRunning = 0
+Set objWMIService = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\cimv2")
+Set colProcessList = objWMIService.ExecQuery ("Select * from Win32_Process")
+For Each objProcess in colProcessList
+    If objProcess.Name = "iTunes.exe" Then
+        iTunesRunning = 1
+    End If
+Next
+
+'If iTunes is running, proceed
+If iTunesRunning = 1 Then
+    Set iTunes = WScript.CreateObject("iTunes.Application")
+    'Make sure iTunes is playing
+    If iTunes.PlayerState <> 0 Then
+        Set track = iTunes.CurrentTrack
+
+        'Grab the Currently playing track, escape for URLs
+        strArtist = Escape(track.Artist)
+	strAlbum = track.Album
+	strAlbum = Replace(strAlbum,"(Disc 1)","")
+	strAlbum = Replace(strAlbum,"(Disc 2)","")
+	strAlbum = Trim(strAlbum)
+        strAlbum = Escape(strAlbum)
+
+        'Assemble the URL
+        strURL = strURL & "?artist=" & strArtist & "&album=" & strAlbum
+
+        'GET the URL
+        Set http = CreateObject("MSXML2.ServerXMLHTTP")
+        http.open "GET", strURL, false 
+        http.send(Now)
+        Set http = nothing 
+
+        Set track = Nothing
+    End If
+    Set iTunesApp = Nothing
+End If

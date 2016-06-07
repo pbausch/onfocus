@@ -1,0 +1,74 @@
+#!/usr/local/bin/perl
+# calendar_csv.pl
+# Converts a list of dates and titles into Outlook CSV
+# for importing into Google Calendar, and projects the
+# events into the future.
+#
+# Simple CSV format: 
+#
+# mm/dd/yyyy,[title]
+#
+# example:
+# 
+# 12/19/1942,Uncle Bob's Birthday
+# 3/17/1953,Aunt Sally's Birthday
+#
+# Set $file to the simple CSV file. and $yearsahead
+# to the number of years you'd like the events to be
+# added.
+#
+# Usage: perl calendar_csv.pl
+
+use strict;
+use Date::Calc qw(Add_Delta_Days);
+
+# Set your simple CSV file here
+my $datefile = "family_dates.csv";
+
+# Set the output file here
+my $importfile = "import.csv";
+
+# Set the number of years to display
+my $yearsahead = "5";
+
+# Grab the current year
+my $year = (localtime)[5] + 1900;
+
+# Open the output file for writing, add column headers
+open(IMPORT_FILE, ">$importfile") or die "can't open $importfile: $!";
+print IMPORT_FILE qq("Subject","Start Date","Start Time","End Date","End Time","All day event","Description"\n);
+
+# Open the input file, loop through rows
+open(DATE_FILE, $datefile) or die "can't open $datefile: $!";
+while (<DATE_FILE>) {
+	chomp;
+	my @fields = split(/,/, $_);
+	my $date = $fields[0];
+	my ($month, $day) = ($date =~ /(\d{1,2})\/(\d{1,2})\/\d{4}/);
+	my $time = "12:00:00 AM";
+	my $title = $fields[1];
+	my $iyear = $year;
+	# Loop the number of years into the future
+	for (my $i=1; $i<=$yearsahead; $i++) {
+		my $fulldate = "$month/$day/$iyear";
+
+		#increment the day
+		my ($y2, $m2, $d2) = Add_Delta_Days($iyear,$month,$day,1);
+		my $nextdate = "$m2/$d2/$y2";
+
+		#Fields: Subject, Start Date
+		print IMPORT_FILE qq("$title","$fulldate",);
+
+		#Fields: Start Time, End Date, End Time
+		print IMPORT_FILE qq("$time","$nextdate","$time",);
+
+		#Fields: All Day Event, Description
+		print IMPORT_FILE qq("True",,\n);
+
+		#Increment the year
+		$iyear++;
+	}
+	
+}
+close(DATE_FILE);
+close(IMPORT_FILE);

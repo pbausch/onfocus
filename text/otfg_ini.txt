@@ -1,0 +1,33 @@
+<?php
+// ini.php, Application Settings
+
+define("PHOTO_MAX_WIDTH",850);  // Maximum size a photo should be
+define("PHOTO_MAX_HEIGHT",640); // Maximum size a photo should be
+define("PHOTO_QUALITY",95);  	// Quality for photo resizing
+
+//Full path to the Photo directory (with trailing slash)
+define("PHOTO_DIR","[photo directory path]");
+
+//Full path to the Thumbnail directory (with trailing slash)
+define("THUMB_DIR","[thumbnail directory path]");
+
+define("SALT","[some unique string]"); // Helps with hashing
+
+//Add your MySQL details
+$mysql_server = "localhost";
+$mysql_user = "[user]";
+$mysql_pass = "[password]";
+$mysql_db = "[db name]";
+
+//Set up some PHP stuff
+ini_set('error_reporting', E_ALL | E_STRICT);
+ini_set('display_errors', 'Off');
+ini_set('log_errors', 'On');
+ini_set('error_log', '[path to error log]');
+
+//Get this db started
+if (!$connection = @ mysql_connect($mysql_server, $mysql_user, $mysql_pass))
+   die("Can't connect to the database!");
+if (!mysql_select_db($mysql_db, $connection))
+   die("Error " . mysql_errno() . " : " . mysql_error());
+?>

@@ -1,0 +1,73 @@
+<?php
+//upload-final.php
+
+require("ini.inc");
+require("auth.inc");
+
+authSession($connection);
+
+if (!$_SESSION['admin']) {
+	header("Location: home.php");
+	exit;
+} 
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Upload Photos</title>
+</head>
+<body>
+
+<h1>Upload Photos</h1>
+
+<?php
+foreach ($_POST["photoIDs"] as $photoID) {
+	//Rename the photo file
+	$sql = "SELECT File, DateCreated FROM photos WHERE PhotoID = $photoID";
+	if (!$result = @ mysql_query ($sql, $connection))
+	   	logerror();
+	while ($photo = mysql_fetch_array($result)) {
+		$photoFile = $photo['File'];
+		$photoDateAdded = $photo['DateCreated'];
+		$photoTitle = $_POST['title_'.$photoID];
+		$photoTitle_file = preg_replace('/\s+/', '-', $photoTitle);
+		$photoTitle_file = preg_replace('/[^-\w]/', '', $photoTitle_file);
+		$photoMonth = date("m",strtotime($photoDateAdded));
+		$photoYear = date("Y",strtotime($photoDateAdded));
+		$photoYearDir = PHOTO_DIR . $photoYear;
+		$photoMonthDir =  $photoYearDir . "\\" . $photoMonth . "\\";
+		$newPhotoFile = $photoMonthDir.$photoTitle_file.".jpg";
+		rename($photoFile,$newPhotoFile);
+		$photoFile_o = str_replace(".jpg", "_o.jpg", $photoFile);
+		if (file_exists($photoFile_o)) {
+			$newPhotoFile_o = str_replace(".jpg", "_o.jpg", $newPhotoFile);
+			rename($photoFile_o,$newPhotoFile_o);
+		}
+
+	}
+
+	//Update title, description, file, make public
+	$photoTitle_f = mysql_real_escape_string($photoTitle);
+	$photoDescription = $_POST['description_'.$photoID];
+	$photoDescription_f = mysql_real_escape_string($photoDescription);
+	$newPhotoFile_f = mysql_real_escape_string($newPhotoFile);
+	$sql = "UPDATE photos SET Title = '$photoTitle_f', Description = '$photoDescription_f', File = '$newPhotoFile_f', Public = 1 WHERE PhotoID = $photoID";
+	if (!$update = @ mysql_query ($sql, $connection))
+		logerror();
+	
+	//Add tags
+	$tags = explode(' ', $_POST['tags_'.$photoID]);
+	for ($i = 0; $i < count($tags); $i++) {
+		$thisTag = trim($tags[$i]);
+		$thisTag_f = mysql_real_escape_string($thisTag);
+		$sql = "INSERT INTO tags (PhotoID, Tag, MachineTag) VALUES ($photoID,'$thisTag_f',0)";
+		if (!$insert = @ mysql_query ($sql, $connection))
+			logerror();
+	}
+	print "Photo <em>$photoTitle</em> added.<br />";
+}
+?>
+
+</body>
+</html>

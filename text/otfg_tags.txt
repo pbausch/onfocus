@@ -1,0 +1,80 @@
+<?php
+// tags.php
+
+require("ini.inc");
+require("auth.inc");
+require("getTags.inc");
+
+authSession($connection);
+
+$query = "SELECT COUNT(Tag) as TagCount, Tag FROM tags INNER JOIN photos ON tags.PhotoID = photos.PhotoID ";
+if (!$_SESSION['admin']) {
+	$query .= "WHERE Public = 1 ";
+}
+$query .= "GROUP BY Tag HAVING COUNT(Tag) >= 3 ORDER BY Tag ASC";
+if (!$result = @ mysql_query ($query, $connection))
+   	logerror();
+if (mysql_num_rows($result) == 0) {
+	die("Couldn't find any photos!");
+} 
+else {
+	$photoBodyHTML = '<h1 class="clsHeader" style="margin-bottom:2px;">Tag Cloud</h1>';
+	$photoBodyHTML .= '<div id="info">Click any keyword to see photos tagged with that keyword.</div>';
+	$photoBodyHTML .= '<div style="width:725px;margin-left:10px;">';
+	while ($tag = mysql_fetch_array($result)) {
+		$tagCount = $tag[0];
+		$tag = $tag['Tag'];
+		if ($tagCount > 40) {
+			$fontSize = 40;
+			$fontColor = "#aa0000";
+		}
+		else {
+			$fontSize = $tagCount;
+			$fontColor = "#eee";
+		}
+		$fontSize = ceil($fontSize + 13);
+		$photoBodyHTML .= <<<THUMBEND
+<a href="/tag/{$tag}/" style="font-family:georgia,times new roman,serif;color:{$fontColor};font-size:{$fontSize}px;font-weight:normal;text-decoration:none;line-height:110%;" rel="tag">{$tag}</a>&nbsp;
+
+THUMBEND;
+	}
+	$photoBodyHTML .= "</div>";
+}
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="DC.title" content="<?php print APP_TITLE ?>" />
+	<meta name="geo.country" content="US" />
+	<meta name="dc.language" content="en" />
+	<meta name="description" content="<?php print APP_DESCRIPTION ?>" />
+	<link rel="stylesheet" type="text/css" href="/site_pblog.css" />
+	<title><?php print APP_TITLE ?>: tag cloud</title>
+<?php
+if ($_SESSION['admin']) {
+?>
+	<script src="/scripts/prototype.js" type="text/javascript"></script>
+	<script src="/scripts/editing.js" type="text/javascript"></script>
+<?php } ?>
+	</head>
+	<body>
+	<div id="topBar" style="background:#eee;">
+		<div id="phases"><img src="/images/phases_p.gif" width="238" height="28" alt="phases" /></div>
+		<div id="sun"><img src="/images/onfocus-photos.gif" height="28" alt="onfocus * photos" style="margin-bottom:2px;margin-right:2px;"/><img src="/images/sun_p.gif" width="33" height="33" alt="sun"/></div>
+	</div>
+	<div id="menuBar">
+		<div style="position:absolute;right:0px;">
+			<a href="/"><img src="/images/menu-photos.gif" width="43" height="15" alt="photos" title="View all photos" style="padding-right:16px;padding-left:16px;border-right:solid #bbb 1px;border-left:solid #bbb 1px;" border="0"/></a>
+			<a href="/tags/"><img src="/images/menu-tags.gif" width="28" height="15" alt="photos" title="View all tags" style="padding-right:16px;padding-left:14px;border-right:solid #bbb 1px;" border="0"/></a>
+			<a href="http://www.onfocus.com/"><img src="/images/menu-blog.gif" width="29" height="15" alt="Blog" title="Go to my blog" style="padding-right:16px;padding-left:16px;" border="0"/></a>
+			<a href="http://www.onfocus.com/about/"><img src="/images/menu-about.gif" width="38" height="15" alt="about" title="About onfocus.com" style="padding-right:10px;padding-left:16px;border-left:solid #bbb 1px;" border="0"/></a>
+		</div>
+	</div>
+	<div id="photobody">
+	<?php print $photoBodyHTML ?>
+	<div style="clear:both;">&nbsp;</div>
+	<div class="clsPost" style="color:#444;margin-top:10px;"><a href="http://photos.onfocus.com/">all photos</a> | <a href="http://www.onfocus.com/">blog</a> | photos <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/">cc</a> 1998-2007 pb.</div>
+	</div>
+	</body>
+</html>

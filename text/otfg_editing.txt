@@ -1,0 +1,443 @@
+// editing.js
+
+var editing = 0;
+var width = 0;
+var stub = '';
+
+//Rotation Functions
+function rotatePhoto() {
+	if (confirm('Are you sure you want to rotate this photo?')) {
+		request=new Ajax.Request(
+			'http://photos.onfocus.com/rotate-photo.php',
+			{method:'post',
+			parameters:'stub='+stub+'&degree=90',
+			onSuccess:refreshImage})
+	}
+	else {
+		return false;
+	}
+}
+function refreshImage(request) {
+	var response = request.responseText;
+	response = response.replace(/^\s*|\s*$/g,"");
+	if ((response == 0) || (response == "")) {
+		alert('Wasn\'t able to rotate this photo!');
+	}
+	else {
+		var arResponse = response.split(",");
+		var src = arResponse[0];
+		var width = arResponse[1];
+		var height = arResponse[2];
+		var img = document.getElementById("mainphoto");
+
+		img.src = 'http://photos.onfocus.com/images/black.gif';
+		img.width = width;
+		img.height = height;
+		img.src = src;
+	}
+}
+
+//Delete
+function deletePhoto() {
+	if (confirm('Are you sure you want to completely remove this photo?')) {
+		document.location = '/delete-photo.php?stub='+stub;
+	}
+	else {
+		return false;
+	}
+}
+
+//Public/Private Functions
+function changeStatus(pub) {
+	if (pub) {
+		var status = 'public';
+	}
+	else {
+		var status = 'private';
+	}
+	if (confirm('Are you sure you want to make this photo '+status+'?')) {
+		request=new Ajax.Request(
+			'http://photos.onfocus.com/edit-status.php',
+			{method:'post',
+			parameters:'stub='+stub+'&pub='+pub,
+			onSuccess:setStatus})
+	}
+	else {
+		return false;
+	}
+}
+function setStatus(request) {
+	var pub=request.responseText;
+	pub = pub.replace(/^\s*|\s*$/g,"");
+	var img = document.getElementById("status");
+	if (pub==1) {
+		img.src = "/images/icon-public.gif";
+		img.title = "Make this photo private";
+		img.onclick = function(){changeStatus(0)}; ;
+	}
+	else {
+		img.src = "/images/icon-private.gif";
+		img.title = "Make this photo public";
+		img.onclick = function(){changeStatus(1)}; ;
+	}
+}
+
+//Edit Title Functions
+function saveTitle() {
+	var title = document.getElementById("newtitle").value;
+	title = escape(title);
+	request=new Ajax.Request(
+		'http://photos.onfocus.com/edit-title.php',
+		{method:'post',
+		parameters:'stub='+stub+'&title='+title,
+		onSuccess:setTitle,
+		onFailure:savingTitle})
+}
+function savingTitle() {
+	editing = 0;
+	var title = document.getElementById("title");
+	title.appendChild(document.createTextNode('Saving...')); 
+	title.style.background = '#666';
+	title.style.padding = '0px';
+	title.style.fontStyle = 'italic';
+	title.removeChild(title.firstChild);
+}
+function setTitle(request) {
+	editing = 0;
+	var response=request.responseText;
+	response = response.replace(/^\s*|\s*$/g,"");
+	var title = document.getElementById("title");
+	var t = response;
+	title.appendChild(document.createTextNode(t));
+	title.onclick = function(){editTitle()}; 
+	title.onmouseover = function(){this.style.backgroundColor='#666'};
+	title.onmouseout = function(){this.style.backgroundColor='#111'};
+	title.style.background = '#111';
+	title.style.padding = '0px';
+	title.style.marginLeft = '10px';
+	title.removeChild(title.firstChild);
+}
+function restoreTitle() {
+	editing = 0;
+	var title = document.getElementById("title");
+	var t = document.getElementById("oldtitle");
+	title.appendChild(document.createTextNode(t.value));
+	title.onclick = function(){editTitle()}; 
+	title.onmouseover = function(){this.style.backgroundColor='#666'};
+	title.onmouseout = function(){this.style.backgroundColor='#111'};
+	title.style.background = '#111';
+	title.style.padding = '0px';
+	title.style.marginLeft = '10px';
+	title.removeChild(title.firstChild);
+}
+function editTitle() {
+	if (!editing) {
+		editing = 1;
+		var title = document.getElementById("title");
+		var f = document.createElement("div");
+		f.id = "titleform";
+		var t = document.createElement("input");
+		t.type = "text";
+		t.value = title.innerHTML;
+		t.style.width = width+'px';
+		t.style.backgroundColor = "#ffffcc";
+		t.style.fontSize = '23px';
+		t.name = "newtitle"
+		t.id = "newtitle";
+		var s = document.createElement("input"); 
+		s.type = "button"; 
+		s.value = "save";
+		s.style.margin = "1px";
+		s.onclick = function(){saveTitle()};
+		var o = document.createElement("span");
+		o.style.fontSize = '11px';
+		o.innerHTML = ' OR ';
+		var b = document.createElement("input"); 
+		b.type = "button";
+		b.value = "cancel";
+		b.style.margin = "1px";
+		b.style.marginLeft = "2px";
+		b.onclick = function(){restoreTitle()};
+		var h = document.createElement("input");
+		h.type = "hidden";
+		h.name = "oldtitle";
+		h.id = "oldtitle";
+		h.value = t.value;
+		f.appendChild(t); 
+		f.appendChild(s);
+		f.appendChild(o);
+		f.appendChild(b);
+		f.appendChild(h);
+		while (title.hasChildNodes()) {
+			title.removeChild(title.firstChild);
+		}
+		title.appendChild(f);
+		title.onmouseout = function(){return false};
+		title.onmouseover = function(){return false};
+		title.onclick = function(){return false};
+		title.style.marginLeft = '5px';
+		title.style.padding = '5px';
+		title.style.background = '#666';
+		var nt = document.getElementById("newtitle");
+		nt.focus();
+	}
+}
+
+//Edit Caption Functions
+function saveCaption() {
+	var caption = document.getElementById("newcaption").value;
+	caption = escape(caption);
+	request=new Ajax.Request(
+		'http://photos.onfocus.com/edit-caption.php',
+		{method:'post',
+		parameters:'stub='+stub+'&caption='+caption,
+		onSuccess:setCaption,
+		onFailure:savingCaption})
+}
+function savingCaption() {
+	editing = 0;
+	var caption = document.getElementById("caption");
+	caption.appendChild(document.createTextNode('Saving...')); 
+	caption.style.background = '#666';
+	caption.style.padding = '0px';
+	caption.style.fontStyle = 'italic';
+	caption.removeChild(caption.firstChild);
+}
+function setCaption(request) {
+	editing = 0;
+	var cap = request.responseText;
+	cap = cap.replace(/^\s*|\s*$/g,"");
+	var caption = document.getElementById("caption");
+	caption.removeChild(caption.firstChild);
+	if (cap != "") {
+		caption.appendChild(document.createTextNode(cap));
+		caption.onclick = function(){editCaption()};  
+		caption.onmouseover = function(){this.style.backgroundColor='#666'};
+		caption.onmouseout = function(){this.style.backgroundColor='#111'};
+		caption.style.background = '#111';
+		caption.style.padding = '0px';
+		caption.style.marginLeft = '5px';
+	}
+	else {
+		caption.style.display = 'none';
+	}
+}
+function restoreCaption() {
+	editing = 0;
+	var caption = document.getElementById("caption");
+	var t = document.getElementById("oldcaption");
+	if (t.value != "") {
+		caption.appendChild(document.createTextNode(t.value));
+		caption.onclick = function(){editCaption()}; 
+		caption.onmouseover = function(){this.style.backgroundColor='#666'};
+		caption.onmouseout = function(){this.style.backgroundColor='#111'};
+		caption.style.background = '#111';
+		caption.style.padding = '0px';
+		caption.style.marginLeft = '5px';
+	}
+	else {
+		caption.style.display = 'none';
+	}
+	caption.removeChild(caption.firstChild);
+}
+function editCaption() {
+	if (!editing) {
+		editing = 1;
+		var caption = document.getElementById("caption");
+		var f = document.createElement("div");
+		f.id = "captionform";
+		var t = document.createElement("textarea");
+		t.value = caption.innerHTML;
+		t.style.width = (width-10)+'px';
+		t.style.backgroundColor = "#ffffcc";
+		t.style.fontSize = '13px';
+		t.name = "newcaption"
+		t.id = "newcaption";
+		var s = document.createElement("input"); 
+		s.type = "button"; 
+		s.value = "save";
+		s.style.margin = "1px";
+		s.onclick = function(){saveCaption()};
+		var o = document.createElement("span");
+		o.style.fontSize = '11px';
+		o.innerHTML = ' OR ';
+		var b = document.createElement("input"); 
+		b.type = "button";
+		b.value = "cancel";
+		b.style.margin = "1px";
+		b.style.marginLeft = "2px";
+		b.onclick = function(){restoreCaption()};
+		var h = document.createElement("input");
+		h.type = "hidden";
+		h.name = "oldcaption";
+		h.id = "oldcaption";
+		h.value = t.value;
+		f.appendChild(t);
+		f.appendChild(s);
+		f.appendChild(o);
+		f.appendChild(b);
+		f.appendChild(h);
+		while (caption.hasChildNodes()) {
+			caption.removeChild(caption.firstChild);
+		}
+		caption.appendChild(f);
+		caption.onmouseout = function(){return false};
+		caption.onmouseover = function(){return false};
+		caption.onclick = function(){return false};
+		caption.style.marginLeft = '0px';
+		caption.style.padding = '5px';
+		caption.style.background = '#666';
+		caption.style.display = 'block';
+		var nc = document.getElementById("newcaption");
+		nc.focus();
+	}
+}
+
+//Edit Tags Functions
+function saveTags() {
+	var tags = document.getElementById("newtags").value;
+	tags = escape(tags);
+	request=new Ajax.Request(
+		'http://photos.onfocus.com/edit-tags.php',
+		{method:'post',
+		parameters:'stub='+stub+'&tags='+tags,
+		onSuccess:setTags,
+		onFailure:savingTags})
+}
+function savingTags() {
+	editing = 0;
+	var tags = document.getElementById("tags");
+	while (tags.hasChildNodes()) {
+		tags.removeChild(tags.firstChild);
+	}
+	tags.appendChild(document.createTextNode('Saving...')); 
+	tags.style.background = '#666';
+	tags.style.padding = '0px';
+	tags.style.fontStyle = 'italic';
+}
+function setTags(request) {
+	editing = 0;
+	var deflist = request.responseText;
+	deflist = deflist.replace(/^\s*|\s*$/g,"");
+	var tags = document.getElementById("tags");
+	var img = document.createElement("img");
+	img.src = "/images/icon-tag.gif";
+	img.width = "12";
+	img.height = "12";
+	img.alt = "tagged";
+	img.title = "Tagged";
+	img.style.verticalAlign = 'middle';
+	var span = document.createElement("span");
+	span.id = "taglist";
+	if (deflist == "") {
+		deflist = "Click here to add tags for this photo.";
+		span.style.fontStyle = 'italic';
+	}
+	span.innerHTML = deflist;
+	while (tags.hasChildNodes()) {
+		tags.removeChild(tags.firstChild);
+	}
+	tags.appendChild(img);
+	tags.appendChild(document.createTextNode(' '));
+	tags.appendChild(span);
+	tags.onclick = function(){editTags()}; 
+	tags.onmouseover = function(){this.style.backgroundColor='#333'};
+	tags.onmouseout = function(){this.style.backgroundColor='#111'};
+	tags.style.background = '#111';
+	tags.style.padding = '0px';
+	tags.style.marginLeft = '6px';
+}
+function restoreTags() {
+	editing = 0;
+	var tags = document.getElementById("tags");
+	var t = document.getElementById("oldtags");
+	var deflist = t.value;
+	var img = document.createElement("img");
+	img.src = "/images/icon-tag.gif";
+	img.width = "12";
+	img.height = "12";
+	img.alt = "tagged";
+	img.title = "Tagged";
+	img.style.verticalAlign = 'middle';
+	var span = document.createElement("span");
+	span.id = "taglist";
+	if (deflist == "") {
+		deflist = "Click here to add tags for this photo.";
+		span.style.fontStyle = 'italic';
+	}
+	span.innerHTML = deflist;
+	while (tags.hasChildNodes()) {
+		tags.removeChild(tags.firstChild);
+	}
+	tags.appendChild(img);
+	tags.appendChild(document.createTextNode(' '));
+	tags.appendChild(span);
+	tags.onclick = function(){editTags()}; 
+	tags.onmouseover = function(){this.style.backgroundColor='#333'};
+	tags.onmouseout = function(){this.style.backgroundColor='#111'};
+	tags.style.background = '#111';
+	tags.style.padding = '0px';
+	tags.style.marginLeft = '6px';
+}
+function editTags() {
+	if (!editing) {
+		editing = 1;
+		var tags = document.getElementById("tags");
+		var taglist = document.getElementById("taglist");
+		var deflist = taglist.innerHTML;
+		if (deflist == "Click here to add tags for this photo.") {
+			deflist = "";
+		}
+		var f = document.createElement("div");
+		f.style.width = width+'px';
+		f.id = "tagform";
+		var t = document.createElement("input");
+		t.type = "text";
+		t.value = deflist;
+		t.size = '50';
+		t.style.backgroundColor = "#ffffcc";
+		t.style.fontSize = '11px';
+		t.name = "newtags"
+		t.id = "newtags";
+		var s = document.createElement("input"); 
+		s.type = "button"; 
+		s.value = "save";
+		s.style.margin = '1px';
+		s.onclick = function(){saveTags()};
+		var o = document.createElement("span");
+		o.style.fontSize = '11px';
+		o.style.color = '#222';
+		o.innerHTML = ' OR ';
+		var b = document.createElement("input"); 
+		b.type = "button";
+		b.value = "cancel";
+		b.style.margin = '1px';
+		b.style.marginLeft = "2px";
+		b.onclick = function(){restoreTags()};
+		var h = document.createElement("input");
+		h.type = "hidden";
+		h.name = "oldtags";
+		h.id = "oldtags";
+		h.value = t.value;
+		f.appendChild(t);
+		f.appendChild(document.createElement("br"));
+		f.appendChild(s);
+		f.appendChild(o);
+		f.appendChild(b);
+		f.appendChild(h);
+		while (tags.hasChildNodes()) {
+			tags.removeChild(tags.firstChild);
+		}
+		tags.appendChild(f);
+		tags.onmouseout = function(){return false};
+		tags.onmouseover = function(){return false};
+		tags.onclick = function(){return false};
+		tags.style.width = width+'px';
+		tags.style.marginLeft = '0px';
+		tags.style.padding = '5px';
+		tags.style.background = '#666';
+		tags.style.display = 'block';
+		var nt = document.getElementById("newtags");
+		nt.focus();
+	}
+}

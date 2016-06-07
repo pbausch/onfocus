@@ -1,0 +1,5 @@
+-- -- Table structure for table `sets`-- CREATE TABLE `sets` (  `SetID` int(11) NOT NULL auto_increment,  `FlickrID` bigint(11) NOT NULL default '0',  `Title` varchar(250) NOT NULL,  `Description` longtext,  `DateCreated` datetime default NULL,  PRIMARY KEY  (`SetID`)) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+-- -- Table structure for table `setphotos`-- CREATE TABLE `setphotos` (  `SetPhotoID` int(11) NOT NULL auto_increment,  `SetID` int(11) NOT NULL,  `PhotoID` int(11) NOT NULL,  `IsPrimary` tinyint(1) NOT NULL default '0',  `Order` int(11) NOT NULL default '0',  `DateAdded` datetime default NULL,  PRIMARY KEY  (`SetPhotoID`)) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

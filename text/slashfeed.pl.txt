@@ -1,0 +1,65 @@
+#!/usr/bin/perl
+#
+# slashfeed.pl
+#
+# Given a numeric Slashdot Topic ID, the script
+# will scrape together an RSS feed with recent
+# posts. Browse the directory of all Slashdot 
+# topics here:
+#
+# http://slashdot.org/search.pl
+#
+# And grab the topic ID from the URL. Here's the
+# topic URL for the topic 'Google': 
+#
+# http://slashdot.org/search.pl?tid=217
+#
+# Note the topid ID (tid) is 217.
+#
+# Screen scraping is brittle. This will probably
+# break. by pb, onfocus.com
+#
+# Usage: slashfeed.pl <tid>
+
+use strict;
+use LWP::Simple;
+use XML::RSS::SimpleGen;
+
+# Grab the incoming word or phrase
+my $tid = join(' ', @ARGV) or die "Usage: slashfeed.pl <topic id>\n";
+
+my $url = "http://slashdot.org/search.pl?tid=$tid";
+
+rss_new($url, "Slashdot Topic");
+rss_language('en');
+rss_daily();
+my $response = get( $url );
+
+# Pick through results
+while ($response =~ m!<div class="search-results">.*?<h4>.*?<a href="(.*?)">(.*?)</a>.*?</h4>.*?<div class="data">(.*?)</div>.*?<div class="intro">(.*?)</div>.*?</div>.*?</div>!mgis) {
+  	my $url = $1;
+	my $title = $2;
+	my $desc = $4;
+	$url = trimwhitespace($url);
+	$title = trimwhitespace($title);
+	$desc = trimwhitespace($desc);
+	$url =~ s!//!http://!gis;
+        rss_item($url, $title, $desc);
+  }
+
+# Warn if nothing was found
+die "No items in this content?! {{\n$_\n}}\nAborting"
+ unless rss_item_count();
+
+# Save the rss file as slashdot_<tid>.rss
+rss_save("slashdot_$tid.xml");
+exit;
+
+# Remove whitespace from the start and end of a string
+sub trimwhitespace($)
+{
+	my $string = shift;
+	$string =~ s/^\s+//;
+	$string =~ s/\s+$//;
+	return $string;
+}

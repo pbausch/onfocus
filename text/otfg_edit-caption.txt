@@ -1,0 +1,23 @@
+<?php
+// edit-caption.php
+
+require("ini.inc");
+require("auth.inc");
+
+authSession($connection);
+
+if (!$_SESSION['admin']) {
+	exit;
+} 
+
+$stub = $_POST['stub'];
+$caption = $_POST['caption'];
+
+$stub_f = mysql_real_escape_string($stub);
+$caption_f = mysql_real_escape_string($caption);
+$sql = "UPDATE photos SET Description = '$caption_f' WHERE Stub = '$stub_f'";
+if (!$update = @ mysql_query ($sql, $connection))
+	logerror();
+
+print $caption;
+?>

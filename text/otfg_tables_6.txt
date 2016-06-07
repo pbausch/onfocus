@@ -1,0 +1,21 @@
+-- 
+-- Table structure for table `exif`
+-- 
+
+CREATE TABLE `exif` (
+  `ExifID` int(11) NOT NULL auto_increment,
+  `PhotoID` int(11) NOT NULL,
+  `ExposureTime` varchar(15) NOT NULL,
+  `FStop` varchar(15) NOT NULL,
+  `ISOSpeed` varchar(15) NOT NULL,
+  `FocalLength` varchar(15) NOT NULL,
+  `CameraMake` varchar(25) NOT NULL,
+  `CameraModel` varchar(25) NOT NULL,
+  `Flash` varchar(15) NOT NULL,
+  `ExposureMode` varchar(15) NOT NULL,
+  `ExposureBias` varchar(10) NOT NULL,
+  `DateTimeOriginal` varchar(25) NOT NULL,
+  `DateTime` varchar(25) NOT NULL,
+  `Software` varchar(40) NOT NULL,
+  PRIMARY KEY  (`ExifID`)
+);

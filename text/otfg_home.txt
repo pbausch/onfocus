@@ -1,0 +1,141 @@
+<?php
+// home.php
+
+require("ini.inc");
+require("auth.inc");
+
+authSession($connection);
+
+$cntThumb = 0;
+$cntPhoto = 0;
+$photoBodyHTML = "";
+
+//Get the total number of photos
+if ($_SESSION['admin']) {
+	$query = "SELECT Count(PhotoID) FROM Photos";
+}
+else {
+	$query = "SELECT Count(PhotoID) FROM Photos WHERE Public = 1";
+}
+if (!$result = @ mysql_query ($query, $connection))
+   	logError();
+while ($tp = mysql_fetch_row($result)) {
+	$totalphotos = $tp[0];
+}
+
+$pageNum = 1;
+$rowsPerPage = 36;
+$totalpages = ceil($totalphotos / $rowsPerPage);
+if (isset($_GET['page'])) {
+	$pageNum = $_GET['page'];
+	if (!ctype_digit($pageNum) || $pageNum > $totalpages) {
+		$pageNum = 1;
+	}
+}
+if ($pageNum == 1) {
+	$rowsPerPage = 35;
+}
+$offset = ($pageNum - 1) * $rowsPerPage;
+
+
+
+if ($_SESSION['admin']) {
+	$query = "SELECT PhotoID, File, Title, Description, DateCreated, Public, Stub FROM Photos ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
+}
+else {
+	$query = "SELECT PhotoID, File, Title, Description, DateCreated, Public, Stub FROM Photos WHERE Public = 1 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
+}
+if (!$result = @ mysql_query ($query, $connection))
+   	printMySQLerror();
+if (mysql_num_rows($result) == 0) {
+	die("Couldn't find this photo!");
+} 
+else {
+	while ($photo = mysql_fetch_array($result)) {
+		$cntPhoto++;
+		$photoID = $photo['PhotoID'];
+		$photoFile = $photo['File'];
+		$photoStub = $photo['Stub'];
+		$photoSRC = str_replace(PHOTO_DIR, "http://photos.onfocus.com/photos/", $photoFile);
+		$photoSRC = str_replace("\\", "/", $photoSRC);
+		$photoTitle = $photo['Title'];
+		$photoDescription = $photo['Description'];
+		$photoDate = $photo['DateCreated'];
+		$photoDateTitle = date("l, F jS",strtotime($photoDate));
+		$photoDateTime = date("g:i A",strtotime($photoDate));
+		$photoDateTimeMore = date("M jS, Y",strtotime($photoDate))." at ".$photoDateTime;
+		$photoYear = date("Y",strtotime($photoDate));
+		$thumbYearDir = THUMB_DIR . $photoYear;
+		$thumbBaseFile = $thumbYearDir . "\\" . md5(SALT.$photoID);
+		$thumbFile_m = $thumbBaseFile . "_m.jpg";
+		$thumbSRC_m = str_replace(THUMB_DIR, "http://photos.onfocus.com/thumbs/", $thumbFile_m);
+		$thumbSRC_m = str_replace("\\", "/", $thumbSRC_m);
+		list($width, $height, $type, $attr) = @getimagesize($photoFile);
+		list($width_m, $height_m, $type_m, $attr_m) = @getimagesize($thumbFile_m);
+		if ($cntPhoto == 1 && $pageNum == 1) {
+			$photoBodyHTML .= <<<PHOTOEND
+<h1 class="clsHeader">{$photoDateTitle}</h1>
+<div class="clsPost">
+	<h2 class="clsTitle">{$photoTitle}</h2>
+	<a href="/{$photoStub}"><img src="{$photoSRC}" width="{$width}" height="{$height}" alt="{$photoTitle}" style="border:solid #333 2px;background:#000;" border="0"/></a><br />
+	<div id="caption">{$photoDescription}</div>
+	<div class="clsDateTime"><img src="http://www.onfocus.com/q/posted.gif" width="12" height="12" alt="[.]" style="vertical-align:middle;" border="0"/> {$photoDateTime}</div>
+</div>
+PHOTOEND;
+		}
+		else {
+			if ($cntThumb == 0) {
+				$photoBodyHTML .= '<h1 class="clsHeader" style="margin-top:30px;margin-bottom:0px;">Older Photos</h1>';
+				$photoBodyHTML .= '<table cellspacing="5" cellpadding="5"><tr>';
+			}
+			if ($cntThumb & 1) {
+				$photoBodyHTML .= "</td><td valign=\"top\">";
+			}
+			else {
+				$photoBodyHTML .= "</td></tr><tr><td valign=\"top\">";
+			}
+			$cntThumb++;
+			$photoBodyHTML .= <<<THUMBEND
+<div class="clsPost" style="margin-right:40px;">
+	<h3 class="clsMiniTitle" style="width:{$width_m}px;">{$photoTitle}</h3>
+	<a href="/{$photoStub}"><img src="{$thumbSRC_m}" width="{$width_m}" height="{$height_m}" alt="{$photoTitle}" style="border:solid #333 2px;background:#000;" border="0"/></a><br />
+	<div class="clsDateTime"><img src="http://www.onfocus.com/q/posted.gif" width="12" height="12" alt="[.]" style="vertical-align:middle;" border="0"/> {$photoDateTimeMore}</div>
+</div>
+THUMBEND;
+		}
+	}
+}
+$photoBodyHTML .= "</td></tr></table>";
+
+//Assemble page numbers
+$pageNumbersHTML = "";
+for ($p=1; $p <= $totalpages; $p++) {
+	if ($p == $pageNum) {
+		$pageNumbersHTML .= ' <span id="thisPage">'.$p.'</span> ';
+	} 
+	else {
+		$pageNumbersHTML .= ' <a class="clsPage" href="/home/'.$p.'/">'.$p.'</a> ';
+	}
+}
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="/photo.css" />
+	<title>onfocus - photos</title>
+<?php
+if ($_SESSION['admin']) {
+?>
+	<script src="/scripts/prototype.js" type="text/javascript"></script>
+	<script src="/scripts/editing.js" type="text/javascript"></script>
+<?php } ?>
+	</head>
+	<body>
+	<div id="menuBar">&nbsp;</div>
+	<div id="photobody">
+	<?php print $photoBodyHTML ?>
+	<div class="clsPost" style="color:#444;margin-top:30px;">Page: <?php print $pageNumbersHTML ?></div>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,64 @@
+<?php
+// delete-photo.php
+
+require("ini.inc");
+require("auth.inc");
+
+authSession($connection);
+
+if (!$_SESSION['admin']) {
+	header("Location: home.php");
+	exit;
+} 
+
+$stub = $_GET['stub'];
+$photoID = 0;
+
+$stub_f = mysql_real_escape_string($stub);
+$sql = "SELECT PhotoID, DateCreated, File FROM photos WHERE Stub = '$stub_f'";
+if (!$result = @ mysql_query ($sql, $connection))
+	logerror();
+while($grabID = mysql_fetch_row($result)) {
+	$photoID = $grabID[0];
+	$photoDate = $grabID[1];
+	$photoFile = $grabID[2];
+}
+
+if ($photoID > 0) {
+	$sql = "DELETE FROM photos WHERE PhotoID = $photoID";
+	if (!$delete = @ mysql_query ($sql, $connection))
+		logerror();
+
+	$sql = "DELETE FROM tags WHERE PhotoID = $photoID";
+	if (!$delete = @ mysql_query ($sql, $connection))
+		logerror();
+
+	$sql = "DELETE FROM setphotos WHERE PhotoID = $photoID";
+	if (!$delete = @ mysql_query ($sql, $connection))
+		logerror();
+
+	$sql = "DELETE FROM notes WHERE PhotoID = $photoID";
+	if (!$delete = @ mysql_query ($sql, $connection))
+		logerror();
+
+	$sql = "DELETE FROM comments WHERE PhotoID = $photoID";
+	if (!$delete = @ mysql_query ($sql, $connection))
+		logerror();
+
+	//Remove images
+	$photoYear = date("Y",strtotime($photoDate));
+	$thumbYearDir = THUMB_DIR . $photoYear;
+	$thumbBaseFile = $thumbYearDir . "\\" . md5(SALT.$photoID);
+	unlink($thumbBaseFile."_m.jpg");
+	unlink($thumbBaseFile."_t.jpg");
+	unlink($thumbBaseFile."_s.jpg");
+	
+	$newPhotoFile = str_replace(".jpg", "_o.jpg", $photoFile);
+	if (file_exists($newPhotoFile)) {
+		unlink($newPhotoFile);
+	}
+	unlink($photoFile);
+}
+
+header("Location: home.php");
+?>

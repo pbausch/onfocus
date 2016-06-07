@@ -1,0 +1,178 @@
+<?php
+// resize-all-photos.php
+//
+// A PHP5 script to resize a batch of photos stored in a db.
+//
+// by pb, http://www.onfocus.com/
+//
+// Use at your own risk.
+
+set_time_limit(48000);
+
+//Application Settings
+define("PHOTO_MAX_WIDTH",850);       // Maximum size a photo should be
+define("PHOTO_MAX_HEIGHT",640);      // Maximum size a photo should be
+define("PHOTO_QUALITY",95);  	     // Quality for photo resizing
+define("SALT","[your unique salt]"); // Helps with file naming
+
+//Add your local photos folders (with trailing slashes)
+$photodir = "[full path to photo directory]";
+$thumbdir = "[full path to thumbs directory]";
+
+//Add your MySQL details
+$mysql_server = "localhost";
+$mysql_user = "[user]";
+$mysql_pass = "[password]";
+$mysql_db = "[db name]";
+
+//Get this db started
+if (!$connection = @ mysql_connect($mysql_server, $mysql_user, $mysql_pass))
+   die("Can't connect to the database!");
+if (!mysql_select_db($mysql_db, $connection))
+   die("Error " . mysql_errno() . " : " . mysql_error());
+
+//Grab the PhotoID and File Location of all photos
+$query = "SELECT PhotoID, File, DateCreated FROM Photos";
+if (!$result = @ mysql_query ($query, $connection))
+   	printMySQLerror();
+if (mysql_num_rows($result) == 0) {
+	die("Couldn't find any photos!");
+} 
+else {
+	while ($photo = mysql_fetch_array($result)) {
+		$photoID = $photo["PhotoID"];
+		$photoFile = $photo["File"];
+		$photoDate = $photo["DateCreated"];
+		$photoYear = date("Y",strtotime($photoDate));
+		$thumbYearDir = $thumbdir . $photoYear;
+		list($width, $height, $type, $attr) = @getimagesize($photoFile);
+		
+		//Check to see if thumbs directory exists
+		if (!is_dir($thumbYearDir)) {
+			mkdir($thumbYearDir, 0777, true);
+		}
+		
+		//See if original image is bigger than the max image size
+		if ($width > PHOTO_MAX_WIDTH) {
+			//Copy the original to [file]_o.jpg if necessary
+			$newPhotoFile = str_replace(".jpg", "_o.jpg", $photoFile);
+			if (!file_exists($newPhotoFile)) {
+				if (!copy($photoFile, $newPhotoFile)) {
+					print "Error: couldn't copy $photoFile.<br />";
+				}
+			}
+			//Resize
+			$newheight = Round($height * PHOTO_MAX_WIDTH) / $width;
+			if (resizePhoto($photoFile,PHOTO_MAX_WIDTH,$newheight,$photoFile,false)) {
+				print "$photoFile resized.<br />";
+			}
+		}
+		elseif ($height > PHOTO_MAX_HEIGHT) {
+			//Copy the original to [file]_o.jpg if necessary
+			$newPhotoFile = str_replace(".jpg", "_o.jpg", $photoFile);
+			if (!file_exists($newPhotoFile)) {
+				if (!copy($photoFile, $newPhotoFile)) {
+					print "Error: couldn't copy $photoFile.<br />";
+				}
+			}			
+			$newwidth = Round($width * PHOTO_MAX_HEIGHT) / $height;
+			if (resizePhoto($photoFile,$newwidth,PHOTO_MAX_HEIGHT,$photoFile,false)) {
+				print "$photoFile resized.<br />";
+			}
+		}
+		
+		//Set up the base file name for thumbnails
+		$thumbBaseFile = $thumbYearDir . "\\" . md5(SALT.$photoID);
+		
+		//See if square thumb file is needed (85x85)
+		$thumbFile_s = $thumbBaseFile . "_s.jpg";
+		if (!file_exists($thumbFile_s)) {
+			if (resizePhoto($photoFile,85,85,$thumbFile_s,true)) {
+				print "$thumbFile_s created.<br />";
+			}
+		}
+		
+		//See if tiny thumb file is needed (100 max)
+		$thumbFile_t = $thumbBaseFile . "_t.jpg";
+		if (!file_exists($thumbFile_t)) {
+			if ($width > $height) {
+				$newheight = Round($height * 100) / $width;
+				if (resizePhoto($photoFile,100,$newheight,$thumbFile_t,false)) {
+					print "$thumbFile_t created.<br />";
+				}
+			}
+			else {
+				$newwidth = Round($width * 100) / $height;
+				if (resizePhoto($photoFile,$newwidth,100,$thumbFile_t,false)) {
+					print "$thumbFile_t created.<br />";
+				}
+			}
+		}
+		
+		//See if medium thumb file is needed (240 max)
+		$thumbFile_m = $thumbBaseFile . "_m.jpg";
+		if (!file_exists($thumbFile_m)) {
+			if ($width > $height) {
+				$newheight = Round($height * 240) / $width;
+				if (resizePhoto($photoFile,240,$newheight,$thumbFile_m,false)) {
+					print "$thumbFile_m created.<br />";
+				}
+			}
+			else {
+				$newwidth = Round($width * 240) / $height;
+				if (resizePhoto($photoFile,$newwidth,240,$thumbFile_m,false)) {
+					print "$thumbFile_m created.<br />";
+				}
+			}
+		}
+		$cnt++;
+		if ($cnt == 10) {
+			sleep(2);
+			$cnt = 0;
+		}
+	    flush();
+	    ob_flush();
+	}
+}
+
+//thanks for the help ZenPhoto, http://www.zenphoto.org/
+//and fluffle, http://us2.php.net/manual/en/function.imagecopyresampled.php#53031
+
+function resizePhoto($original,$width,$height,$destination,$crop) {
+	if ($originalImage  = @imagecreatefromjpeg($original)) {
+		$originalWidth  = imagesx($originalImage);
+		$originalHeight = imagesy($originalImage);
+		$newImage  = imagecreatetruecolor($width, $height);
+		if ($crop) {
+			if ($originalWidth > $originalHeight) {
+			   $offsetWidth = ($originalWidth-$originalHeight)/2;
+			   $offsetHeight = 0;
+			   $originalWidth = $originalHeight;
+			} elseif ($originalHeight > $originalWidth) {
+			   $offsetWidth = 0;
+			   $offsetHeight = ($originalHeight-$originalWidth)/2;
+			   $originalHeight = $originalWidth;
+			} else {
+			   $offsetWidth = 0;
+			   $offsetHeight = 0;
+			}
+		  	imagecopyresampled($newImage, $originalImage, 0, 0, $offsetWidth, $offsetHeight, $width, $height, $originalWidth, $originalHeight);
+		}
+		else {
+		  	imagecopyresampled($newImage, $originalImage, 0, 0, 0, 0, $width, $height, $originalWidth, $originalHeight);
+		}
+
+		//Create the image file
+		touch($destination);
+		imagejpeg($newImage, $destination, PHOTO_QUALITY);
+		chmod($destination, 0644);
+		imagedestroy($newImage);
+		imagedestroy($originalImage);
+		return true;
+	}
+	else {
+		print "Couldn't load file: $original";
+		return false;
+	}
+}
+?>

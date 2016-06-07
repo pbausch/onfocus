@@ -1,0 +1,81 @@
+#!/usr/bin/perl
+# getAlbum.cgi
+# Displays recent album art on a website
+
+my $file = "now-hearing.html";
+my $numofalbums = 3;
+
+#Initialize packages
+use strict;
+use XML::Simple;
+use LWP::Simple;
+use CGI qw/:standard/;
+use URI::Escape;
+
+#Initialize Error Handling
+use CGI::Carp qw( fatalsToBrowser );
+BEGIN {
+	sub carp_error {
+		my $error_message = shift;
+		print "$error_message";
+	}
+	CGI::Carp::set_message( \&carp_error );
+}
+
+# Grab incoming parameters
+my $artist = uri_escape(param('artist'));
+my $album = uri_escape(param('album'));
+
+# Build Amazon URL
+my $amazonurl = "http://xml.amazon.com/onca/xml?Service=AWSECommerceService&AWSAccessKeyId=1JJAECP7T6ZA5DFVERG2&Operation=ItemSearch&Artist=$artist&Title=$album&ResponseGroup=Medium&SearchIndex=Music&Sort=psrank&Catalog=Popular%20Music&SortBy=Best%20Match";
+
+# die($amazonurl);
+
+# Make the request
+my $response = get($amazonurl);
+
+# Parse the response
+my $xmlsimple = XML::Simple->new('forcearray' => 1);
+my $amazonxml = $xmlsimple->XMLin($response);
+
+# Grab the first result
+my $item = $amazonxml->{Items}->[0];
+my $thisItem = $item->{Item}->[0];
+my $asin = $thisItem->{ASIN}->[0];
+my $details = $thisItem->{ItemAttributes}->[0];
+my $album = $details->{Title}->[0];
+my $artist = $details->{Artist}->[0];
+my $imagesets = $thisItem->{ImageSets}->[0]->{ImageSet}->[0];
+my $smallimage = $imagesets->{SmallImage}->[0];
+my $imageURL = $smallimage->{URL}->[0];
+
+# write the new entry
+if (!$imageURL eq "") {
+open MUSIC, "$file"
+	or die "Can't open the file: $!\n";
+my @music = <MUSIC>;
+close MUSIC;
+
+my $exists = 0;
+foreach (@music) {
+	if ($_ =~ m!$asin!gs) {
+		$exists = 1;
+	}
+}
+
+
+if (!$exists) {
+
+	if (!$artist eq "") {
+		$artist = "<br>by $artist";
+	}
+
+	splice(@music,$numofalbums-1,1);
+	open MUSIC, ">$file"
+		or die "Can't open the file: $!\n";
+	print MUSIC "<div class=\"clsBookCover\"><a href=\"http://www.amazon.com/exec/obidos/ASIN/$asin/ref=nosim/onfocus\"><img align=\"bottom\" style=\"border:solid #111 4px;\" src=\"$imageURL\" border=\"0\"></a></div><div class=\"clsBookTitle\"><a href=\"http://www.amazon.com/exec/obidos/ASIN/$asin/ref=nosim/onfocus\">$album</a>$artist</div>\n";
+	print MUSIC @music;
+	close MUSIC;
+}
+}
+

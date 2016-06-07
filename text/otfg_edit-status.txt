@@ -1,0 +1,22 @@
+<?php
+// edit-status.php
+
+require("ini.inc");
+require("auth.inc");
+
+authSession($connection);
+
+if (!$_SESSION['admin']) {
+	exit;
+} 
+
+$stub = $_POST['stub'];
+$public = $_POST['pub'];
+if ($public == 1 || $public == 0) {
+	$stub_f = mysql_real_escape_string($stub);
+	$sql = "UPDATE photos SET Public = $public WHERE Stub = '$stub_f'";
+	if (!$update = @ mysql_query ($sql, $connection))
+		logerror();
+	print $public;
+}
+?>

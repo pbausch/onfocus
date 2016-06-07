@@ -1,0 +1,324 @@
+<?php
+// photo.php
+
+require("ini.inc");
+require("auth.inc");
+require("getTags.inc");
+
+authSession($connection);
+
+$cntThumb = 0;
+$cntPhoto = 0;
+$tagList = "";
+$tagPhotoIDs = "";
+$tag = "";
+
+$stub = $_GET['p'];
+$stub_f = mysql_real_escape_string($stub);
+
+
+if (isset($_GET['tag'])) {
+	$tagPhotoIDs = "";
+	$tag = $_GET['tag'];
+	$tag_f = mysql_real_escape_string($tag);
+	
+	//grab tag photoIDs
+	$tagquery = "SELECT PhotoID FROM tags WHERE Tag = '$tag_f'";
+	if (!$result = @ mysql_query ($tagquery, $connection))
+		logerror();
+	$rows = mysql_num_rows($result);
+	if ($rows == 0) {
+		die("Couldn't find this photo!");
+	} 
+	elseif($rows == 1) {
+		$tag = "";
+	}
+	else {
+		while ($tags = mysql_fetch_array($result)) {
+			$tagPhotoIDs .= $tags['PhotoID'].",";
+		}
+		$tagPhotoIDs = substr($tagPhotoIDs,0,-1);
+		$tagStub = "tag/$tag/";
+		$backNextLink = "/tag/$tag/";
+		$backNextTitle = "Tag: $tag";
+	}
+}
+if ($tag == "") {
+	$tag = "";
+	$tagStub = "";
+	$backNextLink = "/";
+	$backNextTitle = "All Photos";
+}
+
+$query = "SELECT photos.PhotoID, File, Title, Description, DateCreated, Public, ExposureTime, FStop, FocalLength, CameraMake, CameraModel FROM photos LEFT JOIN exif ON photos.PhotoID = exif.PhotoID WHERE ";
+if (!$_SESSION['admin']) {
+	$query .= "Public = 1 AND ";
+}
+$query .= "Stub = '$stub_f' ORDER BY DateCreated DESC LIMIT 1";
+if (!$result = @ mysql_query ($query, $connection))
+   	logerror();
+if (mysql_num_rows($result) == 0) {
+	die("Couldn't find this photo!");
+} 
+else {
+	while ($photo = mysql_fetch_array($result)) {
+		$cntPhoto++;
+		
+		//photo details
+		$photoID = $photo['PhotoID'];
+		$photoFile = $photo['File'];
+		$photoSRC = str_replace(PHOTO_DIR, PHOTO_URL, $photoFile);
+		$photoSRC = str_replace("\\", "/", $photoSRC);
+		$photoTitle = $photo['Title'];
+		$photoDescription = $photo['Description'];
+		$photoDate = $photo['DateCreated'];
+		$photoDateTitle = date("F jS, Y",strtotime($photoDate));
+		$photoDateTime = date("g:i A",strtotime($photoDate));
+		$photoDateTimeMore = date("n/j",strtotime($photoDate))." at ".$photoDateTime;
+		$photoYear = date("Y",strtotime($photoDate));
+		$thumbYearDir = THUMB_DIR . $photoYear;
+		$thumbBaseFile = $thumbYearDir . "\\" . md5(SALT.$photoID);
+		$thumbFile_m = $thumbBaseFile . "_m.jpg";
+		$thumbSRC_m = str_replace(THUMB_DIR, THUMB_URL, $thumbFile_m);
+		$thumbSRC_m = str_replace("\\", "/", $thumbSRC_m);
+		$photoTags = getTags($photoID,$connection);
+		
+		//exif data
+		$exifHTML = "";
+		$cameraMake = $photo['CameraMake'];
+		$cameraModel = $photo['CameraModel'];
+		if ($cameraModel !== "" && !is_null($cameraModel)) {
+			$cameraModel = str_replace("Canon EOS DIGITAL REBEL","Canon Digital Rebel",$cameraModel);
+			$cameraModel = str_replace("EX-Z750","Casio EX-Z750",$cameraModel);
+			$cameraModel = str_replace("S710a","Sony Ericsson S710a",$cameraModel);
+			$exifHTML .= "$cameraModel, ";
+		}
+		$exposureTime = $photo['ExposureTime'];
+		if ($exposureTime !== "" && !is_null($exposureTime)) {
+			$lastNum = $exposureTime[strlen($exposureTime)-1];
+			if ($lastNum !== "2" && $lastNum !== "3") {
+				$exposureTime .= "th";
+			}
+			$exifHTML .= "$exposureTime sec, ";
+		}
+		$fStop = $photo['FStop'];
+		if ($fStop !== "" && !is_null($fStop)) {
+			$fStop = preg_replace("/\/.*/","",$fStop);
+			$exifHTML .= "f/$fStop, ";
+		}
+		$focalLength = $photo['FocalLength'];
+		if ($focalLength !== "" && !is_null($focalLength)) {
+			$focalLength = preg_replace("/\/.*/","",$focalLength);
+			if ($focalLength > 10000) {
+				$focalLength = substr($focalLength,0,2);
+			}
+			$exifHTML .= "$focalLength mm, ";
+		}
+		if ($exifHTML !== "") {
+			$exifHTML = substr($exifHTML,0,-2);
+		}
+		
+		//image dimensions
+		list($width, $height, $type, $attr) = @getimagesize($photoFile);
+		$cssWidth = ($width - 10);
+		list($width_m, $height_m, $type_m, $attr_m) = @getimagesize($thumbFile_m);
+		if ($_SESSION['admin']) {
+			$adminTitleJS = "onmouseover=\"this.style.backgroundColor='#666'\" onmouseout=\"this.style.backgroundColor='#111'\" onclick=\"editTitle()\"";
+			$adminCaptionJS = "onmouseover=\"this.style.backgroundColor='#666'\" onmouseout=\"this.style.backgroundColor='#111'\" onclick=\"editCaption()\"";
+			$adminTagsJS = "onmouseover=\"this.style.backgroundColor='#222'\" onmouseout=\"this.style.backgroundColor='#111'\" onclick=\"editTags()\"";
+			$photoPublic = $photo['Public'];
+			$adminEditJS = '<div id="adminbuttons">';
+			if ($photoPublic) {
+				$adminEditJS .= '<img id="status" src="/images/icon-public.gif" width="12" height="12" alt="public" title="Make this photo private" style="vertical-align:middle;cursor:pointer;" border="0" onclick="changeStatus(0);" /> ';
+			}
+			else {
+				$adminEditJS .= '<img id="status" src="/images/icon-private.gif" width="12" height="12" alt="public" title="Make this photo public" style="vertical-align:middle;cursor:pointer;" border="0" onclick="changeStatus(1);" /> ';
+			}
+			$adminEditJS .= '
+			<img id="addcap" src="/images/icon-edit.gif" width="12" height="12" alt="caption" title="Add/Edit the caption" style="vertical-align:middle;cursor:pointer;" border="0" onclick="editCaption();"/> 
+			<img id="rotate" src="/images/icon-rotate.gif" width="12" height="12" alt="rotate" title="Rotate this photo" style="vertical-align:middle;cursor:pointer;" border="0" onclick="rotatePhoto();" /> 
+			<img id="delete" src="/images/icon-delete.gif" width="12" height="12" alt="delete" title="Delete this photo" style="vertical-align:middle;cursor:pointer;" border="0" onclick="deletePhoto();"/> 
+			</div>
+			';
+		}
+		else {
+			$adminTitleJS = "";
+			$adminCaptionJS = "";
+			$adminTagsJS = "";
+			$adminEditJS = "";
+		}
+		if ($photoDescription == "") {
+			$captionCSS = "display:none;";
+		}
+		else {
+			$captionCSS = "";
+		}
+		if ($cntPhoto == 1) {
+			$photoBody = "";
+			if ($tag !== "") {
+				$photoBody .= "<div class=\"clsHeader\">Tag: $tag</div>";
+			}
+			$photoBody .= <<<PHOTOEND
+<script type="text/javascript">
+stub = '{$_GET['p']}';
+width = ({$width}-10);
+</script>
+<h1 id="title" style="width:{$width}px;" {$adminTitleJS}>{$photoTitle}</h1>
+<div class="clsPost">
+	<img id="mainphoto" src="{$photoSRC}" width="{$width}" height="{$height}" alt="{$photoTitle}" style="border:solid #333 2px;background:#000;"/><br />
+	<div id="caption" style="width:{$cssWidth}px;{$captionCSS}" {$adminCaptionJS}>{$photoDescription}</div>
+	{$adminEditJS}
+	<div id="datetime"><img src="/images/posted.gif" width="12" height="12" alt="[.]" title="Posted" style="vertical-align:middle;" border="0"/> {$photoDateTitle} at {$photoDateTime}</div>
+PHOTOEND;
+		//Print out exif data, if available
+		if ($exifHTML !== "") {
+			$photoBody .= '<div id="exif"><img src="/images/icon-camera.gif" width="12" height="12" alt="[c]" title="Camera Details" style="vertical-align:middle;" border="0" /> ';
+			$photoBody .= $exifHTML;
+			$photoBody .= "</div>";
+		}
+
+		//Print out tags
+		$photoBody .= '<div id="tags" style="width:'.$width.'px;" '.$adminTagsJS.'><img src="/images/icon-tag.gif" width="12" height="12" alt="[t]" title="Tagged" style="vertical-align:middle;" border="0" /> <span id="taglist">';
+		if ($photoTags !== "") {
+			$tags = explode(":",$photoTags);
+			array_pop($tags);
+			for($t=0;$t<count($tags);$t++) {
+				$tagList .= $tags[$t];
+				$photoBody .= '<a href="/tag/'.$tags[$t].'/"';
+				if ($_SESSION['admin']) {
+					$photoBody .= ' onclick="editing=1"';
+				}
+				$photoBody .= '>'.$tags[$t].'</a>';
+				if ($t < (count($tags)-1)) {
+					$photoBody .= ", ";
+					$tagList .= ", ";
+				}
+			}
+		}
+		else {
+			if ($_SESSION['admin']) {
+				$photoBody .= "<em>Click here to add tags for this photo.</em>";
+			}
+		}
+		$photoBody .= "</span></div>";
+		$photoBody .= '<input type="hidden" id="oldtags" name="oldtags" value="'.$tagList.'" />';
+		}
+	}
+}
+
+$backNext = '<table cellspacing="5" cellpadding="0" border="0"><tr>';
+// Get back
+$photoDate_f = date("Y-m-d H:i:s",strtotime($photoDate));
+$sql = "SELECT PhotoID, Title, Stub, DateCreated FROM photos WHERE ";
+if (!$_SESSION['admin']) {
+	$sql .= "Public = 1 AND ";
+}
+if ($tag !== "") {
+	$sql .= "PhotoID IN ($tagPhotoIDs) AND ";
+}
+$sql .= "PhotoID <> $photoID AND DateCreated < '$photoDate_f' ORDER BY DateCreated DESC LIMIT 1";
+if (!$result = @ mysql_query ($sql, $connection))
+   	logerror();
+if (mysql_num_rows($result) > 0) {
+	while ($backphoto = mysql_fetch_array($result)) {
+		$photoDate = $backphoto['DateCreated'];
+		$backphotoID = $backphoto['PhotoID'];
+		$photoYear = date("Y",strtotime($photoDate));
+		$thumbYearDir = THUMB_DIR . $photoYear;
+		$thumbBaseFile = $thumbYearDir . "\\" . md5(SALT.$backphotoID);
+		$thumbFile_s = $thumbBaseFile . "_s.jpg";
+		$thumbSRC_s = str_replace(THUMB_DIR, THUMB_URL, $thumbFile_s);
+		$thumbSRC_s = str_replace("\\", "/", $thumbSRC_s);
+		list($width_s, $height_s, $type_s, $attr_s) = @getimagesize($thumbFile_s);
+		$backNext .= <<<BACKEND
+			<td><a href="/{$tagStub}{$backphoto['Stub']}"><img src="{$thumbSRC_s}" {$attr_s} border="0" style="border:solid #333 1px;" alt="back"/></a>
+			<div id="older"><img src="/images/older.gif" width="52" height="7" alt="older" /></div></td>
+BACKEND;
+		$menuOlderHTML = '<a href="/'.$tagStub.$backphoto['Stub'].'"><img src="/images/menu-older.gif" width="51" height="15" alt="older" title="View an Older Photo" style="padding-left:10px;padding-right:23px;border-right:solid #bbb 1px;" border="0"/></a>';
+	}
+}
+else {
+	$backNext .= '<td width="85">&nbsp;</td>';
+	$menuOlderHTML = '<img src="/images/menu-older-off.gif" width="51" height="15" alt="older" title="View an Older Photo" style="padding-left:10px;padding-right:23px;border-right:solid #bbb 1px;" border="0"/>';
+}
+
+// Get next
+$sql = "SELECT PhotoID, Title, Stub, DateCreated FROM photos WHERE ";
+if (!$_SESSION['admin']) {
+	$sql .= "Public = 1 AND ";
+}
+if ($tag !== "") {
+	$sql .= "PhotoID IN ($tagPhotoIDs) AND ";
+}
+$sql .= "PhotoID <> $photoID AND DateCreated > '$photoDate_f' ORDER BY DateCreated ASC LIMIT 1";
+if (!$result = @ mysql_query ($sql, $connection))
+   	logerror();
+if (mysql_num_rows($result) > 0) {
+	while ($nextphoto = mysql_fetch_array($result)) {
+		$photoDate = $nextphoto['DateCreated'];
+		$nextphotoID = $nextphoto['PhotoID'];
+		$photoYear = date("Y",strtotime($photoDate));
+		$thumbYearDir = THUMB_DIR . $photoYear;
+		$thumbBaseFile = $thumbYearDir . "\\" . md5(SALT.$nextphotoID);
+		$thumbFile_s = $thumbBaseFile . "_s.jpg";
+		$thumbSRC_s = str_replace(THUMB_DIR, THUMB_URL, $thumbFile_s);
+		$thumbSRC_s = str_replace("\\", "/", $thumbSRC_s);
+		list($width_s, $height_s, $type_s, $attr_s) = @getimagesize($thumbFile_s);
+		$backNext .= <<<NEXTEND
+			<td><a href="/{$tagStub}{$nextphoto['Stub']}"><img src="{$thumbSRC_s}" {$attr_s} border="0" style="border:solid #333 1px;" alt="next"/></a>
+			<div id="newer"><img src="/images/newer.gif" width="54" height="7" alt="newer" /></div></td>
+NEXTEND;
+		$menuNewerHTML = '<a href="/'.$tagStub.$nextphoto['Stub'].'"><img src="/images/menu-newer.gif" width="54" height="15" alt="newer" title="View a Newer Photo" style="padding-left:23px;border-left:solid #bbb 1px;" border="0"/></a>';
+	}
+}
+else {
+	$menuNewerHTML = '<img src="/images/menu-newer-off.gif" width="54" height="15" alt="older" title="View a Newer Photo" style="padding-left:23px;border-left:solid #bbb 1px;"/>';
+}
+$backNext .= "</tr></table>";
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="DC.title" content="<?php print APP_TITLE ?>: <?php print $photoTitle ?>" />
+	<meta name="geo.country" content="US" />
+	<meta name="dc.language" content="en" />
+	<meta name="description" content="<?php print APP_DESCRIPTION ?>" />
+	<link rel="stylesheet" type="text/css" href="/site_pblog.css" />
+	<title><?php print APP_TITLE ?>: <?php print $photoTitle ?></title>
+<?php
+if ($_SESSION['admin']) {
+?>
+	<script src="/scripts/prototype.js" type="text/javascript"></script>
+	<script src="/scripts/editing.js" type="text/javascript"></script>
+<?php } ?>
+	</head>
+	<body>
+	<div id="topBar" style="background:#eee;">
+		<div id="phases"><img src="/images/phases_p.gif" width="238" height="28" alt="phases" /></div>
+		<div id="sun"><img src="/images/onfocus-photos.gif" height="28" alt="onfocus * photos" style="margin-bottom:2px;margin-right:2px;"/><img src="/images/sun_p.gif" width="33" height="33" alt="sun"/></div>
+	</div>
+	<div id="menuBar">
+		<div style="position:absolute;left:0px;">
+			<?php print $menuOlderHTML ?>
+			<a href="<?php print $backNextLink ?>"><img src="/images/menu-browse.gif" width="46" height="15" alt="browse" title="Browse <?php print $backNextTitle ?>" style="padding-left:16px;padding-right:16px;" border="0"/></a>
+			<?php print $menuNewerHTML ?>
+		</div>
+		<div style="position:absolute;right:0px;">
+			<a href="/"><img src="/images/menu-photos.gif" width="43" height="15" alt="photos" title="View all photos" style="padding-right:16px;padding-left:16px;border-right:solid #bbb 1px;border-left:solid #bbb 1px;" border="0"/></a>
+			<a href="/tags/"><img src="/images/menu-tags.gif" width="28" height="15" alt="photos" title="View all tags" style="padding-right:16px;padding-left:14px;border-right:solid #bbb 1px;" border="0"/></a>
+			<a href="http://www.onfocus.com/"><img src="/images/menu-blog.gif" width="29" height="15" alt="Blog" title="Go to my blog" style="padding-right:16px;padding-left:16px;" border="0"/></a>
+			<a href="http://www.onfocus.com/about/"><img src="/images/menu-about.gif" width="38" height="15" alt="about" title="About onfocus.com" style="padding-right:10px;padding-left:16px;border-left:solid #bbb 1px;" border="0"/></a>
+		</div>
+	</div>
+	<div id="photobody">
+	<?php print $photoBody; ?>
+	</div>
+	<div id="backnext-title" style="margin-bottom:0px;margin-top:30px;"><a href="<?php print $backNextLink ?>"><?php print $backNextTitle ?></a></div>
+	<div id="backnext" style="margin-bottom:30px;margin-top:0px;">
+	<?php print $backNext; ?>
+	</div>
+	<div class="clsPost" style="color:#444;"><a href="/">all photos</a> | <a href="http://www.onfocus.com/">blog</a> | <a href="/feed/"><img src="/images/icon-feed.gif" width="12" height="12" alt="feed" title="Subscribe to these photos" border="0" style="vertical-align:middle;"></a> feed | photos <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/">cc</a> 1998-2007 pb.</div>
+	</div>
+	</body>
+</html>

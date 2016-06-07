@@ -1,0 +1,91 @@
+<?php
+//addPhoto.inc
+
+function addPhoto($photoFile,$photoTitle,$isPublic,$connection) {
+	$photoID = 0;
+	//make sure the directories are there!
+	$photoMonth = date("m");
+	$photoYear = date("Y");
+	$photoYearDir = PHOTO_DIR . $photoYear;
+	$photoMonthDir =  $photoYearDir . "\\" . $photoMonth . "\\";
+	if (!is_dir($photoYearDir)) {
+		mkdir($photoYearDir, 0777, TRUE);
+	}
+	if (!is_dir($photoMonthDir)) {
+		mkdir($photoMonthDir, 0777, TRUE);
+	}
+	$photoTitle_file = preg_replace('/\s+/', '-', $photoTitle);
+	$photoTitle_file = preg_replace('/[^-\w]/', '', $photoTitle_file);
+	$fileName = $photoMonthDir.$photoTitle_file.".jpg";
+	if(file_exists($fileName)) {
+		$foundPhoto = 0;
+		$j = 0;
+		while ($foundPhoto == 0) {
+			$j++;
+			$fileName = $photoMonthDir . $photoTitle_file . "-" . $j . ".jpg";
+			if(!file_exists($fileName)) {
+				$foundPhoto = 1;
+			}
+		}
+	}
+	if (is_uploaded_file($photoFile)) {
+		if (!move_uploaded_file($photoFile,$fileName)) {
+			return 0;
+			exit;
+		}
+	}
+	else {
+		if (!copy($photoFile,$fileName)) {
+			return 0;
+			exit;
+		}
+		else {
+			unlink($photoFile);
+		}
+	}
+	
+	//See if the last photo added is the same one.
+	$thisFileSize = filesize($fileName);
+	$sql = "SELECT File FROM Photos ORDER BY PhotoID DESC LIMIT 1";
+	if (!$sizequery = @ mysql_query ($sql, $connection))
+		logerror();
+	while($sizeresult = mysql_fetch_array($sizequery)) {
+		$lastFileSize = filesize($sizeresult['File']);
+	}
+	if ($thisFileSize == $lastFileSize) {
+		return 0;
+	}
+	
+	$stub = $photoYear . "/" . $photoMonth . "/" . $photoTitle_file;
+	$fileName_f = mysql_real_escape_string($fileName);
+	$photoTitle_f = mysql_real_escape_string($photoTitle);
+	$stub_f = mysql_real_escape_string($stub);
+	$dateCreated = date("Y-m-d H:i:s");
+	
+	//Set Stub info
+	$selquery = "SELECT Count(PhotoID) FROM photos WHERE Stub LIKE '$stub_f%'";
+	if (!$stubquery = @ mysql_query ($selquery, $connection))
+		logerror();
+	if (mysql_num_rows($stubquery) > 0) {
+		while($stubcount = mysql_fetch_row($stubquery)) {
+			$count = $stubcount[0];
+			if ($count > 0) {
+				$stub .= "-$count";
+				$count++;
+			}
+		}
+	}	
+	$stub_f = mysql_real_escape_string($stub);
+	
+	$sql = "INSERT INTO photos (Title, DateCreated, File, Public, Stub) VALUES ('$photoTitle_f', '$dateCreated', '$fileName_f', $isPublic, '$stub_f')";
+	if (!$add = @ mysql_query ($sql, $connection))
+    	logerror();
+	$sql = "SELECT MAX(PhotoID) AS MaxID FROM photos";
+	if (!$maxid = @ mysql_query ($sql, $connection))
+		logerror();
+	while($thisMaxID = mysql_fetch_row($maxid)) {
+		$photoID = $thisMaxID[0];
+	}
+	return $photoID;
+}
+?>

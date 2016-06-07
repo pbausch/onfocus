@@ -1,0 +1,31 @@
+-- 
+-- Table structure for table `photos`
+-- 
+
+CREATE TABLE `photos` (
+  `PhotoID` int(11) NOT NULL auto_increment,
+  `FlickrID` int(11) NOT NULL default '0',
+  `Title` varchar(250) NOT NULL,
+  `Description` longtext NOT NULL,
+  `DateTaken` datetime NOT NULL,
+  `DateCreated` datetime NOT NULL,
+  `File` varchar(100) NOT NULL,
+  `Public` tinyint(1) NOT NULL default '1',
+  `Longitude` decimal(16,8) NOT NULL default '0.00000000',
+  `Latitude` decimal(16,8) NOT NULL default '0.00000000',
+  PRIMARY KEY  (`PhotoID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `tags`
+-- 
+
+CREATE TABLE `tags` (
+  `TagID` int(11) NOT NULL auto_increment,
+  `PhotoID` int(11) NOT NULL,
+  `Tag` varchar(100) NOT NULL,
+  `MachineTag` tinyint(1) NOT NULL default '0',
+  PRIMARY KEY  (`TagID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

@@ -1,0 +1,44 @@
+<?php
+//upload.php
+
+require("ini.inc");
+require("auth.inc");
+
+authSession($connection);
+
+if (!$_SESSION['admin']) {
+	header("Location: home.php");
+	exit;
+} 
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Upload Photos</title>
+</head>
+<body>
+
+<h1>Upload Photos</h1>
+
+<form action="upload-action.php" method="post" enctype="multipart/form-data">
+
+<h3>Image Files</h3>
+<p>1. <input type="file" name="photos[]"></p>
+<p>2. <input type="file" name="photos[]"></p>
+<p>3. <input type="file" name="photos[]"></p>
+<p>4. <input type="file" name="photos[]"></p>
+<p>5. <input type="file" name="photos[]"></p>
+<p>6. <input type="file" name="photos[]"></p>
+
+
+<h3>Tags</h3>
+<p><input type="text" name="tags" size="40" value="" style="width: 230px;"></p>
+
+
+<br /><br />
+<input type="submit" name="Submit" value="Add Photos" />
+
+
+</body>
+</html>

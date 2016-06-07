@@ -1,0 +1,47 @@
+<?php
+// addStubs.php
+
+set_time_limit(48000);
+
+require("ini.inc");
+
+//Grab the PhotoID and File Location of all photos
+$query = "SELECT PhotoID, Title, DateCreated FROM Photos";
+if (!$result = @ mysql_query ($query, $connection))
+   	print "Error " . mysql_errno() . " : " . mysql_error();
+if (mysql_num_rows($result) == 0) {
+	die("Couldn't find any photos!");
+} 
+else {
+	while ($photo = mysql_fetch_array($result)) {
+		$photoID = $photo["PhotoID"];
+		$photoTitle = $photo["Title"];
+		$photoDateAdded = $photo["DateCreated"];
+		$photoMonth = date("m",strtotime($photoDateAdded));
+		$photoYear = date("Y",strtotime($photoDateAdded));
+		$stub = $photoTitle;
+		$stub = preg_replace('/\s+/', '-', $stub);
+		$stub = preg_replace('/[^-\w]/', '', $stub);
+		$stub = "$photoYear/$photoMonth/$stub";
+		$stub_f = mysql_real_escape_string($stub);
+		$selquery = "SELECT Count(PhotoID) FROM photos WHERE Stub LIKE '$stub_f%'";
+		if (!$stubquery = @ mysql_query ($selquery, $connection))
+			print "Error " . mysql_errno() . " : " . mysql_error();
+		if (mysql_num_rows($stubquery) > 0) {
+			while($stubcount = mysql_fetch_row($stubquery)) {
+				$count = $stubcount[0];
+				if ($count > 0) {
+					$stub .= "-$count";
+					$count++;
+				}
+			}
+		}
+		$stub_f = mysql_real_escape_string($stub);
+		$upquery = "UPDATE Photos SET Stub = '$stub_f' WHERE PhotoID = $photoID";
+		if (!$update = @ mysql_query ($upquery, $connection))
+			print "Error " . mysql_errno() . " : " . mysql_error();
+		print "The new URL for photo $photoID will be /$stub <br />";
+	}
+}
+
+?>

@@ -1,0 +1,10 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document domain("mail.google.com") {
+/* Read Messages */
+tr[class*='zA yO']  {background-color: #f3f3f3 !important;}
+/* Checked Read Messages */
+tr[class*='zA yO x7']  {background-color: #fff1a8 !important;}
+/* Invitations Box */
+.pY {display:none !important;}
+}

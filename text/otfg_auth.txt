@@ -1,0 +1,64 @@
+<?php
+// Thanks to Essential PHP Security by Chris Shiflett 
+// for a bunch of ideas here.
+function authSession($connection) {
+	if (!isset($_SESSION['admin'])) {
+		if (isset($_COOKIE['noodlemush'])) {
+			list($cookieID,$loginKey) = explode(':', $_COOKIE['noodlemush']);
+			if (!ctype_alnum($cookieID)) {
+				bail(); return;
+			}
+			if (!ctype_alnum($loginKey)) {
+				bail(); return;
+			}
+			$cookieID_f = mysql_real_escape_string($cookieID);
+			$sql = "SELECT UserID, UserName, CookieID, LoginKey, LoginExp FROM users WHERE CookieID = '$cookieID_f'";
+			if ($result = mysql_query($sql)) {
+				if (mysql_num_rows($result)) {
+					$user = mysql_fetch_assoc($result);
+					if ($loginKey != $user['LoginKey']) {
+						bail(); return;
+					}
+					elseif (time() > $user['LoginExp']) {
+						bail(); return;
+					}
+					elseif ($cookieID != md5(SALT.md5($user['UserName'].SALT))) {
+						bail(); return;
+					}
+					else {
+            			//Update login key
+            			$newLoginKey = md5(uniqid(rand(), TRUE));
+            			$newLoginExp = time() + (7 * 24 * 60 * 60);
+            			$query = "UPDATE users SET LoginIP = '".$_SERVER['REMOTE_ADDR']."', LoginKey = '$newLoginKey', LoginExp = $newLoginExp WHERE UserID = {$user['UserID']}";
+            		  	if (!$update = @ mysql_query ($query, $connection)) {
+            				bail(); return;
+            		    }
+            			//set new login key in a cookie
+            			setcookie('noodlemush', "{$user['CookieID']}:$newLoginKey", $newLoginExp);
+
+            			//set the admin session variable
+            			$_SESSION['admin'] = 1;
+            		    session_write_close();
+					}
+				}
+			}
+ 		}
+		else {
+			bail(); return;
+		}
+	}
+	else {
+	    if ($_SESSION['admin']) {
+        	return;
+        } 
+        else {
+        	bail(); return;
+        }
+	}
+}
+
+function bail() {
+	$_SESSION['admin'] = 0;
+	session_write_close();
+}
+?>

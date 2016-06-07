@@ -1,0 +1,79 @@
+<?php
+//check-mail.php
+
+$mailServer = "[your mail server]";
+$mailLogin = "[your mail login/account]";
+$mailPassword = "[your mail password]";
+$mailLogFile = "[full path to a log file for mail activity]";
+
+require("ini.inc");
+require("addPhoto.inc");
+require("writeThumbs.inc");
+
+$mailbox = imap_open("{"."$mailServer/pop3:110}INBOX","$mailLogin","$mailPassword",OP_SILENT);
+$totalMsgs = imap_num_msg($mailbox);
+
+if (is_numeric($totalMsgs) && $totalMsgs <= 10) {
+	for ($i = 1; $i <= $totalMsgs; $i++) {
+		$header = imap_header($mailbox, $i);
+		$structure = imap_fetchstructure($mailbox, $i);
+		$subject = $header->subject;
+	
+		//See if attachment is present
+		if($structure->type == 1) {
+			$tmpFileName = TEMP_DIR.md5($subject).".jpg";
+			$image = imap_fetchbody($mailbox,$i,1);
+			$image = base64_decode($image);
+			if (file_put_contents($tmpFileName,$image)) {
+				$photoID = addPhoto($tmpFileName,$subject,1,$connection);
+				if ($photoID > 0) {
+					//Write thumbnails for this photo
+					writeThumbs($photoID,$connection);
+				
+					//Add tags
+					$tags = explode(' ', MAIL_TAGS);
+					for ($t = 0; $t < count($tags); $t++) {
+						$thisTag = trim($tags[$t]);
+						$thisTag_f = mysql_real_escape_string($thisTag);
+						$sql = "INSERT INTO tags (PhotoID, Tag, MachineTag) VALUES ($photoID,'$thisTag_f',0)";
+						if (!$insert = @ mysql_query ($sql, $connection))
+							logerror();
+					}
+				
+					//Log this success
+					maillog("Saved attachment from message $subject as photo $photoID.",$mailLogFile);
+				}
+				else {
+					maillog("Couldn't add photo from message $subject.",$mailLogFile);
+				}
+			}
+			else {
+				maillog("Couldn't write photo from message $subject.",$mailLogFile);
+			}
+		}
+		else {
+			maillog("Message $subject didn't have a photo attachment.",$mailLogFile);
+		}
+	}
+}
+else {
+	maillog("Mailbox has $totalMsgs number of messages, so no messages will be processed.",$mailLogFile);
+}
+//Clear out the mailbox
+if (is_numeric($totalMsgs) && $totalMsgs <= 10) {
+	for ($i = 1; $i <= $totalMsgs; $i++) {
+		imap_delete($mailbox, $i);
+	}
+}
+imap_expunge($mailbox);
+imap_close($mailbox);
+
+
+function maillog($msg,$mailLogFile) {
+	$logfile = @fopen($mailLogFile, "a+");
+	if ($logfile) {
+		fwrite ($logfile, "[".date ("D M d Y h:iA")."] [$msg]\r\n");
+		fclose ($logfile);
+	}
+}
+?>

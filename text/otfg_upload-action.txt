@@ -1,0 +1,83 @@
+<?php
+//upload-action.php
+
+require("ini.inc");
+require("auth.inc");
+require("addPhoto.inc");
+require("writeThumbs.inc");
+
+authSession($connection);
+
+if (!$_SESSION['admin']) {
+	header("Location: home.php");
+	exit;
+} 
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Upload Photos</title>
+</head>
+<body>
+
+<h1>Upload Photos</h1>
+
+<form action="upload-final.php" method="post">
+<?php
+foreach ($_FILES["photos"]["error"] as $key => $error) {
+	$photoID = 0;
+	if ($error == UPLOAD_ERR_OK) {
+		$tmpFileName = $_FILES["photos"]["tmp_name"][$key];
+		$clientName = $_FILES["photos"]["name"][$key];
+		$clientNameExt = explode(".", $clientName);
+		$clientNameExt = array_pop($clientNameExt);
+		$clientName = str_replace(".".$clientNameExt,"",$clientName);
+		$photoID = addPhoto($tmpFileName,$clientName,0,$connection);
+		if ($photoID > 0) {
+			//Write thumbnails for this photo
+			writeThumbs($photoID,$connection);
+			
+			//Write out the title, description, tags form:
+			$dateCreated = date("Y-m-d H:i:s");
+			$photoYear = date("Y",strtotime($dateCreated));
+			$thumbYearDir = THUMB_DIR . $photoYear;
+			$thumbBaseFile = $thumbYearDir . "\\" . md5(SALT.$photoID);
+			$thumbFile_m = $thumbBaseFile . "_m.jpg";
+			$thumbSRC_m = str_replace(THUMB_DIR, "http://photos.onfocus.com/thumbs/", $thumbFile_m);
+			$thumbSRC_m = str_replace("\\", "/", $thumbSRC_m);
+			list($width_m, $height_m, $type_m, $attr_m) = @getimagesize($thumbFile_m);
+			print <<<PHOTOEND
+<input type="hidden" name="photoIDs[]" value="{$photoID}" />
+<table>
+	<tr>
+		<td valign="top"><img src="{$thumbSRC_m}" {$attr_m} alt="{$clientName}" style="border:solid #ccc 3px;"/></td>
+		<td>
+			<table cellpadding="5">
+				<tr>
+					<td class="clsPost">Title:</td>
+					<td><input name="title_{$photoID}" type="text" style="width: 350px;" value="{$clientName}"></td>
+
+				</tr>
+				<tr>
+					<td class="clsPost" valign="top">Description:</td>
+					<td><textarea name="description_{$photoID}" style="width: 350px;" rows="6" wrap="virtual"></textarea></td>
+				</tr>
+				<tr>
+					<td class="clsPost">Tags:</td>
+					<td><input name="tags_{$photoID}" type="text" style="width: 350px;" value="{$_POST['tags']}" /></td>								
+				</tr>
+			</table>
+		</td>
+</table>
+<br /><br />
+PHOTOEND;
+		}
+	}
+}
+?>
+<input type="submit" value="Add Photos" />
+</form>
+
+</body>
+</html>

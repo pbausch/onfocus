@@ -1,0 +1,142 @@
+<?php
+// tag.php
+
+require("ini.inc");
+require("auth.inc");
+require("getTags.inc");
+
+authSession($connection);
+
+$cntThumb = 0;
+$cntPhoto = 0;
+$photoBodyHTML = "";
+if (!isset($_GET['tag'])) {
+	header("Location: /");
+	exit;
+}
+$tag = strtolower($_GET['tag']);
+$tag_f = mysql_real_escape_string($tag);
+
+//Get the total number of photos
+if ($_SESSION['admin']) {
+	$query = "SELECT Count(photos.PhotoID) FROM photos INNER JOIN tags on photos.PhotoID = tags.PhotoID WHERE Tag = '$tag_f'";
+}
+else {
+	$query = "SELECT Count(photos.PhotoID) FROM photos INNER JOIN tags on photos.PhotoID = tags.PhotoID WHERE Public = 1 AND Tag = '$tag_f'";
+}
+
+if (!$result = @ mysql_query ($query, $connection))
+   	logError();
+while ($tp = mysql_fetch_row($result)) {
+	$totalphotos = $tp[0];
+}
+
+$pageNum = 1;
+$rowsPerPage = 48;
+$totalpages = ceil($totalphotos / $rowsPerPage);
+if (isset($_GET['page'])) {
+	$pageNum = $_GET['page'];
+	if (!ctype_digit($pageNum) || $pageNum > $totalpages) {
+		$pageNum = 1;
+	}
+}
+if ($pageNum == 1) {
+	$rowsPerPage = 48;
+}
+$offset = ($pageNum - 1) * $rowsPerPage;
+
+
+
+if ($_SESSION['admin']) {
+	$query = "SELECT photos.PhotoID, File, Title, Description, DateCreated, Public, Stub FROM Photos INNER JOIN tags on photos.PhotoID = tags.PhotoID WHERE Tag = '$tag_f' ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
+}
+else {
+	$query = "SELECT photos.PhotoID, File, Title, Description, DateCreated, Public, Stub FROM Photos INNER JOIN tags on photos.PhotoID = tags.PhotoID WHERE Public = 1 AND Tag = '$tag_f' ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
+}
+if (!$result = @ mysql_query ($query, $connection))
+   	logerror();
+if (mysql_num_rows($result) == 0) {
+	die("Couldn't find any photos!");
+} 
+else {
+	$photoBodyHTML = '<h1 class="clsHeader" style="margin-bottom:15px;">Tag: '.$tag.'</h1>';
+	$photoBodyHTML .= '<div style="width:850px;">';
+	while ($photo = mysql_fetch_array($result)) {
+		$cntPhoto++;
+		$photoID = $photo['PhotoID'];
+		$photoFile = $photo['File'];
+		$photoStub = $photo['Stub'];
+		$photoSRC = str_replace(PHOTO_DIR, PHOTO_URL, $photoFile);
+		$photoSRC = str_replace("\\", "/", $photoSRC);
+		$photoTitle = $photo['Title'];
+		$photoDescription = $photo['Description'];
+		$photoDate = $photo['DateCreated'];
+		$photoDateTitle = date("l, F jS",strtotime($photoDate));
+		$photoDateTime = date("g:i A",strtotime($photoDate));
+		$photoDateTimeMore = date("M jS, Y",strtotime($photoDate))." at ".$photoDateTime;
+		$photoYear = date("Y",strtotime($photoDate));
+		$thumbYearDir = THUMB_DIR . $photoYear;
+		$thumbBaseFile = $thumbYearDir . "\\" . md5(SALT.$photoID);
+		$thumbFile_s = $thumbBaseFile . "_s.jpg";
+		$thumbSRC_s = str_replace(THUMB_DIR, THUMB_URL, $thumbFile_s);
+		$thumbSRC_s = str_replace("\\", "/", $thumbSRC_s);
+		list($width, $height, $type, $attr) = @getimagesize($photoFile);
+		$widthCSS = ($width - 10);
+		list($width_s, $height_s, $type_s, $attr_s) = @getimagesize($thumbFile_m);
+		$cntThumb++;
+		$photoBodyHTML .= <<<THUMBEND
+<div class="clsPost" style="margin:10px;float:left;width:85px;height:85px;background:#000;"><a href="/tag/{$tag}/{$photoStub}"><img src="{$thumbSRC_s}" {$attr_s} alt="{$photoTitle}" title="{$photoTitle}" style="border:solid #222 1px;background:#000;" border="0"/></a></div>
+THUMBEND;
+	}
+	$photoBodyHTML .= "</div>";
+}
+
+//Assemble page numbers
+$pageNumbersHTML = "";
+for ($p=1; $p <= $totalpages; $p++) {
+	if ($p == $pageNum) {
+		$pageNumbersHTML .= ' <span id="thisPage">'.$p.'</span> ';
+	} 
+	else {
+		$pageNumbersHTML .= ' <a class="clsPage" href="/tag/'.$tag.'/'.$p.'/">'.$p.'</a> ';
+	}
+}
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="DC.title" content="<?php print APP_TITLE ?>" />
+	<meta name="geo.country" content="US" />
+	<meta name="dc.language" content="en" />
+	<meta name="description" content="<?php print APP_DESCRIPTION ?>" />
+	<link rel="stylesheet" type="text/css" href="/site_pblog.css" />
+	<title><?php print APP_TITLE ?>: tag: <?php print $tag ?></title>
+<?php
+if ($_SESSION['admin']) {
+?>
+	<script src="/scripts/prototype.js" type="text/javascript"></script>
+	<script src="/scripts/editing.js" type="text/javascript"></script>
+<?php } ?>
+	</head>
+	<body>
+	<div id="topBar" style="background:#eee;">
+		<div id="phases"><img src="/images/phases_p.gif" width="238" height="28" alt="phases" /></div>
+		<div id="sun"><img src="/images/onfocus-photos.gif" height="28" alt="onfocus * photos" style="margin-bottom:2px;margin-right:2px;"/><img src="/images/sun_p.gif" width="33" height="33" alt="sun"/></div>
+	</div>
+	<div id="menuBar">
+		<div style="position:absolute;right:0px;">
+			<a href="/"><img src="/images/menu-photos.gif" width="43" height="15" alt="photos" title="View all photos" style="padding-right:16px;padding-left:16px;border-right:solid #bbb 1px;border-left:solid #bbb 1px;" border="0"/></a>
+			<a href="/tags/"><img src="/images/menu-tags.gif" width="28" height="15" alt="photos" title="View all tags" style="padding-right:16px;padding-left:14px;border-right:solid #bbb 1px;" border="0"/></a>
+			<a href="http://www.onfocus.com/"><img src="/images/menu-blog.gif" width="29" height="15" alt="Blog" title="Go to my blog" style="padding-right:16px;padding-left:16px;" border="0"/></a>
+			<a href="http://www.onfocus.com/about/"><img src="/images/menu-about.gif" width="38" height="15" alt="about" title="About onfocus.com" style="padding-right:10px;padding-left:16px;border-left:solid #bbb 1px;" border="0"/></a>
+		</div>
+	</div>
+	<div id="photobody">
+	<?php print $photoBodyHTML ?>
+	<div style="clear:both;">&nbsp;</div>
+	<div class="clsPost" style="color:#444;margin-top:30px;">Page: <?php print $pageNumbersHTML ?></div>
+	<div class="clsPost" style="color:#444;margin-top:10px;"><a href="/">all photos</a> | <a href="http://www.onfocus.com/">blog</a> | photos <a href="http://creativecommons.org/licenses/by-nc-sa/2.0/">cc</a> 1998-2007 pb.</div>
+	</div>
+	</body>
+</html>

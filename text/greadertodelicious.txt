@@ -1,0 +1,86 @@
+#!/usr/bin/perl -w
+
+# greadertodelicious.pl
+# A script to post Google Reader shared items to delicious.
+
+use strict;
+use LWP::Simple;
+use XML::Atom::Syndication::Feed;
+use Net::Delicious;
+use Time::Local;
+
+#Your Google Shared Items Feed URL
+my $feed_url = '[add your feed URL]';
+
+#A local file location for the feed
+my $feed_file = 'greader_shared_items.atom';
+
+#Your delicious username/password
+my $delicious_user = '[add your delicious username]';
+my $delicious_pass = '[add your delicious password]';
+
+#When you want to start importing shared items
+my $start_date = timelocal(0,0,0,1,4,109); #May 1st, 2009
+
+#Set the google reader namespace URI
+my $gr = 'http://www.google.com/schemas/reader/atom/';
+
+#snag a local copy of the shared items feed
+my $status = getstore($feed_url,$feed_file);
+	die "Error $status fetching the Google Reader feed." unless is_success($status); 
+
+#start up the delicious API
+my $delicious = Net::Delicious->new({user => $delicious_user,
+                                     pswd => $delicious_pass});
+
+#parse the shared items feed
+my $feed = XML::Atom::Syndication::Feed->new($feed_file);
+my @entries = $feed->entries;
+
+#loop through items in the feed
+foreach my $entry (@entries) {
+	#grab the title, link, and source title
+	my $postTitle = $entry->title->body;
+	my $postLink = $entry->link->href;
+	my $sourceTitle = $entry->source->title->body;
+
+	#get the time this item was shared
+	my $shareTime = $entry->get_attribute($gr,'crawl-timestamp-msec');
+	
+	#convert from milliseconds to seconds
+	$shareTime = $shareTime/1000;
+	
+	#skip item if it was shared before the start date
+	next if $shareTime < $start_date;
+
+	#grab any notes
+	my $notes = $entry->get_element($gr,'annotation');
+	
+	#set tags (no tags available in the feed)
+	my $tags = "googlereader";
+
+	#set a title
+	#I like [souce]: [post title]
+	my $title = "$sourceTitle: $postTitle";
+	if ($notes) {
+		#you may or may not need this
+		#$notes =~ s![add your nick]$!!gis; #strip out your google nickname
+	}
+	else {
+		$notes = '';
+	}
+	
+	#set up delicious api arguments
+	my(%args) = ("url"=>$postLink,
+		     "description"=>$title,
+		     "extended"=>$notes,
+		     "tags"=>$tags,
+		     "replace"=>"no"
+		    );
+	
+	#add this item to delicious
+	$delicious->add_post(\%args);
+}
+
+#Delete the local copy of the feed
+unlink($feed_file);

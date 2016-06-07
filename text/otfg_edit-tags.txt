@@ -1,0 +1,43 @@
+<?php
+// edit-tags.txt
+
+require("ini.inc");
+require("auth.inc");
+
+authSession($connection);
+
+if (!$_SESSION['admin']) {
+	exit;
+} 
+
+$photoID = 0;
+$stub = $_POST['stub'];
+$tags = $_POST['tags'];
+
+$stub_f = mysql_real_escape_string($stub);
+$query = "SELECT PhotoID FROM photos WHERE Stub = '$stub_f'";
+if (!$result = @ mysql_query ($query, $connection))
+    logerror();
+while ($photo = mysql_fetch_row($result)) {
+    $photoID = $photo[0];
+}
+
+if ($photoID > 0) {
+	$delquery = "DELETE FROM tags WHERE PhotoID = $photoID";
+	if (!$delete = @ mysql_query ($delquery, $connection))
+	    logerror();
+	
+	if ($tags !== "") {
+		$artags = explode(",",$tags);
+		for($t=0;$t<count($artags);$t++) {
+			$thisTag = Trim($artags[$t]);
+			$thisTag_f = mysql_real_escape_string($thisTag);
+			$insquery = "INSERT INTO tags (PhotoID, Tag) VALUES ($photoID,'$thisTag_f')";
+			if (!$insert = @ mysql_query ($insquery, $connection))
+			    logerror();
+		}
+	}
+}
+
+print $tags;
+?>

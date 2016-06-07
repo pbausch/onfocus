@@ -1,0 +1,103 @@
+<?php
+// import-flickr-notes.php
+//
+// A PHP5 script to download all photo notes from a Flickr account
+// and store them in a database.
+//
+// by pb, http://www.onfocus.com/
+//
+// Use at your own risk.
+
+set_time_limit(48000);
+require_once 'phpFlickr.php';
+
+//Add your MySQL details
+$mysql_server = "localhost";
+$mysql_user = "[user]";
+$mysql_pass = "[password]";
+$mysql_db = "[db name]";
+
+//Add your Flickr details
+$api_key = '[application key]';
+$api_secret = '[application secret]';
+
+//Get this session started (if necessary)
+if (session_id() == "") {
+    session_start();
+}
+
+//Get this Flickr started
+$api = new phpFlickr($api_key, $api_secret, FALSE);
+$api->auth("read");
+$userData = $api->auth_checkToken($_SESSION['phpFlickr_auth_token']);
+if ($api->getErrorMsg() !== false) {
+	die("Error: ".$api->getErrorMsg());
+}
+$userNSID = $userData['user']['nsid'];
+
+//Get this db started
+if (!$connection = @ mysql_connect($mysql_server, $mysql_user, $mysql_pass))
+   die("Can't connect to the database!");
+if (!mysql_select_db($mysql_db, $connection))
+   die("Error " . mysql_errno() . " : " . mysql_error());
+
+//Grab the FlickrID of all photos
+$query = "SELECT PhotoID, FlickrID FROM Photos";
+if (!$result = @ mysql_query ($query, $connection))
+   	printMySQLerror();
+if (mysql_num_rows($result) == 0) {
+	die("Couldn't find your photos!");
+} 
+else {
+	while ($photo = mysql_fetch_array($result)) {
+		$cntNote = 0;
+		$photoID = $photo["PhotoID"];
+		$photoFlickrID = $photo["FlickrID"];
+		
+		//Call the photos getInfo method at Flickr
+		$photoinfo = $api->photos_getInfo($photoFlickrID);
+		if ($api->getErrorMsg() !== false) {
+			die("Error: ".$api->getErrorMsg());
+		}
+		//Loop through any notes
+		if (isset($photoinfo['notes'])) {
+			foreach ($photoinfo['notes']['note'] as $note) {
+				$thisNoteBody = $note['_content'];
+				$thisNoteFlickrID = $note['id'];
+				$thisNoteUserNSID = $note['author'];
+				$thisNoteUserName = $note['authorname'];
+				$thisNoteX = $note['x'];
+				$thisNoteY = $note['y'];
+				$thisNoteWidth = $note['w'];
+				$thisNoteHeight = $note['h'];
+				
+				//See if this note already exists in the db
+				$selquery = "SELECT NoteID FROM notes WHERE FlickrID = $thisNoteFlickrID";
+				if (!$noteexists = @ mysql_query ($selquery, $connection))
+					print "Error " . mysql_errno() . " : " . mysql_error();
+				if (mysql_num_rows($noteexists) == 0) {
+					$thisNoteBody = mysql_real_escape_string($thisNoteBody, $connection);
+					//If not, add this note!
+					$insquery = "INSERT INTO notes SET PhotoID = $photoID,
+            								    FlickrID = $thisNoteFlickrID,
+            								    UserNSID = '$thisNoteUserNSID',
+            								    UserName = '$thisNoteUserName',
+            								    X = $thisNoteX,
+            								    Y = $thisNoteY,
+            								    Width = $thisNoteWidth,
+            								    Height = $thisNoteHeight,
+            								    NoteBody = '$thisNoteBody'";
+		        	if (!$add = @ mysql_query ($insquery, $connection))
+			              print "Error " . mysql_errno() . " : " . mysql_error();
+					$cntNote++;
+				}
+			}
+		}
+		if ($cntNote > 0) {
+			print "Added $cntNote note(s) to photo $photoID.<br />";
+		}
+		flush();
+		ob_flush();
+		sleep(1);
+	}
+}

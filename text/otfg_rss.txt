@@ -1,0 +1,86 @@
+<?php
+// rss.php
+
+require("ini.inc");
+require("auth.inc");
+require("getTags.inc");
+
+// Set current time
+$tm = time();
+$tm = date("D, d M Y H:i:s",$tm);
+$tm = $tm. " -0800"; // PST
+
+$rowsPerPage = 20;
+$pageNum = 1;
+$offset = ($pageNum - 1) * $rowsPerPage;
+
+//Grab the last 20 photos
+$query = "SELECT PhotoID, File, Title, Description, DateCreated, Public, Stub FROM Photos WHERE Public = 1 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
+
+if (!$result = @ mysql_query ($query, $connection))
+   	logerror();
+if (mysql_num_rows($result) == 0) {
+	exit;
+} 
+header('Content-type: text/xml');
+print "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
+?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+	<channel>
+		<title><?php print APP_TITLE ?></title>
+		<link><?php print BASE_URL ?></link>
+		<description><?php print APP_DESCRIPTION ?></description>
+		<pubDate><?php print $tm ?></pubDate>
+		<lastBuildDate><?php print $tm ?></lastBuildDate>
+		<generator><?php print BASE_URL ?></generator>
+<?php
+while ($photo = mysql_fetch_array($result)) {
+		$thisDate = date("D, d M Y H:i:s",strtotime($photo["DateCreated"]));
+		$thisTime = date("g:i A",strtotime($photo["DateCreated"]));
+		// Set template variables
+		$photoID = $photo['PhotoID'];
+		$photoFile = $photo['File'];
+		$photoStub = $photo['Stub'];
+		$photoSRC = str_replace(PHOTO_DIR, PHOTO_URL, $photoFile);
+		$photoSRC = str_replace("\\", "/", $photoSRC);
+		$photoTitle = $photo['Title'];
+		$photoDescription = $photo['Description'];
+		$photoDate = $photo['DateCreated'];
+		$photoDateTitle = date("l, F jS",strtotime($photoDate));
+		$photoDateTime = date("g:i A",strtotime($photoDate));
+		$photoDateTimeMore = date("M jS, Y",strtotime($photoDate))." at ".$photoDateTime;
+		$photoYear = date("Y",strtotime($photoDate));
+		$thumbYearDir = THUMB_DIR . $photoYear;
+		$thumbBaseFile = $thumbYearDir . "\\" . md5(SALT.$photoID);
+		$thumbFile_s = $thumbBaseFile . "_s.jpg";
+		$thumbSRC_s = str_replace(THUMB_DIR, THUMB_URL, $thumbFile_s);
+		$thumbSRC_s = str_replace("\\", "/", $thumbSRC_s);
+		list($width, $height, $type, $attr) = @getimagesize($photoFile);
+		$time = $thisTime;
+		$html = "<p><a href=\"".PHOTO_URL."$photoStub\"><img src=\"$photoSRC\"/></a><br />";
+		if ($photoDescription !== "") {
+			$html .= "<em>$photoDescription</em>";
+		}
+		$html .= "</p>";
+		$html = htmlentities($html);
+		$baseURL = BASE_URL;
+		$photographerName = PHOTOGRAPHER_NAME;
+print <<<END
+		<item>
+			<title>{$photoTitle}</title>
+			<link>{$baseURL}{$photoStub}</link>
+			<description>{$html}</description>
+			<pubDate>{$thisDate} -0800</pubDate>
+			<guid isPermaLink="false">{$photoStub}</guid>
+			<media:content url="{$photoSRC}" type="image/jpeg"/>
+			<media:title>{$photoTitle}</media:title>
+			<media:text type="html">{$html}</media:text>
+			<media:thumbnail url="{$thumbSRC_s}" height="85" width="85"/>
+			<media:credit role="photographer">{$photographerName}</media:credit>
+		</item>
+
+END;
+}
+print "\n";
+?>	</channel>
+</rss>

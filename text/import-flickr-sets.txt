@@ -1,0 +1,146 @@
+<?php
+// import-flickr-sets.php
+//
+// A PHP5 script to download all sets from a Flickr account
+// and store information about those sets in a database.
+//
+// by pb, http://www.onfocus.com/
+//
+// Use at your own risk.
+
+require_once 'phpFlickr.php';
+
+//Add your MySQL details
+$mysql_server = "localhost";
+$mysql_user = "[user]";
+$mysql_pass = "[password]";
+$mysql_db = "[db name]";
+
+//Add your Flickr details
+$api_key = '[application key]';
+$api_secret = '[application secret]';
+
+//Fiddle with this if you want
+$max_per_page = 100; //but it's not needed right now
+
+//Get this session started (if necessary)
+if (session_id() == "") {
+    session_start();
+}
+
+//Get this Flickr started
+$api = new phpFlickr($api_key, $api_secret, FALSE);
+$api->auth("read");
+$userData = $api->auth_checkToken($_SESSION['phpFlickr_auth_token']);
+if ($api->getErrorMsg() !== false) {
+	die("Error: ".$api->getErrorMsg());
+}
+$userNSID = $userData['user']['nsid'];
+
+//Get this db started
+if (!$connection = @ mysql_connect($mysql_server, $mysql_user, $mysql_pass))
+   die("Can't connect to the database!");
+if (!mysql_select_db($mysql_db, $connection))
+   die("Error " . mysql_errno() . " : " . mysql_error());
+
+$sets = $api->photosets_getList($userNSID);
+if ($api->getErrorMsg() !== false) {
+	die("Error: ".$api->getErrorMsg());
+}
+
+if (isset($sets['photoset'])) {
+	foreach ($sets['photoset'] as $photoset) {
+		$msg = "";
+		$photosetID = 0;
+		$photosetFlickrID = $photoset['id'];
+		$photosetCount = $photoset['photos'];
+		$photosetTitle = $photoset['title'];
+		$photosetDescription = $photoset['description'];
+		
+		//Insert this set into the db, grab the setID
+		$selquery = "SELECT SetID FROM sets WHERE FlickrID = '$photosetFlickrID'";
+		if (!$setexists = @ mysql_query ($selquery, $connection))
+			printMySQLerror();
+		if (mysql_num_rows($setexists) == 0) {
+			$photosetTitle = mysql_real_escape_string($photosetTitle, $connection);
+			$photosetDescription = mysql_real_escape_string($photosetDescription, $connection);
+			$insquery = "INSERT INTO sets SET FlickrID = '$photosetFlickrID',
+                                                          Title = '$photosetTitle',
+                                                          Description = '$photosetDescription'";
+	        if (!$add = @ mysql_query ($insquery, $connection))
+		        printMySQLerror();
+			$selmax = "SELECT MAX(SetID) AS MaxID FROM sets";
+			if (!$result = @ mysql_query ($selmax, $connection))
+			   	printMySQLerror();
+			while($newID = mysql_fetch_row($result)) {
+				$photosetID = $newID[0];
+			}
+			$msg .= "Added set $photosetTitle to the db. ";				
+
+		}
+		else {
+			while($oldID = mysql_fetch_row($photoexists)) {
+				$photosetID = $oldID[0];
+				//ignore this one for now
+			}
+		}
+		if ($photosetID == 0) {
+			print "Error. PhotosetID wasn't found.";
+			next;
+		}
+		//Grab the photos from this set
+		
+		//$pages = ceil($photosetCount / $max_per_page);
+		//phpFlickr doesn't support photoset paging yet...so get right to it:
+		
+		$photos = $api->photosets_getPhotos($photosetFlickrID);
+		if ($api->getErrorMsg() !== false) {
+			print "Error: ".$api->getErrorMsg()."<br /><br />";
+			next;
+		}
+		if (isset($photos['photo'])) {
+			foreach ($photos['photo'] as $photo) {
+				$photoID = 0;
+				$photoFlickrID = $photo['id'];
+				$isPrimary = $photo['isprimary'];
+				
+				//Find the local photo ID
+				$query = "SELECT photoID FROM photos WHERE FlickrID = $photoFlickrID";
+				if (!$result = @ mysql_query ($query, $connection))
+				   	printMySQLerror();
+				while($id = mysql_fetch_row($result)) {
+					$photoID = $id[0];
+				}
+				if ($photoID == 0) {
+					print "Error: local photo ID wasn't found for photo $photoFlickrID.<br />";
+					next;
+				}
+				
+				//Add the photoID, setID combo to the photosets table
+				$selquery = "SELECT SetPhotoID FROM setphotos WHERE PhotoID = $photoID AND SetID = $photosetID";
+				if (!$setphotoexists = @ mysql_query ($selquery, $connection))
+					printMySQLerror();
+				if (mysql_num_rows($setphotoexists) == 0) {
+					$insquery = "INSERT INTO setphotos SET PhotoID = $photoID,
+                                                                                SetID = $photosetID,
+                                                                                IsPrimary = $isPrimary";
+		        	   if (!$add = @ mysql_query ($insquery, $connection)) {
+			              printMySQLerror();
+						}
+						else {
+							$msg .= "Photo $photoID added to set $photosetTitle.<br />";
+						}
+				}
+				
+			}
+		}
+		print $msg."<br />";
+		flush();
+	    ob_flush();
+		sleep(1); //take a breathers
+	}
+}
+
+function printMySQLerror() {
+	print "Error: " . mysql_errno() . " : " . mysql_error() . "<br />";
+}

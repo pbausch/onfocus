@@ -1,0 +1,45 @@
+Good morning, off the grid fans! I know it's been a while&mdash;I've been working on my new photoblog behind the scenes. I'm at a point where I'm not sure it helps anyone to share my code, but who knows? Last time I talked about how I'm getting photos into my system, and today I'll talk about how I'm editing photos that are already in the system.
+<div class="clsHeader" style="margin:10px 0px 3px 0px;">Photo URLs</div>
+The first thing I needed to do was provide a permanent home for every photo that finds its way into my database. The easiest method would be using the internal photo ID in the URL somehow, so I'd end up with a URL for any photo like <code>http://photos.onfocus.com/459918/</code>. But as I mentioned when designing the photo file locations (<a href="http://www.onfocus.com/2007/02/3921">Thinking about Photo URLs</a>), I want to include a bit more information about the photo in the URL. So I went with a pattern similar to the files: <code>http://photos.onfocus.com/[year]/[month]/[title]</code>. As with files, the title is stripped of any non-URL-approved characters, and whitespace is replaced with a dash.
+<br /><br />
+I also wanted to keep photo IDs internal, and not use them anywhere within the public-facing application. So I thought the URL pattern of <code>[year]/[month]/[title]</code> would be a good way to uniquely identify a photo within the system as long as there were no duplicates. To accomplish all this, I set up a field in the database called <em>Stub</em> (<code>varchar(50)</code>) that holds the entire string: <code>[year]/[month]/[title]</code>. If two photos have the same title within the same year and month, I simply increment the stub like this: <code>[year]/[month]/[title]-1</code>, <code>[year]/[month]/[title]-2</code>, etc. This way the permalink can be used not only to see the photo on the Web, but also to identify the photo within the application.
+<br /><br />
+I wrote a quick script to add URL stubs to all of the existing photos: <a href="http://www.onfocus.com/otfg_addStubs.txt">addStubs.php</a>. And I retrofitted all of the uploading scripts from the last step to write a URL stub as a photo is added.
+<br /><br />
+With the virtual space for photos set to go, I just needed to give them a permanent home. I set up a script called <em>photo.php</em> that shows one photo at a time, along with a bunch of details about that photo. By passing a URL stub into the script like this <code>http://photos.onfocus.com/photo.php?p=[photo stub]</code>, the page knows which photo to display. With a little <em>.htaccess</em> magic: <code>RewriteRule ^(\d{4}/\d{2}/.*)$ photo.php?p=$1 [L]</code> the nicely formatted URLs are a reality: for example, <a href="http://photos.onfocus.com/2007/01/bandon-beach">bandon beach</a>.
+<div class="clsHeader" style="margin:10px 0px 3px 0px;">Photo Detail Page</div>
+So the photo detail page accepts an incoming URL stub, looks up info about that photo in the database, and arranges things nicely on the page. Here's what a photo detail page looks like in my system today:
+<br /><br />
+<img src="http://www.onfocus.com/otfg-photo-detail.jpg" width="450" height="350" alt="otfg photo detail" />
+<br /><br />
+The main bits are the title, photo itself, caption, time the photo was posted, and a list of tags associated with the photo. This is the public view. If you have the right credentials (set up in Step 9: <a href="http://www.onfocus.com/2007/02/3936">Authentication</a>), you see a bit more on the page, and you have a few more options. As an administrator, directly below the caption is a row of administrative buttons: 
+<br /><br />
+<img src="http://www.onfocus.com/otfg-photo-detail-admin.jpg" width="450" height="126" alt="otfg admin buttons" />
+<br /><br />
+Here's what they do:
+<ul>
+    <li>Sets the public/private status of the photo.</li>
+    <li>Toggles the caption editing form.</li>
+    <li>Rotates the photo 90 degrees clockwise.</li>
+    <li>Completely removes the photo, its thumbnails, and all associated info.</li>
+</ul>
+The other thing an admin can do is edit the title, caption, and tags in place by clicking on any of these things (like Flickr). It looks like this:
+<br /><br />
+<img src="http://www.onfocus.com/otfg-photo-detail-title.jpg" width="450" height="160" alt="otfg editing title" />
+<br /><br />
+All of this editing is accomplished with a series of files. First, the Ajax package <a href="http://www.prototypejs.org/">Prototype</a> handles some of the work in the background. And the rest of the interface stuff is in a Javascript file that's included on the page for an administrator: <a href="http://www.onfocus.com/otfg_editing.txt">editing.js</a>. And the functions in this file post to several scripts that return simple text information:
+<ul>
+    <li><a href="http://www.onfocus.com/otfg_rotate-photo.txt">rotate-photo.php</a> - rotates a photo 90 degrees, stores the rotation value in the db, and rewrites all thumbnails for that photo.</li>
+    <li><a href="http://www.onfocus.com/otfg_delete-photo.txt">delete-photo.php</a> - deletes a photo and all associated info the db.</li>
+    <li><a href="http://www.onfocus.com/otfg_edit-status.txt">edit-status.php</a> - updates the public or private status of a photo.</li>
+    <li><a href="http://www.onfocus.com/otfg_edit-title.txt">edit-title.php</a> - updates the photo title.</li>
+    <li><a href="http://www.onfocus.com/otfg_edit-caption.txt">edit-caption.php</a> - updates the photo caption.</li>
+    <li><a href="http://www.onfocus.com/otfg_edit-tags.txt">edit-tags.php</a> - adds a list of tags to the <em>tags</em> table associated with a photo.</li>
+</ul>
+The only function that requires a page refresh is completely deleting a photo, which is ok with me because the photo detail page is about to be history anyway and I've got to go somewhere. The administrative buttons all have a JavaScript confirmation dialogue before they execute, so I can't accidentally delete a photo when I want to rotate it.
+<br /><br />
+And here's the beast of a script that pulls everything together: <a href="http://www.onfocus.com/otfg_photo.txt">photo.php</a>. This is fairly complex, especially because the public design and administrative functions live together in the same page. 
+<div class="clsHeader" style="margin:10px 0px 3px 0px;">Photo Home Page</div>
+With the photo detail page set, I just needed a place to introduce people to my photos: <a href="http://photos.onfocus.com/">the home page</a>. Again, it's very Flickrish, with two columns of photos and a list of pages at the bottom. The only difference is that the latest photo is at its largest size at the top. I haven't built any editing into this page yet, so any updates have to happen on photo detail pages. And here's the code that powers the front page: <a href="http://www.onfocus.com/otfg_home.txt">home.php</a>. I set up an <em>.htaccess</em> rule for this page too, to help with paging: <code>^home/(\d{1,2})/?$ home.php?page=$1 [L]</code>. That way, as you page through the photos, you'll get friendly URLs like this: <code>http://photos.onfocus.com/home/2</code>.
+<br /><br />
+I think this step gives me a functioning system I can use to publish photos. There are definitely more features I need to build: browsing by tag, extracting EXIF data, an RSS feed, commenting, mapping photos with coordinates. But the I think all of the bare essentials for sharing photos with the world are working now. woohoo! 

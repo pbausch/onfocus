@@ -1,0 +1,75 @@
+#!/usr/bin/perl
+
+# circle_rss.pl
+# Author: Paul Bausch <pb@onfocus.com>
+# 
+# Accepts a purchase circle ID, contacts Amazon for data, and produces an RSS feed.
+# Purchase circles? http://www.amazon.com/exec/obidos/subst/community/community.html
+# Purchase circle ID? -- pick a circle and look for the ~6 digit number in the URL.
+
+use strict;
+use LWP::Simple;
+
+#Take the query from the command-line
+my $circle_id = shift @ARGV or die "Usage:perl circle_rss.pl <circle ID>\n";
+
+#Assemble the URL
+my $url = "http://www.amazon.com/exec/obidos/tg/cm/community-data/-/" . $circle_id . "/book/B/";
+
+#Request page
+my $content = get($url);
+die "Could not retrieve $url" unless $content;
+
+#Turn contents into array
+my @data = split(/"$circle_id",/,$content);
+
+#Initialize some variables
+my($Asin,$title,$author,$aurl,$publisher);
+
+#Print RSS Header
+print <<RSS_HEADER;
+<?xml version="1.0" encoding="UTF-8" ?> 
+<rss version="0.91">
+<channel>
+	<title>Amazon.com - Purchase Circles</title> 
+	<link>http://www.amazon.com/exec/obidos/tg/browse/-/45/1/?rank=%2Bsalesrank%26dev-t=amznRss</link> 
+	<description>Listings of Amazon.com's purchase circles.</description> 
+	<language>en-us</language> 
+	<docs>http://www.amazon.com/exec/obidos/subst/xs/syndicate.html</docs> 
+	<image>
+		<title>Amazon.com--Earth's Biggest Selection</title> 
+		<url>http://images.amazon.com/images/G/01/rcm/logo2.gif</url> 
+		<width>120</width> 
+		<height>30</height> 
+		<link>http://www.amazon.com</link> 
+	</image>
+RSS_HEADER
+
+#Loop through array
+foreach my $row (@data) {
+	#print $row . "\n\n";
+	my @value = split(/",/,$row);
+	$Asin = $value[1];
+	$title = $value[2];
+	$title =~ s!"!!g; #remove quotes
+	$author = $value[3];
+	$author =~ s!"!!g; #remove quotes
+	$author =~ s!é!&#130;!g; #convert e acute accent
+	$aurl = $value[4];
+	$aurl =~ s!"!!g; #remove quotes
+	$publisher = $value[5];
+	if (!$title eq '') {
+		print
+		"<item>\n",
+		"	<title>$title</title>\n",
+		"	<link>$aurl</link>\n",
+		"	<description>$title by $author</description>\n",
+		"</item>\n";
+	}
+}
+
+#Print RSS Footer
+print <<RSS_FOOTER;
+</channel>
+</rss>
+RSS_FOOTER

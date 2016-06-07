@@ -1,0 +1,155 @@
+(*
+now-listening.app
+
+sends the album and artist currently playing in iTunes to
+a remote script.
+
+This script was adapted from Bret Van Horn's trackReporter:
+http://bret.workshed.com/index.cfm?fuseaction=home.download
+*)
+
+global sample_frequency -- how often we should check iTunes
+global itunes_active -- if iTunes is active or not
+global theAlbum -- current album
+global theArtist -- current artist
+
+set sample_frequency to 1200
+
+-- start of monitoring section
+on idle
+	
+	-- check if itunes is running
+	set itunes_active to false
+	
+	tell application "Finder"
+		if (get name of every process) contains "iTunes" then set itunes_active to true
+	end tell
+	
+	-- if itunes is running then we are go
+	if itunes_active then
+		tell application "iTunes"
+			
+			-- if itunes is playing
+			if player state is playing then
+				
+				-- get info on current track
+				try
+					my getCurrentTrack()
+					my sendFile()
+				on error -- playing but not started track yet
+					my getCurrentTrack()
+					my sendFile()
+				end try
+			else
+				
+				-- itunes is active but not playing so check back shortly 
+				set idle_time to 15
+				
+			end if
+			
+		end tell
+		
+		set idle_time to sample_frequency
+		
+	else
+		-- itunes is not currently active so wait a minute before checking again
+		set idle_time to 60
+		
+	end if
+	
+	return idle_time
+	
+end idle
+
+--
+-- subroutineto get the current track from itunes
+--
+on getCurrentTrack()
+	
+	tell application "iTunes"
+		set theAlbum to album of current track as string
+		set theArtist to artist of current track as string
+		
+		-- remove leading or trailing spaces
+		set the theAlbum to my trim_line(theAlbum, " ", 2)
+		set the theArtist to my trim_line(theArtist, " ", 2)
+		
+		-- make them safe for a URL
+		set the theAlbum to my encode_text(theAlbum, true, false)
+		set the theArtist to my encode_text(theArtist, true, false)
+	end tell
+	
+end getCurrentTrack
+
+
+--
+-- subroutine to upload the file
+--
+on sendFile()
+	try
+		with timeout of 30 seconds
+			set theURL to "http://www.example.com/getAlbum.cgi?album=" & theAlbum & "&artist=" & theArtist
+			set shellCommand to "curl -s -m 129 '" & theURL & "'"
+			do shell script shellCommand
+		end timeout
+	on error error_message number error_number
+		tell application (path to frontmost application as text)
+			beep
+			display dialog the error_message buttons {"Cancel"} default button 1
+		end tell
+	end try
+end sendFile
+
+on encode_text(this_text, encode_URL_A, encode_URL_B)
+	set the standard_characters to "abcdefghijklmnopqrstuvwxyz0123456789"
+	set the URL_A_chars to "$+!'/?;&@=#%><{}[]\"~`^\\|*"
+	set the URL_B_chars to ".-_:<>"
+	set the acceptable_characters to the standard_characters
+	if encode_URL_A is false then set the acceptable_characters to the acceptable_characters & the URL_A_chars
+	if encode_URL_B is false then set the acceptable_characters to the acceptable_characters & the URL_B_chars
+	set the encoded_text to ""
+	repeat with this_char in this_text
+		if this_char is in the acceptable_characters then
+			set the encoded_text to (the encoded_text & this_char)
+		else
+			set the encoded_text to (the encoded_text & encode_char(this_char)) as string
+		end if
+	end repeat
+	return the encoded_text
+end encode_text
+
+on encode_char(this_char)
+	set the ASCII_num to (the ASCII number this_char)
+	set the hex_list to {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"}
+	set x to item ((ASCII_num div 16) + 1) of the hex_list
+	set y to item ((ASCII_num mod 16) + 1) of the hex_list
+	return ("%" & x & y) as string
+end encode_char
+
+on trim_line(this_text, trim_chars, trim_indicator)
+	-- 0 = beginning, 1 = end, 2 = both
+	set x to the length of the trim_chars
+	-- TRIM BEGINNING
+	if the trim_indicator is in {0, 2} then
+		repeat while this_text begins with the trim_chars
+			try
+				set this_text to characters (x + 1) thru -1 of this_text as string
+			on error
+				-- the text contains nothing but the trim characters
+				return ""
+			end try
+		end repeat
+	end if
+	-- TRIM ENDING
+	if the trim_indicator is in {1, 2} then
+		repeat while this_text ends with the trim_chars
+			try
+				set this_text to characters 1 thru -(x + 1) of this_text as string
+			on error
+				-- the text contains nothing but the trim characters
+				return ""
+			end try
+		end repeat
+	end if
+	return this_text
+end trim_line

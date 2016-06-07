@@ -1,0 +1,101 @@
+Popular Blogs Readability Scores
+
+=== Site ===
+Site: Engadget
+Desc:  Engadget
+Link:  http://www.engadget.com
+
+Gunning-Fog Index: 14.88
+Flesch Reading Ease: 44.13
+Flesch Kincaid Grade Level: 12.69
+
+=== Site ===
+Site: Boing Boing
+Desc:  
+Link:  http://www.boingboing.net/
+
+Gunning-Fog Index: 13.02
+Flesch Reading Ease: 51.60
+Flesch Kincaid Grade Level: 10.83
+
+=== Site ===
+Site: Gizmodo
+Desc:  Gizmodo, the gadget guide. So much in love with shiny new toys, it's unnatural.
+Link:  http://www.gizmodo.com/
+
+Average Gunning-Fog Index: 13.66
+Average Flesch Reading Ease: 50.95
+Average Flesch Kincaid Grade Level: 11.32
+
+=== Site ===
+Site: The Huffington Post | Full Blog Feed
+Desc:  The Huffington Post blog.
+Link:  http://www.huffingtonpost.com/theblog/
+
+Gunning-Fog Index: 13.47
+Flesch Reading Ease: 49.18
+Flesch Kincaid Grade Level: 10.66
+
+=== Site ===
+Site: TechCrunch
+Desc:  TechCrunch profiles the companies, products and events that are defining and transforming the new web. TechCrunch is written by Michael Arrington.
+Link:  http://www.techcrunch.com
+
+Gunning-Fog Index: 12.74
+Flesch Reading Ease: 47.41
+Flesch Kincaid Grade Level: 10.64
+
+=== Site ===
+Site: Daily Kos
+Desc:  State of the Nation
+Link:  http://www.dailykos.com
+
+Gunning-Fog Index: 11.62
+Flesch Reading Ease: 56.48
+Flesch Kincaid Grade Level: 9.05
+
+=== Site ===
+Site: Lifehacker
+Desc:  Computers make us more productive. Yeah, right. Lifehacker recommends the software downloads and web sites that actually save time. Don't live to geek; geek to live.
+Link:  http://www.lifehacker.com
+
+Gunning-Fog Index: 12.48
+Flesch Reading Ease: 52.75
+Flesch Kincaid Grade Level: 10.36
+
+=== Site ===
+Site: Crooks and Liars
+Desc:  John Amato
+Link:  http://www.crooksandliars.com
+
+Gunning-Fog Index: 18.05
+Flesch Reading Ease: 36.82
+Flesch Kincaid Grade Level: 15.01
+
+=== Site ===
+Site: Think Progress
+Desc:  
+Link:  http://thinkprogress.org
+
+Gunning-Fog Index: 19.51
+Flesch Reading Ease: 28.02
+Flesch Kincaid Grade Level: 17.22
+
+=== Site ===
+Site: Gawker
+Desc:  
+Link:  http://www.gawker.com
+
+Gunning-Fog Index: 12.69
+Flesch Reading Ease: 51.66
+Flesch Kincaid Grade Level: 10.65
+
+
+
+===== AVERAGES =====
+Total Blogs Analyzed: 10
+Total Posts Analyzed: 260
+Gunning-Fog Index: 14.212
+Flesch Reading Ease:  46.9
+Flesch Kincaid Grade Level:  11.843
+

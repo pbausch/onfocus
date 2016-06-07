@@ -1,0 +1,24 @@
+<?php
+// edit-title.php
+
+require("ini.inc");
+require("auth.inc");
+
+authSession($connection);
+
+if (!$_SESSION['admin']) {
+	header("Location: home.php");
+	exit;
+} 
+
+$stub = $_POST['stub'];
+$title = $_POST['title'];
+
+$stub_f = mysql_real_escape_string($stub);
+$title_f = mysql_real_escape_string($title);
+$sql = "UPDATE photos SET title = '$title_f' WHERE Stub = '$stub_f'";
+if (!$update = @ mysql_query ($sql, $connection))
+	logerror();
+
+print $title;
+?>

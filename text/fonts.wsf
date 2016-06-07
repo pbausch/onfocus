@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<job id="Font1">
+	<script language="JScript">
+	<![CDATA[
+	    function SortVBArray(arrVBArray) {
+	        return arrVBArray.toArray().sort().join('\b');
+	    }
+	]]>
+	</script>
+
+	<script language="VBScript">
+	<![CDATA[
+		'-------------------------------------------------------
+		' This script enumerates installed fonts on the system 
+		' based on registry entries, then displays them on a web
+		' page in Internet Explorer. The fonts are probably 
+		' stored in a different location for Win95 and Win98,
+		' but I haven't looked those up. 
+		'
+		' If you have questions/comments, send me an email: 
+		' pb@onfocus.com. 
+		'-------------------------------------------------------
+		
+		'-------------------------------------------------------
+		' turn on error handling.
+		'-------------------------------------------------------
+		On Error Resume Next
+
+		'-------------------------------------------------------
+		' set some variables.
+		'-------------------------------------------------------
+		Const HKLM=&H80000002 'HKEY_LOCAL_MACHINE
+		Const REG_SZ=1
+		Dim ie
+		strSentence = "The quick brown fox jumps over the lazy dog."
+		intFontSize = "14"
+
+		'-------------------------------------------------------
+		' strips parenthesis from string...used for font names.
+		'-------------------------------------------------------
+		Function stripParen(strIn)
+			If Instr(strIn,"(") > 0 Then
+				intBegin = InStr(strIn,"(")
+				intEnd = InStr(strIn,")")
+				If intEnd > 0 Then
+					strRemove = Mid(strIn,intBegin,intEnd)
+					strIn = Replace(strIn,strRemove,"")
+				Else
+					strRemove = Mid(strIn,intBegin,Len(strIn))
+					strIn = Replace(strIn,strRemove,"")
+				End If
+			End If
+			stripParen = Trim(strIn)
+		End Function
+
+		'-------------------------------------------------------
+		' opens up Internet Explorer.
+		'-------------------------------------------------------
+		Sub CreateIE()
+			Set ie = CreateObject("InternetExplorer.Application")
+			ie.height=370
+			ie.width=500
+			ie.menubar=1
+			ie.toolbar=0
+			ie.statusbar=0
+			ie.navigate "About:Blank"
+			ie.visible=1
+			Do while ie.Busy
+				' wait for page to load
+			Loop
+		End Sub
+
+		'-------------------------------------------------------
+		' enumerates registry values given key.
+		'-------------------------------------------------------
+		Function EnumValues(Key, SubKey)
+			Dim Ret()
+			oReg.EnumValues Key,SubKey, sKeys, iKeyType 'fill the array
+			ReDim Ret(UBound(sKeys))
+			If Err.Number <> 0 Then
+				MsgBox "No fonts found." & Chr(13) & Chr(10) & Chr(13) & Chr(10) & "This doesn't mean that you don't have fonts installed," & Chr(13) & Chr(10) & "it just means this script isn't able to find them." & Chr(13) & Chr(10) & Chr(13) & Chr(10) & "Sorry, this script won't be able to run on this machine.", 16, "Error: No Fonts Found!"
+				WScript.Quit
+			End If
+			For Count = 0 to UBound(sKeys)
+				Select Case iKeyType(Count)
+					Case REG_SZ
+						oReg.GetStringValue Key,SubKey, sKeys(Count), sValue
+						Ret(Count) = sKeys(Count) '& "," & sValue
+				End Select
+			Next
+			EnumValues = Join(Ret,Chr(8))
+		End Function
+
+		'-------------------------------------------------------
+		' wrapper for javaScript sort(); function. 
+		'-------------------------------------------------------
+		Function SortArray(arrInput)
+			SortArray = Split(SortVBArray(arrInput), Chr(8))
+		End Function
+
+		'-------------------------------------------------------
+		' let the HTML begin.
+		'-------------------------------------------------------
+		strLF = Chr(13) & Chr(10)
+		strHTMLHead = "<!DOCTYPE HTML PUBLIC ""-//W3C//DTD HTML 4.0 Transitional//EN"">" & strLF
+		strHTMLHead = strHTMLHead & "<html>" & strLF
+		strHTMLHead = strHTMLHead & "<head>" & strLF
+		strHTMLHead = strHTMLHead & "	<meta http-equiv=""Content-Type"" content=""text/html; charset=utf-8""> " & strLF
+		strHTMLHead = strHTMLHead & "	<title>My Installed Fonts</title>" & strLF
+		strHTMLHead = strHTMLHead & "	<style type=""text/css"">" & strLF
+		strHTMLHead = strHTMLHead & "		body {" & strLF
+		strHTMLHead = strHTMLHead & "			margin:0px;" & strLF
+		strHTMLHead = strHTMLHead & "		}" & strLF
+		strHTMLHead = strHTMLHead & "		a {" & strLF
+		strHTMLHead = strHTMLHead & "			text-decoration:none;" & strLF
+		strHTMLHead = strHTMLHead & "		}" & strLF
+		strHTMLHead = strHTMLHead & "		.FontGroup {" & strLF
+		strHTMLHead = strHTMLHead & "			margin-left:5px;" & strLF
+		strHTMLHead = strHTMLHead & "			margin-bottom:10px;" & strLF
+		strHTMLHead = strHTMLHead & "		}" & strLF
+		strHTMLHead = strHTMLHead & "		.FontName {" & strLF
+		strHTMLHead = strHTMLHead & "			font-family:tahoma,arial;" & strLF
+		strHTMLHead = strHTMLHead & "			font-size:8pt;" & strLF
+		strHTMLHead = strHTMLHead & "			padding:2px;" & strLF
+		strHTMLHead = strHTMLHead & "			line-height:130%;" & strLF
+		strHTMLHead = strHTMLHead & "		}" & strLF
+		strHTMLHead = strHTMLHead & "		.FontSentence {" & strLF
+		strHTMLHead = strHTMLHead & "			background:#ffffff;" & strLF
+		strHTMLHead = strHTMLHead & "			padding:10px;" & strLF
+		strHTMLHead = strHTMLHead & "			line-height:130%;" & strLF
+		strHTMLHead = strHTMLHead & "		}" & strLF
+		strHTMLHead = strHTMLHead & "		.message {" & strLF
+		strHTMLHead = strHTMLHead & "			font-family:arial;" & strLF
+		strHTMLHead = strHTMLHead & "			font-size:10pt;" & strLF
+		strHTMLHead = strHTMLHead & "			margin:0px;" & strLF
+		strHTMLHead = strHTMLHead & "			padding:5px;" & strLF
+		strHTMLHead = strHTMLHead & "			background:#cccccc;" & strLF
+		strHTMLHead = strHTMLHead & "			margin-bottom:10px;" & strLF
+		strHTMLHead = strHTMLHead & "		}" & strLF
+		strHTMLHead = strHTMLHead & "	</style>" & strLF
+		strHTMLHead = strHTMLHead & "</head>" & strLF & strLF
+		strHTMLHead = strHTMLHead & "<body bgcolor=""#ffffff"" text=""#000000"">" & strLF
+		strHTMLHead = strHTMLHead & "<div class=""message"" style=""border-bottom:solid gray 1px;"">This is a list of fonts installed on your system.</div>" & strLF
+
+		'-------------------------------------------------------
+		' let the HTML end.
+		'-------------------------------------------------------
+		strHTMLFoot = strHTMLFoot & "<div class=""message"" style=""border-top:solid gray 1px;"">scripted by <a target=""_blank"" href=""http://www.onfocus.com/"">pb</a>.</div>" & strLF
+		strHTMLFoot = strHTMLFoot & "</body>" & strLF
+		strHTMLFoot = strHTMLFoot & "</html>"
+
+		'-------------------------------------------------------
+		' set WMI method for registry reading. 
+		'-------------------------------------------------------
+		Set oReg = GetObject("winmgmts:!root/default:StdRegProv")
+		If Err.Number <> 0 Then
+			MsgBox "Unable to Access Windows Mangement." & Chr(13) & Chr(10) & Chr(13) & Chr(10) & "Sorry, this script won't be able to run on this machine.", 16, "Error: No WMI!"
+			WScript.Quit
+		End If
+		
+		'-------------------------------------------------------
+		' ask the registry for installed font names. 
+		'-------------------------------------------------------
+		strFontList = EnumValues(HKLM,"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts")
+		If strFontList = "" Then
+			MsgBox "No fonts found." & Chr(13) & Chr(10) & Chr(13) & Chr(10) & "This doesn't mean that you don't have fonts installed," & Chr(13) & Chr(10) & "it just means this script isn't able to find them." & Chr(13) & Chr(10) & Chr(13) & Chr(10) & "Sorry, this script won't be able to run on this machine.", 16, "Error: No Fonts Found!"
+			WScript.Quit
+		End If
+
+		'-------------------------------------------------------
+		' sort the font names alphabetically. 
+		'-------------------------------------------------------
+		arFontList = Split(strFontList,Chr(8))
+		arFontList = SortArray(arFontList)
+		
+		'-------------------------------------------------------
+		' loop through names to create document. 
+		'-------------------------------------------------------
+		For x = 0 To UBound(arFontList)
+			strThisFullFontName = arFontList(x)
+			strThisFontName = stripParen(strThisFullFontName)
+			strThisFamily = strThisFontName
+			strThisStyle = "font-size:" & intFontSize & "pt;"
+			strHTML = strHTML & "<div class=""FontGroup"">"
+			strHTML = strHTML & "<div class=""FontName"">" & strThisFullFontName & "</div>"
+			strHTML = strHTML & "<div class=""FontSentence"">"
+			If InStr(LCase(strThisFontName),"bold") > 0 Then
+				strThisStyle = strThisStyle & "font-weight:bold;"
+				strThisFamily = Trim(Replace(strThisFamily,"Bold",""))
+			End If
+			If InStr(LCase(strThisFontName),"italic") > 0 Then
+				strThisStyle = strThisStyle & "font-style:italic;"
+				strThisFamily = Trim(Replace(strThisFamily,"Italic",""))
+			End If
+			strThisStyle = strThisStyle & "font-family:" & strThisFamily & ";"
+			strHTML = strHTML & "<span style=""" & strThisStyle & """>"
+			strHTML = strHTML & strSentence
+			strHTML = strHTML & "</span></div>"
+			strHTML = strHTML & "</div>" & strLF
+		Next
+
+		'-------------------------------------------------------
+		' stitch it all together.
+		'-------------------------------------------------------
+		strHTML = strHTMLHead & strHTML & strHTMLFoot
+
+		'-------------------------------------------------------
+		' open up Internet Explorer and send the HTML.
+		'-------------------------------------------------------
+		call CreateIE()
+		ie.Document.Write (strHTML)
+
+		'-------------------------------------------------------
+		' clean up.
+		'-------------------------------------------------------
+		Set ie = Nothing
+		Set oReg = Nothing
+	]]>
+	</script>
+</job>

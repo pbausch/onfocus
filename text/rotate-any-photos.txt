@@ -1,0 +1,88 @@
+<?php
+// rotate-any-photos.php
+//
+// A PHP5 script to download all rotation info about photos
+// from Flickr, store it in a db, and rotate the photos.
+//
+// by pb, http://www.onfocus.com/
+//
+// Use at your own risk.
+
+set_time_limit(48000);
+require_once 'phpFlickr.php';
+
+//Add your MySQL details
+$mysql_server = "localhost";
+$mysql_user = "[user]";
+$mysql_pass = "[password]";
+$mysql_db = "[db name]";
+
+//Add your Flickr details
+$api_key = '[application key]';
+$api_secret = '[application secret]';
+
+//Get this session started (if necessary)
+if (session_id() == "") {
+    session_start();
+}
+
+//Get this Flickr started
+$api = new phpFlickr($api_key, $api_secret, FALSE);
+$api->auth("read");
+$userData = $api->auth_checkToken($_SESSION['phpFlickr_auth_token']);
+if ($api->getErrorMsg() !== false) {
+	die("Error: ".$api->getErrorMsg());
+}
+$userNSID = $userData['user']['nsid'];
+
+//Get this db started
+if (!$connection = @ mysql_connect($mysql_server, $mysql_user, $mysql_pass))
+   die("Can't connect to the database!");
+if (!mysql_select_db($mysql_db, $connection))
+   die("Error " . mysql_errno() . " : " . mysql_error());
+
+//Grab the PhotoID and File Location of all photos
+$query = "SELECT PhotoID, FlickrID, File FROM Photos";
+if (!$result = @ mysql_query ($query, $connection))
+   	printMySQLerror();
+if (mysql_num_rows($result) == 0) {
+	die("Couldn't find your photos!");
+} 
+else {
+	while ($photo = mysql_fetch_array($result)) {
+		$photoID = $photo["PhotoID"];
+		$photoFlickrID = $photo['FlickrID'];
+		$photoFile = $photo["File"];
+		
+		//Call the photos getInfo method at Flickr
+		$photoinfo = $api->photos_getInfo($photoFlickrID);
+		if ($api->getErrorMsg() !== false) {
+			die("Error: ".$api->getErrorMsg());
+		}
+		$rotate = $photoinfo['rotation'];
+		if ($rotate !== 0) {
+			//Set rotation in the db
+			$query = "UPDATE photos SET rotation = $rotate WHERE PhotoID = $photoID";
+			if (!$up = @ mysql_query ($query, $connection))
+		        print "Error " . mysql_errno() . " : " . mysql_error();
+		
+			//Copy original file to [file]_o.jpg
+			$newPhotoFile = str_replace(".jpg", "_o.jpg", $photoFile);
+			if (!copy($photoFile, $newPhotoFile)) {
+				print "Error: couldn't copy $photoFile.<br />";
+			}
+			
+			//Rotate the original file
+			$originalImage  = @imagecreatefromjpeg($photoFile);
+			list($width, $height, $type, $attr) = getimagesize($photoFile);
+			$rotated = imagerotate($originalImage,-$rotate,0);
+			imagejpeg($rotated, $photoFile, 90) or print("Error: Can't save rotated image.<br />");
+			imagedestroy($tempImage);
+			print "photo $photoFile updated to -$rotate degree rotation.<br />";
+		}
+		flush();
+	    ob_flush();
+		sleep(1);
+	}
+}
+?>
