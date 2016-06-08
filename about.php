@@ -27,7 +27,7 @@ require("header.php");
 		<br /><br />
 		From 1999-2001 I helped create an early weblog tool called <a href="//www.blogger.com/home">Blogger</a> at Pyra Labs.
 		<br /><br />
-		I also have a retired <a href="//photos.onfocus.com/">photoblog</a>. I post pictures on <a href="//www.flickr.com/photos/pb">Flickr</a>, <a href="https://instagram.com/paul.bausch/">Instagram</a>, and <a href="https://onfocus.vsco.co/grid/1">VSCO</a> these days.
+		I also have a retired <a href="http://photos.onfocus.com/">photoblog</a>. I post pictures on <a href="//www.flickr.com/photos/pb">Flickr</a>, <a href="https://instagram.com/paul.bausch/">Instagram</a>, and <a href="https://onfocus.vsco.co/grid/1">VSCO</a> these days.
 		<br /><br />
 		(Here are <a href="https://makerba.se/m/ffatkg/pbausch">a few of my projects on Makerbase</a>.)
 	</div></div>
@@ -50,11 +50,10 @@ require("header.php");
 		<a href="https://onfocus.vsco.co/grid/1" title="VSCO" rel="me"><img src="//www.onfocus.com/images/vsco.gif" alt="VSCO" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="https://onfocus.vsco.co/grid/1" title="VSCO" rel="me">onfocus</a> on VSCO<br>
 		<a href="//pinboard.in/u:pb" title="Pinboard" rel="me"><img src="//www.onfocus.com/images/pinboard-icon.gif" alt="Pinboard" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//pinboard.in/u:pb" title="Pinboard" rel="me">pb</a> on Pinboard<br>
 	    <a href="//mlkshk.com/user/pb"><img src="//www.onfocus.com/images/mlkshk-icon.gif" alt="mlkshk" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//mlkshk.com/user/pb" rel="me">pb</a> on mlkshk<br>
-		<a href="//stellar.io/pb"><img src="//www.onfocus.com/images/stellar-icon.gif" alt="stellar" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//stellar.io/pb" rel="me">pb</a> on Stellar<br>
 		<a href="//vimeo.com/pb" title="Vimeo" rel="me"><img src="//www.onfocus.com/images/vimeo-icon.gif" alt="Vimeo" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//vimeo.com/pb" title="Vimeo" rel="me">pb</a> on Vimeo<br>
 	    <a href="//twitter.com/pbausch" title="Twitter" rel="me"><img src="//www.onfocus.com/images/twitter.gif" alt="Twitter" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//twitter.com/pbausch" title="Twitter" rel="me">pbausch</a> on Twitter<br>
 		<a href="//www.thisismyjam.com/pbausch" title="This Is My Jam" rel="me"><img src="//www.onfocus.com/images/timj-icon.gif" alt="This Is My Jam" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.thisismyjam.com/pbausch" title="This Is My Jam" rel="me">pbausch</a> on This Is My Jam<br>
-		<a href="//www.thisismyjam.com/pbausch" title="This Is My Jam" rel="me"><img src="//www.onfocus.com/images/github-icon.gif" alt="GitHub" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="https://github.com/pbausch/" title="This Is My Jam" rel="me">pbausch</a> on GitHub<br>
+		<a href="//www.thisismyjam.com/pbausch" title="GitHub" rel="me"><img src="//www.onfocus.com/images/github-icon.gif" alt="GitHub" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="https://github.com/pbausch/" title="This Is My Jam" rel="me">pbausch</a> on GitHub<br>
 		<a href="//www.linkedin.com/in/paulbausch" title="LinkedIn" rel="me"><img src="//www.onfocus.com/images/linkedin-icon.gif" alt="LinkedIn" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.linkedin.com/in/paulbausch" title="LinkedIn" rel="me">paulbausch</a> on LinkedIn<br>
 		</div>
 	</div>
