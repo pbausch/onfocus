@@ -14,7 +14,7 @@
 	<link rel="icon" type="image/ico" href="//www.onfocus.com/favicon032010.ico" />
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://xml.onfocus.com/posts" />
 	<link rel="stylesheet" href="//o.snapgallery.net/screen112613.css" />
-	<title><?php print $pagetitle ?></title>
+	<title><?php if (isset($pagetitle)) { print $pagetitle } else { print "onfocus" } ?></title>
 	<script src="//www.onfocus.com/swfobject.js"></script>
 	<style>
 		<?php if ($page == "/archive.php") { ?>@import url( //www.google.com/cse/api/branding.css);<?php } ?>
