@@ -13,7 +13,7 @@
 	<?php if (($pageNum > 1) || ($isDateArchive)) { ?><meta name="ROBOTS" content="NOINDEX,FOLLOW"><?php }?>
 	<link rel="icon" type="image/ico" href="//www.onfocus.com/favicon032010.ico" />
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://xml.onfocus.com/posts" />
-	<link rel="stylesheet" href="//o.snapgallery.net/screen112613.css" />
+	<link rel="stylesheet" href="//d2nixc0nv2xpbr.cloudfront.net/screen112613.css" />
 	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
 	<script src="//www.onfocus.com/swfobject.js"></script>
 	<style>
