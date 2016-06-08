@@ -2,6 +2,7 @@
 require("onfocus-ini.inc");
 $pageNum = 1;
 $isDateArchive = 0;
+$pagetitle = "SnapGallery is Gone | onfocus"
 require("header.php");
 ?><h2>SnapGallery No More</h2>
 	<div class="post" style="margin-top:18px;">

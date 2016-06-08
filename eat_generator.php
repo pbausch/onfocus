@@ -2,6 +2,7 @@
 require("onfocus-ini.inc");
 $pageNum = 1;
 $isDateArchive = 0;
+$pagetitle = "The What-Do-You-Want-For-Dinner I-Don't-Know-What-Do-You-Want? Dialog Generator | onfocus";
 require("header.php");
 
 	if (isset($_POST['hdnHdn'])) {
