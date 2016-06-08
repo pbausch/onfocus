@@ -64,15 +64,4 @@ require("header.php");
 		<a href="/">Home</a> &nbsp;<span style="color:#777;">&middot;</span>&nbsp; <a href="/archive/">Archive</a>
 	</div>
 </div>
-<div id="bottom"></div>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-76008-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
-</body>
-</html>
+<?php require("footer.php"); ?>

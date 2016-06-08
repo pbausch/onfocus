@@ -229,17 +229,4 @@ else {
 		<?php if ($newerPermalink <> "") { ?> &nbsp;<span style="color:#777;">&middot;</span>&nbsp; <a href="<?php print $newerPermalink ?>">Newer Post</a> &#9654;<?php } ?>
 	</div>
 </div>
-<div id="bottom"></div>
-<?php if ($thisToken != '') { ?><script type="text/javascript" language="javascript">var token = '<?php print $thisToken; ?>';</script><?php } ?>
-<script type="text/javascript" src="//www.onfocus.com/post030609-min.js"></script>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-76008-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
-</body>
-</html>
+<?php require("footer.php"); ?>
