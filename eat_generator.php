@@ -1,17 +1,9 @@
 <?php
 require("onfocus-ini.inc");
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>The What-Do-You-Want-For-Dinner I-Don't-Know-What-Do-You-Want? Dialog Generator | onfocus</title>
-	<link rel="stylesheet" href="http://o.snapgallery.net/screen032010.css" />
-</head>
-<body>
-<div id="header" onclick="document.location='/';"></div>
-<div id="blog">
-	<?php 
+$pageNum = 1;
+$isDateArchive = 0;
+require("header.php");
+
 	if (isset($_POST['hdnHdn'])) {
 		$FirstName = Trim(strip_tags($_POST['txtFirstName']));
 		if ($FirstName == "") {
@@ -93,7 +85,7 @@ require("onfocus-ini.inc");
 	How many times have you argued with someone about what to have for dinner when both of you were too apathetic to actually come to a decision? 
 	Well now you can skip the banal conversation with The What-Do-You-Want-For-Dinner-I-Don't-Know-What-Do-You-Want? Dialog Generator and start eating! It's fast and FREE. Just fill in your information below:
 	<br /><br />
-	<form action="eat_generator.asp" method="post" name="EatThisForm">
+	<form action="eat_generator.php" method="post" name="EatThisForm">
 	<table>
 	<tr><td align="right"><font face="verdana, arial" size="2">Your First Name:</font></td><td><input type="text" size="15" maxlength="10" name="txtFirstName" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
 	<tr><td align="right"><font face="verdana, arial" size="2">Friend's/SO's First Name:</font></td><td><input type="text" size="15" maxlength="10" name="txtOtherFirstName" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
@@ -127,15 +119,4 @@ require("onfocus-ini.inc");
 		<?php } ?>
 	</div>
 </div>
-<div id="bottom"></div>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-76008-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
-</body>
-</html>
+<?php require("footer.php") ?>

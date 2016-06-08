@@ -73,26 +73,10 @@ if (mysql_num_rows($result) > 0) {
 		$pagetitle = $GalleryTitle;
 	}
 }
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="http://o.snapgallery.net/screen112011.css" />
-	<meta name="viewport" content="width = 480" />
-	<title><?php print $pagetitle ?> | onfocus</title>
-</head>
-<body>
-<div id="header" onclick="document.location='/';">
-<div id="infobox">
-	<div class="post-text">
-		<a href="http://www.onfocus.com/">Home</a> &middot;
-		<a href="/about">About</a> &middot; 
-		<a href="/archive/">Archive</a> &middot; 
-		<a href="http://xml.onfocus.com/posts">Feed</a>
-	</div>
-</div>
-</div>
-<div id="blog">
+$pageNum = 1;
+$isDateArchive = 0;
+require("header.php");
+?>
 <h2 class="archive-title"><?php print $GalleryTitle ?></h2>
 <div class="post" style="width:<?php print ($width + 30) ?>px;">
 	<div style="">
@@ -120,15 +104,4 @@ if (mysql_num_rows($result) > 0) {
 		<a href="/">Home</a>
 	</div>
 </div>
-<div id="bottom"></div>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-76008-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
-</body>
-</html>
+<?php require("footer.php") ?>
