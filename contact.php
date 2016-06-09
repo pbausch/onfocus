@@ -1,34 +1,10 @@
 <?php
 require("onfocus-ini.inc");
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>About onfocus by Paul Bausch</title>
-	<link rel="stylesheet" href="http://o.snapgallery.net/screen032010.css" />
-	<script language="JavaScript">
-		function checkForm(f) {
-			if (f.txtName.value == '') {
-				alert('Please enter your name. ');	
-				return false;
-			}
-			if (f.txtEmail.value == '') {
-				alert('Please enter your email. ');	
-				return false;
-			}
-			if (f.txaBody.value == '') {
-				alert('Please enter the text of your email. ');
-				return false;
-			}
-			f.submit.disabled = true;
-			return true;
-		}
-	</script>
-</head>
-<body>
-<div id="header" onclick="document.location='/';"></div>
-<div id="blog">
-	<h2>Contact Paul Bausch</h2>
+$pagetitle = "onfocus privacy";
+$pageNum = 1;
+$isDateArchive = 0;
+require("header.php");
+?><h2>Contact Paul Bausch</h2>
 	<?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$from_name = $_POST["txtName"];
@@ -79,15 +55,4 @@ require("onfocus-ini.inc");
 		<a href="/">Home</a>
 	</div>
 </div>
-<div id="bottom"></div>
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-76008-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
-</body>
-</html>
+<?php require("footer.php"); ?>
