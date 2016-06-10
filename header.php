@@ -15,7 +15,7 @@
 	<link rel="icon" type="image/ico" href="//www.onfocus.com/favicon032010.ico" />
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://xml.onfocus.com/posts" />
 	<style>
-		#logo, .tagline, .selected, #bottom {color: #<?php print $logocolor ?> !important;}
+		#logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a {color: #<?php print $logocolor ?> !important;}
 		body {
 			background:  #<?php print $gradcolor ?>; /* Old browsers */
 			background: -moz-linear-gradient(top,  #<?php print $gradcolor ?>, #ffffff); /* FF3.6-15 */
@@ -29,17 +29,23 @@
 			background-color: #<?php print $gradcolor ?>;
 			color: white;
 		}
+		#infobox .post-text a.selected, .navigation a {
+			opacity: 0.8;
+		}
+		#infobox .post-text a {
+			opacity: 0.5;
+		}
+		.tagline {
+			opacity: 0.4;
+		}
 	</style>
-	<link rel="stylesheet" href="//d1x6es5xzge33k.cloudfront.net/screen060916min.css" />
+	<link rel="stylesheet" href="//d1x6es5xzge33k.cloudfront.net/screen060916bmin.css" />
 	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
 	<script src="//www.onfocus.com/swfobject.js"></script>
 	<style>
 		.twitter {
 			padding-left:22px;
 			background:url(http://www.onfocus.com/images/twitterbird.gif) no-repeat 0px 7px;
-		}
-		.tagline {
-			opacity: 0.5;
 		}
 	</style>
 </head>
