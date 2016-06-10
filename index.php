@@ -131,7 +131,7 @@ else {
 		}
 		print "<div class=\"post-text\"";
 		if (($type == 7) || ($type == 5) || ($type == 6) || ($cntPost == 1)) {
-			print " style=\"margin-top:15px\"";
+			print " style=\"margin-top:25px\"";
 		}
 		print ">$body</div>\n";
 		if (($type == 5) || ($type == 6)) {
