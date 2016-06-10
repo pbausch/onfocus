@@ -38,6 +38,14 @@
 		.tagline {
 			opacity: 0.4;
 		}
+		@media screen and (max-width: 750px) {
+			#header {
+				border-bottom: solid 5px #<?php print $logocolor ?>;
+			}
+			#footer {
+				border-top: solid 5px #<?php print $logocolor ?>;
+			}
+		}
 	</style>
 	<link rel="stylesheet" href="//d1x6es5xzge33k.cloudfront.net/screen060916bmin.css" />
 	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
