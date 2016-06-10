@@ -60,7 +60,7 @@ require("header.php");
 </div>
 <div id="footer">
 	<div class="navigation">
-		<a href="/">Home</a> &nbsp;<span style="color:#777;">&middot;</span>&nbsp; <a href="/archive/">Archive</a>
+		<a href="/">Home</a>
 	</div>
 </div>
 <?php require("footer.php"); ?>

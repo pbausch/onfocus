@@ -170,16 +170,16 @@ ob_end_flush();
 	<div class="navigation">
 		<a href="/page/<?php print $olderPageNum ?>">Older Posts</a>
 		<?php if ($pageNum == 2) { ?> 
-			&nbsp; <a href="/">Newer Posts</a>
+		    <span class="flourish">&otimes;</span> <a href="/" style="padding-left:10px;">Newer Posts</a>
 		<?php } elseif ($pageNum > 1) { ?> 
-			&nbsp; <a href="/page/<?php print $newerPageNum ?>">Newer Posts</a>
-		<?php } elseif ($pageNum == 1) { ?> <a href="/archive/">Archive</a><?php } ?>
+		    <span class="flourish">&otimes;</span> <a href="/page/<?php print $newerPageNum ?>" style="padding-left:10px;">Newer Posts</a>
+		<?php } elseif ($pageNum == 1) { ?> <span class="flourish">&otimes;</span> <a href="/archive/" style="padding-left:10px;">Archive</a><?php } ?>
 	</div>
 </div>
 <?php } else { ?>
 <div id="footer">
 	<div class="navigation">
-		<a href="/archive/">Archive</a>
+		<a href="/">Home</a> <span class="flourish">&otimes;</span> <a href="/archive/" style="padding-left:10px;">Archive</a>
 	</div>
 </div>
 <?php } ?>

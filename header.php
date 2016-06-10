@@ -27,13 +27,13 @@
 		}
 		#footer, #bottom {
 			background-color: #<?php print $gradcolor ?>;
-			color: white;
+			color: #<?php print $logocolor ?>;
+		}
+		#infobox .post-text a, .flourish {
+			opacity: 0.3;
 		}
 		#infobox .post-text a.selected, .navigation a {
 			opacity: 0.8;
-		}
-		#infobox .post-text a {
-			opacity: 0.5;
 		}
 		.tagline {
 			opacity: 0.4;
