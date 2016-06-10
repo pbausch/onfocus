@@ -29,7 +29,7 @@
 			background-color: #<?php print $gradcolor ?>;
 			color: #<?php print $logocolor ?>;
 		}
-		#infobox .post-text a, .flourish {
+		#infobox .post-text a, .flourish, #copyright {
 			opacity: 0.3;
 		}
 		#infobox .post-text a.selected, .navigation a {
