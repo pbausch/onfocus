@@ -170,7 +170,7 @@ ob_end_flush();
 	<div class="navigation">
 		<a href="/page/<?php print $olderPageNum ?>">Older Posts</a>
 		<?php if ($pageNum == 2) { ?> 
-			&nbsp; <a href="/">Newer Posts</a>;
+			&nbsp; <a href="/">Newer Posts</a>
 		<?php } elseif ($pageNum > 1) { ?> 
 			&nbsp; <a href="/page/<?php print $newerPageNum ?>">Newer Posts</a>
 		<?php } elseif ($pageNum == 1) { ?> <a href="/archive/">Archive</a><?php } ?>
