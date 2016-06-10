@@ -3,12 +3,10 @@
 <script type="text/javascript" src="//www.onfocus.com/post030609-min.js"></script>
 <script>
 	function focusin(t) {
-		t.setAttribute("style","-webkit-filter:blur(0px)");
-		t.setAttribute("style","filter:blur(0px)");
+		t.setAttribute("style","-webkit-filter:blur(0px);filter:blur(0px)");
 	}
 	function defocus(t) {
-		t.setAttribute("style","-webkit-filter:blur(3px)");
-		t.setAttribute("style","filter:blur(3px)");
+		t.setAttribute("style","-webkit-filter:blur(3px);filter:blur(3px)");
 	}
 	
 </script>
