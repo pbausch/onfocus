@@ -34,10 +34,12 @@
 	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
 	<script src="//www.onfocus.com/swfobject.js"></script>
 	<style>
-		<?php if ($page == "/archive.php") { ?>@import url( //www.google.com/cse/api/branding.css);<?php } ?>
 		.twitter {
 			padding-left:22px;
 			background:url(http://www.onfocus.com/images/twitterbird.gif) no-repeat 0px 7px;
+		}
+		.tagline {
+			opacity: 0.5;
 		}
 	</style>
 </head>
