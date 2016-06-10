@@ -37,6 +37,7 @@
 		}
 		.tagline {
 			opacity: 0.4;
+			letter-spacing: 0.4px;
 		}
 		.btn {
 		    background-color: #<?php print $gradcolor ?>;
