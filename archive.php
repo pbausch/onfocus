@@ -55,30 +55,6 @@ require("header.php");
 		I started this site in 1998, and there are a few remnants of the early days in the <a href=" //web.archive.org/web/*/ //www.onfocus.com/">Internet Archive</a>.
 		</div>
 	</div>
-	<h2>Search</h2>
-	<div class="post">
-		<div class="post-text" style="margin-top:18px;">Search this site with Google:<br /><br />
-			<div class="cse-branding-right" style="background-color:#FFFFFF;color:#000000">
-			  <div class="cse-branding-form" style="margin-right:10px;">
-			    <form action=" //www.onfocus.com/search" id="cse-search-box">
-			      <div>
-			        <input type="hidden" name="cx" value="000030704597610949694:ereby0zkfvi" />
-			        <input type="hidden" name="cof" value="FORID:10" />
-			        <input type="hidden" name="ie" value="UTF-8" />
-			        <input type="text" name="q" size="31" />
-			        <input type="submit" name="sa" value="Search" />
-			      </div>
-			    </form>
-			  </div>
-			  <div class="cse-branding-logo">
-			    <img src=" //www.google.com/images/poweredby_transparent/poweredby_FFFFFF.gif" alt="Google" />
-			  </div>
-			  <div class="cse-branding-text">
-			    Custom Search
-			  </div>
-			</div>
-		</div>
-	</div>
 	<!--
 	<h2>Popular</h2>
 	<div class="post">
@@ -95,12 +71,6 @@ require("header.php");
 		</div>
 	</div>
 	-->
-	<h2>Tags</h2>
-	<div class="post">
-		<div class="post-text" style="margin-top:18px;">
-		I've been tagging every post for years, I just need to put together some way to browse by tag. Coming sometime, maybe.
-		</div>
-	</div>
 </div>
 <div id="footer">
 	<div class="navigation">

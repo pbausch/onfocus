@@ -120,45 +120,33 @@ else {
 		}
 		$thisTime = date(TIME_FORMAT,strtotime($postDateTime));
 		if ($thisDate !== $lastDate) {
-			print "<h2>$thisDate</h2>\n";
+			//print "<h2>$thisDate</h2>\n";
 		}
 		else {
 			print "<div class=\"daysep\"></div>";
 		}
 		print "<div class=\"post\">\n";
-		if ((strpos($title,"Links for") === false) && ($type != 7)) {
+		if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6)) {
 			print "<h3>$title</h3>\n";
 		}
 		print "<div class=\"post-text\"";
-		if ($type == 7) {
+		if (($type == 7) || ($type == 5) || ($type == 6) || ($cntPost == 1)) {
 			print " style=\"margin-top:15px\"";
 		}
 		print ">$body</div>\n";
-		if (($id < 4653) && (strpos($title,"Links for") !== false)) {
-			print "<div class=\"post-byline delicio\">gathered from delicious at <a href=\"$permalink\">$thisTime</a>";
-		} 
-		else if (strpos($title,"Links for") !== false) {
-			print "<div class=\"post-byline pinboard\">gathered from pinboard at <a href=\"$permalink\">$thisTime</a>";
-		}
-		else if ($type == 5) {
-			$changeDate = strtotime('2016-05-10 00:00');
-			if (strtotime($postDateTime) < $changeDate) {
-				print "<div class=\"post-byline instagram\">posted to instagram at <a href=\"$permalink\">$thisTime</a>";
+		if (($type == 5) || ($type == 6)) {
+			print "<div class=\"photo-title\">";
+			if (strpos($title,"instagram photo") === false) {
+				print $title;
 			}
 			else {
-				print "<div class=\"post-byline instagram2\">posted to instagram at <a href=\"$permalink\">$thisTime</a>";
+				print "Untitled";
 			}
+			print "</div>";
 		}
-		else if ($type == 6) {
-			print "<div class=\"post-byline flickr\">posted to flickr at <a href=\"$permalink\">$thisTime</a>";
-		}
-		else if ($type == 7) {
-			//print "<div class=\"post-byline twitter\">posted to twitter at <a href=\"$permalink\">$thisTime</a>";
-			print "<div class\"post-byline\">";
-		}
-		else {
-			print "<div class=\"post-byline\">posted at <a href=\"$permalink\">$thisTime</a>";
-		}
+		
+		print "<div class=\"post-byline\">$thisDate at <a href=\"$permalink\">$thisTime</a>";
+		
 		if ($commentCount > 0) {
 			print " &middot; <a href=\"$permalink#comments\">$commentCount comment";
 			if ($commentCount <> 1) {
@@ -180,12 +168,12 @@ ob_end_flush();
 <?php if (!$isDateArchive) { ?>
 <div id="footer">
 	<div class="navigation">
-		&#9664; <a href="/page/<?php print $olderPageNum ?>">Older Posts</a>
+		<a href="/page/<?php print $olderPageNum ?>">Older Posts</a>
 		<?php if ($pageNum == 2) { ?> 
-			&nbsp;<span style="color:#777;">&middot;</span>&nbsp; <a href="/">Newer Posts</a> &#9654;
+			&nbsp; <a href="/">Newer Posts</a>;
 		<?php } elseif ($pageNum > 1) { ?> 
-			&nbsp;<span style="color:#777;">&middot;</span>&nbsp; <a href="/page/<?php print $newerPageNum ?>">Newer Posts</a> &#9654;
-		<?php } elseif ($pageNum == 1) { ?> <span style="color:#777;">&middot;</span> <a href="/archive/">Archive</a><?php } ?>
+			&nbsp; <a href="/page/<?php print $newerPageNum ?>">Newer Posts</a>;
+		<?php } elseif ($pageNum == 1) { ?> <a href="/archive/">Archive</a><?php } ?>
 	</div>
 </div>
 <?php } else { ?>

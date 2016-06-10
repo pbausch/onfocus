@@ -1,3 +1,4 @@
+<?php require_once('colors.php'); ?>
 <?php $page = $_SERVER["PHP_SELF"]; ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +14,23 @@
 	<?php if (($pageNum > 1) || ($isDateArchive)) { ?><meta name="ROBOTS" content="NOINDEX,FOLLOW"><?php }?>
 	<link rel="icon" type="image/ico" href="//www.onfocus.com/favicon032010.ico" />
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://xml.onfocus.com/posts" />
-	<link rel="stylesheet" href="//d1x6es5xzge33k.cloudfront.net/screen060816.css" />
+	<style>
+		#logo, .tagline, .selected, #bottom {color: #<?php print $logocolor ?> !important;}
+		body {
+			background:  #<?php print $gradcolor ?>; /* Old browsers */
+			background: -moz-linear-gradient(top,  #<?php print $gradcolor ?>, #ffffff); /* FF3.6-15 */
+			background: -webkit-linear-gradient(top, #<?php print $gradcolor ?>, #ffffff); /* Chrome10-25,Safari5.1-6 */
+			background: linear-gradient(to bottom,  #<?php print $gradcolor ?>, #ffffff); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#<?php print $gradcolor ?>', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+			background-size: 1px 1px;
+			background-repeat: repeat-x;
+		}
+		#footer, #bottom {
+			background-color: #<?php print $gradcolor ?>;
+			color: white;
+		}
+	</style>
+	<link rel="stylesheet" href="//d1x6es5xzge33k.cloudfront.net/screen060916min.css" />
 	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
 	<script src="//www.onfocus.com/swfobject.js"></script>
 	<style>
@@ -26,12 +43,13 @@
 </head>
 <body>
 <div id="header" onclick="document.location='/';">
+	<h1 id="logo" onmouseover="focusin(this)" onmouseout="defocus(this)">onfocus</h1>
+	<p class="tagline">a weblog by pb</p>
 	<div id="infobox">
 		<div class="post-text">
-			<a href="/" <?php if (($page == "/index.php") && ($pageNum == 1) && ($isDateArchive == 0)) { ?>class="selected"<?php } ?>>Home</a> &middot;
-			<a href="/about" <?php if ($page == "/about.php") { ?>class="selected"<?php } ?>>About</a> &middot; 
-			<a href="/archive" <?php if ($page == "/archive.php") { ?>class="selected"<?php } ?>>Archive</a> &middot; 
-			<a href="http://xml.onfocus.com/posts">Feed</a>
+			<a href="/" <?php if (($page == "/index.php") && ($pageNum == 1) && ($isDateArchive == 0)) { ?>class="selected"<?php } ?>>Home</a>
+			<a href="/about" <?php if ($page == "/about.php") { ?>class="selected"<?php } ?>>About</a>  
+			<a href="/archive" <?php if ($page == "/archive.php") { ?>class="selected"<?php } ?>>Archive</a> 
 		</div>
 	</div>
 </div>
