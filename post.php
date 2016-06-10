@@ -46,35 +46,28 @@ $pageNum = 1;
 $isDateArchive = 0;
 $pagetitle = $pagetitle . " | onfocus";
 require("header.php");
+if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6)) {
+	print "<h2 class=\"archive-title\">$title</h2>\n";
+}
 ?>
-<h2 class="archive-title"><?php print $title ?></h2>
 <div class="post archive">
 <?php 
-print "<div class=\"post-text\">$body</div>";
-if (($id < 4653) && (preg_match('/^Links for/is',$title))) {
-	print "<div class=\"post-byline archive delicio\">gathered from delicious <span style=\"color:#444\">$thisDate</span> at <span style=\"color:#444\">$thisTime</span></div>";
-} 
-else if (preg_match('/^Links for/is',$title)) {
-	print "<div class=\"post-byline archive pinboard\">gathered from pinboard <span style=\"color:#444\">$thisDate</span> at <span style=\"color:#444\">$thisTime</span></div>";
+print "<div class=\"post-text\"";
+if (($type == 7) || ($type == 5) || ($type == 6)) {
+	print " style=\"margin-top:25px\"";
 }
-else if ($type == 5) {
-	$changeDate = strtotime('2016-05-10 00:00');
-	if (strtotime($postDateTime) < $changeDate) {
-		print "<div class=\"post-byline archive instagram\">posted to instagram on <span style=\"color:#444\">$thisDate</span> at <span style=\"color:#444\">$thisTime</span></div>";
+print ">$body</div>";
+if (($type == 5) || ($type == 6)) {
+	print "<div class=\"photo-title\">";
+	if (strpos($title,"instagram photo") === false) {
+		print $title;
 	}
 	else {
-		print "<div class=\"post-byline archive instagram2\">posted to instagram on <span style=\"color:#444\">$thisDate</span> at <span style=\"color:#444\">$thisTime</span></div>";
+		print "Untitled";
 	}
+	print "</div>";
 }
-else if ($type == 6) {
-	print "<div class=\"post-byline archive flickr\">posted to flickr on <span style=\"color:#444\">$thisDate</span> at <span style=\"color:#444\">$thisTime</span></div>";
-}
-else if ($type == 7) {
-	print "<div class=\"post-byline archive twitter\">posted to twitter on <span style=\"color:#444\">$thisDate</span> at <span style=\"color:#444\">$thisTime</span></div>";
-}
-else {
-	print "<div class=\"post-byline archive\">posted <span style=\"color:#444\">$thisDate</span> at <span style=\"color:#444\">$thisTime</span></div>";
-}
+print "<div class=\"post-byline archive\">$thisDate at $thisTime</div>";
 ?>
 </div>
 <?php
