@@ -11,7 +11,7 @@ require("header.php");
 </div>
 <div id="footer">
 	<div class="navigation">
-		<a href="/">Home</a> | <a href="/archive/">Archive</a>
+		<a href="/">Home</a>
 	</div>
 </div>
 <?php require("footer.php") ?>
