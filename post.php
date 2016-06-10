@@ -224,9 +224,9 @@ else {
 ?>
 <div id="footer">
 	<div class="navigation">
-		<?php if ($olderPermalink <> "") { ?>&#9664; <a href="<?php print $olderPermalink ?>">Older Post</a> &nbsp;<span style="color:#777;">&middot;</span>&nbsp;<?php } ?>
+		<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">Older Post</a> &nbsp;<?php } ?>
 		<a href="/">Home</a>
-		<?php if ($newerPermalink <> "") { ?> &nbsp;<span style="color:#777;">&middot;</span>&nbsp; <a href="<?php print $newerPermalink ?>">Newer Post</a> &#9654;<?php } ?>
+		<?php if ($newerPermalink <> "") { ?> &nbsp; <a href="<?php print $newerPermalink ?>">Newer Post</a> <?php } ?>
 	</div>
 </div>
 <?php require("footer.php"); ?>
