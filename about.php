@@ -13,9 +13,11 @@ require("header.php");
 		<!-- <img src="//www.onfocus.com/images/pb-fall-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> -->
 		<div style="margin-top:15px;">
 		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>. I'm also a husband, father, photo taker, and general Web enthusiast.
+		<br /><br />
+		onfocus is my personal website where I've been posting whatever comes to mind since 1998. These days it's mostly pictures.
 		</div>
-		<br />
-		<div style="margin-top:5px;">
+		<div class="flourish" style="text-align:center;margin:15px;">&middot; &sect; &middot;</div>
+		<div class="post-text">
 		From 2006-2016 I worked at <a href="//www.metafilter.com/">MetaFilter</a>, an amazing online community. If you want to know more about MetaFilter, start with <a href="//vimeo.com/11916466">this talk by Matt Haughey</a>&mdash;it's a great introduction.
 		</div>
 		<br />
@@ -27,22 +29,27 @@ require("header.php");
 		<br /><br />
 		From 1999-2001 I helped create an early weblog tool called <a href="//www.blogger.com/home">Blogger</a> at Pyra Labs.
 		<br /><br />
-		I also have a retired <a href="http://photos.onfocus.com/">photoblog</a>. I post pictures on <a href="//www.flickr.com/photos/pb">Flickr</a>, <a href="https://instagram.com/paul.bausch/">Instagram</a>, and <a href="https://onfocus.vsco.co/grid/1">VSCO</a> these days.
+		(Here are <a href="https://makerba.se/m/ffatkg/pbausch">a few of these projects and more on Makerbase</a>.)
+		</div>
+		<div class="flourish" style="text-align:center;margin:15px;">&middot; &sect; &middot;</div>
+		<div class="post-text">
+		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln. Then I promptly started destroying journalism with computers. (I kid!)
 		<br /><br />
-		(Here are <a href="https://makerba.se/m/ffatkg/pbausch">a few of my projects on Makerbase</a>.)
-	</div></div>
+		When I'm not computering I like to hike and camp. Oregon is a great place for that.
+		</div></div>
 		<h2>About Onfocus</h2>
 		<div class="post" style="margin-top:18px;">
 		<div class="post-text">
 		Right now this blog is a nightly copy of my <a href="//pinboard.in/u:pb">Pinboard bookmarks</a>, <a href="//instagram.com/paul.bausch">Instagram photos</a>, <a href="//www.flickr.com/photos/pb">Flickr photos</a>, and occasional <a href="//twitter.com/#!/pbausch">tweets</a>. Here's <a href="//xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe: <a href="//xml.onfocus.com/posts"><img src="//o.snapgallery.net/feed.png" width="12" height="12" border="0" style="vertical-align:middle;" title="Subscribe to onfocus" alt="rss"/></a> And here's <a href="/archive">the archive</a> if you want to go back in time.
 		<br /><br />
-		<b>onfocus</b> is the name of a <a href="//en.wikipedia.org/wiki/JavaScript">JavaScript</a> event. In 1998 when I was looking for a domain name to go along with my new blog I was using JavaScript quite a bit and thought it was a good fit. I still use JavaScript quite a bit so it was a lucky bet. If this weblog was about JavaScript it would be even better.
+		<code>onfocus</code> is the name of a <a href="//en.wikipedia.org/wiki/JavaScript">JavaScript</a> event. In 1998 when I was looking for a domain name to go along with my new blog I was using JavaScript quite a bit and thought it was a good fit. I still use JavaScript quite a bit so it was a lucky bet. If this weblog was about JavaScript it would be even better.
 		</div>
 		</div>
 	<h2>Contact Me</h2>
 	<div class="post" style="margin-top:18px;">
 		<div class="post-text">
-		You can <a href="/contact">send me an email here</a>. Or you can connect with me on any of these sites:
+		You can <a href="/contact">send me an email here</a>.
+		<br /><br /> Or you can connect with me on any of these sites:
 		<br /><br />
 		<a href="//www.metafilter.com/user/191" title="MetaFilter" rel="me"><img src="//www.onfocus.com/images/mefi-icon.gif" alt="MetaFilter" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.metafilter.com/user/191" title="MetaFilter" rel="me">pb</a> on MetaFilter<br>
 		<a href="//www.flickr.com/photos/pb" title="Flickr" rel="me"><img src="//www.onfocus.com/images/flickr-icon.gif" alt="Flickr" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.flickr.com/photos/pb" title="Flickr" rel="me">pb</a> on Flickr<br>
