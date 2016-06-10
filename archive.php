@@ -21,7 +21,7 @@ require("header.php");
 		$startYear = 1999;
 		$endYear = date("Y",strtotime($maxdate));
 		for ($i = $startYear; $i <= $endYear; $i++) {
-			print "<td style=\"text-align:center;font-size:12px;\">";
+			print "<td style=\"text-align:center;\">";
 			print "<div style=\"font-weight:bold;margin-bottom:5px;\">&nbsp;".$i."&nbsp;</div>";
 			$startMonth = 1;
 			$endMonth = 12;
