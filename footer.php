@@ -4,9 +4,11 @@
 <script>
 	function focusin(t) {
 		t.setAttribute("style","-webkit-filter:blur(0px)");
+		t.setAttribute("style","filter:blur(0px)");
 	}
 	function defocus(t) {
 		t.setAttribute("style","-webkit-filter:blur(3px)");
+		t.setAttribute("style","filter:blur(3px)");
 	}
 	
 </script>
