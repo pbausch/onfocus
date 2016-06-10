@@ -38,12 +38,34 @@
 		.tagline {
 			opacity: 0.4;
 		}
+		.btn {
+		    background-color: #<?php print $gradcolor ?>;
+		    background-repeat: no-repeat;
+		    border: 1px solid #<?php print $gradcolor ?>;
+		    border-radius: 4px;
+		    color: #<?php print $logocolor ?>;
+		    cursor: pointer;
+		    display: inline-block;
+		    font-size: 14px;
+		    line-height: normal;
+		    padding: 8px 16px;
+		    position: relative;
+		}
+		.btn:hover {
+		    opacity: 0.9;
+		}
+		input, textarea {
+			font-size: 1em;
+		}
 		@media screen and (max-width: 750px) {
 			#header {
 				border-bottom: solid 5px #<?php print $logocolor ?>;
 			}
 			#footer {
 				border-top: solid 5px #<?php print $logocolor ?>;
+			}
+			#tophome {
+				display: none;
 			}
 		}
 	</style>
@@ -63,7 +85,7 @@
 	<p class="tagline">a weblog by pb</p>
 	<div id="infobox">
 		<div class="post-text">
-			<a href="/" <?php if (($page == "/index.php") && ($pageNum == 1) && ($isDateArchive == 0)) { ?>class="selected"<?php } ?>>Home</a>
+			<a href="/" <?php if (($page == "/index.php") && ($pageNum == 1) && ($isDateArchive == 0)) { ?>class="selected"<?php } ?> id="tophome">Home</a>
 			<a href="/about" <?php if ($page == "/about.php") { ?>class="selected"<?php } ?>>About</a>  
 			<a href="/archive" <?php if ($page == "/archive.php") { ?>class="selected"<?php } ?>>Archive</a> 
 		</div>

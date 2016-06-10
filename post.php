@@ -217,7 +217,7 @@ else {
 ?>
 <div id="footer">
 	<div class="navigation">
-		<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">Back</a> <span class="flourish">&otimes;</span><?php } ?>
+		<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">Previous</a> <span class="flourish">&otimes;</span><?php } ?>
 		<a href="/" style="padding-left:10px;">Home</a>
 		<?php if ($newerPermalink <> "") { ?> <span class="flourish">&otimes;</span> <a href="<?php print $newerPermalink ?>" style="padding-left:10px;">Next</a> <?php } ?>
 	</div>
