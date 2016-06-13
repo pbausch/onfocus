@@ -29,34 +29,10 @@
 			background-color: #<?php print $gradcolor ?>;
 			color: #<?php print $logocolor ?>;
 		}
-		#infobox .post-text a, .flourish, #copyright {
-			opacity: 0.3;
-		}
-		#infobox .post-text a.selected, .navigation a {
-			opacity: 0.8;
-		}
-		.tagline {
-			opacity: 0.4;
-			letter-spacing: 0.4px;
-		}
 		.btn {
 		    background-color: #<?php print $gradcolor ?>;
-		    background-repeat: no-repeat;
 		    border: 1px solid #<?php print $gradcolor ?>;
-		    border-radius: 4px;
 		    color: #<?php print $logocolor ?>;
-		    cursor: pointer;
-		    display: inline-block;
-		    font-size: 14px;
-		    line-height: normal;
-		    padding: 8px 16px;
-		    position: relative;
-		}
-		.btn:hover {
-		    opacity: 0.9;
-		}
-		input, textarea {
-			font-size: 1em;
 		}
 		@media screen and (max-width: 750px) {
 			#header {
@@ -65,12 +41,9 @@
 			#footer {
 				border-top: solid 5px #<?php print $logocolor ?>;
 			}
-			#tophome {
-				display: none;
-			}
 		}
 	</style>
-	<link rel="stylesheet" href="//d1x6es5xzge33k.cloudfront.net/screen060916bmin.css" />
+	<link rel="stylesheet" href="//o.snapgallery.net/screen061316cmin.css" />
 	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
 	<script src="//www.onfocus.com/swfobject.js"></script>
 	<style>

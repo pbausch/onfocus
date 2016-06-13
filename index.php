@@ -125,14 +125,15 @@ else {
 		else {
 			print "<div class=\"daysep\"></div>";
 		}
-		print "<div class=\"post\">\n";
+		print "<div class=\"post\"";
+		if (($type == 7) || ($type == 5) || ($type == 6) || ($cntPost == 1)) {
+			print " style=\"margin-top:25px\"";
+		}
+		print ">\n";
 		if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6)) {
 			print "<h3>$title</h3>\n";
 		}
 		print "<div class=\"post-text\"";
-		if (($type == 7) || ($type == 5) || ($type == 6) || ($cntPost == 1)) {
-			print " style=\"margin-top:25px\"";
-		}
 		print ">$body</div>\n";
 		if (($type == 5) || ($type == 6)) {
 			print "<div class=\"photo-title\">";
