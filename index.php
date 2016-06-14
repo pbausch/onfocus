@@ -127,7 +127,7 @@ else {
 		}
 		print "<div class=\"post\"";
 		if (($type == 7) || ($type == 5) || ($type == 6) || ($cntPost == 1)) {
-			print " style=\"margin-top:25px\"";
+//			print " style=\"margin-top:25px\"";
 		}
 		print ">\n";
 		if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6)) {

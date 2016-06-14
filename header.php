@@ -43,7 +43,7 @@
 			}
 		}
 	</style>
-	<link rel="stylesheet" href="//o.snapgallery.net/screen061316cmin.css" />
+	<link rel="stylesheet" href="//o.snapgallery.net/screen061416cmin.css" />
 	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
 	<script src="//www.onfocus.com/swfobject.js"></script>
 	<style>

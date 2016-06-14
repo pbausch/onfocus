@@ -44,18 +44,20 @@ else {
 }
 $pageNum = 1;
 $isDateArchive = 0;
+$cntPost = 1;
 $pagetitle = $pagetitle . " | onfocus";
 require("header.php");
 if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6)) {
 	print "<h2 class=\"archive-title\">$title</h2>\n";
 }
 ?>
-<div class="post archive">
 <?php 
-print "<div class=\"post-text\"";
-if (($type == 7) || ($type == 5) || ($type == 6)) {
-	print " style=\"margin-top:25px\"";
+print "<div class=\"post archive\"";
+if (($type == 7) || ($type == 5) || ($type == 6) || ($cntPost == 1)) {
+//	print " style=\"margin-top:32px\"";
 }
+print ">";
+print "<div class=\"post-text\"";
 print ">$body</div>";
 if (($type == 5) || ($type == 6)) {
 	print "<div class=\"photo-title\">";
