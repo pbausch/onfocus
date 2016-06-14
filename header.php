@@ -42,11 +42,6 @@
 				border-top: solid 5px #<?php print $logocolor ?>;
 			}
 		}
-		@media screen and (max-width: 450px) {
-			#logo {
-				font-size: 30px !important;
-			}
-		}
 	</style>
 	<link rel="stylesheet" href="//o.snapgallery.net/screen061416cmin.css" />
 	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
@@ -55,6 +50,18 @@
 		.twitter {
 			padding-left:22px;
 			background:url(http://www.onfocus.com/images/twitterbird.gif) no-repeat 0px 7px;
+		}
+		@media screen and (max-width: 375px) {
+			#logo {
+				font-size: 28px;
+				margin-bottom: .2em;
+			}
+			#infobox .post-text {
+				font-size: 0.9em;
+			}
+			.navigation {
+				font-size: 18px;
+			}
 		}
 	</style>
 </head>
