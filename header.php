@@ -10,7 +10,7 @@
 	<meta name="dc.language" content="en" />
 	<meta name="description" content="Thoughts and photos from a Web developer living in Oregon. " />
 	<meta name="verify-v1" content="l6Cjq8kY0ofKv+8EY2FMrKOUTC8ztnB/GzIhrMJW/Cs=" />
-	<meta name="viewport" content="width = 480" />
+	<meta name="viewport" content="initial-scale=1" />
 	<?php if (($pageNum > 1) || ($isDateArchive)) { ?><meta name="ROBOTS" content="NOINDEX,FOLLOW"><?php }?>
 	<link rel="icon" type="image/ico" href="//d1x6es5xzge33k.cloudfront.net/<?php print $logocolor ?>.ico?v=<?php print $logocolor ?>" />
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://xml.onfocus.com/posts" />
@@ -40,6 +40,11 @@
 			}
 			#footer {
 				border-top: solid 5px #<?php print $logocolor ?>;
+			}
+		}
+		@media screen and (max-width: 450px) {
+			#logo {
+				font-size: 37px !important;
 			}
 		}
 	</style>
