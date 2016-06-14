@@ -37,7 +37,7 @@ require("header.php");
 		<br /><br />
 		When I'm not computering I like to hike and camp. Oregon is a great place for that.
 		</div></div>
-		<h2>About Onfocus</h2>
+		<h2>About onfocus</h2>
 		<div class="post" style="margin-top:18px;">
 		<div class="post-text">
 		Right now this blog is a nightly copy of my <a href="//pinboard.in/u:pb">Pinboard bookmarks</a>, <a href="//instagram.com/paul.bausch">Instagram photos</a>, <a href="//www.flickr.com/photos/pb">Flickr photos</a>, and occasional <a href="//twitter.com/#!/pbausch">tweets</a>. Here's <a href="//xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe: <a href="//xml.onfocus.com/posts"><img src="//o.snapgallery.net/feed.png" width="12" height="12" border="0" style="vertical-align:middle;" title="Subscribe to onfocus" alt="rss"/></a> And here's <a href="/archive">the archive</a> if you want to go back in time.
