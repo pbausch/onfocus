@@ -44,7 +44,7 @@
 		}
 		@media screen and (max-width: 450px) {
 			#logo {
-				font-size: 37px !important;
+				font-size: 30px !important;
 			}
 		}
 	</style>
