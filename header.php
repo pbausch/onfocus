@@ -60,7 +60,7 @@
 				font-size: 0.9em;
 			}
 			.navigation {
-				font-size: 18px;
+				font-size: 16px;
 			}
 		}
 	</style>
