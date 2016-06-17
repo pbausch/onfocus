@@ -135,7 +135,7 @@ else {
 		}
 		print "<div class=\"post-text\"";
 		print ">$body</div>\n";
-		if (($type == 5) || ($type == 6)) {
+		if (($type == 5) || ($type == 6) || ($type == 8)) {
 			print "<div class=\"photo-title\">";
 			if (strpos($title,"instagram photo") === false) {
 				print $title;
