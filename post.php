@@ -59,7 +59,7 @@ if (($type == 7) || ($type == 5) || ($type == 6) || ($type == 8) || ($cntPost ==
 print ">";
 print "<div class=\"post-text\"";
 print ">$body</div>";
-if (($type == 5) || ($type == 6)) {
+if (($type == 5) || ($type == 6) || ($type == 8)) {
 	print "<div class=\"photo-title\">";
 	if (strpos($title,"instagram photo") === false) {
 		print $title;
