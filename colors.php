@@ -1,8 +1,7 @@
 <?php
 //$colors = array("69D2E7", "A7DBD8", "E0E4CC", "F38630", "FA6900"); //giant goldfish
-//$colors = array("CFF09E", "A8DBA8", "79BD9A", "3B8686", "0B486B"); //adrift in dreams
 $colors = array("FE4365", "FC9D9A", "F9CDAD", "C8C8A9", "83AF9B"); //(◕〝◕)
-$colors = array("F88D64", "FBA052", "FBB644", "FAC83F", "F4E43A", "E1D430", "C3CA2D", "88C861", "12BF8A", "14B497", "12B3AD"); // goog rainbow
+//$colors = array("CFF09E", "A8DBA8", "79BD9A", "3B8686", "0B486B"); //adrift in dreams
 $logocolor = $colors[array_rand($colors)];
 $redhex  = substr($logocolor,0,2);
 $greenhex = substr($logocolor,2,2);
