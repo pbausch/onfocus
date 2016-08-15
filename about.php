@@ -35,7 +35,7 @@ require("header.php");
 		<div class="post-text">
 		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln. Then I promptly started destroying journalism with computers. (I kid!)
 		<br /><br />
-		When I'm not computering I like to hike and camp. Oregon is a great place for that.
+		When I'm not computering I like to hike and camp. Oregon is a great place for those.
 		</div></div>
 		<h2>About onfocus</h2>
 		<div class="post" style="margin-top:18px;">
@@ -54,7 +54,7 @@ require("header.php");
 		<a href="//www.metafilter.com/user/191" title="MetaFilter" rel="me"><img src="//www.onfocus.com/images/mefi-icon.gif" alt="MetaFilter" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.metafilter.com/user/191" title="MetaFilter" rel="me">pb</a> on MetaFilter<br>
 		<a href="//www.flickr.com/photos/pb" title="Flickr" rel="me"><img src="//www.onfocus.com/images/flickr-icon.gif" alt="Flickr" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.flickr.com/photos/pb" title="Flickr" rel="me">pb</a> on Flickr<br>
 		<a href="https://instagram.com/paul.bausch/" title="Instagram" rel="me"><img src="//www.onfocus.com/images/instagram.gif" alt="Flickr" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="https://instagram.com/paul.bausch/" title="Instagram" rel="me">paul.bausch</a> on Instagram<br>
-		<a href="http://vsco.co/onfocus/" title="VSCO" rel="me"><img src="//www.onfocus.com/images/vsco.gif" alt="VSCO" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="https://onfocus.vsco.co/grid/1" title="VSCO" rel="me">onfocus</a> on VSCO<br>
+		<a href="http://vsco.co/onfocus/" title="VSCO" rel="me"><img src="//www.onfocus.com/images/vsco.gif" alt="VSCO" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="http://vsco.co/onfocus/" title="VSCO" rel="me">onfocus</a> on VSCO<br>
 		<a href="//pinboard.in/u:pb" title="Pinboard" rel="me"><img src="//www.onfocus.com/images/pinboard-icon.gif" alt="Pinboard" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//pinboard.in/u:pb" title="Pinboard" rel="me">pb</a> on Pinboard<br>
 	    <a href="//mlkshk.com/user/pb"><img src="//www.onfocus.com/images/mlkshk-icon.gif" alt="mlkshk" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//mlkshk.com/user/pb" rel="me">pb</a> on mlkshk<br>
 		<a href="//vimeo.com/pb" title="Vimeo" rel="me"><img src="//www.onfocus.com/images/vimeo-icon.gif" alt="Vimeo" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//vimeo.com/pb" title="Vimeo" rel="me">pb</a> on Vimeo<br>
