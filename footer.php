@@ -1,4 +1,4 @@
-<div id="bottom"><div id="copyright">\m/ >_< \m/</div></div>
+<div id="bottom"><div id="copyright">\m/ &gt;_&lt; \m/</div></div>
 <?php if (isset($thisToken)) { if ($thisToken != '') { ?><script type="text/javascript" language="javascript">var token = '<?php print $thisToken; ?>';</script><?php }} ?>
 <script type="text/javascript" src="//www.onfocus.com/post030609-min.js"></script>
 <script>
