@@ -52,11 +52,11 @@ if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($
 }
 ?>
 <?php 
-print "<div class=\"post archive\"";
-if (($type == 7) || ($type == 5) || ($type == 6) || ($type == 8) || ($cntPost == 1)) {
-//	print " style=\"margin-top:32px\"";
+print "<div class=\"post archive";
+if (($type == 5) || ($type == 6) || ($type == 8)) {
+	print " photo";
 }
-print ">";
+print "\">";
 print "<div class=\"post-text\"";
 print ">$body</div>";
 if (($type == 5) || ($type == 6) || ($type == 8)) {
