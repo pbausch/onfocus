@@ -129,7 +129,7 @@ else {
 		if (($type == 5) || ($type == 6) || ($type == 8)) {
 			print " photo";
 		}
-		print "\"">\n";
+		print "\">\n";
 		if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
 			print "<h3>$title</h3>\n";
 		}
