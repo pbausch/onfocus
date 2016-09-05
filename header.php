@@ -42,6 +42,7 @@
 				border-top: solid 5px #<?php print $logocolor ?>;
 			}
 		}
+		.post.photo .post-text {text-align:center;}
 	</style>
 	<link rel="stylesheet" href="//o.snapgallery.net/screen061416cmin.css" />
 	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
