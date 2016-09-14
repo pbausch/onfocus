@@ -52,6 +52,14 @@ else {
 		$cntPost++;
 		$title = $post['title'];
 		$body = $post['body'];
+		// fix up youtube embeds
+		if (strpos($body, "class=\"embed\"") !== false) {
+			$find = "width=\"100%\" ";
+			$pos = strpos($body, $find);
+			if ($pos !== false) {
+			    $body = substr_replace($body, "width=\"640\" height=\"360\" ", $pos, strlen($find));
+			}
+		}
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
 		$thisYear = date('Y',strtotime($postDateTime));
