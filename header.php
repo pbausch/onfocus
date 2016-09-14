@@ -43,6 +43,19 @@
 			}
 		}
 		.post.photo .post-text {text-align:center;}
+		.embed {
+			position:relative;
+			padding-bottom:56.25%;
+			height:0;
+			margin-bottom:20px;
+		}
+		.embed iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
 	</style>
 	<link rel="stylesheet" href="//o.snapgallery.net/screen061416cmin.css" />
 	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
