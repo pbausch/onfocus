@@ -8,9 +8,9 @@ require("header.php");
 	<div class="post" style="margin-top:18px;">
 		<div class="post-text">
 		<!-- <img src="//www.onfocus.com/images/pb_coffee2_square_140.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
-		<img src="//www.onfocus.com/images/pb-photo-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp;
+		<!-- <img src="//www.onfocus.com/images/pb-photo-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
 		<!-- <img src="//www.onfocus.com/images/pb-tripod-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
-		<!-- <img src="//www.onfocus.com/images/pb-fall-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> -->
+		<img src="//www.onfocus.com/images/pb-fall-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/>
 		<div style="margin-top:15px;">
 		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>. I'm also a husband, father, photo taker, and general Web enthusiast.
 		<br /><br />
