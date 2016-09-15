@@ -78,7 +78,7 @@ $query = "SELECT author, url, date, comment, comment_id FROM comments WHERE hide
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) > 0) {
-	print "<a name=\"comments\"></a><h2 class=\"archive-title\" style=\"margin-bottom:20px;\">Comments</h2>";
+	print "<a name=\"comments\"></a><h2 class=\"archive-title\" style=\"margin-bottom:20px;\">Comments</h2><div class=\"post archive\">";
 	while ($comment = mysql_fetch_array($result)) {
 		$comment_id = $comment['comment_id'];
 		$body = $comment['comment'];
@@ -125,11 +125,11 @@ if (mysql_num_rows($result) > 0) {
 		$commentDateTime = $comment['date'];
 		$thisYear = date('Y',strtotime($commentDateTime));
 		$currentYear = date('Y');
-		if (substr($url,0,7) == " //") {
+		if (((substr($url,0,7) == "http://") || (substr($url,0,7) == "https://")) && ($id > 6699)) {
 			$author = "<a href=\"$url\" rel=\"nofollow\">$author</a>";
 		}
 		else {
-			$author = "<span style=\"font-weight:bold;color:#444;\">$author</span>";
+			$author = "<span class=\"comment-author\">$author</span>";
 		}
 		if ($thisYear == $currentYear) {
 			$thisDate = date(DATE_HEADER_FORMAT,strtotime($commentDateTime));
@@ -138,11 +138,12 @@ if (mysql_num_rows($result) > 0) {
 			$thisDate = date(DATE_HEADER_YEAR_FORMAT,strtotime($commentDateTime));
 		}
 		$thisTime = date(TIME_FORMAT,strtotime($commentDateTime));		
-		print "<div class=\"post\" style=\"margin-bottom:2.5em\">";
+		print "<div class=\"comment\" style=\"margin-bottom:2.5em\">";
 		print "<div class=\"post-text\">$body</div>";
 		print "<div class=\"post-byline comment\" style=\"margin-top:4px;\">by $author on $thisDate at $thisTime</div>";
 		print "</div>";
 	}
+	print "</div>";
 }
 // BEGIN COMMENT FORM 
 // ------------ comments must be enabled, and then only for six months ------------
@@ -158,18 +159,36 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 	if (isset($_COOKIE["url"])) {
 		$thisURL = $_COOKIE["url"];
 	}
-	print "<a name=\"add-comment\"></a><h3 style=\"margin-left:22px;\">Add Comments</h3>";
+	print "<a name=\"add-comment\"></a><h2 class=\"archive-title\" style=\"margin-bottom:20px;\">Add a Comment</h2><div class=\"post archive\">";
 ?>
-<div class="post-text" style="border:solid #ddd 1px;color:#111;background-color:#eee;padding:10px;margin:10px 0px 10px 10px;" id="jsmsg">JavaScript is required to comment. Please make sure you're not blocking JavaScript in your browser settings or extensions.</div>
+<div class="post-text" id="jsmsg">If you want to comment you'll need JavaScript on. According to our records you have disabled JavaScript in your browser settings or with an extension.</div>
 <script type="text/javascript">var msg=document.getElementById("jsmsg");msg.style.display='none';</script>
 <form action="/post-comment.php" method="post" onsubmit="return submitForm(this);" style="display:none;" id="cform">
-<table style="margin-left:42px;">
-		<tr><td align="right" valign="top"><span class="post-byline">comment &nbsp;</span></td><td><textarea cols="40" rows="8" name="comment" style="width:400px;height:200px;background-color:#eee;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="comment"></textarea></td></tr>
-		<tr><td></td><td align="left"><div class="post-byline" style="border:solid #ddd 1px;color:#111;background-color:#eee;padding:10px;margin:10px 0px 10px 0px;"><b>Please Note:</b> HTML will be removed from comments.</div></td></tr>
-		<tr><td align="right" valign="middle"><span class="post-byline">name &nbsp;</span></td><td align="left"><input name="name" type="text" size="50" maxlength="25" value="<?php print $thisName ?>" style="width:250px;background-color:#eee;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="name"/></td></tr>
-		<tr><td align="right" valign="middle"><span class="post-byline">url &nbsp;</span></td><td align="left"><input name="url" type="text" size="50" maxlength="100" value="<?php print $thisURL ?>" style="width:250px;background-color:#eee;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="url" type="url"/></td></tr>
-		<tr><td></td><td align="left"><input style="margin-top:10px;" type="submit" value="comment" id="submit"/></td></tr>
-</table>
+<div class="formRow">
+	<label class="post-byline" for="comment">comment</label>
+	<div class="formElement">
+		<textarea cols="40" rows="8" name="comment" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="comment" aria-required="true"></textarea>
+		<div class="please-note post-byline"><b>FYI:</b> HTML won't work. Markdown won't work. Emojis? &#128683;</div>
+	</div>
+</div>
+
+<div class="formRow">	
+	<label class="form-label post-byline" for="name">name</label>
+	<div class="formElement">
+		<input name="name" type="text" size="50" maxlength="25" value="<?php print $thisName ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="name" aria-required="true"/>
+	</div>
+</div>
+<div class="formRow">
+	<label class="post-byline" for="url">url</label>
+	<div class="formElement">
+		<input name="url" type="text" size="50" maxlength="100" value="<?php print $thisURL ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="url" type="url" placeholder="http://"></td></tr>
+	</div>
+</div>
+<div class="formRow">
+	<div class="formElement">
+		<input class="btn" type="submit" value="add comment" id="submit"/>
+	</div>
+</div>
 <input type="hidden" name="postid" value="<?php print $id ?>" id="postid"/>
 <input type="hidden" name="token" value="<?php print md5(uniqid(rand(), TRUE)) ?>" id="token"/>
 </form>
@@ -181,6 +200,7 @@ else {
 }
 // END COMMENT FORM
 ?>
+</div>
 </div>
 <?php
 // OLDER POST LINK

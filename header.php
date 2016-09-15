@@ -1,5 +1,6 @@
 <?php require_once('colors.php'); ?>
-<?php $page = $_SERVER["PHP_SELF"]; ?><!DOCTYPE html>
+<?php $page = $_SERVER["PHP_SELF"]; ?>
+<?php $cssfile = "/css/style091516.4544.css"; //dev: /css/style.css ?><!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -12,7 +13,7 @@
 	<meta name="verify-v1" content="l6Cjq8kY0ofKv+8EY2FMrKOUTC8ztnB/GzIhrMJW/Cs=" />
 	<meta name="viewport" content="initial-scale=1" />
 	<?php if (($pageNum > 1) || ($isDateArchive)) { ?><meta name="ROBOTS" content="NOINDEX,FOLLOW"><?php }?>
-	<link rel="icon" type="image/ico" href="//d1x6es5xzge33k.cloudfront.net/<?php print $logocolor ?>.ico?v=<?php print $logocolor ?>" />
+<link rel="icon" type="image/ico" href="//d1x6es5xzge33k.cloudfront.net/<?php print $logocolor ?>.ico?v=<?php print $logocolor ?>" />
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://xml.onfocus.com/posts" />
 	<style>
 		#logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a {color: #<?php print $logocolor ?> !important;}
@@ -31,7 +32,7 @@
 		}
 		.btn {
 		    background-color: #<?php print $gradcolor ?>;
-		    border: 1px solid #<?php print $gradcolor ?>;
+		    border: 1px solid #<?php print $logocolor ?>;
 		    color: #<?php print $logocolor ?>;
 		}
 		@media screen and (max-width: 750px) {
@@ -42,41 +43,9 @@
 				border-top: solid 5px #<?php print $logocolor ?>;
 			}
 		}
-		.post.photo .post-text {text-align:center;}
-		.embed {
-			position:relative;
-			padding-bottom:56.25%;
-			height:0;
-			margin-bottom:20px;
-		}
-		.embed iframe {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-		}
 	</style>
-	<link rel="stylesheet" href="//o.snapgallery.net/screen061416cmin.css" />
+	<link rel="stylesheet" href="<?php print $cssfile ?>" />
 	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
-	<style>
-		.twitter {
-			padding-left:22px;
-			background:url(http://www.onfocus.com/images/twitterbird.gif) no-repeat 0px 7px;
-		}
-		@media screen and (max-width: 375px) {
-			#logo {
-				font-size: 28px;
-				margin-bottom: .2em;
-			}
-			#infobox .post-text {
-				font-size: 0.9em;
-			}
-			.navigation {
-				font-size: 16px;
-			}
-		}
-	</style>
 </head>
 <body>
 <div id="header" onclick="document.location='/';">
