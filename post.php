@@ -78,7 +78,7 @@ $query = "SELECT author, url, date, comment, comment_id FROM comments WHERE hide
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) > 0) {
-	print "<a name=\"comments\"></a><h2 class=\"archive-title\" style=\"margin-bottom:10px;\">Comments</h2>";
+	print "<a name=\"comments\"></a><h2 class=\"archive-title\" style=\"margin-bottom:20px;\">Comments</h2>";
 	while ($comment = mysql_fetch_array($result)) {
 		$comment_id = $comment['comment_id'];
 		$body = $comment['comment'];
