@@ -163,7 +163,7 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 ?>
 <div class="post-text" id="jsmsg">If you want to comment you'll need JavaScript on. According to our records you have disabled JavaScript in your browser settings or with an extension.</div>
 <script type="text/javascript">var msg=document.getElementById("jsmsg");msg.style.display='none';</script>
-<form action="/post-comment.php" method="post" onsubmit="return submitForm(this);" style="display:none;" id="cform">
+<form action="/add-comment.php" method="post" onsubmit="return submitForm(this);" style="display:none;" id="cform">
 <div class="formRow">
 	<label class="post-byline" for="comment">comment</label>
 	<div class="formElement">
