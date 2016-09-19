@@ -54,11 +54,12 @@ else {
 		$body = $post['body'];
 		// fix up youtube embeds
 		if (strpos($body, "class=\"embed\"") !== false) {
-			$find = "width=\"100%\" ";
+			$find = "src=\"\" ";
 			$pos = strpos($body, $find);
 			if ($pos !== false) {
-			    $body = substr_replace($body, "width=\"640\" height=\"360\" ", $pos, strlen($find));
+			    $body = substr_replace($body, "", $pos, strlen($find));
 			}
+			$body = str_replace("data-src", "src", $body);
 		}
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];

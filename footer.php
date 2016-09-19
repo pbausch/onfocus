@@ -8,8 +8,18 @@
 	function defocus(t) {
 		t.setAttribute("style","-webkit-filter:blur(3px);filter:blur(3px)");
 	}
-	
+	function deferVideos() {
+		var vidDefer = document.getElementsByTagName('iframe');
+		for (var i=0; i<vidDefer.length; i++) {
+			if(vidDefer[i].getAttribute('data-src')) {
+				vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
+				console.log('src set');
+			} 
+		} 
+  	}
+  	window.onload = deferVideos;
 </script>
+<?php if (isset($pageFooterAddition)) { print $pageFooterAddition; } ?>
 <?php include_once("analyticstracking.php") ?>
 </body>
 </html>
