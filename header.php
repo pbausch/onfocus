@@ -1,5 +1,5 @@
 <?php require_once('lib/colors.php'); ?>
-<?php require_once('lib/set-stylesheet.php'); ?>
+<?php require_once('lib/set-includes.php'); ?>
 <?php $page = $_SERVER["PHP_SELF"]; ?>
 <!DOCTYPE html>
 <html lang="en">
