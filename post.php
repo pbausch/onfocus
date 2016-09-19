@@ -95,7 +95,7 @@ $pageFooterAddition = <<<END
 (function() {
 
   wdtEmojiBundle.defaults.emojiSheets = {
-    'apple': '/css/sheets/sheet_apple_64.png',
+    'apple': '//d1x6es5xzge33k.cloudfront.net/css/emoji.png',
   };
   wdtEmojiBundle.defaults.allow_native = false;
   wdtEmojiBundle.init('.wdt-emoji-bundle-enabled');
