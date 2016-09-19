@@ -20,6 +20,6 @@
   	window.onload = deferVideos;
 </script>
 <?php if (isset($pageFooterAddition)) { print $pageFooterAddition; } ?>
-<?php include_once("analyticstracking.php") ?>
+<?php include_once("lib/analyticstracking.php") ?>
 </body>
 </html>

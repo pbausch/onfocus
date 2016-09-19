@@ -1,6 +1,7 @@
-<?php require_once('colors.php'); ?>
+<?php require_once('lib/colors.php'); ?>
+<?php require_once('lib/set-stylesheet.php'); ?>
 <?php $page = $_SERVER["PHP_SELF"]; ?>
-<?php $cssfile = "/css/style.css"; ?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -44,9 +45,9 @@
 			}
 		}
 	</style>
-	<link rel="stylesheet" href="<?php print $cssfile ?>" />
+	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
 	<?php if (isset($pageHeaderAddition)) { print $pageHeaderAddition; } ?>
-	<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
+<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
 </head>
 <body>
 <div id="header" onclick="document.location='/';">
