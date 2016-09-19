@@ -1,5 +1,6 @@
 <?php
 require("onfocus-ini.inc");
+include('lib/emoji.php');
 
 $query = "SELECT post_id, DateCreated, title, body, comments_on, item_type_id FROM items WHERE hide = 0 AND post_id = ". mysql_real_escape_string($_GET['id']);
 if (!$result = @ mysql_query ($query, $connection))
@@ -46,6 +47,61 @@ $pageNum = 1;
 $isDateArchive = 0;
 $cntPost = 1;
 $pagetitle = $pagetitle . " | onfocus";
+$pageHeaderAddition = <<<END
+<link href="/css/wdt-emoji-bundle.css" rel="stylesheet">\n
+END;
+$pageFooterAddition = <<<END
+<div class="wdt-emoji-popup">
+    <a href="#" class="wdt-emoji-popup-mobile-closer"> &times; </a>
+	<div class="wdt-emoji-menu-content">
+		<div id="wdt-emoji-menu-header">
+            <a class="wdt-emoji-tab active" data-group-name="Recent"></a>
+            <a class="wdt-emoji-tab" data-group-name="People"></a>
+            <a class="wdt-emoji-tab" data-group-name="Nature"></a>
+            <a class="wdt-emoji-tab" data-group-name="Foods"></a>
+            <a class="wdt-emoji-tab" data-group-name="Activity"></a>
+            <a class="wdt-emoji-tab" data-group-name="Places"></a>
+            <a class="wdt-emoji-tab" data-group-name="Objects"></a>
+            <a class="wdt-emoji-tab" data-group-name="Symbols"></a>
+            <a class="wdt-emoji-tab" data-group-name="Flags"></a>
+            <a class="wdt-emoji-tab" data-group-name="Custom"></a>
+        </div>
+		<div class="wdt-emoji-scroll-wrapper">
+            <div id="wdt-emoji-menu-items">
+                <input id="wdt-emoji-search" type="text" placeholder="Search">
+                <h3 id="wdt-emoji-search-result-title">Search Results</h3>
+                <div class="wdt-emoji-sections"></div>
+                <div id="wdt-emoji-no-result">No emoji found</div>
+            </div>
+        </div>
+		<div id="wdt-emoji-footer">
+            <div id="wdt-emoji-preview">
+                <span id="wdt-emoji-preview-img"></span>
+                <div id="wdt-emoji-preview-text">
+                    <span id="wdt-emoji-preview-name"></span><br>
+                    <span id="wdt-emoji-preview-aliases"></span>
+                </div>
+            </div>
+
+            <div id="wdt-emoji-preview-bundle">
+                <span>Emoji Picker</span>
+            </div>
+		</div>
+	</div>
+</div>
+<script src="/js/emoji.min.js"></script>
+<script src="/js/wdt-emoji-bundle.min.js"></script>
+<script>
+(function() {
+
+  wdtEmojiBundle.defaults.emojiSheets = {
+    'apple': '/css/sheets/sheet_apple_64.png',
+  };
+  wdtEmojiBundle.defaults.allow_native = false;
+  wdtEmojiBundle.init('.wdt-emoji-bundle-enabled');
+})();
+</script>
+END;
 require("header.php");
 if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
 	print "<h2 class=\"archive-title\">$title</h2>\n";
@@ -120,6 +176,8 @@ if (mysql_num_rows($result) > 0) {
 		  )?
 		)}ix';
 		if ($comment_id > 2616) {$body = preg_replace($pattern, '<a href="$1">$1</a>', $body);}
+		$body = emoji_name_to_unified($body);
+		$body = emoji_unified_to_html($body);
 		$author = $comment['author'];
 		$url = $comment['url'];
 		$commentDateTime = $comment['date'];
@@ -164,24 +222,25 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 <div class="post-text" id="jsmsg">If you want to comment you'll need JavaScript on. According to our records you have disabled JavaScript in your browser settings or with an extension.</div>
 <script type="text/javascript">var msg=document.getElementById("jsmsg");msg.style.display='none';</script>
 <form action="/add-comment.php" method="post" onsubmit="return submitForm(this);" style="display:none;" id="cform">
-<div class="formRow">
+<div class="formRow commentHere">
 	<label class="post-byline" for="comment">comment</label>
 	<div class="formElement">
-		<textarea cols="40" rows="8" name="comment" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="comment" aria-required="true"></textarea>
-		<div class="please-note post-byline"><b>FYI:</b> HTML won't work. Markdown won't work. Emojis? &#128683;</div>
+		<textarea cols="40" rows="8" name="comment" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="comment" aria-required="true" class="wdt-emoji-bundle-enabled"></textarea>
 	</div>
 </div>
+
+<div class="please-note post-byline"><b>FYI:</b> HTML won't work. Markdown won't work. Emoji? <span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji1f44c"></span></span></div>
 
 <div class="formRow">	
 	<label class="form-label post-byline" for="name">name</label>
 	<div class="formElement">
-		<input name="name" type="text" size="50" maxlength="25" value="<?php print $thisName ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="name" aria-required="true"/>
+		<input name="name" type="text" size="50" maxlength="25" value="<?php print $thisName ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="name" aria-required="true">
 	</div>
 </div>
 <div class="formRow">
 	<label class="post-byline" for="url">url</label>
 	<div class="formElement">
-		<input name="url" type="text" size="50" maxlength="100" value="<?php print $thisURL ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="url" type="url" placeholder="http://"></td></tr>
+		<input name="url" type="text" size="50" maxlength="100" value="<?php print $thisURL ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="url" type="url" placeholder="https://"></td></tr>
 	</div>
 </div>
 <div class="formRow">

@@ -1,5 +1,9 @@
 #cform
   width: 100%
+  .formRow.commentHere
+    width: 475px
+    max-width: 100%
+    margin-bottom: 0px
   .formRow
     margin-bottom: 10px
     label
@@ -10,8 +14,9 @@
     background-color: #eee
     padding: 3px 2px
   textarea
-    width: 476px
+    width: 100%
     border: solid #ddd 1px
+    font-family: $font-body
   input[type='text']
     width: 250px
   .btn
@@ -21,11 +26,19 @@
     color: #31708f
     background-color: #d9edf7
     padding: 10px
-    margin-top: 0px
     display: inline-block
-    max-width: 95%
-    margin: 0 !important
+    margin-bottom: 10px 
+    margin-top: 5px
     width: 460px
+    max-width: 95%
+  .wdt-emoji-picker
+    right: 0px !important
+    bottom: 10px !important
+    -webkit-filter: grayscale(100%)
+    filter: grayscale(100%)
+  .wdt-emoji-picker:hover, .wdt-emoji-picker-open
+    -webkit-filter: grayscale(0%)
+    filter: grayscale(0%)
 
 .comment
   .comment-author
@@ -38,3 +51,6 @@
   background-color: #f2dede
   padding: 10px
   margin: 10px 0px 10px 0px
+
+.wdt-emoji-popup
+  text-align: left
