@@ -47,9 +47,6 @@ $pageNum = 1;
 $isDateArchive = 0;
 $cntPost = 1;
 $pagetitle = $pagetitle . " | onfocus";
-$pageHeaderAddition = <<<END
-<link href="/css/wdt-emoji-bundle.css" rel="stylesheet">\n
-END;
 $pageFooterAddition = <<<END
 <div class="wdt-emoji-popup">
     <a href="#" class="wdt-emoji-popup-mobile-closer"> &times; </a>
