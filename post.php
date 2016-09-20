@@ -180,7 +180,7 @@ if (mysql_num_rows($result) > 0) {
 		$commentDateTime = $comment['date'];
 		$thisYear = date('Y',strtotime($commentDateTime));
 		$currentYear = date('Y');
-		if (((substr($url,0,7) == "http://") || (substr($url,0,8) == "https://")) && ($id > 6699)) {
+		if (((substr($url,0,7) == "http://") || (substr($url,0,8) == "https://"))) {
 			$author = "<a href=\"$url\" rel=\"nofollow\">$author</a>";
 		}
 		else {
@@ -193,7 +193,7 @@ if (mysql_num_rows($result) > 0) {
 			$thisDate = date(DATE_HEADER_YEAR_FORMAT,strtotime($commentDateTime));
 		}
 		$thisTime = date(TIME_FORMAT,strtotime($commentDateTime));		
-		print "<div class=\"comment\" style=\"margin-bottom:2.5em\">";
+		print "<div class=\"comment\" style=\"margin-bottom:2.5em\" id=\"c$comment_id\">";
 		print "<div class=\"post-text\">$body</div>";
 		print "<div class=\"post-byline comment\" style=\"margin-top:4px;\">by $author on $thisDate at $thisTime</div>";
 		print "</div>";
