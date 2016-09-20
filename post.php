@@ -183,7 +183,7 @@ if (mysql_num_rows($result) > 0) {
 		$commentDateTime = $comment['date'];
 		$thisYear = date('Y',strtotime($commentDateTime));
 		$currentYear = date('Y');
-		if (((substr($url,0,7) == "http://") || (substr($url,0,7) == "https://")) && ($id > 6699)) {
+		if (((substr($url,0,7) == "http://") || (substr($url,0,8) == "https://")) && ($id > 6699)) {
 			$author = "<a href=\"$url\" rel=\"nofollow\">$author</a>";
 		}
 		else {
