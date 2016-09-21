@@ -13,6 +13,7 @@
 *.swf
 *.flv
 *.htaccess
+*.txt
 post/CodeMirror2.22/*
 post/magpiecache/*
 magpiecache/*
