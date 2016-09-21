@@ -269,7 +269,7 @@ else {
 </div>
 <?php
 // OLDER POST LINK
-$query = "SELECT post_id, DateCreated FROM items WHERE hide = 0 AND post_id < ". mysql_real_escape_string($_GET['id']) . " ORDER BY post_id DESC LIMIT 1";
+$query = "SELECT post_id, DateCreated, url_slug FROM items WHERE hide = 0 AND post_id < ". mysql_real_escape_string($_GET['id']) . " ORDER BY post_id DESC LIMIT 1";
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) == 0) {
@@ -279,14 +279,18 @@ else {
 	while ($post = mysql_fetch_array($result)) {
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
+		$slug = $post['url_slug'];
 		$thisYear = date('Y',strtotime($postDateTime));
 		$thisMonth = date('m',strtotime($postDateTime));
 		$olderPermalink = "/$thisYear/$thisMonth/$id";
+		if ($slug !== '') {
+			$olderPermalink .= "/$slug";
+		}
 	}
 }
 
 // NEWER POST LINK
-$query = "SELECT post_id, DateCreated FROM items WHERE hide = 0 AND post_id > ". mysql_real_escape_string($_GET['id']) . " LIMIT 1";
+$query = "SELECT post_id, DateCreated, url_slug FROM items WHERE hide = 0 AND post_id > ". mysql_real_escape_string($_GET['id']) . " LIMIT 1";
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) == 0) {
@@ -296,9 +300,13 @@ else {
 	while ($post = mysql_fetch_array($result)) {
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
+		$slug = $post['url_slug'];
 		$thisYear = date('Y',strtotime($postDateTime));
 		$thisMonth = date('m',strtotime($postDateTime));
 		$newerPermalink = "/$thisYear/$thisMonth/$id";
+		if ($slug !== '') {
+			$newerPermalink .= "/$slug";
+		}
 	}
 }
 ?>

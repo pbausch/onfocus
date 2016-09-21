@@ -108,7 +108,10 @@ else {
 		$postDateTime = $post['DateCreated'];
 		$thisYear = date('Y',strtotime($postDateTime));
 		$thisMonth = date('m',strtotime($postDateTime));
-		$permalink = "/$thisYear/$thisMonth/$id/$slug";
+		$permalink = "/$thisYear/$thisMonth/$id";
+		if ($slug !== '') {
+			$permalink .= "/$slug";
+		}
 		$currentYear = date('Y');
 		$commentCount = $post['comment_count'];
 		$thisCommentsOn = $post['comments_on'];
