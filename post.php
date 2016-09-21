@@ -2,7 +2,7 @@
 require("onfocus-ini.inc");
 include('lib/emoji.php');
 
-$query = "SELECT post_id, DateCreated, title, body, comments_on, item_type_id FROM items WHERE hide = 0 AND post_id = ". mysql_real_escape_string($_GET['id']);
+$query = "SELECT post_id, DateCreated, title, body, comments_on, item_type_id, url_slug FROM items WHERE hide = 0 AND post_id = ". mysql_real_escape_string($_GET['id']);
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) == 0) {
@@ -14,10 +14,6 @@ else {
 		//$title = utf8_encode($title);
 		$body = $post['body'];
 		$body = preg_replace('/<!-- comment -->/s','',$body);
-		//if (preg_match('/^Links for/is',$title)) {
-		//	$body = preg_replace('/<li((.(?<!<li))*?<\/ul>)/s','<li style="margin-bottom:0px;"$1',$body);
-		//}
-		//$body = utf8_encode($body);
 		$pagetitle = $title;
 		if ($pagetitle == "") {
 			$pagetitle = $body;
@@ -41,12 +37,25 @@ else {
 		$lastDate = $thisDate;
 		$thisCommentsOn = $post['comments_on'];
 		$type = $post['item_type_id'];
+		$slug = $post['url_slug'];
+		//if ($slug !== '') {
+			// If we don't have a matching slug, redirect to canonical
+		//	if ($slug !== $_GET['s']) {
+		//		header("HTTP/1.1 301 Moved Permanently"); 
+		//		header("Location: https://www.onfocus.com$permalink/$slug");
+		//	}
+		//	$canonicalUrl = "https://www.onfocus.com$permalink/$slug";
+		//}
+		//else {
+		//	$canonicalUrl = "https://www.onfocus.com$permalink";
+		//}
 	}
 }
 $pageNum = 1;
 $isDateArchive = 0;
 $cntPost = 1;
 $pagetitle = $pagetitle . " | onfocus";
+//$pageHeaderAddition = "<link rel=\"canonical\" href=\"$canonicalUrl\" />\n";
 $pageFooterAddition = <<<END
 <div class="wdt-emoji-popup">
     <a href="#" class="wdt-emoji-popup-mobile-closer"> &times; </a>
