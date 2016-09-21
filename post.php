@@ -38,24 +38,24 @@ else {
 		$thisCommentsOn = $post['comments_on'];
 		$type = $post['item_type_id'];
 		$slug = $post['url_slug'];
-		//if ($slug !== '') {
+		if ($slug !== '') {
 			// If we don't have a matching slug, redirect to canonical
-		//	if ($slug !== $_GET['s']) {
-		//		header("HTTP/1.1 301 Moved Permanently"); 
-		//		header("Location: https://www.onfocus.com$permalink/$slug");
-		//	}
-		//	$canonicalUrl = "https://www.onfocus.com$permalink/$slug";
-		//}
-		//else {
-		//	$canonicalUrl = "https://www.onfocus.com$permalink";
-		//}
+			if ($slug !== $_GET['s']) {
+				header("HTTP/1.1 301 Moved Permanently"); 
+				header("Location: https://www.onfocus.com$permalink/$slug");
+			}
+			$canonicalUrl = "https://www.onfocus.com$permalink/$slug";
+		}
+		else {
+			$canonicalUrl = "https://www.onfocus.com$permalink";
+		}
 	}
 }
 $pageNum = 1;
 $isDateArchive = 0;
 $cntPost = 1;
 $pagetitle = $pagetitle . " | onfocus";
-//$pageHeaderAddition = "<link rel=\"canonical\" href=\"$canonicalUrl\" />\n";
+$pageHeaderAddition = "<link rel=\"canonical\" href=\"$canonicalUrl\" />\n";
 $pageFooterAddition = <<<END
 <div class="wdt-emoji-popup">
     <a href="#" class="wdt-emoji-popup-mobile-closer"> &times; </a>

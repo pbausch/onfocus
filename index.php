@@ -81,10 +81,10 @@ if ($isDateArchive) {
 	print "<h2 style=\"margin-bottom:18px;\">Archive of Posts from ".date("F Y",$thisArchiveDate)."</h2>";
 	$thisArchiveYear = mysql_real_escape_string($thisArchiveYear);
 	$thisArchiveMonth = mysql_real_escape_string($thisArchiveMonth);
-	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id FROM items WHERE Year(DateCreated) = $thisArchiveYear AND Month(DateCreated) = $thisArchiveMonth AND hide = 0 ORDER BY DateCreated DESC";
+	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE Year(DateCreated) = $thisArchiveYear AND Month(DateCreated) = $thisArchiveMonth AND hide = 0 ORDER BY DateCreated DESC";
 }
 else {
-	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id FROM items WHERE hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
+	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
 }
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
@@ -94,6 +94,7 @@ if (mysql_num_rows($result) == 0) {
 else {
 	while ($post = mysql_fetch_array($result)) {
 		$cntPost++;
+		$slug = $post['slug'];
 		$title = $post['title'];
 		//$title = utf8_encode($title);
 		$body = $post['body'];
@@ -107,7 +108,7 @@ else {
 		$postDateTime = $post['DateCreated'];
 		$thisYear = date('Y',strtotime($postDateTime));
 		$thisMonth = date('m',strtotime($postDateTime));
-		$permalink = "/$thisYear/$thisMonth/$id";
+		$permalink = "/$thisYear/$thisMonth/$id/$slug";
 		$currentYear = date('Y');
 		$commentCount = $post['comment_count'];
 		$thisCommentsOn = $post['comments_on'];
