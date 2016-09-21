@@ -41,7 +41,7 @@ else {
 <language>en-us</language>
 <lastBuildDate><?php print date(DATE_RSS_FORMAT); ?></lastBuildDate>
 <?php
-$query = "SELECT post_id, DateCreated, title, body FROM Items WHERE hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
+$query = "SELECT post_id, DateCreated, title, body, url_slug FROM Items WHERE hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) == 0) {
@@ -50,6 +50,7 @@ if (mysql_num_rows($result) == 0) {
 else {
 	while ($post = mysql_fetch_array($result)) {
 		$cntPost++;
+		$slug = $post['url_slug'];
 		$title = $post['title'];
 		$body = $post['body'];
 		// fix up youtube embeds
@@ -65,7 +66,10 @@ else {
 		$postDateTime = $post['DateCreated'];
 		$thisYear = date('Y',strtotime($postDateTime));
 		$thisMonth = date('m',strtotime($postDateTime));
-		$permalink = "http://www.onfocus.com/$thisYear/$thisMonth/$id";
+		$permalink = "https://www.onfocus.com/$thisYear/$thisMonth/$id";
+		if ($slug !== '') {
+			$permalink .= "/$slug";
+		}
 		$currentYear = date('Y');
 		$thisDate = date(DATE_RSS_FORMAT,strtotime($postDateTime));
 ?>
