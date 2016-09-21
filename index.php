@@ -94,7 +94,7 @@ if (mysql_num_rows($result) == 0) {
 else {
 	while ($post = mysql_fetch_array($result)) {
 		$cntPost++;
-		$slug = $post['slug'];
+		$slug = $post['url_slug'];
 		$title = $post['title'];
 		//$title = utf8_encode($title);
 		$body = $post['body'];
