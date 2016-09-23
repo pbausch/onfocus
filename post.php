@@ -14,6 +14,8 @@ else {
 		//$title = utf8_encode($title);
 		$body = $post['body'];
 		$body = preg_replace('/<!-- comment -->/s','',$body);
+		$body = emoji_name_to_unified($body);
+		$body = emoji_unified_to_html($body);
 		$pagetitle = $title;
 		if ($pagetitle == "") {
 			$pagetitle = $body;

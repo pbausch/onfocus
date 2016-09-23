@@ -1,5 +1,6 @@
 <?php
 require("onfocus-ini.inc");
+require("lib/emoji.php");
 ob_start();
 
 $cntPost = 0;
@@ -99,6 +100,8 @@ else {
 		//$title = utf8_encode($title);
 		$body = $post['body'];
 		$body = preg_replace('/<!-- comment -->/s','',$body);
+		$body = emoji_name_to_unified($body);
+		$body = emoji_unified_to_html($body);
 		//$body = preg_replace('/<embed/s','&lt;embed',$body);
 		if (strpos($title,"Links for") !== false) {
 			//$body = preg_replace('/<li((.(?<!<li))*?<\/ul>)/s','<li style="margin-bottom:0px;"$1',$body);
