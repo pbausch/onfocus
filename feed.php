@@ -3,6 +3,7 @@
 <?xml-stylesheet href="feed.xsl" type="text/xsl" media="screen"?>
 <?php
 require("onfocus-ini.inc");
+require("lib/emoji.php");
 ob_start();
 
 $cntPost = 0;
@@ -62,6 +63,7 @@ else {
 			}
 			$body = str_replace("data-src", "src", $body);
 		}
+		$body = emoji_name_to_unified($body);
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
 		$thisYear = date('Y',strtotime($postDateTime));
