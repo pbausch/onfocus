@@ -63,7 +63,6 @@ else {
 			}
 			$body = str_replace("data-src", "src", $body);
 		}
-		$body = emoji_name_to_unified($body);
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
 		$thisYear = date('Y',strtotime($postDateTime));
