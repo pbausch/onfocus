@@ -6,15 +6,15 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="ICBM" content="44.564400,-123.260910" />
-	<meta name="DC.title" content="onfocus" />
-	<meta name="keywords" content="Oregon, Corvallis, developer, hiking, Web services, weblogs, books, bookwatch, photography" />
+	<meta name="DC.title" content="<?php if (isset($pageTitle)) { print htmlspecialchars($pageTitle); } else { print "onfocus"; } ?>" />
+	<meta name="keywords" content="<?php if (isset($pageKeywords)) { print htmlspecialchars($pageKeywords); } else { print "pb, Oregon, Corvallis, developer, photography"; } ?>" />
 	<meta name="geo.country" content="US" />
 	<meta name="dc.language" content="en" />
-	<meta name="description" content="Thoughts and photos from a Web developer living in Oregon. " />
+<?php if (isset($pageDescription)) { print "\t<meta name=\"description\" content=\"" . htmlspecialchars($pageDescription) . "\" />\n"; } ?>
 	<meta name="verify-v1" content="l6Cjq8kY0ofKv+8EY2FMrKOUTC8ztnB/GzIhrMJW/Cs=" />
 	<meta name="viewport" content="initial-scale=1" />
-	<?php if (($pageNum > 1) || ($isDateArchive)) { ?><meta name="ROBOTS" content="NOINDEX,FOLLOW"><?php }?>
-<link rel="icon" type="image/ico" href="//d1x6es5xzge33k.cloudfront.net/<?php print $logocolor ?>.ico?v=<?php print $logocolor ?>" />
+<?php if (($pageNum > 1) || ($isDateArchive)) { print "\t"; ?><meta name="ROBOTS" content="NOINDEX,FOLLOW"><?php }?>
+	<link rel="icon" type="image/ico" href="//d1x6es5xzge33k.cloudfront.net/<?php print $logocolor ?>.ico?v=<?php print $logocolor ?>" />
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://xml.onfocus.com/posts" />
 	<style>
 		#logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a {color: #<?php print $logocolor ?> !important;}
@@ -47,7 +47,7 @@
 	</style>
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
 	<?php if (isset($pageHeaderAddition)) { print $pageHeaderAddition; } ?>
-<title><?php if (isset($pagetitle)) { print $pagetitle; } else { print "onfocus"; } ?></title>
+<title><?php if (isset($pageTitle)) { print $pageTitle; } else { print "onfocus"; } ?></title>
 </head>
 <body>
 <div id="header" onclick="document.location='/';">

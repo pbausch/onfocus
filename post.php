@@ -1,8 +1,8 @@
 <?php
 require("onfocus-ini.inc");
 include('lib/emoji.php');
-
-$query = "SELECT post_id, DateCreated, title, body, comments_on, item_type_id, url_slug FROM items WHERE hide = 0 AND post_id = ". mysql_real_escape_string($_GET['id']);
+include('lib/site-functions.php');
+$query = "SELECT post_id, DateCreated, title, body, comments_on, item_type_id, url_slug, tags FROM items WHERE hide = 0 AND post_id = ". mysql_real_escape_string($_GET['id']);
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) == 0) {
@@ -16,12 +16,16 @@ else {
 		$body = preg_replace('/<!-- comment -->/s','',$body);
 		$body = emoji_name_to_unified($body);
 		$body = emoji_unified_to_html($body);
-		$pagetitle = $title;
-		if ($pagetitle == "") {
-			$pagetitle = $body;
-			$pagetitle = preg_replace('/<[a-zA-Z\/][^>]*>/is','',$pagetitle);
-			$pagetitle = preg_replace('/(.{1,20}[ \.,\?\)!]).*/is','\1',$pagetitle);
-			$pagetitle = trim($pagetitle)."...";
+		$pageTitle = $title;
+		if ($pageTitle == "") {
+			$pageTitle = $body;
+			$pageTitle = preg_replace('/<[a-zA-Z\/][^>]*>/is','',$pageTitle);
+			$pageTitle = preg_replace('/(.{1,20}[ \.,\?\)!]).*/is','\1',$pageTitle);
+			$pageTitle = trim($pageTitle)."...";
+		}
+		$tags = $post['tags'];
+		if ($tags != "") {
+			$pageKeywords = preg_replace('#\s+#',', ',trim($tags));
 		}
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
@@ -56,7 +60,7 @@ else {
 $pageNum = 1;
 $isDateArchive = 0;
 $cntPost = 1;
-$pagetitle = $pagetitle . " | onfocus";
+$pageTitle = $pageTitle . " | onfocus";
 $pageHeaderAddition = "<link rel=\"canonical\" href=\"$canonicalUrl\" />\n";
 $pageFooterAddition = <<<END
 <div class="wdt-emoji-popup">

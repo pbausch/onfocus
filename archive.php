@@ -7,7 +7,8 @@ if (!$result = @ mysql_query ($query, $connection))
 while ($tp = mysql_fetch_row($result)) {
 	$maxdate = $tp[0];
 }
-$pagetitle = "onfocus archive";
+$pageTitle = "onfocus archive";
+$pageDescription = "Linking 17 years of onfocus.com month by month.";
 $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");

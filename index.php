@@ -33,7 +33,8 @@ else {
 	$newerPageNum = 0;
 }
 
-$pagetitle = APP_TITLE . " by Paul Bausch";
+$pageTitle = APP_TITLE . " by Paul Bausch";
+$pageDescription = "Thoughts and photos from a Web developer in Corvallis, Oregon.";
 
 $isDateArchive = 0;
 $thisArchiveYear = "";
