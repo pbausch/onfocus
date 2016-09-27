@@ -4,10 +4,10 @@ function swapnoimg() {
 		w = img.naturalWidth;
 		h = img.naturalHeight;
 		if (!img.complete) {
-			img.src = 'http://www.onfocus.com/no-image.gif';
+			img.src = 'https://www.onfocus.com/no-image.gif';
 		}
 		else if ((w == 0) || (h == 0)) {
-			img.src = 'http://www.onfocus.com/no-image.gif';
+			img.src = 'https://www.onfocus.com/no-image.gif';
 		}
 	}
 }
@@ -59,7 +59,6 @@ function deferVideos() {
 	for (var i=0; i<vidDefer.length; i++) {
 		if(vidDefer[i].getAttribute('data-src')) {
 			vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
-			console.log('src set');
 		} 
 	} 
 }
