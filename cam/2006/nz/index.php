@@ -1,7 +1,7 @@
 <?php
 require("onfocus-ini.inc");
 require(ROOT_DIR . "/lib/gallery.php");
-$pageTitle = "New Zealand 2016 Gallery";
+$pageTitle = "New Zealand 2006 Gallery | onfocus";
 $pageNum = 1;
 $isDateArchive = 0;
 $dir = getcwd() . "/";

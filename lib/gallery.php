@@ -1,6 +1,6 @@
 <?php
 function gallery($dir, $title) {
-	$out = "<h2 class=\"archive-title\">$title</h2>\n";
+	$out = "<h2 class=\"archive-title\">". str_replace(" | onfocus", "", $title) . "</h2>\n";
 	$out .= "<div class=\"post archive\" style=\"margin-top:25px;\">\n";
 	$out .= "<div id=\"gallery\" class=\"post-text\" style=\"text-align:center;\">\n";
 
