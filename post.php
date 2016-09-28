@@ -62,6 +62,9 @@ $isDateArchive = 0;
 $cntPost = 1;
 $pageTitle = $pageTitle . " | onfocus";
 $pageHeaderAddition = "<link rel=\"canonical\" href=\"$canonicalUrl\" />\n";
+if (strpos($body, 'new SWFObject') !== false) {
+    $pageHeaderAddition .= "<script type=\"text/javascript\" src=\"//d1x6es5xzge33k.cloudfront.net/swfobject.js\"></script>\n";
+}
 $pageFooterAddition = <<<END
 <div class="wdt-emoji-popup">
     <a href="#" class="wdt-emoji-popup-mobile-closer"> &times; </a>
