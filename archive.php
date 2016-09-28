@@ -13,9 +13,11 @@ $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
 ?>
-	<h2>Archive</h2>
+	<h2>Post Archive</h2>
 	<div class="post">
 		<div class="post-text" style="margin-top:18px;">
+		Here are 17 years worth of onfocus.com posts, month by month:
+		<br/><br/>
 		<table border="0" cellpadding="6" style="line-height:150%;"><tr valign="top"> 
 		<?php
 		$cal_month_abb = array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
@@ -55,6 +57,29 @@ require("header.php");
 		<br />
 		I started this site in 1998, and there are a few remnants of the early days in the <a href=" //web.archive.org/web/*/ //www.onfocus.com/">Internet Archive</a>.
 		</div>
+	</div>
+<?php
+$query = "SELECT GalleryName, DateCreated, URL, ThumbURL, TotalPhotos FROM Galleries ORDER BY DateCreated DESC";
+if (!$result = @ mysql_query ($query, $connection))
+   	logError();
+?>
+	<h2>Gallery Archive</h2>
+	<div class="post" id="galleryArchive">
+		<div class="post-text" style="margin-top:18px;">
+			Before Flickr, Facebook, Instagram, and others I posted a lot of pictures here. I used to post one or two pictures in a post and then link to a gallery of more. These are links to those galleries:
+			<br /><br />
+			<?php while ($tp = mysql_fetch_row($result)) {
+				$galleryName = $tp[0];
+				$galleryDTM = $tp[1];
+				$galleryURL = $tp[2];
+				$galleryThumbURL = $tp[3];
+				$galleryThumbURL = str_replace("http://","https://",$galleryThumbURL);
+				$galleryThumbURL = str_replace("thumbs/","",$galleryThumbURL);
+				$galleryTotalPhotos = $tp[4];
+				print '<div class="galleryThumb"><a href="https://www.onfocus.com'.$galleryURL.'" title="'. $galleryName .' ('. date('Y', strtotime($galleryDTM)) .') / '. $galleryTotalPhotos .' photos"><img data-src="'.$galleryThumbURL.'" src="'.$galleryThumbURL.'" width="200" height="130"/></a></div>';
+			} ?>
+		</div>
+		<div style="clear:both;"></div>
 	</div>
 	<!--
 	<h2>Popular</h2>
