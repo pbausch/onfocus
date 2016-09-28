@@ -22,7 +22,7 @@ function gallery($con) {
 	else {
 		$galleryTitle = "random gallery";
 		$galleryDescription = "Just some pictures I threw into a directory for some reason.";
-		$galleryDateTime = new DateTime();
+		$galleryDateTime = date("Y-m-d H:i:s");
 	}
 	
 	$pageNum = 1;
