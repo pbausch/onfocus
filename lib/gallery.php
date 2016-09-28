@@ -1,10 +1,43 @@
 <?php
-function gallery($dir, $title) {
-	$out = "<h2 class=\"archive-title\">". str_replace(" | onfocus", "", $title) . "</h2>\n";
-	$out .= "<div class=\"post archive\" style=\"margin-top:25px;\">\n";
-	$out .= "<div id=\"gallery\" class=\"post-text\" style=\"text-align:center;\">\n";
+function gallery($con) {
+	$url = $_SERVER["REQUEST_URI"];
+	$dir = getcwd() . "/";
 
-	$images = glob($dir."*.jpg");
+	$imageCount = 0;
+	$images = glob($dir."*.{jpg,JPG}",GLOB_BRACE);
+	if ($images) {
+		$imageCount = count($images);
+	}
+	
+	$query = "SELECT GalleryName, GalleryDescription, DateCreated FROM Galleries WHERE URL = '" . mysql_real_escape_string($url) . "'";
+	if (!$result = @ mysql_query ($query, $con))
+	   	logError();
+	if ($result && (mysql_num_rows($result) > 0)) {
+		while ($gallery = mysql_fetch_array($result)) {
+			$galleryTitle = $gallery['GalleryName'];
+			$galleryDescription = $gallery['GalleryDescription'];
+			$galleryDateTime = $gallery['DateCreated'];
+		}
+	} 	
+	else {
+		$galleryTitle = "random gallery";
+		$galleryDescription = "Just some pictures I threw into a directory for some reason.";
+		$galleryDateTime = new DateTime();
+	}
+	
+	$pageNum = 1;
+	$isDateArchive = 0;
+	$pageTitle = $galleryTitle . " | onfocus";
+	require(ROOT_DIR . "header.php");
+	
+	$thisDate = date("M jS, Y",strtotime($galleryDateTime));
+	
+	$out = "<h2 class=\"archive-title gallery-title\">". str_replace(" | onfocus", "", $galleryTitle) . "</h2>\n";
+	$out .= "<div id=\"gallery\" class=\"post archive\">\n";
+	$out .= "<div class=\"post-text\">$galleryDescription</div>\n";
+	$out .= "<div class=\"post-byline archive\">$thisDate &middot; $imageCount photos</div>\n";
+	$out .= "<div class=\"post-text gallery-list\">\n";
+
 	foreach($images as $image) {
 		list($width, $height, $type, $attr) = getimagesize($image);
 		if ($width > 640) {
@@ -21,6 +54,12 @@ function gallery($dir, $title) {
 	}
 
 	$out .=  "</div></div></div>";
-	return $out;
+	print $out;
+	print "<div id=\"footer\">";
+	print "	<div class=\"navigation\">";
+	print "<a href=\"/\">Home</a>";
+	print "	</div>";
+	print "</div>";
+	require(ROOT_DIR . "footer.php");
 }
 ?>
