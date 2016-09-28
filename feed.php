@@ -56,7 +56,7 @@ else {
 		$body = $post['body'];
 		// fix up youtube embeds
 		if (strpos($body, "class=\"embed\"") !== false) {
-			$find = "src=\"http://www.onfocus.com/loading.php\" ";
+			$find = "src=\"https://www.onfocus.com/loading.php\" ";
 			$pos = strpos($body, $find);
 			if ($pos !== false) {
 			    $body = substr_replace($body, "", $pos, strlen($find));
