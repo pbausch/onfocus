@@ -18,6 +18,8 @@ else {
 		$body = emoji_unified_to_html($body);
 		$summary = $body;
 		$summary = preg_replace("/<style\\b[^>]*>(.*?)<\\/style>/s", "", $summary);
+		$imageUrls = array();
+		$images = preg_match_all('!//[a-z0-9\-\.\/]+\.(?:jpe?g|png|gif)!Ui' , $summary , $imageUrls);
 		$summary = strip_tags($summary);
 		$summary = preg_replace("/\s+/", " ", $summary);
 		$summary = truncate_to_x_words($summary, 45);
@@ -74,6 +76,9 @@ $pageHeaderAddition .= <<<END
 	<meta property="og:site_name" content="onfocus"/>
 	<meta property="og:description" content="$summary" />\n
 END;
+if ($images > 0) {
+	$pageHeaderAddition .= "	<meta property=\"og:image\" content=\"". $imageUrls[0][0] . "\" />\n";
+}
 if (strpos($body, 'new SWFObject') !== false) {
     $pageHeaderAddition .= "<script type=\"text/javascript\" src=\"//d1x6es5xzge33k.cloudfront.net/swfobject.js\"></script>\n";
 }
