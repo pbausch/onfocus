@@ -77,7 +77,11 @@ $pageHeaderAddition .= <<<END
 	<meta property="og:description" content="$summary" />\n
 END;
 if ($images > 0) {
-	$pageHeaderAddition .= "	<meta property=\"og:image\" content=\"". $imageUrls[0][0] . "\" />\n";
+	$firstImageUrl = $imageUrls[0][0];
+	if (substr($firstImageUrl,0,2) == "//") {
+		$firstImageUrl = "https:" . $firstImageUrl;
+	}
+	$pageHeaderAddition .= "	<meta property=\"og:image\" content=\"". $firstImageUrl . "\" />\n";
 }
 if (strpos($body, 'new SWFObject') !== false) {
     $pageHeaderAddition .= "<script type=\"text/javascript\" src=\"//d1x6es5xzge33k.cloudfront.net/swfobject.js\"></script>\n";
