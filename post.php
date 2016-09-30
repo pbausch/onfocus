@@ -23,6 +23,9 @@ else {
 		$summary = strip_tags($summary);
 		$summary = preg_replace("/\s+/", " ", $summary);
 		$summary = truncate_to_x_words($summary, 45);
+		if ($summary == "") {
+			$summary = $title;
+		}
 		$pageTitle = $title;
 		if ($pageTitle == "") {
 			$pageTitle = $body;
