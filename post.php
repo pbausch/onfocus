@@ -88,7 +88,7 @@ if ($images > 0) {
 	if (substr($firstImageUrl,0,2) == "//") {
 		$firstImageUrl = "https:" . $firstImageUrl;
 	}
-	$pageHeaderAddition .= "	<meta property=\"og:image\" content=\"". $firstImageUrl . "\" />";
+	$pageHeaderAddition .= "	<meta property=\"og:image\" content=\"". $firstImageUrl . "\" />\n";
 	$pageHeaderAddition .= "	<meta name=\"twitter:image\" content=\"". $firstImageUrl . "\" />\n";
 }
 if (strpos($body, 'new SWFObject') !== false) {
