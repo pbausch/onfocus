@@ -72,25 +72,29 @@ $isDateArchive = 0;
 $cntPost = 1;
 $pageTitle = $pageTitle . " | onfocus";
 $pageHeaderAddition = "<link rel=\"canonical\" href=\"$canonicalUrl\" />\n";
+if ($images > 0) {
+	$firstImageUrl = $imageUrls[0][0];
+	if (substr($firstImageUrl,0,2) == "//") {
+		$firstImageUrl = "https:" . $firstImageUrl;
+	}
+}
+else {
+	$firstImageUrl = "https://d1x6es5xzge33k.cloudfront.net/200808.twitter-card.png";
+}
+
 $pageHeaderAddition .= <<<END
 	<meta property="og:title" content="onfocus: $title" />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="$canonicalUrl" />
 	<meta property="og:site_name" content="onfocus"/>
 	<meta property="og:description" content="$summary" />
+	<meta property="og:image" content="$firstImageUrl" />
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:site" content="@pbausch" />
 	<meta name="twitter:title" content="$title" />
 	<meta name="twitter:description" content="$summary" />
+	<meta name="twitter:image" content="$firstImageUrl" />\n\t
 END;
-if ($images > 0) {
-	$firstImageUrl = $imageUrls[0][0];
-	if (substr($firstImageUrl,0,2) == "//") {
-		$firstImageUrl = "https:" . $firstImageUrl;
-	}
-	$pageHeaderAddition .= "	<meta property=\"og:image\" content=\"". $firstImageUrl . "\" />\n";
-	$pageHeaderAddition .= "	<meta name=\"twitter:image\" content=\"". $firstImageUrl . "\" />\n";
-}
 if (strpos($body, 'new SWFObject') !== false) {
     $pageHeaderAddition .= "<script type=\"text/javascript\" src=\"//d1x6es5xzge33k.cloudfront.net/swfobject.js\"></script>\n";
 }
