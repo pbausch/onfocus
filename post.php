@@ -99,13 +99,16 @@ else {
 	}
 }
 
+// use smaller youtube images for facebook (8Mb max)
+$firstImageUrlFb = str_replace("hqdefault","mqdefault",$firstImageUrl);
+
 $pageHeaderAddition .= <<<END
 	<meta property="og:title" content="onfocus: $title" />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="$canonicalUrl" />
 	<meta property="og:site_name" content="onfocus"/>
 	<meta property="og:description" content="$summary" />
-	<meta property="og:image" content="$firstImageUrl" />
+	<meta property="og:image" content="$firstImageUrlFb" />
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:site" content="@pbausch" />
 	<meta name="twitter:title" content="$title" />
