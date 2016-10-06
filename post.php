@@ -82,17 +82,22 @@ if ($images > 0) {
 else {
 	// no local image so look for youtube
 	$dom = new DOMDocument;
-	$dom->loadHTML($body);
-	foreach ($dom->getElementsByTagName('iframe') as $node) {
-		if ($node->hasAttribute('data-src')) {
-	    	$url = $node->getAttribute('data-src');
-			$urlHost = parse_url($url, PHP_URL_HOST);
-			if (strpos($urlHost, 'youtu') !== false) {
-				$urlPath = parse_url($url,PHP_URL_PATH);
-				$ytid = str_replace("/embed/","",$urlPath);
-				$firstImageUrl = "https://i.ytimg.com/vi/$ytid/hqdefault.jpg";
+	try {
+		$dom->loadHTML($body);
+		foreach ($dom->getElementsByTagName('iframe') as $node) {
+			if ($node->hasAttribute('data-src')) {
+		    	$url = $node->getAttribute('data-src');
+				$urlHost = parse_url($url, PHP_URL_HOST);
+				if (strpos($urlHost, 'youtu') !== false) {
+					$urlPath = parse_url($url,PHP_URL_PATH);
+					$ytid = str_replace("/embed/","",$urlPath);
+					$firstImageUrl = "https://i.ytimg.com/vi/$ytid/hqdefault.jpg";
+				}
 			}
 		}
+	}
+	catch (Exception $e) {
+		// log eventually to catch bad HTML in posts
 	}
 	if ($firstImageUrl == "") {
 		$firstImageUrl = "https://d1x6es5xzge33k.cloudfront.net/200808.twitter-card.png";
