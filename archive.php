@@ -77,7 +77,7 @@ if (!$result = @ mysql_query ($query, $connection))
 				$galleryThumbURL = str_replace("thumbs/","",$galleryThumbURL);
 				$galleryThumbURL = str_replace(".com/",".com/img/200x130/",$galleryThumbURL);
 				$galleryTotalPhotos = $tp[4];
-				print '<div class="galleryThumb"><a href="https://www.onfocus.com'.$galleryURL.'" title="'. $galleryName .' ('. date('Y', strtotime($galleryDTM)) .') / '. $galleryTotalPhotos .' photos"><img data-src="'.$galleryThumbURL.'" src="'.$galleryThumbURL.'" width="200" height="130"/></a></div>';
+				print '<div class="galleryThumb"><a href="https://d2w93c8ybe19gl.cloudfront.net'.$galleryURL.'" title="'. $galleryName .' ('. date('Y', strtotime($galleryDTM)) .') / '. $galleryTotalPhotos .' photos"><img data-src="'.$galleryThumbURL.'" src="'.$galleryThumbURL.'" width="200" height="130"/></a></div>';
 			} ?>
 		</div>
 		<div style="clear:both;"></div>
@@ -88,12 +88,12 @@ if (!$result = @ mysql_query ($query, $connection))
 		<div class="post-text" style="margin-top:18px;">
 		According to <a href=" //www.google.com/analytics/">Google Analytics</a>, these are the most viewed pages over the last 30 days:
 		<ul>
-			<li><a href=" //www.onfocus.com/eat_generator.php">What do you want for dinner? I dunno.</a> - 1999</li>
-			<li><a href=" //www.onfocus.com/2006/04/3799">Add a batch of dates to Google Calendar</a> - April 18th, 2006</li>
-			<li><a href=" //www.onfocus.com/2005/06/3712">hot shower for sunburn</a> - June 28th, 2005</li>
-			<li><a href=" //www.onfocus.com/2007/01/3900">Command Line Zip for Windows</a> - January 4th, 2007</li>
-			<li><a href=" //www.onfocus.com/cam/2003/dials/">radio dials (2003)</a> and <a href=" //www.onfocus.com/cam/2004/radio-dials/">radio dials (2004)</a></li>
-			<li><a href=" //www.onfocus.com/2009/07/4247">Remove Google Reader 'Likes'</a> - July, 2009</li>
+			<li><a href="//www.onfocus.com/eat_generator.php">What do you want for dinner? I dunno.</a> - 1999</li>
+			<li><a href="//www.onfocus.com/2006/04/3799">Add a batch of dates to Google Calendar</a> - April 18th, 2006</li>
+			<li><a href="//www.onfocus.com/2005/06/3712">hot shower for sunburn</a> - June 28th, 2005</li>
+			<li><a href="//www.onfocus.com/2007/01/3900">Command Line Zip for Windows</a> - January 4th, 2007</li>
+			<li><a href="//www.onfocus.com/cam/2003/dials/">radio dials (2003)</a> and <a href=" //www.onfocus.com/cam/2004/radio-dials/">radio dials (2004)</a></li>
+			<li><a href="//www.onfocus.com/2009/07/4247">Remove Google Reader 'Likes'</a> - July, 2009</li>
 		</ul>
 		</div>
 	</div>
