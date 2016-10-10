@@ -75,9 +75,9 @@ if (!$result = @ mysql_query ($query, $connection))
 				$galleryThumbURL = $tp[3];
 				$galleryThumbURL = str_replace("http://","https://",$galleryThumbURL);
 				$galleryThumbURL = str_replace("thumbs/","",$galleryThumbURL);
-				$galleryThumbURL = str_replace(".com/",".com/img/200x130/",$galleryThumbURL);
+				$galleryThumbURL = str_replace("www.onfocus.com/","d2w93c8ybe19gl.cloudfront.net/img/200x130/",$galleryThumbURL);
 				$galleryTotalPhotos = $tp[4];
-				print '<div class="galleryThumb"><a href="https://d2w93c8ybe19gl.cloudfront.net'.$galleryURL.'" title="'. $galleryName .' ('. date('Y', strtotime($galleryDTM)) .') / '. $galleryTotalPhotos .' photos"><img data-src="'.$galleryThumbURL.'" src="'.$galleryThumbURL.'" width="200" height="130"/></a></div>';
+				print '<div class="galleryThumb"><a href="https://www.onfocus.com'.$galleryURL.'" title="'. $galleryName .' ('. date('Y', strtotime($galleryDTM)) .') / '. $galleryTotalPhotos .' photos"><img data-src="'.$galleryThumbURL.'" src="'.$galleryThumbURL.'" width="200" height="130"/></a></div>';
 			} ?>
 		</div>
 		<div style="clear:both;"></div>
