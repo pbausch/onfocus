@@ -19,5 +19,6 @@
 </head>
 <body>
 	<div id="content">Loading...</div>
+	<script>var src = window.frameElement.getAttribute('data-src');</script>
 </body>
 </html>
