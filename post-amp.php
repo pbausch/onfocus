@@ -50,16 +50,17 @@ else {
 			$thisDate = date("M jS, Y",strtotime($postDateTime));
 		}
 		$thisTime = date(TIME_FORMAT,strtotime($postDateTime));
+		$thisAmpDate = date("Y-m-d\\TH:i:sP",strtotime($postDateTime));
 		$lastDate = $thisDate;
 		$thisCommentsOn = $post['comments_on'];
 		$type = $post['item_type_id'];
 		$slug = $post['url_slug'];
 		if ($slug !== '') {
 			// If we don't have a matching slug, redirect to canonical
-			if ($slug !== $_GET['s']) {
-				header("HTTP/1.1 301 Moved Permanently"); 
-				header("Location: https://www.onfocus.com$permalink/$slug");
-			}
+			//if ($slug !== $_GET['s']) {
+			//	header("HTTP/1.1 301 Moved Permanently"); 
+			//	header("Location: https://www.onfocus.com$permalink/$slug");
+			//}
 			$canonicalUrl = "https://www.onfocus.com$permalink/$slug";
 		}
 		else {
@@ -72,7 +73,6 @@ $isDateArchive = 0;
 $cntPost = 1;
 $pageTitle = $pageTitle . " | onfocus";
 $pageHeaderAddition = "<link rel=\"canonical\" href=\"$canonicalUrl\" />\n";
-$pageHeaderAddition = "<link rel=\"amphtml\" href=\"${canonicalUrl}/amp\" />\n";
 $firstImageUrl = "";
 if ($images > 0) {
 	$firstImageUrl = $imageUrls[0][0];
@@ -105,78 +105,79 @@ else {
 	}
 }
 
-// use smaller youtube images for facebook (8Mb max)
-$firstImageUrlFb = str_replace("hqdefault","mqdefault",$firstImageUrl);
-
-$pageHeaderAddition .= <<<END
-	<meta property="og:title" content="onfocus: $title" />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content="$canonicalUrl" />
-	<meta property="og:site_name" content="onfocus"/>
-	<meta property="og:description" content="$summary" />
-	<meta property="og:image" content="$firstImageUrlFb" />
-	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:site" content="@pbausch" />
-	<meta name="twitter:title" content="$title" />
-	<meta name="twitter:description" content="$summary" />
-	<meta name="twitter:image" content="$firstImageUrl" />\n\t
-END;
-if (strpos($body, 'new SWFObject') !== false) {
-    $pageHeaderAddition .= "<script type=\"text/javascript\" src=\"//d1x6es5xzge33k.cloudfront.net/swfobject.js\"></script>\n";
+$dom = new DOMDocument;
+try {
+	$dom->loadHTML($body,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+	foreach ($dom->getElementsByTagName('iframe') as $node) {
+		$ytid = "";
+		if ($node->hasAttribute('data-src')) {
+	    	$url = $node->getAttribute('data-src');
+			$urlHost = parse_url($url, PHP_URL_HOST);
+			if (strpos($urlHost, 'youtu') !== false) {
+				$urlPath = parse_url($url,PHP_URL_PATH);
+				$ytid = str_replace("/embed/","",$urlPath);
+				$nodeYT = $dom->createElement("amp-youtube", "");
+				$nodeYT->setAttribute("data-videoid", $ytid);
+				$nodeYT->setAttribute("layout", "responsive");
+				$nodeYT->setAttribute("width", "640");
+				$nodeYT->setAttribute("height", "320");
+				$node->parentNode->replaceChild($nodeYT, $node);
+			}
+		}
+	}
+	$body = $dom->saveHTML();
 }
-$pageFooterAddition = <<<END
-<div class="wdt-emoji-popup">
-    <a href="#" class="wdt-emoji-popup-mobile-closer"> &times; </a>
-	<div class="wdt-emoji-menu-content">
-		<div id="wdt-emoji-menu-header">
-            <a class="wdt-emoji-tab active" data-group-name="Recent"></a>
-            <a class="wdt-emoji-tab" data-group-name="People"></a>
-            <a class="wdt-emoji-tab" data-group-name="Nature"></a>
-            <a class="wdt-emoji-tab" data-group-name="Foods"></a>
-            <a class="wdt-emoji-tab" data-group-name="Activity"></a>
-            <a class="wdt-emoji-tab" data-group-name="Places"></a>
-            <a class="wdt-emoji-tab" data-group-name="Objects"></a>
-            <a class="wdt-emoji-tab" data-group-name="Symbols"></a>
-            <a class="wdt-emoji-tab" data-group-name="Flags"></a>
-            <a class="wdt-emoji-tab" data-group-name="Custom"></a>
-        </div>
-		<div class="wdt-emoji-scroll-wrapper">
-            <div id="wdt-emoji-menu-items">
-                <input id="wdt-emoji-search" type="text" placeholder="Search">
-                <h3 id="wdt-emoji-search-result-title">Search Results</h3>
-                <div class="wdt-emoji-sections"></div>
-                <div id="wdt-emoji-no-result">No emoji found</div>
-            </div>
-        </div>
-		<div id="wdt-emoji-footer">
-            <div id="wdt-emoji-preview">
-                <span id="wdt-emoji-preview-img"></span>
-                <div id="wdt-emoji-preview-text">
-                    <span id="wdt-emoji-preview-name"></span><br>
-                    <span id="wdt-emoji-preview-aliases"></span>
-                </div>
-            </div>
+catch (Exception $e) {
+	// log eventually to catch bad HTML in posts
+}
+// Change post HTML for amp
+$body = str_replace("<img","<amp-img layout=\"responsive\" ",$body);
+$body = preg_replace("/style=\"[^\"]*\"/i","",$body);
 
-            <div id="wdt-emoji-preview-bundle">
-                <span>Emoji Picker</span>
-            </div>
+// Change css for amp
+$css = file_get_contents('./css/amp.css', true);
+$css = str_replace("!important","",$css);
+?>
+<!doctype html>
+<html amp lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+	<script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+	<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <title><?php print $pageTitle ?></title>
+    <link rel="canonical" href="<?php print $canonicalUrl ?>" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "headline": "<?php print $title ?>",
+        "datePublished": "<?php print $thisAmpDate ?>",
+        "image": [
+          "<?php print $firstImageUrl ?>"
+        ]
+      }
+    </script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+	<style amp-custom>
+	<?php print $css ?>
+	</style>
+  </head>
+  <body>
+	<div id="header">
+		<h1 id="logo">onfocus</h1>
+		<p class="tagline">a weblog by pb</p>
+		<div id="infobox">
+			<div class="post-text">
+				<a href="/" id="tophome">Home</a>
+				<a href="/about">About</a>  
+				<a href="/archive">Archive</a> 
+			</div>
 		</div>
 	</div>
-</div>
-<script src="/js/emoji.min.js"></script>
-<script src="/js/wdt-emoji-bundle.min.js"></script>
-<script>
-(function() {
-
-  wdtEmojiBundle.defaults.emojiSheets = {
-    'apple': '//d1x6es5xzge33k.cloudfront.net/css/emoji.png',
-  };
-  wdtEmojiBundle.defaults.allow_native = false;
-  wdtEmojiBundle.init('.wdt-emoji-bundle-enabled');
-})();
-</script>
-END;
-require("header.php");
+	<div id="blog">
+<?php
 if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
 	print "<h2 class=\"archive-title\">$title</h2>\n";
 }
@@ -291,41 +292,9 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 	if (isset($_COOKIE["url"])) {
 		$thisURL = $_COOKIE["url"];
 	}
-	print "<a name=\"add-comment\"></a><h2 class=\"archive-title\" style=\"margin-bottom:20px;\">Add a Comment</h2><div class=\"post archive\">";
+	print "<a name=\"add-comment\"></a><h2 class=\"archive-title\">Add a Comment</h2><div class=\"post archive\">";
 ?>
-<div class="post-text" id="jsmsg">If you want to comment you'll need JavaScript on. According to our records you have disabled JavaScript in your browser settings or with an extension.</div>
-<script type="text/javascript">var msg=document.getElementById("jsmsg");msg.style.display='none';</script>
-<form action="https://www.onfocus.com/add-comment.php" method="post" onsubmit="return submitForm(this);" style="display:none;" id="cform">
-<div class="formRow commentHere">
-	<label class="post-byline" for="comment">comment</label>
-	<div class="formElement">
-		<textarea cols="40" rows="8" name="comment" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="comment" aria-required="true" class="wdt-emoji-bundle-enabled"></textarea>
-	</div>
-</div>
-
-<div class="please-note post-byline"><b>FYI:</b> HTML won't work. Markdown won't work. Emoji? <span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji1f44c"></span></span></div>
-
-<div class="formRow">	
-	<label class="form-label post-byline" for="name">name</label>
-	<div class="formElement">
-		<input name="name" type="text" size="50" maxlength="25" value="<?php print $thisName ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="name" aria-required="true">
-	</div>
-</div>
-<div class="formRow">
-	<label class="post-byline" for="url">url</label>
-	<div class="formElement">
-		<input name="url" type="text" size="50" maxlength="100" value="<?php print $thisURL ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="url" type="url" placeholder="https://"></td></tr>
-	</div>
-</div>
-<div class="formRow">
-	<div class="formElement">
-		<input class="btn" type="submit" value="add comment" id="submit"/>
-	</div>
-</div>
-<input type="hidden" name="postid" value="<?php print $id ?>" id="postid"/>
-<input type="hidden" name="token" value="<?php print md5(uniqid(rand(), TRUE)) ?>" id="token"/>
-</form>
-<script type="text/javascript">var f=document.getElementById("cform");f.style.display='block';</script>
+<div class="post-text" id="jsmsg">Please visit the <a href="<?php print $canonicalUrl ?>#comment">standard page</a> to add a comment.</div>
 <?php
 }
 else {
@@ -381,8 +350,24 @@ else {
 <div id="footer">
 	<div class="navigation">
 		<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">Previous</a> <span class="flourish">&otimes;</span><?php } ?>
-		<a href="/" style="padding-left:10px;">Home</a>
-		<?php if ($newerPermalink <> "") { ?> <span class="flourish">&otimes;</span> <a href="<?php print $newerPermalink ?>" style="padding-left:10px;">Next</a> <?php } ?>
+		<a href="/" class="footHome">Home</a>
+		<?php if ($newerPermalink <> "") { ?> <span class="flourish">&otimes;</span> <a href="<?php print $newerPermalink ?>" class="footHome">Next</a> <?php } ?>
 	</div>
 </div>
-<?php require("footer.php"); ?>
+<amp-analytics type="googleanalytics" id="analytics1">
+<script type="application/json">
+{
+  "vars": {
+    "account": "UA-76008-1"
+  },
+  "triggers": {
+    "trackPageview": {
+      "on": "visible",
+      "request": "pageview"
+    }
+  }
+}
+</script>
+</amp-analytics>
+</body>
+</html>
