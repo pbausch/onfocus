@@ -19,6 +19,9 @@
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://xml.onfocus.com/posts" />
 	<style>
 		#logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a {color: #<?php print $logocolor ?> !important;}
+		html {
+			background:  #<?php print $gradcolor ?>;
+		}
 		body {
 			background:  #<?php print $gradcolor ?>; /* Old browsers */
 			background: -moz-linear-gradient(top,  #<?php print $gradcolor ?>, #ffffff); /* FF3.6-15 */
