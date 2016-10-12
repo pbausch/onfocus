@@ -209,7 +209,7 @@ $query = "SELECT author, url, date, comment, comment_id FROM comments WHERE hide
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) > 0) {
-	print "<a name=\"comments\"></a><h2 class=\"archive-title\" style=\"margin-bottom:20px;\">Comments</h2><div class=\"post archive\">";
+	print "<a name=\"comments\"></a><h2 class=\"archive-title comments-title\">Comments</h2><div class=\"post archive\">";
 	while ($comment = mysql_fetch_array($result)) {
 		$comment_id = $comment['comment_id'];
 		$body = $comment['comment'];
@@ -271,9 +271,9 @@ if (mysql_num_rows($result) > 0) {
 			$thisDate = date(DATE_HEADER_YEAR_FORMAT,strtotime($commentDateTime));
 		}
 		$thisTime = date(TIME_FORMAT,strtotime($commentDateTime));		
-		print "<div class=\"comment\" style=\"margin-bottom:2.5em\" id=\"c$comment_id\">";
+		print "<div class=\"comment\" id=\"c$comment_id\">";
 		print "<div class=\"post-text\">$body</div>";
-		print "<div class=\"post-byline comment\" style=\"margin-top:4px;\">by $author on $thisDate at $thisTime</div>";
+		print "<div class=\"post-byline comment-byline\">by $author on $thisDate at $thisTime</div>";
 		print "</div>";
 	}
 	print "</div>";

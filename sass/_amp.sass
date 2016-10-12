@@ -1,8 +1,10 @@
 /// Colors
 $link: #a35435
 $visited: #703a24
-$active: #eee
+$active: #eeeeee
 $hover: #900 
+$front: #614C3B
+$back: #DACDC2
 
 /// Fonts
 $font-body:              "Segoe UI", Helvetica, Arial, sans-serif
@@ -13,40 +15,39 @@ $font-bold:              600
 .footHome
   padding-left: 10px
 
-/// Pick a site color
-#logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a 
-  color: #7F8A63
-html 
-  background:  #F5F6F3
-
-body 
-  background:  #F5F6F3 /* Old browsers */
-  background: -moz-linear-gradient(top,  #F5F6F3, #ffffff) /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #F5F6F3, #ffffff) /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  #F5F6F3, #ffffff) /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#F5F6F3', endColorstr='#ffffff',GradientType=0 ) /* IE6-9 */
-  background-size: 1px 1px
-  background-repeat: repeat-x
-
-#footer, #bottom 
-  background-color: #F5F6F3
-  color: #7F8A63
-
-.btn 
-  background-color: #F5F6F3
-  border: 1px solid #7F8A63
-  color: #7F8A63
-
-@media screen and (max-width: 750px) 
-  #header 
-    border-bottom: solid 5px #7F8A63
-  
-  #footer 
-    border-top: solid 5px #7F8A63
-  
-
 // Includes
 @import "base"
 @import "posts"
 @import "comments"
 @import "mobile"
+
+/// Pick a site color
+#logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a 
+  color: $front
+html 
+  background:  $back
+
+body 
+  background:  $back /* Old browsers */
+  background: -moz-linear-gradient(top,  $back, #ffffff) /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, $back, #ffffff) /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  $back, #ffffff) /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$back', endColorstr='#ffffff',GradientType=0 ) /* IE6-9 */
+  background-size: 1px 1px
+  background-repeat: repeat-x
+
+#footer, #bottom 
+  background-color: $back
+  color: $front
+
+.btn 
+  background-color: $back
+  border: 1px solid $front
+  color: $front
+
+@media screen and (max-width: 750px) 
+  #header 
+    border-bottom: solid 5px $front
+  
+  #footer 
+    border-top: solid 5px $front
