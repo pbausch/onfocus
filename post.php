@@ -74,6 +74,7 @@ $pageTitle = $pageTitle . " | onfocus";
 $pageHeaderAddition = "<link rel=\"canonical\" href=\"$canonicalUrl\" />\n";
 $pageHeaderAddition = "<link rel=\"amphtml\" href=\"${canonicalUrl}/amp\" />\n";
 $firstImageUrl = "";
+$twitterType = "summary_large_image";
 if ($images > 0) {
 	$firstImageUrl = $imageUrls[0][0];
 	if (substr($firstImageUrl,0,2) == "//") {
@@ -101,6 +102,7 @@ else {
 		// log eventually to catch bad HTML in posts
 	}
 	if ($firstImageUrl == "") {
+		$twitterType = "summary";
 		$firstImageUrl = "https://d1x6es5xzge33k.cloudfront.net/200808.twitter-card.png";
 	}
 }
@@ -115,7 +117,7 @@ $pageHeaderAddition .= <<<END
 	<meta property="og:site_name" content="onfocus"/>
 	<meta property="og:description" content="$summary" />
 	<meta property="og:image" content="$firstImageUrlFb" />
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="$twitterType" />
 	<meta name="twitter:site" content="@pbausch" />
 	<meta name="twitter:title" content="$title" />
 	<meta name="twitter:description" content="$summary" />
