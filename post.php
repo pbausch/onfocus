@@ -22,7 +22,7 @@ else {
 		$images = preg_match_all('!//[a-z0-9\-\.\/]+\.(?:jpe?g|png|gif)!Ui' , $summary , $imageUrls);
 		$summary = strip_tags($summary);
 		$summary = preg_replace("/\s+/", " ", $summary);
-		$summary = truncate_to_x_words($summary, 45);
+		$summary = trim(truncate_to_x_words($summary, 45));
 		if ($summary == "") {
 			$summary = $title;
 		}
