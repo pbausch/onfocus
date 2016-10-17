@@ -164,7 +164,7 @@ else {
 			print "</a>";
 		}
 		else if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months"))) {
-			print " &middot; <a href=\"$permalink#add-comment\" style=\"text-decoration:underline\">comment</a>";
+			print " &middot; <a href=\"$permalink#comment\" style=\"text-decoration:underline\">comment</a>";
 		}
 		print "</div>\n";
 		print "</div>\n";
