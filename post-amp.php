@@ -171,9 +171,9 @@ $css = str_replace("!important","",$css);
 		    "name": "onfocus",
 		    "logo": {
 		      "@type": "ImageObject",
-		      "url": "https://d1x6es5xzge33k.cloudfront.net/200808.twitter-card.png",
-		      "width": 1200,
-		      "height": 1200
+		      "url": "https://d1x6es5xzge33k.cloudfront.net/onfocus-amp-logo.png",
+		      "width": 244,
+		      "height": 60
 		    }
 		  },
 		  "description": <?php print json_encode($summary) ?>		
