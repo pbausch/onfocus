@@ -158,8 +158,8 @@ $css = str_replace("!important","",$css);
 		  "image": {
 		    "@type": "ImageObject",
 		    "url": "<?php print $firstImageUrl ?>",
-		    "height": 640,
-		    "width": 320
+		    "height": 1200,
+		    "width": 1200
 		  },
 		  "datePublished": "<?php print $thisAmpDate ?>",
 		  "author": {
