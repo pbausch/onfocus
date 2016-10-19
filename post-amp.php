@@ -156,7 +156,7 @@ $css = str_replace("!important","",$css);
 		  "@type": "BlogPosting",
 		  "mainEntityOfPage": {
 		    "@type": "WebPage",
-		    "@id": "onfocus-post-<?php print $id ?>"
+		    "@id": "https://google.com/article"
 		  },
 		  "headline": <?php print json_encode($title) ?>,
 		  "image": {
