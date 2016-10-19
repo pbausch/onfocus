@@ -72,7 +72,7 @@ $isDateArchive = 0;
 $cntPost = 1;
 $pageTitle = $pageTitle . " | onfocus";
 $pageHeaderAddition = "<link rel=\"canonical\" href=\"$canonicalUrl\" />\n";
-$pageHeaderAddition .= "<link rel=\"amphtml\" href=\"${canonicalUrl}/amp\" />\n";
+$pageHeaderAddition .= "\t<link rel=\"amphtml\" href=\"${canonicalUrl}/amp\" />\n";
 $firstImageUrl = "";
 $twitterType = "summary_large_image";
 if ($images > 0) {
