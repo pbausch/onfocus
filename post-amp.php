@@ -155,7 +155,7 @@ $css = str_replace("!important","",$css);
 		  "@context": "http://schema.org",
 		  "@type": "BlogPosting",
 		  "mainEntityOfPage": {
-		    "@type": "BlogPosting",
+		    "@type": "WebPage",
 		    "@id": "onfocus-post-<?php print $id ?>"
 		  },
 		  "headline": <?php print json_encode($title) ?>,
