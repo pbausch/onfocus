@@ -134,7 +134,8 @@ catch (Exception $e) {
 $body = str_replace("<img","<amp-img layout=\"responsive\" ",$body);
 $body = str_replace("border=\"0\"","",$body);
 $body = preg_replace("/style=\"[^\"]*\"/i","",$body);
-
+$body = preg_replace("/<font[^>]*>/i","",$body);
+$body = preg_replace("/</font>/i","",$body);
 
 // Change css for amp
 $css = file_get_contents('./css/amp.css', true);
