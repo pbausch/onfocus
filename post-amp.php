@@ -149,15 +149,33 @@ $css = str_replace("!important","",$css);
     <link rel="canonical" href="<?php print $canonicalUrl ?>" />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script type="application/ld+json">
-      {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "<?php print $title ?>",
-        "datePublished": "<?php print $thisAmpDate ?>",
-		"author": "Paul Bausch",
-		"publisher": "Paul Bausch",
-        "image": "<?php print $firstImageUrl ?>"
-      }
+	  {
+		  "@context": "http://schema.org",
+		  "@type": "BlogPosting",
+		  "headline": "<?php print json_encode($title) ?>",
+		  "image": {
+		    "@type": "ImageObject",
+		    "url": "<?php print $firstImageUrl ?>",
+		    "height": 640,
+		    "width": 320
+		  },
+		  "datePublished": "<?php print $thisAmpDate ?>",
+		  "author": {
+		    "@type": "Person",
+		    "name": "Paul Bausch"
+		  },
+		   "publisher": {
+		    "@type": "Organization",
+		    "name": "onfocus",
+		    "logo": {
+		      "@type": "ImageObject",
+		      "url": "https://d1x6es5xzge33k.cloudfront.net/200808.twitter-card.png",
+		      "width": 1200,
+		      "height": 1200
+		    }
+		  },
+		  "description": "<?php print json_encode($summary) ?>"		
+	  }
     </script>
     <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
 	<style amp-custom>
