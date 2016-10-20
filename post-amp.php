@@ -125,6 +125,13 @@ try {
 			}
 		}
 	}
+	// AMP removals
+	foreach ($dom->getElementsByTagName('style') as $node) {
+		$node->parentNode->removeChild($node);
+	}
+	foreach ($dom->getElementsByTagName('script') as $node) {
+		$node->parentNode->removeChild($node);
+	}
 	$body = $dom->saveHTML();
 }
 catch (Exception $e) {
