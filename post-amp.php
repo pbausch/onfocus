@@ -163,7 +163,7 @@ catch (Exception $e) {
 
 // Change post HTML for amp
 //$body = str_replace("<img","<amp-img  ",$body);
-$body = str_replace("border=\"0\"","",$body);
+$body = preg_replace("/onclick=\"[^\"]*\"/i","",$body);
 $body = preg_replace("/style=\"[^\"]*\"/i","",$body);
 $body = preg_replace("/<font[^>]*>/i","",$body);
 $body = str_replace("</font>","",$body);
