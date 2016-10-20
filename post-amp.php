@@ -105,11 +105,15 @@ else {
 	}
 }
 
+$ytid = "";
 $dom = new DOMDocument;
+$internalErrors = libxml_use_internal_errors(false);
+$body = str_replace("&","&amp;",$body);
 try {
-	$dom->loadHTML($body,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-	foreach ($dom->getElementsByTagName('iframe') as $node) {
-		$ytid = "";
+	$dom->loadHTML($body,LIBXML_HTML_NODEFDTD);
+	$nodeList = $dom->getElementsByTagName('iframe');
+	for($n=$nodeList->length-1;$n>=0;--$n) {
+		$node = $nodeList->item($n);
 		if ($node->hasAttribute('data-src')) {
 	    	$url = $node->getAttribute('data-src');
 			$urlHost = parse_url($url, PHP_URL_HOST);
@@ -125,20 +129,40 @@ try {
 			}
 		}
 	}
-	// AMP removals
-	foreach ($dom->getElementsByTagName('style') as $node) {
-		$node->parentNode->removeChild($node);
+	$nodeList = $dom->getElementsByTagName('img');
+	for($n=$nodeList->length-1;$n>=0;--$n) {
+		$img = $nodeList->item($n);
+		$nodeAI = $dom->createElement("amp-img", "");
+		foreach ($img->attributes as $attr) {
+			$name = $attr->nodeName;
+		    $value = $attr->nodeValue;
+			if (($name !== "border") && ($name !== "style")) {
+				$nodeAI->setAttribute($name,$value);
+			}
+		}
+		$img->parentNode->replaceChild($nodeAI, $img);
 	}
-	foreach ($dom->getElementsByTagName('script') as $node) {
-		$node->parentNode->removeChild($node);
-	}
+	removeElementsByTagName('style', $dom);
+	removeElementsByTagName('script', $dom);
 	$body = $dom->saveHTML();
+
+	$body = str_replace("<html><head>","",$body);
+	$body = str_replace("</head><body><p>","",$body);
+	$body = str_replace("</p></body></html>","",$body);
+
+	$body = str_replace("<html><body>","",$body);
+	$body = str_replace("</body></html>","",$body);
+	
+	//$body = substr($body,30);
+	//$body = substr($body,0,-20);
 }
 catch (Exception $e) {
 	// log eventually to catch bad HTML in posts
 }
+//libxml_use_internal_errors($internalErrors);
+
 // Change post HTML for amp
-$body = str_replace("<img","<amp-img layout=\"responsive\" ",$body);
+//$body = str_replace("<img","<amp-img  ",$body);
 $body = str_replace("border=\"0\"","",$body);
 $body = preg_replace("/style=\"[^\"]*\"/i","",$body);
 $body = preg_replace("/<font[^>]*>/i","",$body);
@@ -403,3 +427,13 @@ else {
 </amp-analytics>
 </body>
 </html>
+
+<?php
+function removeElementsByTagName($tagName, $document) {
+  $nodeList = $document->getElementsByTagName($tagName);
+  for ($nodeIdx = $nodeList->length; --$nodeIdx >= 0; ) {
+    $node = $nodeList->item($nodeIdx);
+    $node->parentNode->removeChild($node);
+  }
+}
+?>
