@@ -124,7 +124,7 @@ $pageHeaderAddition .= <<<END
 	<meta name="twitter:image" content="$firstImageUrl" />\n\t
 END;
 if (strpos($body, 'new SWFObject') !== false) {
-    $pageHeaderAddition .= "<script type=\"text/javascript\" src=\"//d1x6es5xzge33k.cloudfront.net/swfobject.js\"></script>\n";
+    $pageHeaderAddition .= "<script type=\"text/javascript\" src=\"https://d1x6es5xzge33k.cloudfront.net/js/swfobject.js\"></script>\n";
 }
 $pageFooterAddition = <<<END
 <div class="wdt-emoji-popup">
@@ -165,13 +165,13 @@ $pageFooterAddition = <<<END
 		</div>
 	</div>
 </div>
-<script src="/js/emoji.min.js"></script>
-<script src="/js/wdt-emoji-bundle.min.js"></script>
+<script src="https://d1x6es5xzge33k.cloudfront.net/js/emoji2.min.js"></script>
+<script src="https://d1x6es5xzge33k.cloudfront.net/js/wdt-emoji-bundle.min.js"></script>
 <script>
 (function() {
 
   wdtEmojiBundle.defaults.emojiSheets = {
-    'apple': '//d1x6es5xzge33k.cloudfront.net/css/emoji.png',
+    'apple': 'https://d1x6es5xzge33k.cloudfront.net/css/emoji.png',
   };
   wdtEmojiBundle.defaults.allow_native = false;
   wdtEmojiBundle.init('.wdt-emoji-bundle-enabled');
