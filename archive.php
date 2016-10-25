@@ -55,7 +55,7 @@ require("header.php");
 		?>
 		</tr></table>
 		<br />
-		I started this site in 1998, and there are a few remnants of the early days in the <a href=" //web.archive.org/web/*/ //www.onfocus.com/">Internet Archive</a>.
+		I started this site in 1998, and there are a few remnants of the early days in the <a href="https://web.archive.org/web/*/http://www.onfocus.com/">Internet Archive</a>.
 		</div>
 	</div>
 <?php
