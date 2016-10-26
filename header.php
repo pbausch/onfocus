@@ -14,8 +14,8 @@
 	<meta name="verify-v1" content="l6Cjq8kY0ofKv+8EY2FMrKOUTC8ztnB/GzIhrMJW/Cs=" />
 	<meta name="viewport" content="initial-scale=1" />
 <?php if (($pageNum > 1) || ($isDateArchive)) { print "\t"; ?><meta name="ROBOTS" content="NOINDEX,FOLLOW"><?php }?>
-	<link rel="icon" type="image/ico" href="https://d1x6es5xzge33k.cloudfront.net/<?php print $logocolor ?>.ico?v=<?php print $logocolor ?>" />
-	<link rel="apple-touch-icon" href="https://d1x6es5xzge33k.cloudfront.net/<?php print $logocolor ?>.apple-touch-icon.png">
+	<link rel="icon" type="image/ico" href="<?php print CDN_URL ?>/<?php print $logocolor ?>.ico?v=<?php print $logocolor ?>" />
+	<link rel="apple-touch-icon" href="<?php print CDN_URL ?>/<?php print $logocolor ?>.apple-touch-icon.png">
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://xml.onfocus.com/posts" />
 	<style>
 		#logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a {color: #<?php print $logocolor ?> !important;}
