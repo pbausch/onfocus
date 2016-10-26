@@ -43,15 +43,7 @@ require("header.php");
 		I'm available for consulting and development work. Some of the things I'm obsessed with include web performance, database query tuning, and helping communities communicate online. I have over 20 years of experience building websites. Please <a href="/contact">get in touch</a> if you'd like to discuss your project.
 		</div>
 		</div>
-		<div class="post">
-		<h3>About onfocus</h3>
-		<div class="post-text">
-		Right now this blog is a nightly copy of my <a href="//pinboard.in/u:pb">Pinboard bookmarks</a>, <a href="//instagram.com/paul.bausch">Instagram photos</a>, <a href="//www.flickr.com/photos/pb">Flickr photos</a>, and occasional <a href="//twitter.com/#!/pbausch">tweets</a>. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe: <a href="http://xml.onfocus.com/posts"><img src="//o.snapgallery.net/feed.png" width="12" height="12" border="0" style="vertical-align:middle;" title="Subscribe to onfocus" alt="rss"/></a> And here's <a href="/archive">the archive</a> if you want to go back in time.
-		<br /><br />
-		<code>onfocus</code> is the name of a <a href="//en.wikipedia.org/wiki/JavaScript">JavaScript</a> event. In 1998 when I was looking for a domain name to go along with my new blog I was using JavaScript quite a bit and thought it was a good fit. I still use JavaScript quite a bit so it was a lucky bet. If this weblog was about JavaScript it would be even better.
-		</div>
-		</div>
-	<div class="post" style="margin-top:18px;">
+		<div class="post" style="margin-top:18px;">
 		<h3>Contact Me</h3>
 		<div class="post-text">
 		You can <a href="/contact">send me an email here</a>.
@@ -69,7 +61,15 @@ require("header.php");
 		<a href="//www.thisismyjam.com/pbausch" title="GitHub" rel="me"><img src="//www.onfocus.com/images/github-icon.gif" alt="GitHub" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="https://github.com/pbausch/" title="This Is My Jam" rel="me">pbausch</a> on GitHub<br>
 		<a href="//www.linkedin.com/in/paulbausch" title="LinkedIn" rel="me"><img src="//www.onfocus.com/images/linkedin-icon.gif" alt="LinkedIn" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.linkedin.com/in/paulbausch" title="LinkedIn" rel="me">paulbausch</a> on LinkedIn<br>
 		</div>
-	</div>
+		</div>
+		<div class="post">
+		<h3>About onfocus</h3>
+		<div class="post-text">
+		Right now this blog is a nightly copy of my <a href="//pinboard.in/u:pb">Pinboard bookmarks</a>, <a href="//instagram.com/paul.bausch">Instagram photos</a>, <a href="//www.flickr.com/photos/pb">Flickr photos</a>, and occasional <a href="//twitter.com/#!/pbausch">tweets</a>. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe: <a href="http://xml.onfocus.com/posts"><img src="//o.snapgallery.net/feed.png" width="12" height="12" border="0" style="vertical-align:middle;" title="Subscribe to onfocus" alt="rss"/></a> And here's <a href="/archive">the archive</a> if you want to go back in time.
+		<br /><br />
+		<code>onfocus</code> is the name of a <a href="//en.wikipedia.org/wiki/JavaScript">JavaScript</a> event. In 1998 when I was looking for a domain name to go along with my new blog I was using JavaScript quite a bit and thought it was a good fit. I still use JavaScript quite a bit so it was a lucky bet. If this weblog was about JavaScript it would be even better.
+		</div>
+		</div>
 </div>
 <div id="footer">
 	<div class="navigation">
