@@ -35,6 +35,13 @@
 			background-color: #<?php print $gradcolor ?>;
 			color: #<?php print $logocolor ?>;
 		}
+		.heartbox {
+			margin-top: 20px;
+		}
+		.hearticon {
+			cursor: pointer;
+			fill: #<?php print $logocolor ?>;
+		}
 		.btn {
 		    background-color: #<?php print $gradcolor ?>;
 		    border: 1px solid #<?php print $logocolor ?>;

@@ -67,6 +67,11 @@ else {
 		}
 	}
 }
+
+// Set a token for comments and hearts
+$thisToken = md5(uniqid(rand(), TRUE));
+$_SESSION['token'] = $thisToken;
+
 $pageNum = 1;
 $isDateArchive = 0;
 $cntPost = 1;
@@ -126,6 +131,7 @@ END;
 if (strpos($body, 'new SWFObject') !== false) {
     $pageHeaderAddition .= "<script type=\"text/javascript\" src=\"https://d1x6es5xzge33k.cloudfront.net/js/swfobject.js\"></script>\n";
 }
+$pageHeaderAddition .= "<script>var pid = ${id};</script>\n";
 $pageFooterAddition = <<<END
 <div class="wdt-emoji-popup">
     <a href="#" class="wdt-emoji-popup-mobile-closer"> &times; </a>
@@ -202,6 +208,7 @@ if (($type == 5) || ($type == 6) || ($type == 8)) {
 	print "</div>";
 }
 print "<div class=\"post-byline archive\">$thisDate at $thisTime</div>";
+require("lib/heart.php");
 ?>
 </div>
 <?php
@@ -283,8 +290,6 @@ if (mysql_num_rows($result) > 0) {
 // ------------ comments must be enabled, and then only for six months ------------
 if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months"))) {
 	// Set session token
-	$thisToken = md5(uniqid(rand(), TRUE));
-	$_SESSION['token'] = $thisToken;
 	$thisName = "";
 	$thisURL = "";
 	if (isset($_COOKIE["name"])) {
@@ -325,13 +330,10 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 	</div>
 </div>
 <input type="hidden" name="postid" value="<?php print $id ?>" id="postid"/>
-<input type="hidden" name="token" value="<?php print md5(uniqid(rand(), TRUE)) ?>" id="token"/>
+<input type="hidden" name="token" value="<?php print $thisToken ?>" id="token"/>
 </form>
 <script type="text/javascript">var f=document.getElementById("cform");f.style.display='block';</script>
 <?php
-}
-else {
-	$thisToken = '';
 }
 // END COMMENT FORM
 ?>

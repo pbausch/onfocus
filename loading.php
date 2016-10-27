@@ -32,8 +32,8 @@ header('Cache-Control: public');
 	<script>
 		var src = window.frameElement.getAttribute('data-src');
 		var video_id = src.split('/embed/')[1];
-		video_id = video_id.replace('?rel=0','');
 		if(video_id != undefined) {
+			video_id = video_id.replace('?rel=0','');
 		 	var content = document.getElementById("content");
 			content.style.backgroundImage = 'url(https://img.youtube.com/vi/'+ video_id +'/maxresdefault.jpg)';
 			content.style.backgroundSize = '640px 360px';

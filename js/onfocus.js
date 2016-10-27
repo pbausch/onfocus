@@ -62,5 +62,46 @@ function deferVideos() {
 		} 
 	} 
 }
+function setHeart(h,o) {
+	var r = new XMLHttpRequest();
+	r.open("POST", "/heart.php?h="+o+"&pid="+pid+"&t="+token, true);
+	r.onreadystatechange = function () {
+	  if (r.readyState != 4 || r.status != 200) return;
+	  h.setAttribute('data-status',o);
+	  if (o == 1) {
+		document.getElementById('lineheart').style.display = 'none';
+		document.getElementById('fullheart').style.display = 'block';
+	  }
+	  else {
+		document.getElementById('lineheart').style.display = 'block';
+		document.getElementById('fullheart').style.display = 'none';
+	  }
+	};
+	r.send();
+	
+}
+function startHeart() {
+	if (typeof pid !== 'undefined') {
+		var h = document.getElementById("lineheart");
+		h.onclick = function() { 
+			if (h.getAttribute('data-status')==1) {
+				setHeart(h,0);
+			}
+			else {
+				setHeart(h,1);
+			}
+		};
+		var h = document.getElementById("fullheart");
+		h.onclick = function() { 
+			if (h.getAttribute('data-status')==1) {
+				setHeart(h,0);
+			}
+			else {
+				setHeart(h,1);
+			}
+		};
+	}
+}
 addEvent(window, 'load', swapnoimg);
 addEvent(window, 'load', deferVideos);
+addEvent(window, 'load', startHeart);
