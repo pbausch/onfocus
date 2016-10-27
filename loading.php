@@ -12,13 +12,28 @@
 		}
 		#content {
 		    display: table-cell;
-		    text-align: center;
-		    vertical-align: middle;
+		    text-align: left;
+		    vertical-align: top;
+		}
+		#msg {
+			background-color: rgba(255,255,255,0.5);
+			padding: 20px;
 		}
 	</style>
 </head>
 <body>
-	<div id="content">Loading...</div>
-	<script>var src = window.frameElement.getAttribute('data-src');</script>
+	<div id="content">
+		<div id="msg">Loading...</div>
+	</div>
+	<script>
+		var src = window.frameElement.getAttribute('data-src');
+		var video_id = src.split('/embed/')[1];
+		video_id = video_id.replace('?rel=0','');
+		if(video_id != undefined) {
+		 	var content = document.getElementById("content");
+			content.style.backgroundImage = 'url(https://img.youtube.com/vi/'+ video_id +'/maxresdefault.jpg)';
+			content.style.backgroundSize = '640px 360px';
+		}
+	</script>
 </body>
 </html>
