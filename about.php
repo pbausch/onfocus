@@ -38,9 +38,9 @@ require("header.php");
 		When I'm not computering I like to hike and camp. Oregon is a great place for those.
 		</div></div>
 		<div class="post">
-		<h3>Hire Me!</h3>
+		<h3>Hire Me</h3>
 		<div class="post-text">
-		I'm available for consulting and development work. Some of the things I'm obsessed with include web performance, database query tuning, and helping communities communicate online. I have over 20 years of experience building websites. Please <a href="/contact">get in touch</a> if you'd like to discuss your project.
+		I'm available for consulting and development work. Some of the things I'm obsessed with include web performance, database query tuning, and helping communities communicate online. I have over 20 years of experience building websites. Please <a href="/contact">get in touch</a> if you'd like to discuss a project.
 		</div>
 		</div>
 		<div class="post" style="margin-top:18px;">
