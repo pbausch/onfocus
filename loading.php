@@ -1,3 +1,7 @@
+<?php 
+header('Expires: ' . gmdate('D, d M Y H:i:s', time() + (60*60*24*45)) . ' GMT'); 
+header('Cache-Control: public');
+?>
 <html>
 <head>
 	<style>
