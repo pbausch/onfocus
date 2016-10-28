@@ -106,11 +106,13 @@ else {
 	catch (Exception $e) {
 		// log eventually to catch bad HTML in posts
 	}
-	if ($firstImageUrl == "") {
-		$twitterType = "summary";
-		$firstImageUrl = "https://d1x6es5xzge33k.cloudfront.net/200808.twitter-card.png";
-	}
 }
+
+if ((strlen($firstImageUrl) <=4) || ($firstImageUrl == "")) {
+	$twitterType = "summary";
+	$firstImageUrl = "https://d1x6es5xzge33k.cloudfront.net/200808.twitter-card.png";
+}
+
 
 // use smaller youtube images for facebook (8Mb max)
 $firstImageUrlFb = str_replace("hqdefault","mqdefault",$firstImageUrl);
