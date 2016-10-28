@@ -108,7 +108,7 @@ else {
 	}
 }
 
-if (($firstImageUrl !== "https://www.gif") || ($firstImageUrl == "")) {
+if (($firstImageUrl == "https://www.gif") || ($firstImageUrl == "")) {
 	$twitterType = "summary";
 	$firstImageUrl = "https://d1x6es5xzge33k.cloudfront.net/200808.twitter-card.png";
 }
