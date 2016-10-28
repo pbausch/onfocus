@@ -298,30 +298,42 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 	if (isset($_COOKIE["url"])) {
 		$thisURL = $_COOKIE["url"];
 	}
+	$commentFieldName = crypt('comment'.$thisToken,MD5_SALT);
+	$nameFieldName = crypt('name'.$thisToken,MD5_SALT);
+	$urlFieldName = crypt('url'.$thisToken,MD5_SALT);
+	$postFieldName = crypt('postid'.$thisToken,MD5_SALT);
+	$randomFieldName = crypt('random'.$thisToken,MD5_SALT);
+	$randomValue = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)) )),1,10);
 	print "<a name=\"add-comment\"></a><h2 class=\"archive-title\" style=\"margin-bottom:20px;\">Add a Comment</h2><div class=\"post archive\">";
 ?>
 <div class="post-text" id="jsmsg">If you want to comment you'll need JavaScript on. According to our records you have disabled JavaScript in your browser settings or with an extension.</div>
 <script type="text/javascript">var msg=document.getElementById("jsmsg");msg.style.display='none';</script>
 <form action="https://www.onfocus.com/add-comment.php" method="post" onsubmit="return submitForm(this);" style="display:none;" id="cform">
 <div class="formRow commentHere">
-	<label class="post-byline" for="comment">comment</label>
+	<label class="post-byline" for="<?php print $commentFieldName ?>">comment</label>
 	<div class="formElement">
-		<textarea cols="40" rows="8" name="comment" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="comment" aria-required="true" class="wdt-emoji-bundle-enabled"></textarea>
+		<textarea cols="40" rows="8" name="<?php print $commentFieldName ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $commentFieldName ?>" aria-required="true" class="wdt-emoji-bundle-enabled"></textarea>
 	</div>
 </div>
 
 <div class="please-note post-byline"><b>FYI:</b> HTML won't work. Markdown won't work. Emoji? <span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji1f44c"></span></span></div>
 
 <div class="formRow">	
-	<label class="form-label post-byline" for="name">name</label>
+	<label class="form-label post-byline" for="<?php print $nameFieldName ?>">name</label>
 	<div class="formElement">
-		<input name="name" type="text" size="50" maxlength="25" value="<?php print $thisName ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="name" aria-required="true">
+		<input name="<?php print $nameFieldName ?>" type="text" size="50" maxlength="25" value="<?php print $thisName ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $nameFieldName ?>" aria-required="true">
 	</div>
 </div>
 <div class="formRow">
-	<label class="post-byline" for="url">url</label>
+	<label class="post-byline" for="<?php print $urlFieldName ?>">url</label>
 	<div class="formElement">
-		<input name="url" type="text" size="50" maxlength="100" value="<?php print $thisURL ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="url" type="url" placeholder="https://"></td></tr>
+		<input name="<?php print $urlFieldName ?>" type="text" size="50" maxlength="100" value="<?php print $thisURL ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $urlFieldName ?>" type="url" placeholder="https://"></td></tr>
+	</div>
+</div>
+<div class="formRow">
+	<label class="post-byline" for="<?php print $randomFieldName ?>">email</label>
+	<div class="formElement">
+		<input name="<?php print $randomFieldName ?>" type="text" size="50" maxlength="100" value="<?php print $randomValue ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $randomFieldName ?>" type="email" placeholder="email"></td></tr>
 	</div>
 </div>
 <div class="formRow">
@@ -329,12 +341,10 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 		<input class="btn" type="submit" value="add comment" id="submit"/>
 	</div>
 </div>
-<input type="hidden" name="postid" value="<?php print $id ?>" id="postid"/>
+<input type="hidden" name="<?php print $postFieldName ?>" value="<?php print $id ?>" id="postid"/>
 <input type="hidden" name="token" value="<?php print $thisToken ?>" id="token"/>
-<input type="hidden" name="f" value="<?php print crypt($thisToken,SALT) ?>"/>
-<input type="hidden" name="u" value=""/>
 </form>
-<script type="text/javascript">var f=document.getElementById("cform");f.style.display='block';</script>
+<script type="text/javascript">var v = document.getElementById("<?php print $randomFieldName ?>");v.value = 'reset';var r = document.getElementsByClassName('formRow')[3];r.style.display = 'none';var f = document.getElementById("cform");f.style.display='block';</script>
 <?php
 }
 // END COMMENT FORM
