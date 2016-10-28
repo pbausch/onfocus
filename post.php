@@ -331,6 +331,8 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 </div>
 <input type="hidden" name="postid" value="<?php print $id ?>" id="postid"/>
 <input type="hidden" name="token" value="<?php print $thisToken ?>" id="token"/>
+<input type="hidden" name="f" value="<?php print crypt($thisToken,SALT) ?>"/>
+<input type="hidden" name="u" value=""/>
 </form>
 <script type="text/javascript">var f=document.getElementById("cform");f.style.display='block';</script>
 <?php
