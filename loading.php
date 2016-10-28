@@ -36,7 +36,7 @@ header('Cache-Control: public');
 			video_id = video_id.replace('?rel=0','');
 		 	var content = document.getElementById("content");
 			content.style.backgroundImage = 'url(https://img.youtube.com/vi/'+ video_id +'/maxresdefault.jpg)';
-			content.style.backgroundSize = '640px 360px';
+			content.style.backgroundSize = 'cover';
 		}
 	</script>
 </body>
