@@ -33,7 +33,7 @@ require("header.php");
 		</div>
 		<div class="flourish" style="text-align:center;margin:15px;">&middot; &sect; &middot;</div>
 		<div class="post-text">
-		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln. Then I promptly started destroying journalism with computers. (I kid!)
+		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln.
 		<br /><br />
 		When I'm not computering I like to hike and camp. Oregon is a great place for those.
 		</div></div>
