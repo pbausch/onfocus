@@ -2,7 +2,7 @@
 require("onfocus-ini.inc");
 $pageNum = 1;
 $isDateArchive = 0;
-$pagetitle = "The What-Do-You-Want-For-Dinner I-Don't-Know-What-Do-You-Want? Dialog Generator | onfocus";
+$pageTitle = "The What-Do-You-Want-For-Dinner I-Don't-Know-What-Do-You-Want? Dialog Generator | onfocus";
 require("header.php");
 
 	if (isset($_POST['hdnHdn'])) {
@@ -79,6 +79,16 @@ require("header.php");
 	<b><?php print $FirstName ?></b>: <?php print $Number ?>.
 	</div>
 	</div>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- Responsive Eat -->
+	<ins class="adsbygoogle"
+	     style="display:block"
+	     data-ad-client="ca-pub-7425124421286960"
+	     data-ad-slot="1890304351"
+	     data-ad-format="auto"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
 	<?php } else { ?>
 	<h2 class="archive-title">The What-Do-You-Want-For-Dinner I-Don't-Know-What-Do-You-Want? Dialog Generator.</h2>
 	<div class="post archive">
@@ -86,15 +96,15 @@ require("header.php");
 	How many times have you argued with someone about what to have for dinner when both of you were too apathetic to actually come to a decision? 
 	Well now you can skip the banal conversation with The What-Do-You-Want-For-Dinner-I-Don't-Know-What-Do-You-Want? Dialog Generator and start eating! It's fast and FREE. Just fill in your information below:
 	<br /><br />
-	<form action="eat_generator.php" method="post" name="EatThisForm">
+	<form action="eat_generator.php" method="post" id="eat">
 	<table>
-	<tr><td align="right"><font face="verdana, arial" size="2">Your First Name:</font></td><td><input type="text" size="15" maxlength="10" name="txtFirstName" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
-	<tr><td align="right"><font face="verdana, arial" size="2">Friend's/SO's First Name:</font></td><td><input type="text" size="15" maxlength="10" name="txtOtherFirstName" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
-	<tr><td align="right"><font face="verdana, arial" size="2">Your Favorite Food:</font></td><td><input type="text" size="15" maxlength="10" name="txtFavoriteFood" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
-	<tr><td align="right"><font face="verdana, arial" size="2">Your Least Favorite Food:</font></td><td><input type="text" size="15" maxlength="10" name="txtBadFood" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
-	<tr><td align="right"><font face="verdana, arial" size="2">Your Favorite Number:</font></td><td><input type="text" size="15" maxlength="10" name="txtNumber" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
+	<tr><td align="right"><label for="txtFirstName">Your First Name:</label></td><td><input type="text" size="15" maxlength="10" id="txtFirstName" name="txtFirstName" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
+	<tr><td align="right"><label for="txtOtherFirstName">Friend's/SO's First Name:</label></td><td><input type="text" size="15" maxlength="10" id="txtOtherFirstName" name="txtOtherFirstName" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
+	<tr><td align="right"><label for="txtFavoriteFood">Your Favorite Food:</label></td><td><input type="text" size="15" maxlength="10" id="txtFavoriteFood" name="txtFavoriteFood" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
+	<tr><td align="right"><label for="txtBadFood">Your Least Favorite Food:</label></td><td><input type="text" size="15" maxlength="10" id="txtBadFood" name="txtBadFood" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
+	<tr><td align="right"><label for="txtNumber">Your Favorite Number:</label></td><td><input type="text" size="15" maxlength="10" id="txtNumber" name="txtNumber" style="width:150px;background-color:#ddd;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#ddd';"/></td></tr>
 	<tr><td colspan="2" height="15"></td></tr>
-	<tr><td colspan="2" align="right"><input type="hidden" name="hdnHdn" value="true" /><input type="submit" value="ready? discuss..." class="butt" /></td></tr>
+	<tr><td colspan="2" align="right"><input type="hidden" name="hdnHdn" value="true" /><input type="submit" value="ready? discuss..." class="btn" /></td></tr>
 	</table>
 	</form>
 	</div>
@@ -104,20 +114,6 @@ require("header.php");
 <div id="footer">
 	<div class="navigation">
 		<a href="/">Home</a>
-		<?php if (isset($_POST['hdnHdn'])) { ?>
-		<br><br>
-		<script type="text/javascript"><!--
-		google_ad_client = "pub-7425124421286960";
-		/* 468x60, EAT, created 9/17/10 */
-		google_ad_slot = "3793776548";
-		google_ad_width = 468;
-		google_ad_height = 60;
-		//-->
-		</script>
-		<script type="text/javascript"
-		src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-		</script>
-		<?php } ?>
 	</div>
 </div>
 <?php require("footer.php") ?>
