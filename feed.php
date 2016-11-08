@@ -37,7 +37,7 @@ else {
 <rss version="2.0">
 <channel>
 <title>onfocus.com</title>
-<link>http://www.onfocus.com/</link>
+<link>https://www.onfocus.com/</link>
 <description>A personal weblog by Paul Bausch, a web developer in Corvallis, OR</description>
 <language>en-us</language>
 <lastBuildDate><?php print date(DATE_RSS_FORMAT); ?></lastBuildDate>
