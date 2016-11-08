@@ -77,8 +77,7 @@ require("header.php");
 	<b><?php print $FirstName ?></b>: Yeah, ok.<br>
 	<b><?php print $OtherFirstName ?></b>: What's your favorite number?<br>
 	<b><?php print $FirstName ?></b>: <?php print $Number ?>.
-	</div>
-	</div>
+	<br /><br />
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<!-- Responsive Eat -->
 	<ins class="adsbygoogle"
@@ -89,6 +88,8 @@ require("header.php");
 	<script>
 	(adsbygoogle = window.adsbygoogle || []).push({});
 	</script>
+	</div>
+	</div>
 	<?php } else { ?>
 	<h2 class="archive-title">The What-Do-You-Want-For-Dinner I-Don't-Know-What-Do-You-Want? Dialog Generator.</h2>
 	<div class="post archive">
