@@ -211,20 +211,7 @@ if (($type == 5) || ($type == 6) || ($type == 8)) {
 }
 print "<div class=\"post-byline archive\">$thisDate at $thisTime</div>";
 require("lib/heart.php");
-if (strtotime("-2 month") > strtotime($postDateTime)) {
 ?>
-<br /><br />
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- Responsive Post -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-7425124421286960"
-     data-ad-slot="5411860358"
-     data-ad-format="auto"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<?php } ?>
 </div>
 <?php
 // BEGIN COMMENTS
