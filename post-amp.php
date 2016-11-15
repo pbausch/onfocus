@@ -188,7 +188,7 @@ $css = str_replace("!important","",$css);
 		  "@type": "BlogPosting",
 		  "mainEntityOfPage": {
 		    "@type": "WebPage",
-		    "@id": "https://google.com/article"
+		    "@id": "<?php print $canonicalUrl ?>"
 		  },
 		  "headline": <?php print json_encode($title) ?>,
 		  "image": {
