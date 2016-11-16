@@ -57,7 +57,10 @@
 		}
 	</style>
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
-	<?php if (isset($pageHeaderAddition)) { print $pageHeaderAddition; } ?>
+	<?php if (isset($pageHeaderAddition)) { 
+		$pageHeaderAddition = str_replace("200808.twitter-card.png",$logocolor . ".twitter-card.png",$pageHeaderAddition);
+		print $pageHeaderAddition; 
+	} ?>
 <title><?php if (isset($pageTitle)) { print $pageTitle; } else { print "onfocus"; } ?></title>
 </head>
 <body>
