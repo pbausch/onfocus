@@ -19,7 +19,12 @@ else {
 		$summary = $body;
 		$summary = preg_replace("/<style\\b[^>]*>(.*?)<\\/style>/s", "", $summary);
 		$imageUrls = array();
-		$images = preg_match_all('!//[a-z0-9\-\.\/]+\.(?:jpe?g|png|gif)!Ui' , $summary , $imageUrls);
+		if (strpos($body,"img")) {
+			$images = preg_match_all('!//[a-z0-9\-\.\/]+\.(?:jpe?g|png|gif)!Ui' , $summary , $imageUrls);
+		}
+		else {
+			$images = 0;
+		}
 		$summary = strip_tags($summary);
 		$summary = preg_replace("/\s+/", " ", $summary);
 		$summary = trim(truncate_to_x_words($summary, 45));
