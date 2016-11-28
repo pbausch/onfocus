@@ -13,10 +13,58 @@ $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
 ?>
-	<h2>Post Archive</h2>
+	<h2>Archive</h2>
+	
+	<div class="post" style="margin-top:18px;">
+		<h3>Start Here</h3>
+		<div class="post-text">
+		You have to start somewhere.
+		<ul>
+			<li><a href="https://www.onfocus.com/amafeed/">Amazon Feed Generator</a></li>
+			<li><a href="https://www.onfocus.com/eat_generator.asp">What do you want for dinner? I dunno.</a> (1999)</li>
+			<li><a href="https://www.onfocus.com/2016/11/6842/pinboard-popular-tweets">Pinboard Popular Tweets</a> (Nov 2016)</li>
+			<li><a href="https://www.onfocus.com/2004/09/3566/guerilla-media-literacy-list">Media Literacy Reading List</a> (Sep 2004)</li>
+			<li><a href="https://www.onfocus.com/2005/08/3732/how-i-write-a-hack">How I Write a Hack</a> (Aug 2005)</li>
+		</ul>
+		</div>
+	</div>
+	
 	<div class="post">
-		<div class="post-text" style="margin-top:18px;">
-		Here are 17 years worth of onfocus.com posts, month by month:
+		<h3>Most Hearted Posts</h3>
+		<div class="post-text">
+		Each post has a clickable heart that I added in October 2016: <a href="https://www.onfocus.com/2016/10/6812/c2bk-infrastructure-report-hearts">Hearts</a>. These posts have the most heart-clicks:
+		<ul>
+			<?php
+			$query = "SELECT COUNT(hearts.post_id), items.post_id, items.title, items.DateCreated, items.url_slug FROM hearts INNER JOIN items ON items.post_id = hearts.post_id WHERE heart = 1 GROUP BY items.post_id, items.title, items.DateCreated, items.url_slug ORDER BY COUNT(hearts.post_id) DESC LIMIT 10";
+			if (!$result = @ mysql_query ($query, $connection))
+			   	logError();
+			if (mysql_num_rows($result) == 0) {
+				die("<div class=\"post-text\">Couldn't find any hearts! WTF?!</div>");
+			} 
+			else {
+				while ($heart = mysql_fetch_array($result)) {
+					$title = $heart['title'];
+					$id = $heart['post_id'];
+					$slug = $heart['url_slug'];
+					$postDateTime = $heart['DateCreated'];
+					$thisYear = date('Y',strtotime($postDateTime));
+					$thisMonth = date('m',strtotime($postDateTime));
+					$permalink = "/$thisYear/$thisMonth/$id";
+					if ($slug !== '') {
+						$permalink .= "/$slug";
+					}
+					print "<li><a href=\"$permalink\">$title</a></li>";
+				}
+			}
+			?>
+		</ul>
+		</div>
+	</div>
+
+	<div class="post">
+		<h3>Post Archive</h3>
+		<div class="post-text">
+		For serious browsers only: 17 years worth of onfocus posts, month by month:
 		<br/><br/>
 		<table border="0" cellpadding="6" style="line-height:150%;"><tr valign="top"> 
 		<?php
@@ -63,9 +111,9 @@ $query = "SELECT GalleryName, DateCreated, URL, ThumbURL, TotalPhotos FROM Galle
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 ?>
-	<h2>Gallery Archive</h2>
 	<div class="post" id="galleryArchive">
-		<div class="post-text" style="margin-top:18px;">
+		<h3>Gallery Archive</h3>
+		<div class="post-text">
 			Before Flickr, Facebook, Instagram, and others I posted a lot of pictures here. I used to post one or two pictures in a post and then link to a gallery of more. These are links to those galleries:
 			<br /><br />
 			<?php while ($tp = mysql_fetch_row($result)) {
