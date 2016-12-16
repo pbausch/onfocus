@@ -71,6 +71,7 @@ else {
 $pageNum = 1;
 $isDateArchive = 0;
 $cntPost = 1;
+$ampHeadline = $pageTitle;
 $pageTitle = $pageTitle . " | onfocus";
 $pageHeaderAddition = "<link rel=\"canonical\" href=\"$canonicalUrl\" />\n";
 $firstImageUrl = "";
@@ -190,7 +191,7 @@ $css = str_replace("!important","",$css);
 		    "@type": "WebPage",
 		    "@id": "<?php print $canonicalUrl ?>"
 		  },
-		  "headline": <?php print json_encode($title) ?>,
+		  "headline": <?php print json_encode($ampHeadline) ?>,
 		  "image": {
 		    "@type": "ImageObject",
 		    "url": "<?php print $firstImageUrl ?>",
