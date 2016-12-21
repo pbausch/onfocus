@@ -10,7 +10,7 @@ require("header.php");
 		<!-- <img src="//www.onfocus.com/images/pb_coffee2_square_140.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
 		<!-- <img src="//www.onfocus.com/images/pb-photo-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
 		<!-- <img src="//www.onfocus.com/images/pb-tripod-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
-		<img src="//www.onfocus.com/images/pb-winter-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/>
+		<img src="//www.onfocus.com/images/pb-winter-avatar.jpg" width="140" height="140" alt="Paul Bausch"/>
 		<div style="margin-top:15px;">
 		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>.
 		<br /><br />
