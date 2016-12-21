@@ -5,8 +5,8 @@ $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
 ?><img src="//www.onfocus.com/images/pb-winter-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;"/>
-<h2>About Paul Bausch</h2>
 	<div class="post" style="margin-top:18px;">
+	<h3>About Paul Bausch</h3>
 		<div class="post-text">
 		<!-- <img src="//www.onfocus.com/images/pb_coffee2_square_140.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
 		<!-- <img src="//www.onfocus.com/images/pb-photo-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
@@ -37,12 +37,6 @@ require("header.php");
 		<br /><br />
 		When I'm not computering I like to hike and camp. Oregon is a great place for those.
 		</div></div>
-		<div class="post">
-		<h3>Hire Me</h3>
-		<div class="post-text">
-		I'm available for consulting and development work. Some of the things I'm obsessed with include web performance, database query tuning, and helping communities communicate online. I have over 20 years of experience building websites. Please <a href="/contact">get in touch</a> if you'd like to discuss a project.
-		</div>
-		</div>
 		<div class="post" style="margin-top:18px;">
 		<h3>Contact Me</h3>
 		<div class="post-text">
