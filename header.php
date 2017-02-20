@@ -52,10 +52,10 @@
 		}
 		@media screen and (max-width: 750px) {
 			#header {
-				border-bottom: solid 5px #<?php print $logocolor ?>;
+				border-bottom: solid 5px #666;
 			}
 			#footer {
-				border-top: solid 5px #<?php print $logocolor ?>;
+				border-top: solid 5px #666;
 			}
 		}
 	</style>
