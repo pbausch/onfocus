@@ -1,6 +1,9 @@
-<?php require_once('lib/colors.php'); ?>
 <?php require_once('lib/set-includes.php'); ?>
 <?php $page = $_SERVER["PHP_SELF"]; ?>
+<?php
+	$logocolor = "fefefe";
+	$gradcolor = "222";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,16 +26,16 @@
 			background:  #<?php print $gradcolor ?>;
 		}
 		body {
-			background:  #<?php print $gradcolor ?>; /* Old browsers */
+    		background:  #<?php print $gradcolor ?>; /* Old browsers */
 			background: -moz-linear-gradient(top,  #<?php print $gradcolor ?>, #ffffff); /* FF3.6-15 */
 			background: -webkit-linear-gradient(top, #<?php print $gradcolor ?>, #ffffff); /* Chrome10-25,Safari5.1-6 */
 			background: linear-gradient(to bottom,  #<?php print $gradcolor ?>, #ffffff); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#<?php print $gradcolor ?>', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 			background-size: 1px 1px;
 			background-repeat: repeat-x;
+			background-image: linear-gradient(to bottom, #434343 0%, #222 100%);
 		}
 		#footer, #bottom {
-			background-color: #<?php print $gradcolor ?>;
 			color: #<?php print $logocolor ?>;
 		}
 		.heartbox {
