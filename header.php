@@ -44,6 +44,7 @@
 		.hearticon {
 			cursor: pointer;
 			fill: #<?php print $gradcolor ?>;
+			margin-bottom: 20px;
 		}
 		.btn {
 		    background-color: #<?php print $gradcolor ?>;
