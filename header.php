@@ -43,7 +43,7 @@
 		}
 		.hearticon {
 			cursor: pointer;
-			fill: #<?php print $logocolor ?>;
+			fill: #<?php print $gradcolor ?>;
 		}
 		.btn {
 		    background-color: #<?php print $gradcolor ?>;
