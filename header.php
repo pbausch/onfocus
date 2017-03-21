@@ -69,7 +69,7 @@
 </head>
 <body>
 <div id="header" onclick="document.location='/';">
-	<h1 id="logo" onmouseover="focusin(this)" onmouseout="defocus(this)">onfocus</h1>
+	<h1 id="logo">onfocus</h1>
 	<p class="tagline">a weblog by pb</p>
 	<div id="infobox">
 		<div class="post-text">

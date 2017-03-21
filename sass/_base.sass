@@ -97,11 +97,113 @@ ul.delicious
   font-family: Helvetica
   font-size: 40px
   text-transform: uppercase
-  -webkit-filter: blur(3px)
-  filter: blur(3px)
   line-height: 1.25
   margin-top: .5em
   letter-spacing: 2px
+  filter: blur(3px)
+  -webkit-animation: text-onfocus 2s ease-in forwards
+  -moz-animation: text-onfocus 2s ease-in forwards
+  animation: text-onfocus 2s ease-in forwards
+
+#logo:hover
+  -webkit-animation: text-unfocus .1s ease-out both
+  -moz-animation: text-unfocus .1s ease-out both
+  animation: text-unfocus .1s ease-out both
+
+.hearticon:hover
+  -webkit-animation: heartbeat 1.5s ease-in-out infinite both
+  -moz-animation: heartbeat 1.5s ease-in-out infinite both
+  animation: heartbeat 1.5s ease-in-out infinite both
+
+@-webkit-keyframes text-unfocus
+  from
+    -webkit-filter: blur(0x)
+    filter: blur(0)
+  to
+    -webkit-filter: blur(3px)
+    filter: blur(3px)
+
+@keyframes text-unfocus
+  from
+    -webkit-filter: blur(0)
+    filter: blur(0)
+  to
+    -webkit-filter: blur(3px)
+    filter: blur(3px)
+
+@-webkit-keyframes text-onfocus
+  from
+    -webkit-filter: blur(3px)
+    filter: blur(3px)
+  to
+    -webkit-filter: blur(0)
+    filter: blur(0)
+
+@keyframes text-onfocus
+  from
+    -webkit-filter: blur(3px)
+    filter: blur(3px)
+  to
+    -webkit-filter: blur(0)
+    filter: blur(0)
+
+@-webkit-keyframes heartbeat
+  0%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+    -webkit-transform-origin: center center
+    transform-origin: center center
+    -webkit-animation-timing-function: ease-out
+    animation-timing-function: ease-out
+  10%
+    -webkit-transform: scale(.91)
+    transform: scale(.91)
+    -webkit-animation-timing-function: ease-in
+    animation-timing-function: ease-in
+  17%
+    -webkit-transform: scale(.98)
+    transform: scale(.98)
+    -webkit-animation-timing-function: ease-out
+    animation-timing-function: ease-out
+  33%
+    -webkit-transform: scale(.87)
+    transform: scale(.87)
+    -webkit-animation-timing-function: ease-in
+    animation-timing-function: ease-in
+  45%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+    -webkit-animation-timing-function: ease-out
+    animation-timing-function: ease-out
+
+@keyframes heartbeat
+  0%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+    -webkit-transform-origin: center center
+    transform-origin: center center
+    -webkit-animation-timing-function: ease-out
+    animation-timing-function: ease-out
+  10%
+    -webkit-transform: scale(.91)
+    transform: scale(.91)
+    -webkit-animation-timing-function: ease-in
+    animation-timing-function: ease-in
+  17%
+    -webkit-transform: scale(.98)
+    transform: scale(.98)
+    -webkit-animation-timing-function: ease-out
+    animation-timing-function: ease-out
+  33%
+    -webkit-transform: scale(.87)
+    transform: scale(.87)
+    -webkit-animation-timing-function: ease-in
+    animation-timing-function: ease-in
+  45%
+    -webkit-transform: scale(1)
+    transform: scale(1)
+    -webkit-animation-timing-function: ease-out
+    animation-timing-function: ease-out
 
 .tagline 
   font-size: 14px

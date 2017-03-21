@@ -49,10 +49,10 @@ function trim (str) {
 	return str.slice(0, i + 1);
 }
 function focusin(t) {
-	t.setAttribute("style","-webkit-filter:blur(0px);filter:blur(0px)");
+	//t.setAttribute("style","-webkit-filter:blur(0px);filter:blur(0px)");
 }
 function defocus(t) {
-	t.setAttribute("style","-webkit-filter:blur(3px);filter:blur(3px)");
+	//t.setAttribute("style","-webkit-filter:blur(3px);filter:blur(3px)");
 }
 function deferVideos() {
 	var vidDefer = document.getElementsByTagName('iframe');
