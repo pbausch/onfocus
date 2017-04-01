@@ -18,7 +18,7 @@ require("header.php");
 		<br /><br />
 		onfocus is my personal website where I've been posting whatever comes to mind since 1998. These days it's mostly pictures.
 		</div>
-		<div class="flourish" style="text-align:center;margin:15px;font-size:1em;text-shadow: 3px 3px 0px #b12;">&#9670;</div>
+		<div class="flourish" style="text-align:center;margin:15px;font-size:2em;">&#9670;</div>
 		<div class="post-text">
 		From 2006-2016 I worked at <a href="//www.metafilter.com/">MetaFilter</a>, an amazing online community. If you want to know more about MetaFilter, start with <a href="//vimeo.com/11916466">this talk by Matt Haughey</a>&mdash;it's a great introduction.
 		</div>
@@ -33,7 +33,7 @@ require("header.php");
 		<br /><br />
 		(Here are <a href="https://makerba.se/m/ffatkg/pbausch">a few of these projects and more on Makerbase</a>.)
 		</div>
-		<div class="flourish" style="text-align:center;margin:15px;font-size:1em;text-shadow: 3px 3px 0px #b12;">&#9670;</div>
+		<div class="flourish" style="text-align:center;margin:15px;font-size:2em;">&#9670;</div>
 		<div class="post-text">
 		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln.
 		<br /><br />
