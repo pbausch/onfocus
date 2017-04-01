@@ -47,14 +47,6 @@
 		    border: 1px solid #<?php print $logocolor ?>;
 		    color: #<?php print $logocolor ?>;
 		}
-		@media screen and (max-width: 750px) {
-			#header {
-				border-bottom: solid 5px #666;
-			}
-			#footer {
-				border-top: solid 5px #666;
-			}
-		}
 	</style>
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
 	<?php if (isset($pageHeaderAddition)) { 
