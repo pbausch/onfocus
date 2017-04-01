@@ -31,7 +31,7 @@
 		}
 		.hearticon {
 			cursor: pointer;
-			fill: #<?php print $gradcolor ?>;
+			fill: #b12;
 			margin-bottom: 20px;
 		}
 		.btn {
