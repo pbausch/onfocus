@@ -4,9 +4,11 @@ $pagetitle = "About onfocus by Paul Bausch";
 $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
-?><img src="//www.onfocus.com/images/pb-winter-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;"/>
+?>
+	<h2>&#9670;&nbsp;&nbsp;About&nbsp;&nbsp;&#9670;</h2>
+	<img src="//www.onfocus.com/images/pb-winter-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;margin-top:18px;"/>
 	<div class="post" style="margin-top:18px;">
-	<h3>About Paul Bausch</h3>
+	<h3>Paul Bausch</h3>
 		<div class="post-text">
 		<!-- <img src="//www.onfocus.com/images/pb_coffee2_square_140.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
 		<!-- <img src="//www.onfocus.com/images/pb-photo-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
