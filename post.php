@@ -193,7 +193,7 @@ $pageFooterAddition = <<<END
 END;
 require("header.php");
 if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
-	print "<h2 class=\"archive-title\">$title</h2>\n";
+	print "<h3 class=\"archive-title\">$title</h3\n";
 }
 ?>
 <?php 
@@ -224,7 +224,7 @@ $query = "SELECT author, url, date, comment, comment_id FROM comments WHERE hide
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) > 0) {
-	print "<a name=\"comments\"></a><h2 class=\"archive-title comments-title\">Comments</h2><div class=\"post archive\">";
+	print "<a name=\"comments\"></a><h3 class=\"archive-title comments-title\">Comments</h3><div class=\"post archive\">";
 	while ($comment = mysql_fetch_array($result)) {
 		$comment_id = $comment['comment_id'];
 		$body = $comment['comment'];
@@ -311,7 +311,7 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 	$postFieldName = crypt('postid'.$thisToken,MD5_SALT);
 	$randomFieldName = crypt('random'.$thisToken,MD5_SALT);
 	$randomValue = substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(10/strlen($x)) )),1,10);
-	print "<a name=\"add-comment\"></a><h2 class=\"archive-title\" style=\"margin-bottom:20px;\">Add a Comment</h2><div class=\"post archive\">";
+	print "<a name=\"add-comment\"></a><h3 class=\"archive-title\" style=\"margin-bottom:20px;\">Add a Comment</h3><div class=\"post archive\">";
 ?>
 <div class="post-text" id="jsmsg">If you want to comment you'll need JavaScript on. According to our records you have disabled JavaScript in your browser settings or with an extension.</div>
 <script type="text/javascript">var msg=document.getElementById("jsmsg");msg.style.display='none';</script>
