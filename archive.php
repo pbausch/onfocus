@@ -147,6 +147,7 @@ if (!$result = @ mysql_query ($query, $connection))
 	</div>
 	-->
 </div>
+<div class="fill" style="margin-bottom:12px;"><div class="triangle-up-right rot90"></div><div class="triangle-up-left rotn90"></div></div>
 <div id="footer">
 	<div class="navigation">
 		<a href="/">Home</a>

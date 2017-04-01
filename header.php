@@ -23,17 +23,13 @@
 	<style>
 		#logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a {color: #<?php print $logocolor ?> !important;}
 		html {
-			background:  #<?php print $gradcolor ?>;
+			background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898; 
+			background-blend-mode: multiply,multiply;
+			min-height: 100%;
 		}
 		body {
-    		background:  #<?php print $gradcolor ?>; /* Old browsers */
-			background: -moz-linear-gradient(top,  #<?php print $gradcolor ?>, #ffffff); /* FF3.6-15 */
-			background: -webkit-linear-gradient(top, #<?php print $gradcolor ?>, #ffffff); /* Chrome10-25,Safari5.1-6 */
-			background: linear-gradient(to bottom,  #<?php print $gradcolor ?>, #ffffff); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#<?php print $gradcolor ?>', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-			background-size: 1px 1px;
-			background-repeat: repeat-x;
-			background-image: linear-gradient(to bottom, #434343 0%, #222 100%);
+	
+			
 		}
 		#footer, #bottom {
 			color: #<?php print $logocolor ?>;
@@ -70,7 +66,6 @@
 <body>
 <div id="header" onclick="document.location='/';">
 	<h1 id="logo">onfocus</h1>
-	<p class="tagline">a weblog by pb</p>
 	<div id="infobox">
 		<div class="post-text">
 			<a href="/" <?php if (($page == "/index.php") && ($pageNum == 1) && ($isDateArchive == 0)) { ?>class="selected"<?php } ?> id="tophome">Home</a>
@@ -79,4 +74,5 @@
 		</div>
 	</div>
 </div>
+<div class="fill"><div class="triangle-up-right"></div><div class="triangle-up-left"></div></div>
 <div id="blog">

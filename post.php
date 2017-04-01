@@ -401,6 +401,7 @@ else {
 	}
 }
 ?>
+<div class="fill" style="margin-bottom:12px;"><div class="triangle-up-right rot90"></div><div class="triangle-up-left rotn90"></div></div>
 <div id="footer">
 	<div class="navigation">
 		<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">Previous</a> <span class="flourish">&otimes;</span><?php } ?>

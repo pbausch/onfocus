@@ -174,6 +174,7 @@ else {
 ob_end_flush();
 ?>
 </div>
+<div class="fill" style="margin-bottom:12px;"><div class="triangle-up-right rot90"></div><div class="triangle-up-left rotn90"></div></div>
 <?php if (!$isDateArchive) { ?>
 <div id="footer">
 	<div class="navigation">
