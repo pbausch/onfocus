@@ -406,9 +406,9 @@ else {
 ?>
 <div id="footer">
 	<div class="navigation">
-		<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">Previous</a> <span class="flourish">&otimes;</span><?php } ?>
+		<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">Previous</a> <span class="flourish">&#9670;</span><?php } ?>
 		<a href="/" class="footHome">Home</a>
-		<?php if ($newerPermalink <> "") { ?> <span class="flourish">&otimes;</span> <a href="<?php print $newerPermalink ?>" class="footHome">Next</a> <?php } ?>
+		<?php if ($newerPermalink <> "") { ?> <span class="flourish">&#9670;</span> <a href="<?php print $newerPermalink ?>" class="footHome">Next</a> <?php } ?>
 	</div>
 </div>
 <amp-analytics type="googleanalytics" id="analytics1">
