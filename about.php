@@ -17,9 +17,10 @@ require("header.php");
 		</div>
 		<div class="flourish" style="text-align:center;margin:15px;font-size:1.5em;">&#9670;</div>
 		<div class="post-text">
+		This year I started working at <a href="http://ecampus.oregonstate.edu/">Oregon State University Ecampus</a>, one of the top online education programs in the US.
+		<br /><br />
 		From 2006-2016 I worked at <a href="//www.metafilter.com/">MetaFilter</a>, an amazing online community. If you want to know more about MetaFilter, start with <a href="//vimeo.com/11916466">this talk by Matt Haughey</a>&mdash;it's a great introduction.
-		</div>
-		<br />
+		<br /><br />
 		From 2008-2013 I co-developed <a href="//www.fuelly.com/">Fuelly</a> which helps people share and compare their vehicle fuel economy.
 		<br /><br />
 		From 2003-2008 I developed and ran ORblogs.com, an Oregon weblog directory.
