@@ -36,7 +36,7 @@ require("header.php");
 		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln.
 		<br /><br />
 		When I'm not computering I like to hike and camp. Oregon is a great place for those.
-		</div>
+		</div></div></div>
 		<div class="post" style="margin-top:18px;">
 		<h3>Contact Me</h3>
 		<div class="post-text">
