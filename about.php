@@ -6,7 +6,7 @@ $isDateArchive = 0;
 require("header.php");
 ?>
 	<h2>&#9670;&nbsp;&nbsp;About&nbsp;&nbsp;&#9670;</h2>
-	<img src="https://d1x6es5xzge33k.cloudfront.net/pb-deck-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;margin-top:18px;"/>
+	<img src="https://d1x6es5xzge33k.cloudfront.net/pb-deck-avatar-backup.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;margin-top:18px;"/>
 	<div class="post" style="margin-top:18px;">
 	<h3>Paul Bausch</h3>
 		<div class="post-text">
