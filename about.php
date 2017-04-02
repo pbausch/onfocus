@@ -6,13 +6,10 @@ $isDateArchive = 0;
 require("header.php");
 ?>
 	<h2>&#9670;&nbsp;&nbsp;About&nbsp;&nbsp;&#9670;</h2>
-	<img src="//www.onfocus.com/images/pb-winter-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;margin-top:18px;"/>
+	<img src="https://d1x6es5xzge33k.cloudfront.net/pb-deck-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;margin-top:18px;"/>
 	<div class="post" style="margin-top:18px;">
 	<h3>Paul Bausch</h3>
 		<div class="post-text">
-		<!-- <img src="//www.onfocus.com/images/pb_coffee2_square_140.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
-		<!-- <img src="//www.onfocus.com/images/pb-photo-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
-		<!-- <img src="//www.onfocus.com/images/pb-tripod-avatar.jpg" width="140" height="140" alt="Paul Bausch" style="border:solid #ddd 1px;"/> &nbsp; -->
 		<div style="margin-top:15px;">
 		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>.
 		<br /><br />
@@ -45,17 +42,17 @@ require("header.php");
 		You can <a href="/contact">send me an email here</a>.
 		<br /><br /> Or you can connect with me on any of these sites:
 		<br /><br />
-		<a href="//www.metafilter.com/user/191" title="MetaFilter" rel="me"><img src="//www.onfocus.com/images/mefi-icon.gif" alt="MetaFilter" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.metafilter.com/user/191" title="MetaFilter" rel="me">pb</a> on MetaFilter<br>
-		<a href="//www.flickr.com/photos/pb" title="Flickr" rel="me"><img src="//www.onfocus.com/images/flickr-icon.gif" alt="Flickr" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.flickr.com/photos/pb" title="Flickr" rel="me">pb</a> on Flickr<br>
-		<a href="https://instagram.com/paul.bausch/" title="Instagram" rel="me"><img src="//www.onfocus.com/images/instagram.gif" alt="Flickr" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="https://instagram.com/paul.bausch/" title="Instagram" rel="me">paul.bausch</a> on Instagram<br>
-		<a href="http://vsco.co/onfocus/" title="VSCO" rel="me"><img src="//www.onfocus.com/images/vsco.gif" alt="VSCO" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="http://vsco.co/onfocus/" title="VSCO" rel="me">onfocus</a> on VSCO<br>
-		<a href="//pinboard.in/u:pb" title="Pinboard" rel="me"><img src="//www.onfocus.com/images/pinboard-icon.gif" alt="Pinboard" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//pinboard.in/u:pb" title="Pinboard" rel="me">pb</a> on Pinboard<br>
-	    <a href="//mlkshk.com/user/pb"><img src="//www.onfocus.com/images/mlkshk-icon.gif" alt="mlkshk" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//mlkshk.com/user/pb" rel="me">pb</a> on mlkshk<br>
-		<a href="//vimeo.com/pb" title="Vimeo" rel="me"><img src="//www.onfocus.com/images/vimeo-icon.gif" alt="Vimeo" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//vimeo.com/pb" title="Vimeo" rel="me">pb</a> on Vimeo<br>
-	    <a href="//twitter.com/pbausch" title="Twitter" rel="me"><img src="//www.onfocus.com/images/twitter.gif" alt="Twitter" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//twitter.com/pbausch" title="Twitter" rel="me">pbausch</a> on Twitter<br>
-		<a href="//www.thisismyjam.com/pbausch" title="This Is My Jam" rel="me"><img src="//www.onfocus.com/images/timj-icon.gif" alt="This Is My Jam" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.thisismyjam.com/pbausch" title="This Is My Jam" rel="me">pbausch</a> on This Is My Jam<br>
-		<a href="//www.thisismyjam.com/pbausch" title="GitHub" rel="me"><img src="//www.onfocus.com/images/github-icon.gif" alt="GitHub" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="https://github.com/pbausch/" title="This Is My Jam" rel="me">pbausch</a> on GitHub<br>
-		<a href="//www.linkedin.com/in/paulbausch" title="LinkedIn" rel="me"><img src="//www.onfocus.com/images/linkedin-icon.gif" alt="LinkedIn" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.linkedin.com/in/paulbausch" title="LinkedIn" rel="me">paulbausch</a> on LinkedIn<br>
+		<a href="//www.metafilter.com/user/191" title="MetaFilter" rel="me"><img src="https://d1x6es5xzge33k.cloudfront.net/images/mefi-icon.gif" alt="MetaFilter" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.metafilter.com/user/191" title="MetaFilter" rel="me">pb</a> on MetaFilter<br>
+		<a href="//www.flickr.com/photos/pb" title="Flickr" rel="me"><img src="https://d1x6es5xzge33k.cloudfront.net/images/flickr-icon.gif" alt="Flickr" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.flickr.com/photos/pb" title="Flickr" rel="me">pb</a> on Flickr<br>
+		<a href="https://instagram.com/paul.bausch/" title="Instagram" rel="me"><img src="https://d1x6es5xzge33k.cloudfront.net/images/instagram.gif" alt="Flickr" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="https://instagram.com/paul.bausch/" title="Instagram" rel="me">paul.bausch</a> on Instagram<br>
+		<a href="http://vsco.co/onfocus/" title="VSCO" rel="me"><img src="https://d1x6es5xzge33k.cloudfront.net/images/vsco.gif" alt="VSCO" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="http://vsco.co/onfocus/" title="VSCO" rel="me">onfocus</a> on VSCO<br>
+		<a href="//pinboard.in/u:pb" title="Pinboard" rel="me"><img src="https://d1x6es5xzge33k.cloudfront.net/images/pinboard-icon.gif" alt="Pinboard" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//pinboard.in/u:pb" title="Pinboard" rel="me">pb</a> on Pinboard<br>
+	    <a href="//mlkshk.com/user/pb"><img src="https://d1x6es5xzge33k.cloudfront.net/images/mlkshk-icon.gif" alt="mlkshk" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//mlkshk.com/user/pb" rel="me">pb</a> on mlkshk<br>
+		<a href="//vimeo.com/pb" title="Vimeo" rel="me"><img src="https://d1x6es5xzge33k.cloudfront.net/images/vimeo-icon.gif" alt="Vimeo" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//vimeo.com/pb" title="Vimeo" rel="me">pb</a> on Vimeo<br>
+	    <a href="//twitter.com/pbausch" title="Twitter" rel="me"><img src="https://d1x6es5xzge33k.cloudfront.net/images/twitter.gif" alt="Twitter" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//twitter.com/pbausch" title="Twitter" rel="me">pbausch</a> on Twitter<br>
+		<a href="//www.thisismyjam.com/pbausch" title="This Is My Jam" rel="me"><img src="https://d1x6es5xzge33k.cloudfront.net/images/timj-icon.gif" alt="This Is My Jam" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.thisismyjam.com/pbausch" title="This Is My Jam" rel="me">pbausch</a> on This Is My Jam<br>
+		<a href="//www.thisismyjam.com/pbausch" title="GitHub" rel="me"><img src="https://d1x6es5xzge33k.cloudfront.net/images/github-icon.gif" alt="GitHub" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="https://github.com/pbausch/" title="This Is My Jam" rel="me">pbausch</a> on GitHub<br>
+		<a href="//www.linkedin.com/in/paulbausch" title="LinkedIn" rel="me"><img src="https://d1x6es5xzge33k.cloudfront.net/images/linkedin-icon.gif" alt="LinkedIn" border="0" width="16" height="16" style="background:#fff;border:solid #fff 1px;vertical-align:middle;"/></a> <a href="//www.linkedin.com/in/paulbausch" title="LinkedIn" rel="me">paulbausch</a> on LinkedIn<br>
 		</div>
 		</div>
 		<div class="post">
