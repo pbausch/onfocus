@@ -61,19 +61,44 @@ require("header.php");
 		</div>
 	</div>
 
+	<style>
+		.even {
+			background-color: #eee;
+		}
+		.odd {
+			backgaround-color: #fff;
+		}
+		table {
+			line-height:150%;border:solid #eee 3px;
+		}
+		@media screen and (max-width: 750px) {
+			.even {
+				background-color: #fff;
+			}
+		}
+	</style>
+
 	<div class="post">
 		<h3>Post Archive</h3>
 		<div class="post-text">
 		For serious browsers only: 17 years worth of onfocus posts, month by month:
 		<br/><br/>
-		<table border="0" cellpadding="6" style="line-height:150%;"><tr valign="top"> 
+		<table border="0" cellpadding="6"><tr valign="top"> 
 		<?php
 		$cal_month_abb = array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 		$startYear = 1999;
 		$endYear = date("Y",strtotime($maxdate));
+		$k = 1;
 		for ($i = $startYear; $i <= $endYear; $i++) {
-			print "<td style=\"text-align:center;\">";
-			print "<div style=\"font-weight:bold;margin-bottom:5px;\">&nbsp;".$i."&nbsp;</div>";
+			print "<td style=\"text-align:center;\" class=\"";
+			if ($k % 2 == 0) {
+				print "odd";
+			}
+			else {
+				print "even";
+			}
+			print "\">";
+			print "<div style=\"font-family:'DDC Hardware';font-weight:bold;margin-bottom:5px;background-color:#ddd;\">&nbsp;".$i."&nbsp;</div>";
 			$startMonth = 1;
 			$endMonth = 12;
 			if ($i == $endYear) {
@@ -98,7 +123,9 @@ require("header.php");
 			print "</td>";
 			if ($i == 2007) {
 				print "</tr></table><br /><br /><table border=\"0\" cellpadding=\"6\" style=\"line-height:150%;\"><tr valign=top>";
+				$k = $k - 1;
 			}
+			$k++;
 		}
 		?>
 		</tr></table>
