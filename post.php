@@ -54,6 +54,10 @@ else {
 		else {
 			$thisDate = date("M jS, Y",strtotime($postDateTime));
 		}
+		$thisDate = str_replace("st","<sup>st</sup>",$thisDate);
+		$thisDate = str_replace("th","<sup>th</sup>",$thisDate);
+		$thisDate = str_replace("nd","<sup>nd</sup>",$thisDate);
+		$thisDate = str_replace("rd","<sup>rd</sup>",$thisDate);
 		$thisTime = date(TIME_FORMAT,strtotime($postDateTime));
 		$lastDate = $thisDate;
 		$thisCommentsOn = $post['comments_on'];

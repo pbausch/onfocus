@@ -127,6 +127,10 @@ else {
 		else {
 			$thisDate = date(DATE_HEADER_YEAR_FORMAT,strtotime($postDateTime));
 		}
+		$thisDate = str_replace("st","<sup>st</sup>",$thisDate);
+		$thisDate = str_replace("th","<sup>th</sup>",$thisDate);
+		$thisDate = str_replace("nd","<sup>nd</sup>",$thisDate);
+		$thisDate = str_replace("rd","<sup>rd</sup>",$thisDate);
 		$thisTime = date(TIME_FORMAT,strtotime($postDateTime));
 		if ($thisDate !== $lastDate) {
 			//print "<h2>$thisDate</h2>\n";
