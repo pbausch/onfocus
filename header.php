@@ -1,7 +1,7 @@
 <?php require_once('lib/set-includes.php'); ?>
 <?php $page = $_SERVER["PHP_SELF"]; ?>
 <?php
-	$logocolor = "fefefe";
+	$logocolor = "fefefd";
 	$gradcolor = "222";
 ?>
 <!DOCTYPE html>
