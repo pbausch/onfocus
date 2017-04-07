@@ -7,6 +7,9 @@ body
   text-align: center
   background-size: auto
   background-repeat: repeat
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  text-rendering: optimizeLegibility
 
 a 
   &:link 
@@ -51,7 +54,7 @@ a
   color: #4C4E49
   padding-left: 24px
   padding-bottom: 5px
-  background-color: black
+  background-color: $black
 
 #header
   margin-top: 1.5em
@@ -81,7 +84,7 @@ a
   margin-left: -12px
   margin-top: -12px
   border-left: 12px solid transparent
-  border-top: 12px solid #000
+  border-top: 12px solid $black
 
 .triangle-up-left
   position: absolute
@@ -101,7 +104,7 @@ a
   height: 0
   margin-left: -12px
   border-bottom: 12px solid transparent
-  border-left: 12px solid #000
+  border-left: 12px solid $black
 
 .rot90
   transform: rotate(90deg) translateX(-12px)
@@ -206,10 +209,10 @@ h2
   text-align: center
   padding: 10px
   margin: 0
-  background-color: $link
-  color: white
+  background-color: $red
+  color: $white
   margin-top: -40px
-  text-shadow: 3px 3px 0px rgba(0, 0, 0, 1)
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 1)
 
 .navigation 
   margin: 0 auto
@@ -267,13 +270,13 @@ blockquote, ol, ul
   margin-top: 0.5em
 
 #copyright, #infobox .post-text a, .navigation a
-  opacity: 0.5
+  opacity: 0.7
 
 #copyright, #infobox .post-text a:hover, .navigation a:hover
   opacity: 1
 
 #infobox .post-text a.selected
-  opacity: 0.8
+  opacity: 1
 
 #infobox .post-text
   font-family: 'DDC Hardware', Helvetica

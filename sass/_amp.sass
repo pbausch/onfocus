@@ -1,10 +1,13 @@
 /// Colors
-$link: #bb1122
+$link: #b12
 $visited: #860C18
-$active: #eeeeee
+$active: #eee
 $hover: #900 
-$front: #614C3B
-$back: #DACDC2
+$front: #fefefd
+$back: #020202
+$red: #b12
+$black: #020202
+$white: #fefefd
 
 /// Fonts
 $font-body:              "Segoe UI", Helvetica, Arial, sans-serif
@@ -16,25 +19,19 @@ $font-bold:              600
   padding-left: 10px
 
 // Includes
+@import "webfont"
 @import "base"
 @import "posts"
 @import "comments"
 @import "mobile"
+@import "keyframes"
 
 /// Pick a site color
 #logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a 
   color: $front
 html 
-  background:  $back
-
-body 
-  background:  $back /* Old browsers */
-  background: -moz-linear-gradient(top,  $back, #ffffff) /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, $back, #ffffff) /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom,  $back, #ffffff) /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$back', endColorstr='#ffffff',GradientType=0 ) /* IE6-9 */
-  background-size: 1px 1px
-  background-repeat: repeat-x
+  background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898
+  min-height: 100%
 
 #footer, #bottom 
   background-color: $back
@@ -45,8 +42,12 @@ body
   border: 1px solid $front
   color: $front
 
+.fillbottom 
+  margin-bottom: 12px
+
 @media screen and (max-width: 750px) 
   #header 
+    background-color: #eee
     border-bottom: solid 5px $front
   
   #footer 

@@ -102,7 +102,7 @@ else {
 		// log eventually to catch bad HTML in posts
 	}
 	if ($firstImageUrl == "") {
-		$firstImageUrl = "https://d1x6es5xzge33k.cloudfront.net/200808.twitter-card.png";
+		$firstImageUrl = "https://d1x6es5xzge33k.cloudfront.net/fefefd.twitter-card.png";
 	}
 }
 
@@ -224,7 +224,6 @@ $css = str_replace("!important","",$css);
   <body>
 	<div id="header">
 		<h1 id="logo">onfocus</h1>
-		<p class="tagline">a weblog by pb</p>
 		<div id="infobox">
 			<div class="post-text">
 				<a href="/" id="tophome">Home</a>
@@ -233,6 +232,7 @@ $css = str_replace("!important","",$css);
 			</div>
 		</div>
 	</div>
+	<div class="fill"><div class="triangle-up-right"></div><div class="triangle-up-left"></div></div>
 	<div id="blog">
 <?php
 if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
@@ -330,7 +330,7 @@ if (mysql_num_rows($result) > 0) {
 		$thisTime = date(TIME_FORMAT,strtotime($commentDateTime));		
 		print "<div class=\"comment\" id=\"c$comment_id\">";
 		print "<div class=\"post-text\">$body</div>";
-		print "<div class=\"post-byline comment-byline\">by $author on $thisDate at $thisTime</div>";
+		print "<div class=\"post-byline comment-byline\">by $author on $thisDate, $thisTime</div>";
 		print "</div>";
 	}
 	print "</div>";
@@ -404,6 +404,7 @@ else {
 	}
 }
 ?>
+<div class="fill fillbottom"><div class="triangle-up-right rot90"></div><div class="triangle-up-left rotn90"></div></div>
 <div id="footer">
 	<div class="navigation">
 		<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">Previous</a> <span class="flourish">&#9670;</span><?php } ?>

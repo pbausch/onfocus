@@ -159,7 +159,7 @@ else {
 			print "</div>";
 		}
 		
-		print "<div class=\"post-byline\">$thisDate at <a href=\"$permalink\">$thisTime</a>";
+		print "<div class=\"post-byline\">$thisDate, <a href=\"$permalink\">$thisTime</a>";
 		
 		if ($commentCount > 0) {
 			print " &middot; <a href=\"$permalink#comments\">$commentCount comment";
