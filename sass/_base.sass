@@ -303,13 +303,25 @@ blockquote, ol, ul
   svg
     width: 65px
     height: 65px
-    transition: all .4s ease
+    transition: .4s ease
+    -webkit-transition: .4s ease
+    stop
+      transition: .4s ease
+      -webkit-transition: .4s ease
 
 #instagramicon:hover
   fill: #E4405F
 
-#flickricon:hover
+#flickricon
   fill: url(#fGradient)
+
+#flickricon:hover 
+  #fGradient
+    .flickrblue
+      stop-color: #0B64DF
+    .flickrpink
+      stop-color: #FF2D80
+  
 
 #twittericon:hover
   fill: #1DA1F2
