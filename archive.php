@@ -13,7 +13,7 @@ $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
 ?>
-	<h2>&#9670;&nbsp;&nbsp;Archive&nbsp;&nbsp;&#9670;</h2>
+	<h2><span class="dmd">&#9670;</span>&nbsp;&nbsp;Archive&nbsp;&nbsp;<span class="dmd">&#9670;</span></h2>
 	
 	<div class="post" style="margin-top:18px;">
 		<h3>Start Here</h3>

@@ -86,7 +86,7 @@ if ($isDateArchive) {
 	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE Year(DateCreated) = $thisArchiveYear AND Month(DateCreated) = $thisArchiveMonth AND hide = 0 ORDER BY DateCreated DESC";
 }
 else {
-	print "<h2 style=\"margin-bottom:30px;\">&#9670;&nbsp;&nbsp;a weblog by pb&nbsp;&nbsp;&#9670;</h2>";
+	print "<h2 style=\"margin-bottom:30px;\"><span class=\"dmd\">&#9670;</span>&nbsp;&nbsp;a weblog by pb&nbsp;&nbsp;<span class=\"dmd\">&#9670;</span></h2>";
 	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
 }
 if (!$result = @ mysql_query ($query, $connection))
