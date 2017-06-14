@@ -196,14 +196,19 @@ $pageFooterAddition = <<<END
 </script>
 END;
 require("header.php");
+$notitle = 1;
 if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
 	print "<h2 class=\"archive-title\">$title</h2>\n";
+	$notitle = 0;
 }
 ?>
 <?php 
 print "<div class=\"post archive single";
 if (($type == 5) || ($type == 6) || ($type == 8)) {
 	print " photo";
+}
+if ($notitle == 1) {
+	print " notitle";
 }
 print "\">";
 print "<div class=\"post-text\"";

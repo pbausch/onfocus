@@ -1,4 +1,7 @@
 @media screen and (max-width: 750px) 
+  html, body 
+    overflow-x: hidden
+    
   #copyright, #flickr_badge_uber_wrapper, #tophome, .tagline, td br, .fill 
     display: none
   
@@ -14,7 +17,7 @@
     width: 100%
     border-radius: 0
     min-height: 0
-    padding-top: 22px
+    padding-top: 0
   
   #bottom, #copyright, #footer, #header 
     width: 100%
@@ -31,8 +34,18 @@
   .post, .archive-title 
     margin-right: 22px
     margin-left: 22px
-  
-  .post img
+    margin-top: 0
+
+  .post.notitle
+    margin-top: -10px
+    padding-top: 22px
+
+  .post img 
+    max-width: 100%
+    height: auto
+
+  .post img[width='640']
+    max-width: none
     height: auto
     display: block
     width: 100vw
@@ -44,7 +57,7 @@
     margin-right: 22px
   
   #blog > h2
-    margin-top: -22px !important
+    margin-top: 0 !important
 
   h2 
     font-size: 1.5em
