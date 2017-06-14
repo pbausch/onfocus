@@ -207,6 +207,9 @@ print "<div class=\"post archive single";
 if (($type == 5) || ($type == 6) || ($type == 8)) {
 	print " photo";
 }
+else {
+	print " other";
+}
 if ($notitle == 1) {
 	print " notitle";
 }
