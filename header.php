@@ -51,4 +51,4 @@
 	</div>
 </div>
 <div class="fill"><div class="triangle-up-right"></div><div class="triangle-up-left"></div></div>
-<div id="blog"<?php if (isset($pageHeaderClass)) { print "class = \"$pageHeaderClass\""; } ?>>
+<div id="blog">
