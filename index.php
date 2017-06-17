@@ -5,6 +5,7 @@ ob_start();
 
 $cntPost = 0;
 $lastDate = 0;
+$pageHeaderClass = "index";
 
 // Paging
 $query = "SELECT Count(post_id), Min(DateCreated), Max(DateCreated) FROM items WHERE hide = 0";

@@ -85,6 +85,7 @@ $pageNum = 1;
 $isDateArchive = 0;
 $cntPost = 1;
 $pageTitle = $pageTitle . " | onfocus";
+$pageHeaderClass = "single";
 $pageHeaderAddition = "<link rel=\"canonical\" href=\"$canonicalUrl\" />\n";
 $pageHeaderAddition .= "\t<link rel=\"amphtml\" href=\"${canonicalUrl}/amp\" />\n";
 $firstImageUrl = "";
