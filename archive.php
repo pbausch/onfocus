@@ -28,38 +28,6 @@ require("header.php");
 		</ul>
 		</div>
 	</div>
-	
-	<div class="post">
-		<h3>Most Hearted Posts</h3>
-		<div class="post-text">
-		Each post has a clickable heart that I added in October 2016: <a href="https://www.onfocus.com/2016/10/6812/c2bk-infrastructure-report-hearts">Hearts</a>. These posts have the most heart-clicks:
-		<ul>
-			<?php
-			$query = "SELECT COUNT(hearts.post_id), items.post_id, items.title, items.DateCreated, items.url_slug FROM hearts INNER JOIN items ON items.post_id = hearts.post_id WHERE heart = 1 AND items.hide = 0 GROUP BY items.post_id, items.title, items.DateCreated, items.url_slug ORDER BY COUNT(hearts.post_id) DESC, post_id DESC LIMIT 10";
-			if (!$result = @ mysql_query ($query, $connection))
-			   	logError();
-			if (mysql_num_rows($result) == 0) {
-				die("<div class=\"post-text\">Couldn't find any hearts! WTF?!</div>");
-			} 
-			else {
-				while ($heart = mysql_fetch_array($result)) {
-					$title = $heart['title'];
-					$id = $heart['post_id'];
-					$slug = $heart['url_slug'];
-					$postDateTime = $heart['DateCreated'];
-					$thisYear = date('Y',strtotime($postDateTime));
-					$thisMonth = date('m',strtotime($postDateTime));
-					$permalink = "/$thisYear/$thisMonth/$id";
-					if ($slug !== '') {
-						$permalink .= "/$slug";
-					}
-					print "<li><a href=\"$permalink\">$title</a></li>";
-				}
-			}
-			?>
-		</ul>
-		</div>
-	</div>
 
 	<style>
 		.even {
