@@ -227,7 +227,7 @@ if (($type == 5) || ($type == 6) || ($type == 8)) {
 	print "</div>";
 }
 print "<div class=\"post-byline archive\">$thisDate, $thisTime</div>";
-require("lib/heart.php");
+//require("lib/heart.php");
 ?>
 </div>
 <?php
