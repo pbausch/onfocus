@@ -80,13 +80,13 @@ if ($thisArchiveYear != "" && $thisArchiveMonth != "") {
 }
 require("header.php");
 if ($isDateArchive) {
-	print "<h2 style=\"margin-bottom:18px;\">Archive of Posts from ".date("F Y",$thisArchiveDate)."</h2>";
+	print "<h2>Archive of Posts from ".date("F Y",$thisArchiveDate)."</h2>";
 	$thisArchiveYear = mysql_real_escape_string($thisArchiveYear);
 	$thisArchiveMonth = mysql_real_escape_string($thisArchiveMonth);
 	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE Year(DateCreated) = $thisArchiveYear AND Month(DateCreated) = $thisArchiveMonth AND hide = 0 ORDER BY DateCreated DESC";
 }
 else {
-	print "<h2 style=\"margin-bottom:30px;\"><span class=\"dmd\">&#9670;</span>&nbsp;&nbsp;a weblog by pb&nbsp;&nbsp;<span class=\"dmd\">&#9670;</span></h2>";
+	print "<h2><span class=\"dmd\">&#9670;</span>&nbsp;&nbsp;a weblog by pb&nbsp;&nbsp;<span class=\"dmd\">&#9670;</span></h2>";
 	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
 }
 if (!$result = @ mysql_query ($query, $connection))
@@ -132,21 +132,30 @@ else {
 		$thisDate = str_replace("nd","<sup>nd</sup>",$thisDate);
 		$thisDate = str_replace("rd","<sup>rd</sup>",$thisDate);
 		$thisTime = date(TIME_FORMAT,strtotime($postDateTime));
+		$notitle = 1;
 		if ($thisDate !== $lastDate) {
 			//print "<h2>$thisDate</h2>\n";
 		}
 		else {
-			print "<div class=\"daysep\"></div>";
+			//print "<div class=\"daysep\"></div>";
 		}
 		print "<div class=\"post";
 		if (($type == 5) || ($type == 6) || ($type == 8)) {
 			print " photo";
 		}
+		else {
+			print " other";
+		}
 		print "\">\n";
 		if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
 			print "<h3>$title</h3>\n";
+			$notitle = 0;
 		}
-		print "<div class=\"post-text\"";
+		print "<div class=\"post-text";
+		if ($notitle == 1) {
+			print " notitle";
+		}
+		print "\"";
 		print ">$body</div>\n";
 		if (($type == 5) || ($type == 6) || ($type == 8)) {
 			print "<div class=\"photo-title\">";
