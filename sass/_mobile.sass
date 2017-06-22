@@ -110,6 +110,15 @@
   #header
     border-bottom: solid 5px #666
 
+@media screen and (max-width: 480px) 
+  .post img[height='640']
+    max-width: none
+    height: auto
+    display: block
+    width: 100vw
+    margin-left: 50%
+    transform: translateX(-50%)
+
 @media screen and (max-width: 375px) 
   #logo 
     font-size: 28px
