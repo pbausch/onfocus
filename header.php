@@ -31,13 +31,13 @@
 		    border: 1px solid #<?php print $logocolor ?>;
 		    color: #<?php print $logocolor ?>;
 		}
-		iframe.flickr-embed-frame {
-		    margin: 0 !important;
-			max-width: 100% !important;
-		}
-		.flickr-embed .flickr-embed-photo img {
-			max-width: 100% !important;
-			height: auto !important;
+		@media screen and (max-width: 750px) {
+			iframe.flickr-embed-frame {
+				width: 100vw;
+				margin-left: 50%;
+				-webkit-transform: translateX(-50%);
+				transform: translateX(-50%);
+			}
 		}
 	</style>
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
