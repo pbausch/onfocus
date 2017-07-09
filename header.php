@@ -31,6 +31,9 @@
 		    border: 1px solid #<?php print $logocolor ?>;
 		    color: #<?php print $logocolor ?>;
 		}
+		iframe.flickr-embed-frame {
+		    margin: 0 !important;
+		}
 	</style>
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
 	<?php if (isset($pageHeaderAddition)) { 
