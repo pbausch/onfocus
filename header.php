@@ -35,9 +35,9 @@
 		    margin: 0 !important;
 			max-width: 100% !important;
 		}
-		.flickr-embed-photo img {
-			max-width: 100%;
-			height: auto;
+		.flickr-embed .flickr-embed-photo img {
+			max-width: 100% !important;
+			height: auto !important;
 		}
 	</style>
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
