@@ -35,6 +35,10 @@
 		    margin: 0 !important;
 			max-width: 100% !important;
 		}
+		.flickr-embed-photo img {
+			max-width: 100%;
+			height: auto;
+		}
 	</style>
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
 	<?php if (isset($pageHeaderAddition)) { 
