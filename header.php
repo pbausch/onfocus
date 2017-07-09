@@ -33,6 +33,7 @@
 		}
 		iframe.flickr-embed-frame {
 		    margin: 0 !important;
+			max-width: 100% !important;
 		}
 	</style>
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
