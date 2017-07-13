@@ -13,8 +13,8 @@ $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
 ?>
-	<h2><span class="dmd">&#9670;</span>&nbsp;&nbsp;Archive&nbsp;&nbsp;<span class="dmd">&#9670;</span></h2>
-	
+	<!-- <h2><span class="dmd">&#9670;</span>&nbsp;&nbsp;Archive&nbsp;&nbsp;<span class="dmd">&#9670;</span></h2> -->
+	<!--
 	<div class="post" style="margin-top:18px;">
 		<h3>Start Here</h3>
 		<div class="post-text">
@@ -28,7 +28,7 @@ require("header.php");
 		</ul>
 		</div>
 	</div>
-
+	-->
 	<style>
 		.even {
 			background-color: #eee;
@@ -46,7 +46,7 @@ require("header.php");
 		}
 	</style>
 
-	<div class="post">
+	<div class="post other">
 		<h3>Post Archive</h3>
 		<div class="post-text">
 		For serious browsers only: 17 years worth of onfocus posts, month by month:
