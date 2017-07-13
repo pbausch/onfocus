@@ -31,6 +31,9 @@
 		    border: 1px solid #<?php print $logocolor ?>;
 		    color: #<?php print $logocolor ?>;
 		}
+		.flickr-embed-header {
+			visibility:hidden;
+		}
 		@media screen and (max-width: 750px) {
 			iframe.flickr-embed-frame {
 				width: 100vw;
