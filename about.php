@@ -7,7 +7,7 @@ require("header.php");
 ?>
 	<!-- <h2><span class="dmd">&#9670;</span>&nbsp;&nbsp;About&nbsp;&nbsp;<span class="dmd">&#9670;</span></h2> -->
 	<div class="post other">
-	<img src="https://d1x6es5xzge33k.cloudfront.net/pb-deck-avatar-backup.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;"/>
+	<img src="https://d1x6es5xzge33k.cloudfront.net/pb-deck-avatar-backup.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;margin-bottom:15px;"/>
 	<h3>About Paul Bausch</h3>
 		<div class="post-text">
 		<div style="margin-top:15px;">
