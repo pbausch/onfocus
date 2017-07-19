@@ -34,6 +34,12 @@
 		.flickr-embed-header {
 			visibility:hidden;
 		}
+        #footer {
+            min-height: 46px;
+        }
+        h2 {
+            text-align: center;
+        }
 		@media screen and (max-width: 750px) {
 			iframe.flickr-embed-frame {
 				width: 100vw;
