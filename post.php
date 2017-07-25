@@ -143,6 +143,7 @@ if (strpos($body, 'new SWFObject') !== false) {
     $pageHeaderAddition .= "<script type=\"text/javascript\" src=\"https://d1x6es5xzge33k.cloudfront.net/js/swfobject.js\"></script>\n";
 }
 $pageHeaderAddition .= "<script>var pid = ${id};</script>\n";
+if ($thisCommentsOn) {
 $pageFooterAddition = <<<END
 <div class="wdt-emoji-popup">
     <a href="#" class="wdt-emoji-popup-mobile-closer"> &times; </a>
@@ -195,6 +196,7 @@ $pageFooterAddition = <<<END
 })();
 </script>
 END;
+}
 require("header.php");
 $notitle = 1;
 if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
