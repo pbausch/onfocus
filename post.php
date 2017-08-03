@@ -31,6 +31,7 @@ else {
 		if ($summary == "") {
 			$summary = $title;
 		}
+		$summary = htmlspecialchars($summary);
 		$pageTitle = $title;
 		if ($pageTitle == "") {
 			$pageTitle = $body;
