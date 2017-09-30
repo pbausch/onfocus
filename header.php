@@ -48,8 +48,8 @@
 				transform: translateX(-50%);
 			}
 		}
-        @import url('https://fonts.googleapis.com/css?family=Catamaran:600|Merriweather+Sans:400,700');
 	</style>
+	<link href="https://fonts.googleapis.com/css?family=Catamaran:600|Merriweather+Sans:400,700" rel="stylesheet">
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
 	<?php if (isset($pageHeaderAddition)) { 
 		$pageHeaderAddition = str_replace("200808.twitter-card.png",$logocolor . ".twitter-card.png",$pageHeaderAddition);
