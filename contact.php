@@ -4,7 +4,7 @@ $pagetitle = "onfocus contact";
 $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
-?><h2>Contact Paul Bausch</h2>
+?><h2 style="text-align:left;">Contact Paul Bausch</h2>
 	<?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$from_name = $_POST["txtName"];
