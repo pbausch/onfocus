@@ -66,7 +66,7 @@ require("header.php");
 		<div class="post">
 		<h3>About onfocus</h3>
 		<div class="post-text">
-		Right now this blog is a nightly copy of my <a href="//pinboard.in/u:pb">Pinboard bookmarks</a>, <a href="//instagram.com/paul.bausch">Instagram photos</a>, <a href="//www.flickr.com/photos/pb">Flickr photos</a>, and occasional <a href="//twitter.com/#!/pbausch">tweets</a>. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe: <a href="http://xml.onfocus.com/posts"><img src="//o.snapgallery.net/feed.png" width="12" height="12" border="0" style="vertical-align:middle;" title="Subscribe to onfocus" alt="rss"/></a> And here's <a href="/archive">the archive</a> if you want to go back in time.
+		I share links, photos, and occasional thoughts. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe: <a href="http://xml.onfocus.com/posts"><img src="//o.snapgallery.net/feed.png" width="12" height="12" border="0" style="vertical-align:middle;" title="Subscribe to onfocus" alt="rss"/></a> And here's <a href="/archive">the archive</a> if you want to go back in time.
 		<br /><br />
 		<code>onfocus</code> is the name of a <a href="//en.wikipedia.org/wiki/JavaScript">JavaScript</a> event. In 1998 when I was looking for a domain name to go along with my new blog I was using JavaScript quite a bit and thought it was a good fit. I still use JavaScript quite a bit so it was a lucky bet. If this weblog was about JavaScript it would be even better.
 		</div>
