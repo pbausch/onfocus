@@ -1,8 +1,10 @@
 <?php require_once('lib/set-includes.php'); ?>
 <?php $page = $_SERVER["PHP_SELF"]; ?>
 <?php
-	$logocolor = "fefefd";
-	$gradcolor = "222";
+	$logocolor = "fefefd"; //fefefd
+	$gradcolor = "222222"; //222222
+	$bannercolor = "323131"; //2F3141, 020202
+	$basebg = "989898"; //929EAD, 989898
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,8 +25,9 @@
 	<style>
 		#logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a {color: #<?php print $logocolor ?> !important;}
 		html {
-			background: #989898;
-			background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898; 
+			background: #<?php print $basebg ?>;
+			background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #<?php print $basebg ?>; 
+			background-blend-mode: multiply,multiply;
 			min-height: 100%;
 		}
 		.btn {
@@ -35,6 +38,9 @@
 		.flickr-embed-header {
 			visibility:hidden;
 		}
+		#header, #footer { background-color: #<?php print $bannercolor ?> !important; }
+		.triangle-up-right:after { border-top-color: #<?php print $bannercolor ?> !important;}
+		.triangle-up-left:after { border-left-color: #<?php print $bannercolor ?> !important;}
         #footer {
             min-height: 46px;
         }

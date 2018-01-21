@@ -3,7 +3,7 @@
   padding: 0
 
 body 
-  font-family: Helvetica, 'Helvetica Neue', Arial, sans-serif
+  font-family: $font-body
   text-align: center
   background-size: auto
   background-repeat: repeat
@@ -145,11 +145,12 @@ ul.delicious
     padding-right: 0
   
 #infobox .post-text 
-  color: #444
+  color: #888
   a 
     color: #ccc
     height: 100%
     padding-right: 10px
+    letter-spacing: .5px
     &.selected 
       color: #999
     
@@ -160,7 +161,7 @@ ul.delicious
   font-weight: 400
 
 .tagline
-  font-family: 'DDC Hardware Condensed', Hevletica
+  font-family: $font-tagline
   font-size: 1.4rem
   text-align: left
   opacity: .4
@@ -173,23 +174,20 @@ ul.delicious
   padding-bottom: 1em
 
 #logo 
-  font-family: 'DDC Hardware', Hevletica
+  font-family: $font-title
   text-rendering: optimizeLegibility
   font-size: 3.5em
   line-height: 1.02
   margin-top: .2em
-  filter: blur(3px)
-  -webkit-animation: text-onfocus 2s ease-in forwards
-  -moz-animation: text-onfocus 2s ease-in forwards
-  animation: text-onfocus 2s ease-in forwards
+  filter: blur(2px)
   font-weight: normal
   letter-spacing: -1px
   -webkit-font-smoothing: antialiased
 
 #logo:hover
-  -webkit-animation: text-unfocus .1s ease-out both
-  -moz-animation: text-unfocus .1s ease-out both
-  animation: text-unfocus .1s ease-out both
+  -webkit-animation: text-lnfocus .1s ease-out both
+  -moz-animation: text-lnfocus .1s ease-out both
+  animation: text-onfocus .1s ease-out both
 
 .hearticon:hover
   -webkit-animation: heartbeat 1.5s ease-in-out infinite both
@@ -197,7 +195,7 @@ ul.delicious
   animation: heartbeat 1.5s ease-in-out infinite both
 
 h2 
-  font-family: 'DDC Hardware', Hevletica
+  font-family: $font-title
   font-size: 1.8em
   margin-left: 40px
   margin-right: 40px
@@ -208,11 +206,13 @@ h2
 .navigation 
   margin: 0 auto
   width: 720px
-  font-family: 'DDC Hardware', Helvetica
+  font-family: $font-headline
   font-weight: 400
   font-size: 20px
   line-height: 130%
   text-align: center
+  text-transform: uppercase
+  letter-spacing: .5px
   a 
     padding-right: 10px
   
@@ -270,7 +270,8 @@ blockquote, ol, ul
   opacity: 1
 
 #infobox .post-text
-  font-family: 'DDC Hardware', Helvetica
+  font-family: $font-headline
+  text-transform: uppercase
 
 .btn 
   background-repeat: no-repeat
