@@ -66,10 +66,7 @@
 <title><?php if (isset($pageTitle)) { print $pageTitle; } else { print "onfocus"; } ?></title>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6395HJ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) --><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M6395HJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><!-- End Google Tag Manager (noscript) -->
 <div id="header" onclick="document.location='/';">
 	<h1 id="logo">onfocus</h1>
 	<div id="infobox">
