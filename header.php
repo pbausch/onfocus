@@ -4,7 +4,7 @@
 	$logocolor = "fefefd"; //fefefd
 	$gradcolor = "222222"; //222222
 	$bannercolor = "323131"; //2F3141, 020202
-	$basebg = "989898"; //929EAD, 989898
+	$basebg = "bbd2c5"; //929EAD, 989898
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,8 +27,7 @@
 		#logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a {color: #<?php print $logocolor ?> !important;}
 		html {
 			background: #<?php print $basebg ?>;
-			background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #<?php print $basebg ?>; 
-			background-blend-mode: multiply,multiply;
+		    background: radial-gradient(#bbd2c5 0%, #536976 140%);
 			min-height: 100%;
 		}
 		.btn {
