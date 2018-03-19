@@ -419,7 +419,7 @@ else {
 <div class="fill" style="margin-bottom:12px;"><div class="triangle-up-right rot90"></div><div class="triangle-up-left rotn90"></div></div>
 <div id="footer">
 	<div class="navigation">
-		<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">Previous</a> <span class="flourish">&#9670;</span><?php } ?>
+		<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">Prev</a> <span class="flourish">&#9670;</span><?php } ?>
 		<a href="/" style="padding-left:10px;">Home</a>
 		<?php if ($newerPermalink <> "") { ?> <span class="flourish">&#9670;</span> <a href="<?php print $newerPermalink ?>" style="padding-left:10px;">Next</a> <?php } ?>
 	</div>
