@@ -151,7 +151,7 @@ else {
 			print "<h3 class=\"title entry-title\">$title</h3>\n";
 			$notitle = 0;
 		}
-		print "<div class=\"post-text";
+		print "<div class=\"post-text entry-content";
 		if ($notitle == 1) {
 			print " notitle";
 		}
