@@ -220,7 +220,7 @@ if ($notitle == 0) {
 print "<div class=\"post-text entry-content\"";
 print ">$body</div>";
 if (($type == 5) || ($type == 6) || ($type == 8)) {
-	print "<div class=\"photo-title\">";
+	print "<div class=\"photo-title entry-title\">";
 	if (strpos($title,"instagram photo") === false) {
 		print $title;
 	}
