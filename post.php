@@ -203,7 +203,7 @@ $notitle = 1;
 if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
 	$notitle = 0;
 }
-print "<div class=\"post archive single";
+print "<article class=\"post archive single";
 if (($type == 5) || ($type == 6) || ($type == 8)) {
 	print " photo";
 }
@@ -215,9 +215,9 @@ if ($notitle == 1) {
 }
 print "\">";
 if ($notitle == 0) {
-	print "<h3 class=\"title\">$title</h3>\n";
+	print "<h2 class=\"title entry-title\">$title</h2>\n";
 }
-print "<div class=\"post-text\"";
+print "<div class=\"post-text entry-content\"";
 print ">$body</div>";
 if (($type == 5) || ($type == 6) || ($type == 8)) {
 	print "<div class=\"photo-title\">";
@@ -232,7 +232,7 @@ if (($type == 5) || ($type == 6) || ($type == 8)) {
 print "<div class=\"post-byline archive\">$thisDate, $thisTime</div>";
 //require("lib/heart.php");
 ?>
-</div>
+</article>
 <?php
 // BEGIN COMMENTS
 $query = "SELECT author, url, date, comment, comment_id FROM comments WHERE hide = 0 AND trackback = 0 AND post_id = " . $id . " ORDER BY date ASC";

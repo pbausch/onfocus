@@ -80,7 +80,7 @@ if ($thisArchiveYear != "" && $thisArchiveMonth != "") {
 }
 require("header.php");
 if ($isDateArchive) {
-	print "<h2>Archive of Posts from ".date("F Y",$thisArchiveDate)."</h2>";
+	print "<h2 class=\"subtitle\">Archive of Posts from ".date("F Y",$thisArchiveDate)."</h2>";
 	$thisArchiveYear = mysql_real_escape_string($thisArchiveYear);
 	$thisArchiveMonth = mysql_real_escape_string($thisArchiveMonth);
 	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE Year(DateCreated) = $thisArchiveYear AND Month(DateCreated) = $thisArchiveMonth AND hide = 0 ORDER BY DateCreated DESC";
@@ -92,7 +92,7 @@ else {
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) == 0) {
-	die("<div class=\"post-text\">Couldn't find any posts! WTF?!</div>");
+	die("<div class=\"post-text entry-content\">Couldn't find any posts! WTF?!</div>");
 } 
 else {
 	while ($post = mysql_fetch_array($result)) {
@@ -139,7 +139,7 @@ else {
 		else {
 			//print "<div class=\"daysep\"></div>";
 		}
-		print "<div class=\"post";
+		print "<article class=\"post";
 		if (($type == 5) || ($type == 6) || ($type == 8)) {
 			print " photo";
 		}
@@ -148,7 +148,7 @@ else {
 		}
 		print "\">\n";
 		if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
-			print "<h3>$title</h3>\n";
+			print "<h3 class=\"title entry-title\">$title</h3>\n";
 			$notitle = 0;
 		}
 		print "<div class=\"post-text";
@@ -158,7 +158,7 @@ else {
 		print "\"";
 		print ">$body</div>\n";
 		if (($type == 5) || ($type == 6) || ($type == 8)) {
-			print "<div class=\"photo-title\">";
+			print "<div class=\"photo-title entry-title\">";
 			if (strpos($title,"instagram photo") === false) {
 				print $title;
 			}
@@ -181,7 +181,7 @@ else {
 			print " &middot; <a href=\"$permalink#comment\" style=\"text-decoration:underline\">comment</a>";
 		}
 		print "</div>\n";
-		print "</div>\n";
+		print "</article>\n";
 		$lastDate = $thisDate;
 	}
 }

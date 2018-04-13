@@ -8,7 +8,7 @@ require("header.php");
 	<!-- <h2><span class="dmd">&#9670;</span>&nbsp;&nbsp;About&nbsp;&nbsp;<span class="dmd">&#9670;</span></h2> -->
 	<div class="post other">
 	<img src="https://d1x6es5xzge33k.cloudfront.net/pb-deck-avatar-backup.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;margin-bottom:15px;"/>
-	<h3>About Paul Bausch</h3>
+	<h2 class="title">About Paul Bausch</h2>
 		<div class="post-text">
 		<div style="margin-top:15px;">
 		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>.
@@ -38,7 +38,7 @@ require("header.php");
 		When I'm not computering I like to hike and camp. Oregon is a great place for those.
 		</div></div></div>
 		<div class="post" style="margin-top:18px;">
-		<h3>Contact Me</h3>
+		<h2 class="title">Contact Me</h2>
 		<div class="post-text">
 		You can <a href="/contact">send me an email here</a>.
 		<br /><br /> Or you can connect with me on any of these sites:
@@ -64,7 +64,7 @@ require("header.php");
 		</div>
 		<div style="clear: both;"></div>
 		<div class="post">
-		<h3>About onfocus</h3>
+		<h2 class="title">About onfocus</h2>
 		<div class="post-text">
 		I share links, photos, and occasional thoughts. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe: <a href="http://xml.onfocus.com/posts"><img src="//o.snapgallery.net/feed.png" width="12" height="12" border="0" style="vertical-align:middle;" title="Subscribe to onfocus" alt="rss"/></a> And here's <a href="/archive">the archive</a> if you want to go back in time.
 		<br /><br />

@@ -44,9 +44,6 @@
         #footer {
             min-height: 46px;
         }
-        h2 {
-            text-align: center;
-        }
 		@media screen and (max-width: 750px) {
 			iframe.flickr-embed-frame {
 				width: 100vw;
@@ -77,4 +74,4 @@
 	</div>
 </div>
 <div class="fill"><div class="triangle-up-right"></div><div class="triangle-up-left"></div></div>
-<div id="blog">
+<div id="blog" class="hfeed">
