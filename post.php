@@ -203,7 +203,7 @@ $notitle = 1;
 if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
 	$notitle = 0;
 }
-print "<article class=\"post archive single";
+print "<article class=\"post archive single hentry";
 if (($type == 5) || ($type == 6) || ($type == 8)) {
 	print " photo";
 }

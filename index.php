@@ -139,7 +139,7 @@ else {
 		else {
 			//print "<div class=\"daysep\"></div>";
 		}
-		print "<article class=\"post";
+		print "<article class=\"post hentry";
 		if (($type == 5) || ($type == 6) || ($type == 8)) {
 			print " photo";
 		}
