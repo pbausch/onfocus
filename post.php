@@ -372,7 +372,6 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 // END COMMENT FORM
 ?>
 </div>
-</div>
 <?php
 // OLDER POST LINK
 $query = "SELECT post_id, DateCreated, url_slug FROM items WHERE hide = 0 AND post_id < ". mysql_real_escape_string($_GET['id']) . " ORDER BY post_id DESC LIMIT 1";
