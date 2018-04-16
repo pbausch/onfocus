@@ -5,9 +5,40 @@ $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
 ?>
+<style>
+	.blend {
+		display:inline-block;
+		margin: auto;
+		border-radius: 50%;
+		margin-bottom:15px;
+		transition: 1s filter linear, .5s -webkit-filter linear;
+	}
+	.blend img {
+		transition: 1s filter linear, .5s -webkit-filter linear;
+		border-radius: 50%;
+	}
+	.blend:hover {
+		background: linear-gradient(135deg, #536976 0%, #90485f 50%);
+		transition: 1s filter linear, .5s -webkit-filter linear;
+	}
+	.blend:hover img {
+		border-radius: 50%;
+		mix-blend-mode: lighten;
+		-webkit-filter: grayscale(100%) contrast(.8);
+		filter: grayscale(100%) contrast(.8);
+	}
+	.flourish img:hover {
+		filter: grayscale(100%);
+		transition: 1s filter linear, .5s -webkit-filter linear;
+	}
+</style>
 	<!-- <h2><span class="dmd">&#9670;</span>&nbsp;&nbsp;About&nbsp;&nbsp;<span class="dmd">&#9670;</span></h2> -->
 	<div class="post other">
-	<img src="https://d1x6es5xzge33k.cloudfront.net/pb-deck-avatar-backup.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;margin-bottom:15px;"/>
+	<div style="text-align:center;">
+	<div class="blend">
+		<img src="https://d1x6es5xzge33k.cloudfront.net/pb-deck-avatar-backup.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;"/>
+	</div>
+	</div>
 	<h2 class="title">About Paul Bausch</h2>
 		<div class="post-text">
 		<div style="margin-top:15px;">
@@ -15,7 +46,9 @@ require("header.php");
 		<br /><br />
 		onfocus is my personal website where I've been posting whatever comes to mind since 1998. These days it's mostly pictures.
 		</div>
-		<div class="flourish" style="text-align:center;margin:15px;font-size:1.5em;">&#9670;</div>
+		<div class="flourish" style="text-align:center;margin:15px;font-size:1.5em;">
+			<img src="fig111.png" style="width:150px;padding-top:10px;"/>
+		</div>
 		<div class="post-text">
 		In 2017 I started working at <a href="http://ecampus.oregonstate.edu/">Oregon State University Ecampus</a>, one of the top online education programs in the US.
 		<br /><br />
@@ -31,7 +64,9 @@ require("header.php");
 		<br /><br />
 		(Here are <a href="https://makerba.se/m/ffatkg/pbausch">a few of these projects and more on Makerbase</a>.)
 		</div>
-		<div class="flourish" style="text-align:center;margin:15px;font-size:1.5em;">&#9670;</div>
+		<div class="flourish" style="text-align:center;margin:15px;font-size:1.5em;">
+			<img src="fig113.png" style="width:160px;padding-top:10px;"/>
+		</div>
 		<div class="post-text">
 		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln.
 		<br /><br />
@@ -67,7 +102,9 @@ require("header.php");
 		<h2 class="title">About onfocus</h2>
 		<div class="post-text">
 		I share links, photos, and occasional thoughts. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe: <a href="http://xml.onfocus.com/posts"><img src="//o.snapgallery.net/feed.png" width="12" height="12" border="0" style="vertical-align:middle;" title="Subscribe to onfocus" alt="rss"/></a> And here's <a href="/archive">the archive</a> if you want to go back in time.
-		<br /><br />
+		<div class="flourish" style="text-align:center;margin:15px;font-size:1.5em;">
+			<img src="fig110.png" style="width:160px;padding-top:10px;"/>
+		</div>
 		<code>onfocus</code> is the name of a <a href="//en.wikipedia.org/wiki/JavaScript">JavaScript</a> event. In 1998 when I was looking for a domain name to go along with my new blog I was using JavaScript quite a bit and thought it was a good fit. I still use JavaScript quite a bit so it was a lucky bet. If this weblog was about JavaScript it would be even better.
 		</div>
 		</div>
