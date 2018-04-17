@@ -4,7 +4,7 @@ $pagetitle = "onfocus contact";
 $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
-?><h2 style="text-align:left;">Contact Paul Bausch</h2>
+?><div class="post other"><h2 class="title">Contact Paul Bausch</h2>
 	<?php
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$from_name = $_POST["txtName"];
@@ -33,7 +33,7 @@ require("header.php");
 	}
 	else {
 	?>
-	<div class="post" style="margin-top:18px;">
+
 		<div class="post-text">This handy form will send a message directly to my inbox.
 		<br /><br />
 		<form action="/contact" method="post" name="frmComment" onSubmit="return checkForm(this);" id="cform">
@@ -58,17 +58,18 @@ require("header.php");
 		<div class="formRow">
 			<label for="txaBody"><nobr>Message&nbsp;</nobr></label>
 			<div class="formElement">
-				<textarea cols="40" rows="14" id="txaBody" name="txaBody" style="width:400px;background-color:#eee;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" aria-required="true"></textarea>
+				<textarea cols="30" rows="10" id="txaBody" name="txaBody" style="width:400px;background-color:#eee;padding:3px 2px;" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" aria-required="true"></textarea>
 			</div>
 		</div>
 			
-		<input class="btn" style="margin-top:10px;" type="submit" value="send message"/></td></tr>
+		<input class="btn" style="margin-top:10px;" type="submit" value="Send Message"/></td></tr>
 		</form>
 		</table>
 		</div>
 	</div>
 	<?php } ?>
 </div>
+<div class="fill" style="margin-bottom:12px;"><div class="triangle-up-right rot90"></div><div class="triangle-up-left rotn90"></div></div>
 <div id="footer">
 	<div class="navigation">
 		<a href="/">Home</a>
