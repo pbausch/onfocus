@@ -111,6 +111,7 @@ else {
 		//$body = utf8_encode($body);
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
+		$postDate8601 = date(DATE_ISO8601, strtotime($postDateTime));
 		$thisYear = date('Y',strtotime($postDateTime));
 		$thisMonth = date('m',strtotime($postDateTime));
 		$permalink = "/$thisYear/$thisMonth/$id";
@@ -168,7 +169,7 @@ else {
 			print "</div>";
 		}
 		
-		print "<div class=\"post-byline\">$thisDate, <a href=\"$permalink\">$thisTime</a>";
+		print "<div class=\"post-byline\"><span class=\"updated\" datetime=\"$postDate8601\">$thisDate, <a href=\"$permalink\">$thisTime</a></span";
 		
 		if ($commentCount > 0) {
 			print " &middot; <a href=\"$permalink#comments\">$commentCount comment";
@@ -181,6 +182,7 @@ else {
 			print " &middot; <a href=\"$permalink#comment\" style=\"text-decoration:underline\">comment</a>";
 		}
 		print "</div>\n";
+		print "<div class=\"vcard\" style=\"display:none;\"><span class=\"fn\">Paul Bausch</span></div>\n";
 		print "</article>\n";
 		$lastDate = $thisDate;
 	}
