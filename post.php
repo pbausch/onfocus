@@ -45,6 +45,7 @@ else {
 		}
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
+		$postDate8601 = date(DATE_ISO8601, strtotime($postDateTime));
 		$thisYear = date('Y',strtotime($postDateTime));
 		$thisMonth = date('m',strtotime($postDateTime));
 		$permalink = "/$thisYear/$thisMonth/$id";
@@ -229,7 +230,7 @@ if (($type == 5) || ($type == 6) || ($type == 8)) {
 	}
 	print "</div>";
 }
-print "<div class=\"post-byline archive\">$thisDate, $thisTime</div>";
+print "<time class=\"post-byline archive updated\" datetime=\"$postDate8601\">$thisDate, $thisTime</time>";
 //require("lib/heart.php");
 ?>
 </article>

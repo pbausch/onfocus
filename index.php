@@ -192,11 +192,11 @@ ob_end_flush();
 <?php if (!$isDateArchive) { ?>
 <div id="footer">
 	<div class="navigation">
-		<a href="/page/<?php print $olderPageNum ?>">Older Posts</a>
+		<a href="/page/<?php print $olderPageNum ?>">Older</a>
 		<?php if ($pageNum == 2) { ?> 
-		    <span class="flourish">&#9670;</span> <a href="/" style="padding-left:10px;">Newer Posts</a>
+		    <span class="flourish">&#9670;</span> <a href="/" style="padding-left:10px;">Newer</a>
 		<?php } elseif ($pageNum > 1) { ?> 
-		    <span class="flourish">&#9670;</span> <a href="/page/<?php print $newerPageNum ?>" style="padding-left:10px;">Newer Posts</a>
+		    <span class="flourish">&#9670;</span> <a href="/page/<?php print $newerPageNum ?>" style="padding-left:10px;">Newer</a>
 		<?php } elseif ($pageNum == 1) { ?> <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">Archive</a><?php } ?>
 	</div>
 </div>
