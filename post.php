@@ -233,6 +233,9 @@ if (($type == 5) || ($type == 6) || ($type == 8)) {
 print "<time class=\"post-byline archive updated\" datetime=\"$postDate8601\">$thisDate, $thisTime</time>";
 //require("lib/heart.php");
 ?>
+<div class="vcard" style="display:none;">
+ <span class="fn">Paul Bausch</span>
+</div>
 </article>
 <?php
 // BEGIN COMMENTS
