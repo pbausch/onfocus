@@ -28,7 +28,7 @@ a
     text-decoration: underline
 
 #footer .flourish
-  color: #bbd2c5
+  color: #90485f
   font-size: 1em
 
 #blog, #copyright, #header, .fill
@@ -53,6 +53,9 @@ a
   padding-left: 24px
   padding-bottom: 5px
   background-color: $black
+
+#topflourish
+  transition: color .5s
 
 #header
   margin-top: 1.5em
@@ -81,6 +84,9 @@ a
 
 #header:hover + .fill .triangle-up-left:after
   border-left-color: #90485f !important
+
+#header:hover #topflourish 
+  color: #bbd2c5
 
 #footer
   border-bottom-left-radius: 4px
@@ -176,13 +182,17 @@ ul.delicious
   
 #infobox .post-text 
   color: #888
-  a 
+  a
     color: #ccc
     height: 100%
     padding-right: 10px
     letter-spacing: .5px
     &.selected 
       color: #999
+  #tophome, .flourish
+    padding-right: 0
+  .flourish
+    color: #90485f
     
 #logo, .tagline 
   color: #666
@@ -371,3 +381,21 @@ ul
 
 li
   margin-bottom: 15px
+
+td
+  font-family: $font-system
+
+.blend 
+  display: inline-block
+  margin: auto
+  margin-bottom: 15px
+  transition: 1s filter linear, .5s -webkit-filter linear
+  img
+    transition: 1s filter linear, .5s -webkit-filter linear
+  &:hover 
+    background: linear-gradient(135deg, #536976 0%, #90485f 50%)
+    transition: 1s filter linear, .5s -webkit-filter linear
+    img
+      mix-blend-mode: lighten
+      -webkit-filter: grayscale(100%) contrast(.8)
+      filter: grayscale(100%) contrast(.8)

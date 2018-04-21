@@ -129,6 +129,7 @@ if (($firstImageUrl == "https://www.gif") || ($firstImageUrl == "")) {
 $firstImageUrlFb = str_replace("hqdefault","mqdefault",$firstImageUrl);
 
 $pageHeaderAddition .= <<<END
+	<meta name="description" content="$summary" />
 	<meta property="og:title" content="onfocus: $title" />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content="$canonicalUrl" />

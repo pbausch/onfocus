@@ -6,26 +6,8 @@ $isDateArchive = 0;
 require("header.php");
 ?>
 <style>
-	.blend {
-		display:inline-block;
-		margin: auto;
+	.blend, .blend img {
 		border-radius: 50%;
-		margin-bottom:15px;
-		transition: 1s filter linear, .5s -webkit-filter linear;
-	}
-	.blend img {
-		transition: 1s filter linear, .5s -webkit-filter linear;
-		border-radius: 50%;
-	}
-	.blend:hover {
-		background: linear-gradient(135deg, #536976 0%, #90485f 50%);
-		transition: 1s filter linear, .5s -webkit-filter linear;
-	}
-	.blend:hover img {
-		border-radius: 50%;
-		mix-blend-mode: lighten;
-		-webkit-filter: grayscale(100%) contrast(.8);
-		filter: grayscale(100%) contrast(.8);
 	}
 	.flourish img:hover {
 		filter: grayscale(100%);

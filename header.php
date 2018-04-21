@@ -68,8 +68,9 @@
 	<h1 id="logo">onfocus</h1>
 	<div id="infobox">
 		<div class="post-text">
-			<a href="/" <?php if (($page == "/index.php") && ($pageNum == 1) && ($isDateArchive == 0)) { ?>class="selected"<?php } ?> id="tophome">Home</a>
-			<a href="/about" <?php if ($page == "/about.php") { ?>class="selected"<?php } ?>>About</a>  
+			<a href="/" title="go to the homepage" <?php if (($page == "/index.php") && ($pageNum == 1) && ($isDateArchive == 0)) { ?>class="selected"<?php } ?> id="tophome">Home</a>
+			<span id="topflourish" class="flourish">&nbsp;◆&nbsp;</span>
+			<a href="/about" title="what is this place?" <?php if ($page == "/about.php") { ?>class="selected"<?php } ?>>About</a>  
 		</div>
 	</div>
 </div>

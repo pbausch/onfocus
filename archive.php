@@ -16,7 +16,7 @@ require("header.php");
 	<!-- <h2><span class="dmd">&#9670;</span>&nbsp;&nbsp;Archive&nbsp;&nbsp;<span class="dmd">&#9670;</span></h2> -->
 	<!--
 	<div class="post" style="margin-top:18px;">
-		<h3>Start Here</h3>
+		<h2 class="title">Start Here</h2>
 		<div class="post-text">
 		You have to start somewhere.
 		<ul>
@@ -44,10 +44,11 @@ require("header.php");
 				background-color: #fff;
 			}
 		}
+		td a {font-weight:400 !important;}
 	</style>
 
 	<div class="post other">
-		<h3>Post Archive</h3>
+		<h2 class="title">Post Archive</h2>
 		<div class="post-text">
 		For serious browsers only: 17 years worth of onfocus posts, month by month:
 		<br/><br/>
@@ -66,7 +67,7 @@ require("header.php");
 				print "even";
 			}
 			print "\">";
-			print "<div style=\"font-family:'DDC Hardware';font-weight:bold;margin-bottom:5px;background-color:#ddd;\">&nbsp;".$i."&nbsp;</div>";
+			print "<div style=\"font-weight:bold;margin-bottom:5px;background-color:#ddd;\">&nbsp;".$i."&nbsp;</div>";
 			$startMonth = 1;
 			$endMonth = 12;
 			if ($i == $endYear) {
@@ -107,7 +108,7 @@ if (!$result = @ mysql_query ($query, $connection))
    	logError();
 ?>
 	<div class="post" id="galleryArchive">
-		<h3>Gallery Archive</h3>
+		<h2 class="title">Gallery Archive 1999-2006</h2>
 		<div class="post-text">
 			Before Flickr, Facebook, Instagram, and others I posted a lot of pictures here. I used to post one or two pictures in a post and then link to a gallery of more. These are links to those galleries:
 			<br /><br />
@@ -120,7 +121,7 @@ if (!$result = @ mysql_query ($query, $connection))
 				$galleryThumbURL = str_replace("thumbs/","",$galleryThumbURL);
 				$galleryThumbURL = str_replace("https://www.onfocus.com/",LOCAL_CDN_URL."/img/200x130/",$galleryThumbURL);
 				$galleryTotalPhotos = $tp[4];
-				print '<div class="galleryThumb"><a href="https://www.onfocus.com'.$galleryURL.'" title="'. $galleryName .' ('. date('Y', strtotime($galleryDTM)) .') / '. $galleryTotalPhotos .' photos"><img data-src="'.$galleryThumbURL.'" src="'.$galleryThumbURL.'" width="200" height="130"/></a></div>';
+				print '<div class="galleryThumb blend"><a href="https://www.onfocus.com'.$galleryURL.'" title="'. $galleryName .' ('. date('Y', strtotime($galleryDTM)) .') / '. $galleryTotalPhotos .' photos"><img data-src="'.$galleryThumbURL.'" src="'.$galleryThumbURL.'" width="200" height="130"/></a></div>';
 			} ?>
 		</div>
 		<div style="clear:both;"></div>
