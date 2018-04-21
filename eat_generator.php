@@ -27,7 +27,7 @@ require("header.php");
 			$Number = "3";
 		}
 	?>
-	<h2 class="archive-title">The What-Do-You-Want-For-Dinner I-Don't-Know-What-Do-You-Want? Dialog Generator Results:</h2>
+	<h2 class="subtitle">The What-Do-You-Want-For-Dinner I-Don't-Know-What-Do-You-Want? Dialog Generator Results:</h2>
 	<div class="post archive">
 	<div class="post-text">
 	<b><?php print $FirstName ?></b>: So, what do you want to eat?<br>
@@ -91,7 +91,7 @@ require("header.php");
 	</div>
 	</div>
 	<?php } else { ?>
-	<h2 class="archive-title">The What-Do-You-Want-For-Dinner I-Don't-Know-What-Do-You-Want? Dialog Generator.</h2>
+	<h2 class="subtitle" style="margin-top:10px;line-height:150%;">The What-Do-You-Want-For-Dinner I-Don't-Know-What-Do-You-Want? Dialog Generator.</h2>
 	<div class="post archive">
 	<div class="post-text">
 	How many times have you argued with someone about what to have for dinner when both of you were too apathetic to actually come to a decision? 
