@@ -32,9 +32,9 @@ function gallery($con) {
 	
 	$thisDate = date("M jS, Y",strtotime($galleryDateTime));
 	
-	$out = "<div class=\"post other\">";
+	$out = "<div class=\"post other\">\n";
 	$out .= "<h2 class=\"title\">". str_replace(" | onfocus", "", $galleryTitle) . "</h2>\n";
-	$out .= "<div id=\"gallery\" class=\"post archive\">\n";
+	//$out .= "<div id=\"gallery\" class=\"post archive\">\n";
 	$out .= "<div class=\"post-text\">$galleryDescription</div>\n";
 	$out .= "<div class=\"post-byline archive\">$thisDate &middot; $imageCount photos</div>\n";
 	$out .= "<div class=\"post-text gallery-list\">\n";
@@ -54,7 +54,7 @@ function gallery($con) {
 		$out .=  "</div>";
 	}
 
-	$out .=  "</div></div></div></div>";
+	$out .=  "</div></div></div>";
 	print $out;
 	print "<div class=\"fill\" style=\"margin-bottom:12px;\"><div class=\"triangle-up-right rot90\"></div><div class=\"triangle-up-left rotn90\"></div></div>";
 	print "<div id=\"footer\">";
