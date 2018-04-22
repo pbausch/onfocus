@@ -77,7 +77,7 @@ $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
 ?>
-<h2 class="archive-title"><?php print $GalleryTitle ?></h2>
+<h2 class="title"><?php print $GalleryTitle ?></h2>
 <div class="post" style="width:<?php print ($width + 30) ?>px;">
 	<div style="">
 	<div class="post-text" style="float:right;margin-bottom:5px;padding:7px 15px 0px 0px;"><?php print "$page of $totalPages" ?></div>
@@ -99,6 +99,7 @@ require("header.php");
 </div>
 <?php if ($thisCaption <> "") { ?><div class="post" style="margin-top:15px;width:<?php print ($width + 30) ?>px;text-align:center;"><div class="post-text" style="padding:0px 10px 0px 10px;"><?php print $thisCaption ?></div></div><?php } ?>
 </div>
+<div class="fill" style="margin-bottom:12px;"><div class="triangle-up-right rot90"></div><div class="triangle-up-left rotn90"></div></div>
 <div id="footer">
 	<div class="navigation">
 		<a href="/">Home</a>

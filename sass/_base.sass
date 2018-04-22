@@ -394,12 +394,16 @@ td
   margin: auto
   margin-bottom: 15px
   transition: 1s filter linear, .5s -webkit-filter linear
+  background: linear-gradient(135deg, #536976 0%, #90485f 50%)
   img
     transition: 1s filter linear, .5s -webkit-filter linear
+    mix-blend-mode: lighten
+    -webkit-filter: grayscale(100%) contrast(.8)
+    filter: grayscale(100%) contrast(.8)
   &:hover 
-    background: linear-gradient(135deg, #536976 0%, #90485f 50%)
     transition: 1s filter linear, .5s -webkit-filter linear
+    background: transparent
     img
-      mix-blend-mode: lighten
-      -webkit-filter: grayscale(100%) contrast(.8)
-      filter: grayscale(100%) contrast(.8)
+      mix-blend-mode: initial
+      -webkit-filter: none
+      filter: none
