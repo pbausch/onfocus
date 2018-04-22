@@ -143,7 +143,7 @@ $pageHeaderAddition .= <<<END
 	<meta name="twitter:image" content="$firstImageUrl" />\n\t
 END;
 if (strpos($body, 'new SWFObject') !== false) {
-    $pageHeaderAddition .= "<script type=\"text/javascript\" src=\"https://d1x6es5xzge33k.cloudfront.net/js/swfobject.js\"></script>\n";
+    $pageHeaderAddition .= "<script src=\"https://d1x6es5xzge33k.cloudfront.net/js/swfobject.js\"></script>\n";
 }
 $pageHeaderAddition .= "<script>var pid = ${id};</script>\n";
 if ($thisCommentsOn) {
@@ -334,7 +334,7 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 	print "<a name=\"add-comment\"></a><h2 class=\"archive-title\" style=\"margin-bottom:20px;\">Add a Comment</h2><div class=\"post archive\">";
 ?>
 <div class="post-text" id="jsmsg">If you want to comment you'll need JavaScript on. According to our records you have disabled JavaScript in your browser settings or with an extension.</div>
-<script type="text/javascript">var msg=document.getElementById("jsmsg");msg.style.display='none';</script>
+<script>var msg=document.getElementById("jsmsg");msg.style.display='none';</script>
 <form action="https://www.onfocus.com/add-comment.php" method="post" onsubmit="return submitForm(this);" style="display:none;" id="cform">
 <div class="formRow commentHere">
 	<label class="post-byline" for="<?php print $commentFieldName ?>">comment</label>
@@ -354,13 +354,13 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 <div class="formRow">
 	<label class="post-byline" for="<?php print $urlFieldName ?>">url</label>
 	<div class="formElement">
-		<input name="<?php print $urlFieldName ?>" type="text" size="50" maxlength="100" value="<?php print $thisURL ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $urlFieldName ?>" type="url" placeholder="https://"></td></tr>
+		<input name="<?php print $urlFieldName ?>" type="url" size="50" maxlength="100" value="<?php print $thisURL ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $urlFieldName ?>" placeholder="https://">
 	</div>
 </div>
 <div class="formRow">
 	<label class="post-byline" for="<?php print $randomFieldName ?>">email</label>
 	<div class="formElement">
-		<input name="<?php print $randomFieldName ?>" type="text" size="50" maxlength="100" value="<?php print $randomValue ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $randomFieldName ?>" type="email" placeholder="email"></td></tr>
+		<input name="<?php print $randomFieldName ?>" type="email" size="50" maxlength="100" value="<?php print $randomValue ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $randomFieldName ?>" placeholder="email">
 	</div>
 </div>
 <div class="formRow">
@@ -371,7 +371,7 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 <input type="hidden" name="<?php print $postFieldName ?>" value="<?php print $id ?>" id="postid"/>
 <input type="hidden" name="token" value="<?php print $thisToken ?>" id="token"/>
 </form>
-<script type="text/javascript">var v = document.getElementById("<?php print $randomFieldName ?>");v.value = 'reset';var r = document.getElementsByClassName('formRow')[3];r.style.display = 'none';var f = document.getElementById("cform");f.style.display='block';</script>
+<script>var v = document.getElementById("<?php print $randomFieldName ?>");v.value = 'reset';var r = document.getElementsByClassName('formRow')[3];r.style.display = 'none';var f = document.getElementById("cform");f.style.display='block';</script>
 <?php
 }
 // END COMMENT FORM
