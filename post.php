@@ -354,13 +354,13 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 <div class="formRow">
 	<label class="post-byline" for="<?php print $urlFieldName ?>">url</label>
 	<div class="formElement">
-		<input name="<?php print $urlFieldName ?>" type="url" size="50" maxlength="100" value="<?php print $thisURL ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $urlFieldName ?>" placeholder="https://">
+		<input name="<?php print $urlFieldName ?>" type="text" size="50" maxlength="100" value="<?php print $thisURL ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $urlFieldName ?>" placeholder="https://">
 	</div>
 </div>
 <div class="formRow">
 	<label class="post-byline" for="<?php print $randomFieldName ?>">email</label>
 	<div class="formElement">
-		<input name="<?php print $randomFieldName ?>" type="email" size="50" maxlength="100" value="<?php print $randomValue ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $randomFieldName ?>" placeholder="email">
+		<input name="<?php print $randomFieldName ?>" type="text" size="50" maxlength="100" value="<?php print $randomValue ?>" onfocus="this.style.backgroundColor='#fff';" onblur="this.style.backgroundColor='#eee';" id="<?php print $randomFieldName ?>" placeholder="email">
 	</div>
 </div>
 <div class="formRow">
