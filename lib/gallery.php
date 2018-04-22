@@ -32,7 +32,7 @@ function gallery($con) {
 	
 	$thisDate = date("M jS, Y",strtotime($galleryDateTime));
 	
-	$out = "<div class=\"post other\">\n";
+	$out = "<div id=\"gallery\" class=\"post other\">\n";
 	$out .= "<h2 class=\"title\">". str_replace(" | onfocus", "", $galleryTitle) . "</h2>\n";
 	//$out .= "<div id=\"gallery\" class=\"post archive\">\n";
 	$out .= "<div class=\"post-text\">$galleryDescription</div>\n";
