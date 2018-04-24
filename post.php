@@ -10,6 +10,7 @@ if (mysql_num_rows($result) == 0) {
 } 
 else {
 	while ($post = mysql_fetch_array($result)) {
+		$type = $post['item_type_id'];
 		$title = $post['title'];
 		//$title = utf8_encode($title);
 		$body = $post['body'];
@@ -30,6 +31,10 @@ else {
 		$summary = trim(truncate_to_x_words($summary, 45));
 		if ($summary == "") {
 			$summary = $title;
+			// we have a photo with no caption so add a description
+			if (($type == 5) || ($type == 6) || ($type == 8)) {
+				$summary = "A photo by pb.";
+			}
 		}
 		$summary = htmlspecialchars($summary);
 		$pageTitle = $title;
@@ -63,7 +68,6 @@ else {
 		$thisTime = date(TIME_FORMAT,strtotime($postDateTime));
 		$lastDate = $thisDate;
 		$thisCommentsOn = $post['comments_on'];
-		$type = $post['item_type_id'];
 		$slug = $post['url_slug'];
 		if ($slug !== '') {
 			// If we don't have a matching slug, redirect to canonical
