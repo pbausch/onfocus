@@ -23,7 +23,7 @@ else {
 		// if this is a photo post, add fancybox
 		if ($post['item_type_id'] == 8) {
 			$dom = new DOMDocument;
-			$dom->loadHTML($body);
+			$dom->loadHTML($body, LIBXML_HTML_NODEFDTD);
 			$images = $dom->getElementsByTagName('img');
 			foreach ($images as $image) {
 				$src = $image->getAttribute('src');
@@ -36,7 +36,7 @@ else {
 				$modal->appendChild($image);
 			}
 			$html = $dom->saveHTML();
-			$body = $html;
+			$body = substr($html, 12, -15); //remove added html/body tags
 		}
 		$imageUrls = array();
 		if (strpos($body,"<img") !== false) {

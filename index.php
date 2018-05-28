@@ -112,7 +112,7 @@ else {
 		// if this is a photo post, add fancybox
 		if ($post['item_type_id'] == 8) {
 			$dom = new DOMDocument;
-			$dom->loadHTML($body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+			$dom->loadHTML($body, LIBXML_HTML_NODEFDTD);
 			$images = $dom->getElementsByTagName('img');
 			foreach ($images as $image) {
 				$src = $image->getAttribute('src');
@@ -125,10 +125,7 @@ else {
 				$modal->appendChild($image);
 			}
 			$html = $dom->saveHTML();
-			$body = $html;
-			
-			//<a href="image.jpg" data-fancybox data-caption="Caption for single image">
-			
+			$body = substr($html, 12, -15); //remove added html/body tags
 		}
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
