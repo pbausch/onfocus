@@ -10,6 +10,7 @@ if (mysql_num_rows($result) == 0) {
 } 
 else {
 	while ($post = mysql_fetch_array($result)) {
+		$slug = $post['url_slug'];
 		$type = $post['item_type_id'];
 		$title = $post['title'];
 		//$title = utf8_encode($title);
@@ -19,6 +20,23 @@ else {
 		$body = emoji_unified_to_html($body);
 		$summary = $body;
 		$summary = preg_replace("/<style\\b[^>]*>(.*?)<\\/style>/s", "", $summary);
+		// if this is a photo post, add fancybox
+		if ($post['item_type_id'] == 8) {
+			$dom = new DOMDocument;
+			$dom->loadHTML($body);
+			$images = $dom->getElementsByTagName('img');
+			foreach ($images as $image) {
+				$src = $image->getAttribute('src');
+				$src = str_replace('.jpg','_o.jpg',$src);
+				$modal = $dom->createElement('a');
+		        $modal->setAttribute('data-fancybox',$slug);
+		        $modal->setAttribute('href', $src);
+				$image->parentNode->replaceChild($modal, $image);
+				$modal->appendChild($image);
+			}
+			$html = $dom->saveHTML();
+			$body = $html;
+		}
 		$imageUrls = array();
 		if (strpos($body,"<img") !== false) {
 			$images = preg_match_all('!//[a-z0-9\-\.\/]+\.(?:jpe?g|png|gif)!Ui' , $summary , $imageUrls);

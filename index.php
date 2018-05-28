@@ -109,6 +109,26 @@ else {
 			//$body = preg_replace('/<li((.(?<!<li))*?<\/ul>)/s','<li style="margin-bottom:0px;"$1',$body);
 		}
 		//$body = utf8_encode($body);
+		// if this is a photo post, add fancybox
+		if ($post['item_type_id'] == 8) {
+			$dom = new DOMDocument;
+			$dom->loadHTML($body);
+			$images = $dom->getElementsByTagName('img');
+			foreach ($images as $image) {
+				$src = $image->getAttribute('src');
+				$src = str_replace('.jpg','_o.jpg',$src);
+				$modal = $dom->createElement('a');
+		        $modal->setAttribute('data-fancybox',$slug);
+		        $modal->setAttribute('href', $src);
+				$image->parentNode->replaceChild($modal, $image);
+				$modal->appendChild($image);
+			}
+			$html = $dom->saveHTML();
+			$body = $html;
+			
+			//<a href="image.jpg" data-fancybox data-caption="Caption for single image">
+			
+		}
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
 		$postDate8601 = date(DATE_ISO8601, strtotime($postDateTime));
