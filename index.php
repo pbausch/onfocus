@@ -112,7 +112,7 @@ else {
 		// if this is a photo post, add fancybox
 		if ($post['item_type_id'] == 8) {
 			$dom = new DOMDocument;
-			$dom->loadHTML($body);
+			$dom->loadHTML($body, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 			$images = $dom->getElementsByTagName('img');
 			foreach ($images as $image) {
 				$src = $image->getAttribute('src');
@@ -121,6 +121,7 @@ else {
 		        $modal->setAttribute('data-fancybox',$slug);
 		        $modal->setAttribute('href', $src);
 				$image->parentNode->replaceChild($modal, $image);
+				$image->setAttribute('style','display:block');
 				$modal->appendChild($image);
 			}
 			$html = $dom->saveHTML();

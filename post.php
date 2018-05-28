@@ -32,6 +32,7 @@ else {
 		        $modal->setAttribute('data-fancybox',$slug);
 		        $modal->setAttribute('href', $src);
 				$image->parentNode->replaceChild($modal, $image);
+				$image->setAttribute('style','display:block');
 				$modal->appendChild($image);
 			}
 			$html = $dom->saveHTML();
