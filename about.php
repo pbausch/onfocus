@@ -9,9 +9,23 @@ require("header.php");
 	.blend, .blend img {
 		border-radius: 50%;
 	}
-	.flourish img:hover {
-		filter: grayscale(100%);
-		transition: 1s filter linear, .5s -webkit-filter linear;
+	#blog .flourish {
+		display: block;
+		border-top: solid #bbd2c5 1px;
+		color: #90485f;
+		margin: 3em auto 3em auto;
+		width: 66%;
+		text-align: center;
+	}
+	#blog .flourish .ftext {
+		position: absolute;
+		display: inline-block;
+		margin-top: -1em;
+		margin-left: -30px;
+		background-color: #fff;
+		line-height: 1;
+		padding: 10px .5em 5px .5em;
+		font-size: 1.5em;
 	}
 </style>
 	<!-- <h2><span class="dmd">&#9670;</span>&nbsp;&nbsp;About&nbsp;&nbsp;<span class="dmd">&#9670;</span></h2> -->
@@ -28,8 +42,8 @@ require("header.php");
 		<br /><br />
 		onfocus is my personal website where I've been posting whatever comes to mind since 1998. These days it's mostly pictures.
 		</div>
-		<div class="flourish" style="text-align:center;margin:15px;font-size:1.5em;">
-			<img src="fig111.png" style="width:150px;padding-top:10px;"/>
+		<div class="flourish">
+			<div class="ftext">&nbsp;◆&nbsp;</div>
 		</div>
 		<div class="post-text">
 		In 2017 I started working at <a href="http://ecampus.oregonstate.edu/">Oregon State University Ecampus</a>, one of the top online education programs in the US.
@@ -46,8 +60,8 @@ require("header.php");
 		<br /><br />
 		(Here are <a href="https://makerba.se/m/ffatkg/pbausch">a few of these projects and more on Makerbase</a>.)
 		</div>
-		<div class="flourish" style="text-align:center;margin:15px;font-size:1.5em;">
-			<img src="fig113.png" style="width:160px;padding-top:10px;"/>
+		<div class="flourish">
+			<div class="ftext">&nbsp;◆&nbsp;</div>
 		</div>
 		<div class="post-text">
 		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln.
@@ -92,8 +106,8 @@ require("header.php");
 		<h2 class="title">About onfocus</h2>
 		<div class="post-text">
 		I share links, photos, and occasional thoughts. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe: <a href="http://xml.onfocus.com/posts"><img src="//o.snapgallery.net/feed.png" width="12" height="12" border="0" style="vertical-align:middle;" title="Subscribe to onfocus" alt="rss"/></a> And here's <a href="/archive">the archive</a> if you want to go back in time.
-		<div class="flourish" style="text-align:center;margin:15px;font-size:1.5em;">
-			<img src="fig110.png" style="width:160px;padding-top:10px;"/>
+		<div class="flourish">
+			<div class="ftext">&nbsp;◆&nbsp;</div>
 		</div>
 		<code>onfocus</code> is the name of a <a href="//en.wikipedia.org/wiki/JavaScript">JavaScript</a> event. In 1998 when I was looking for a domain name to go along with my new blog I was using JavaScript quite a bit and thought it was a good fit. I still use JavaScript quite a bit so it was a lucky bet. If this weblog was about JavaScript it would be even better.
 		</div>
