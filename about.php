@@ -31,9 +31,7 @@ require("header.php");
 	<!-- <h2><span class="dmd">&#9670;</span>&nbsp;&nbsp;About&nbsp;&nbsp;<span class="dmd">&#9670;</span></h2> -->
 	<div class="post other">
 	<div style="text-align:center;">
-	<div class="blend">
-		<img src="https://d1x6es5xzge33k.cloudfront.net/pb-deck-avatar-backup.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;"/>
-	</div>
+		<img src="https://d1x6es5xzge33k.cloudfront.net/pb-deck-avatar-backup.jpg" width="140" height="140" alt="Paul Bausch" style="display:block;margin:auto;margin-bottom:15px;border-radius: 50%;"/>
 	</div>
 	<h2 class="title">About Paul Bausch</h2>
 		<div class="post-text">
