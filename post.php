@@ -30,7 +30,8 @@ else {
 				$src = str_replace('.jpg','_o.jpg',$src);
 				$modal = $dom->createElement('a');
 		        $modal->setAttribute('data-fancybox',$slug);
-		        $modal->setAttribute('href', $src);
+				$modal->setAttribute('href', $src);
+				$modal->setAttribute('style','cursor:zoom-in');
 				$image->parentNode->replaceChild($modal, $image);
 				$image->setAttribute('style','display:block');
 				$modal->appendChild($image);
