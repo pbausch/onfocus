@@ -52,6 +52,7 @@
 				transform: translateX(-50%);
 			}
 		}
+		a[data-fancybox] { cursor: zoom-in; }
 	</style>
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
 	<link rel="stylesheet" href="/css/jquery.fancybox.min.css" />
