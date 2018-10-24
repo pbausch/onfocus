@@ -226,7 +226,10 @@ END;
 }
 require("header.php");
 $notitle = 1;
-if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
+if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8) && ($type != 9)) {
+	$notitle = 0;
+} 
+if (($type == 9) && ($id <= 6873)) {
 	$notitle = 0;
 }
 print "<article class=\"post archive single hentry";

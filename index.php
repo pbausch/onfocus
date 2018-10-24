@@ -167,7 +167,7 @@ else {
 			print " other";
 		}
 		print "\">\n";
-		if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8)) {
+		if ((strpos($title,"Links for") === false) && ($type != 7) && ($type != 5) && ($type != 6) && ($type != 8) && ($type != 9)) {
 			print "<h3 class=\"title entry-title\">$title</h3>\n";
 			$notitle = 0;
 		}
