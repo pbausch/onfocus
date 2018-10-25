@@ -266,7 +266,7 @@ if ($type == 9) {
 	print "Recommended &middot; ";
 }
 if (($type == 5) || ($type == 6) || ($type == 8)) {
-	print "Photo &middot; ";
+	print "Photos &middot; ";
 }
 print "$thisDate, $thisTime</time>";
 //require("lib/heart.php");
