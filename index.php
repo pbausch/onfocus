@@ -193,7 +193,7 @@ else {
 			print "Thoughts &middot; ";
 		}
 		if ($type == 9) {
-			print "Recommended link &middot; ";
+			print "Recommended &middot; ";
 		}
 		if (($type == 5) || ($type == 6) || ($type == 8)) {
 			print "Photo &middot; ";

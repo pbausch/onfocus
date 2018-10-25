@@ -42,7 +42,7 @@ else {
 <language>en-us</language>
 <lastBuildDate><?php print date(DATE_RSS_FORMAT); ?></lastBuildDate>
 <?php
-$query = "SELECT post_id, DateCreated, title, body, url_slug FROM Items WHERE hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
+$query = "SELECT post_id, DateCreated, title, body, url_slug, item_type_id FROM Items WHERE hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) == 0) {
@@ -54,6 +54,7 @@ else {
 		$slug = $post['url_slug'];
 		$title = $post['title'];
 		$body = $post['body'];
+		$type = $post['item_type_id'];
 		// fix up youtube embeds
 		if (strpos($body, "class=\"embed\"") !== false) {
 			$find = "src=\"https://www.onfocus.com/loading.php\" ";
@@ -62,6 +63,14 @@ else {
 			    $body = substr_replace($body, "", $pos, strlen($find));
 			}
 			$body = str_replace("data-src", "src", $body);
+		}
+		// fix up pinboard link images
+		if ($type == 9) {
+			$find = "<div class=\"linkimg\"><img";
+			$pos = strpos($body, $find);
+			if ($pos !== false) {
+			    $body = substr_replace($body, "<div class=\"linkimg\"><img width=\"200\" height=\"auto\" ", $pos, strlen($find));
+			}			
 		}
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
