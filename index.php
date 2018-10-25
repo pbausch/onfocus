@@ -188,7 +188,17 @@ else {
 			print "</div>";
 		}
 		
-		print "<div class=\"post-byline\"><span class=\"updated\" datetime=\"$postDate8601\">$thisDate, <a href=\"$permalink\">$thisTime</a></span>";
+		print "<div class=\"post-byline\">";
+		if ($type == 1) {
+			print "Thoughts &middot; ";
+		}
+		if ($type == 9) {
+			print "Recommended link &middot; ";
+		}
+		if (($type == 5) || ($type == 6) || ($type == 8)) {
+			print "Photo &middot; ";
+		}
+		print "<span class=\"updated\" datetime=\"$postDate8601\">$thisDate, <a href=\"$permalink\">$thisTime</a></span>";
 		
 		if ($commentCount > 0) {
 			print " &middot; <a href=\"$permalink#comments\">$commentCount comment";

@@ -258,7 +258,17 @@ if (($type == 5) || ($type == 6) || ($type == 8)) {
 	}
 	print "</div>";
 }
-print "<time class=\"post-byline archive updated\" datetime=\"$postDate8601\">$thisDate, $thisTime</time>";
+print "<time class=\"post-byline archive updated\" datetime=\"$postDate8601\">";
+if ($type == 1) {
+	print "Thoughts &middot; ";
+}
+if ($type == 9) {
+	print "Recommended link &middot; ";
+}
+if (($type == 5) || ($type == 6) || ($type == 8)) {
+	print "Photo &middot; ";
+}
+print "$thisDate, $thisTime</time>";
 //require("lib/heart.php");
 ?>
 <div class="vcard" style="display:none;">
