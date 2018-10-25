@@ -92,7 +92,7 @@ else {
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) == 0) {
-	die("<div class=\"post-text entry-content\">Couldn't find any posts! WTF?!</div>");
+	die("<div class=\"post-text entry-content\">Something went wrong! We'll be back soon.</div>");
 } 
 else {
 	while ($post = mysql_fetch_array($result)) {
@@ -196,7 +196,7 @@ else {
 			print "Recommended &middot; ";
 		}
 		if (($type == 5) || ($type == 6) || ($type == 8)) {
-			print "Photo &middot; ";
+			print "Photos &middot; ";
 		}
 		print "<span class=\"updated\" datetime=\"$postDate8601\">$thisDate, <a href=\"$permalink\">$thisTime</a></span>";
 		
