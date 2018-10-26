@@ -259,14 +259,16 @@ if (($type == 5) || ($type == 6) || ($type == 8)) {
 	print "</div>";
 }
 print "<time class=\"post-byline archive updated\" datetime=\"$postDate8601\">";
-if ($type == 1) {
-	print "Thoughts &middot; ";
-}
-if ($type == 9) {
-	print "Recommended &middot; ";
-}
-if (($type == 5) || ($type == 6) || ($type == 8)) {
-	print "Photos &middot; ";
+if ($thisYear > 2017) {
+	if ($type == 1) {
+		print "Thoughts &middot; ";
+	}
+	if ($type == 9) {
+		print "Recommended &middot; ";
+	}
+	if (($type == 5) || ($type == 6) || ($type == 8)) {
+		print "Photos &middot; ";
+	}
 }
 print "$thisDate, $thisTime</time>";
 //require("lib/heart.php");

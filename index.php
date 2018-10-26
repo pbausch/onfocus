@@ -189,14 +189,16 @@ else {
 		}
 		
 		print "<div class=\"post-byline\">";
-		if ($type == 1) {
-			print "Thoughts &middot; ";
-		}
-		if ($type == 9) {
-			print "Recommended &middot; ";
-		}
-		if (($type == 5) || ($type == 6) || ($type == 8)) {
-			print "Photos &middot; ";
+		if ($thisYear > 2017) {
+			if ($type == 1) {
+				print $thisYear . " Thoughts &middot; ";
+			}
+			if ($type == 9) {
+				print "Recommended &middot; ";
+			}
+			if (($type == 5) || ($type == 6) || ($type == 8)) {
+				print "Photos &middot; ";
+			}
 		}
 		print "<span class=\"updated\" datetime=\"$postDate8601\">$thisDate, <a href=\"$permalink\">$thisTime</a></span>";
 		
