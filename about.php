@@ -66,7 +66,7 @@ require("header.php");
 		<div class="post-text">
 		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln.
 		<br /><br />
-		When I'm not computering I like to go camping in Oregon, play Dungeons & Dragons, noodle around the guitar, and throw plastic discs at trees.
+		When I'm not computering I like to go camping in Oregon, play Dungeons &amp; Dragons, noodle around on the guitar, and throw plastic discs at trees. Ask me about being an adult!
 		</div></div></div>
 		<div class="post" style="margin-top:18px;">
 		<h2 class="title">Contact Me</h2>
