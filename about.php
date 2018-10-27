@@ -44,6 +44,8 @@ require("header.php");
 			<div class="ftext">&nbsp;◆&nbsp;</div>
 		</div>
 		<div class="post-text">
+		You might remember me from such projects as...
+		<br /><br />
 		In 2017 I started working at <a href="http://ecampus.oregonstate.edu/">Oregon State University Ecampus</a>, one of the top online education programs in the US.
 		<br /><br />
 		From 2006-2016 I worked at <a href="//www.metafilter.com/">MetaFilter</a>, an amazing online community. If you want to know more about MetaFilter, start with <a href="//vimeo.com/11916466">this talk by Matt Haughey</a>&mdash;it's a great introduction.
@@ -54,7 +56,7 @@ require("header.php");
 		<br /><br />
 		From 2002-2006 I wrote <a href="//www.amazon.com/gp/redirect.html?ie=UTF8&amp;location=http%3A%2F%2Fwww.amazon.com%2Fs%3Fie%3DUTF8%26redirect%3Dtrue%26search-type%3Dss%26index%3Dbooks%26ref%3Dntt%255Fathr%255Fdp%255Fsr%255F1%26field-author%3DPaul%2520Bausch&amp;tag=onfocus&amp;linkCode=ur2&amp;camp=1789&amp;creative=390957">some books</a><img src="https://www.assoc-amazon.com/e/ir?t=onfocus&amp;l=ur2&amp;o=1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> about web applications. 
 		<br /><br />
-		From 1999-2001 I helped create an early weblog tool called <a href="//www.blogger.com/home">Blogger</a> at Pyra Labs.
+		From 1999-2001 I helped create an early weblog tool called <a href="//www.blogger.com/home">Blogger</a> at Pyra Labs. I helped make <a href="https://en.wikipedia.org/wiki/Permalink">permalinks</a> popular! (It's my sole wikipedia mention!)
 		<br /><br />
 		(Here are <a href="https://makerba.se/m/ffatkg/pbausch">a few of these projects and more on Makerbase</a>.)
 		</div>
