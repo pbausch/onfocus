@@ -36,7 +36,7 @@ require("header.php");
 	<h2 class="title">About Paul Bausch</h2>
 		<div class="post-text">
 		<div style="margin-top:15px;">
-		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>.
+		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>. I'm a husband, father of two, amateur photographer, and terrible disc golfer.
 		<br /><br />
 		onfocus is my personal website where I've been posting whatever comes to mind since 1998. These days it's mostly pictures.
 		</div>
@@ -66,7 +66,7 @@ require("header.php");
 		<div class="post-text">
 		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln.
 		<br /><br />
-		When I'm not computering I like to hike and camp. Oregon is a great place for those.
+		When I'm not computering I like to go camping in Oregon, play Dungeons & Dragons, noodle around the guitar, and throw plastic discs at trees.
 		</div></div></div>
 		<div class="post" style="margin-top:18px;">
 		<h2 class="title">Contact Me</h2>
