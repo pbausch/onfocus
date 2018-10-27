@@ -152,6 +152,7 @@ else {
 		$thisDate = str_replace("nd","<sup>nd</sup>",$thisDate);
 		$thisDate = str_replace("rd","<sup>rd</sup>",$thisDate);
 		$thisTime = date(TIME_FORMAT,strtotime($postDateTime));
+		$thisTime = preg_replace('/\s(\S*)$/', '&nbsp;$1', $thisTime);
 		$notitle = 1;
 		if ($thisDate !== $lastDate) {
 			//print "<h2>$thisDate</h2>\n";
@@ -191,7 +192,7 @@ else {
 		print "<div class=\"post-byline\">";
 		if ($thisYear > 2017) {
 			if ($type == 1) {
-				print $thisYear . " Thoughts &middot; ";
+				print "Thoughts &middot; ";
 			}
 			if ($type == 9) {
 				print "Recommended &middot; ";

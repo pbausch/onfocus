@@ -86,6 +86,7 @@ else {
 		$thisDate = str_replace("nd","<sup>nd</sup>",$thisDate);
 		$thisDate = str_replace("rd","<sup>rd</sup>",$thisDate);
 		$thisTime = date(TIME_FORMAT,strtotime($postDateTime));
+		$thisTime = preg_replace('/\s(\S*)$/', '&nbsp;$1', $thisTime);
 		$lastDate = $thisDate;
 		$thisCommentsOn = $post['comments_on'];
 		$slug = $post['url_slug'];
