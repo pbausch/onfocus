@@ -76,4 +76,4 @@
 	</div>
 </div>
 <div class="fill"><div class="triangle-up-right"></div><div class="triangle-up-left"></div></div>
-<div id="blog" class="hfeed">
+<div id="blog" class="hfeed<?php if ($page == "/post.php") { echo ' single';} ?>">
