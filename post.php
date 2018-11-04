@@ -415,10 +415,12 @@ if (($thisCommentsOn == 1) && (strtotime($postDateTime) > strtotime("-6 months")
 <?php
 }
 // END COMMENT FORM
+else {
 ?>
 <div class="welcome goodbye other"><div class="post-text">
  Hi! You're reading a single post on a weblog by <a href="https://www.onfocus.com/about">Paul Bausch</a> where I share recommended links, my photos, and occasional thoughts.
 </div></div>
+<?php } ?>
 </div>
 </div>
 <?php
