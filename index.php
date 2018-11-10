@@ -118,6 +118,7 @@ else {
 		}
 		//$body = utf8_encode($body);
 		// if this is a photo post, add fancybox
+		$vert = 0;
 		if ($post['item_type_id'] == 8) {
 			$dom = new DOMDocument;
 			$dom->loadHTML($body, LIBXML_HTML_NODEFDTD);
@@ -125,6 +126,11 @@ else {
 			foreach ($images as $image) {
 				$src = $image->getAttribute('src');
 				$src = str_replace('.jpg','_o.jpg',$src);
+				$img_width = $image->getAttribute('width');
+				$img_height = $image->getAttribute('height');
+				if ($img_height > $img_width) {
+					$vert = 1;
+				}
 				$modal = $dom->createElement('a');
 		        $modal->setAttribute('data-fancybox',$slug);
 				$modal->setAttribute('href', $src);
@@ -171,6 +177,9 @@ else {
 		print "<article class=\"post hentry";
 		if (($type == 5) || ($type == 6) || ($type == 8)) {
 			print " photo";
+			if ($vert == 1) {
+				print " vert";
+			}
 		}
 		else {
 			print " other";

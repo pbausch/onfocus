@@ -128,13 +128,21 @@
     border-image: linear-gradient(to right, #536976 0%, #90485f 100%)
     border-image-slice: 1
 
+@media screen and (max-width: 660px) 
+  .post.photo.vert .post-text
+    padding: 0
+    background: none
+
+  .post.photo.vert .post-text img
+    margin: 0
+  
 @media screen and (max-width: 480px) 
   .post img[height='640']
     max-width: none
     height: auto
     display: block
     width: 100vw
-    margin-left: 50%
+    margin-left: 50% !important
     transform: translateX(-50%)
 
 @media screen and (max-width: 375px) 
