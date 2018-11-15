@@ -20,7 +20,6 @@ movies/*
 post/*
 post-comment.php
 add-comment.php
-
 lib/set-stylesheet.php
-
 lib/set-includes.php
+twitter-archive/*
