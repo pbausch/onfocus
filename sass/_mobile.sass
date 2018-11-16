@@ -131,18 +131,23 @@
   .project
     margin-bottom: 40px
     clear: both
+    direction: rtl
 
-  .project-icon 
-    float: left
-    padding-top: 5px
-    padding-right: 5px
+    .project-icon 
+      display: inline
+      float: right
+      padding-top: 5px
+      padding-right: 0
+      text-align: right
+      direction: ltr !important
 
-  .project-icon img
-    margin-top: 0
+    .project-icon img
+      margin-top: 0
 
-  .project-text
-    /* display: block */
-    padding: 0
+    .project-text
+      display: inline
+      padding: 0
+      direction: ltr !important
 
 @media screen and (max-width: 660px) 
   .post.photo.vert .post-text
