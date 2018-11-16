@@ -45,18 +45,43 @@ require("header.php");
 		</div>
 		<div class="post-text">
 		You might remember me from such projects as...
-		<br /><br />
+		<br><br>
+		<div class="project">
+		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-osu-logo.png" width="50" height="50" style="margin-top:-5px;" /></div>
+		<div class="project-text">
 		In 2017 I started working at <a href="http://ecampus.oregonstate.edu/">Oregon State University Ecampus</a>, one of the top online education programs in the US.
-		<br /><br />
-		From 2006-2016 I worked at <a href="//www.metafilter.com/">MetaFilter</a>, an amazing online community. If you want to know more about MetaFilter, start with <a href="//vimeo.com/11916466">this talk by Matt Haughey</a>&mdash;it's a great introduction.
-		<br /><br />
+		</div>
+		</div>
+		<div class="project">
+		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-mefi-logo.png" width="50" height="50" class="by-the-power-of" /></div>
+		<div class="project-text">
+		From 2006-2016 I helped develop <a href="//www.metafilter.com/">MetaFilter</a>, an amazing online community. If you want to know more about MetaFilter, start with <a href="//vimeo.com/11916466">this talk by Matt Haughey</a>&mdash;it's a great introduction.
+		</div>
+		</div>
+		<div class="project">
+		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-fuelly-logo.png" width="50" height="50" class="by-the-power-of" /></div>
+		<div class="project-text">
 		From 2008-2013 I co-developed <a href="//www.fuelly.com/">Fuelly</a> which helps people share and compare their vehicle fuel economy.
-		<br /><br />
+		</div>
+		</div>
+		<div class="project">
+		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-orblogs-logo.png" width="50" height="50" class="by-the-power-of" /></div>
+		<div class="project-text">
 		From 2003-2008 I developed and ran ORblogs.com, an Oregon weblog directory.
-		<br /><br />
-		From 2002-2006 I wrote <a href="//www.amazon.com/gp/redirect.html?ie=UTF8&amp;location=http%3A%2F%2Fwww.amazon.com%2Fs%3Fie%3DUTF8%26redirect%3Dtrue%26search-type%3Dss%26index%3Dbooks%26ref%3Dntt%255Fathr%255Fdp%255Fsr%255F1%26field-author%3DPaul%2520Bausch&amp;tag=onfocus&amp;linkCode=ur2&amp;camp=1789&amp;creative=390957">some books</a><img src="https://www.assoc-amazon.com/e/ir?t=onfocus&amp;l=ur2&amp;o=1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /> about web applications including Google Hacks, Flickr Hacks, Yahoo Hacks, and Amazon Hacks. (Hacks!)
-		<br /><br />
-		From 1999-2001 I helped create an early weblog tool called <a href="//www.blogger.com/home">Blogger</a> at Pyra Labs. I helped make <a href="https://en.wikipedia.org/wiki/Permalink">permalinks</a> popular!
+		</div>
+		</div>
+		<div class="project">
+		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-ora-logo.png" width="50" height="50" class="by-the-power-of" /></div>
+		<div class="project-text">
+		From 2002-2006 I wrote <a href="https://www.oreilly.com/pub/au/1200">some books</a> about web applications for O'Reilly including <em>Google Hacks</em>, <em>Flickr Hacks</em>, <em>Yahoo! Hacks</em>, and <em>Amazon Hacks</em>. (Hacks!) I also co-wrote a book about weblogs called <a href="https://books.google.com/books/about/We_Blog.html?id=Hhl_QgAACAAJ">We Blog</a>. 
+		</div>
+		</div>
+		<div class="project">
+		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-blogger-logo.png" width="50" height="50" class="by-the-power-of" /></div>
+		<div class="project-text">
+		From 1999-2001 I helped create an early weblog tool called <a href="//www.blogger.com/home">Blogger</a> at Pyra Labs. Yay <a href="https://en.wikipedia.org/wiki/Permalink">permalinks</a>!
+		</div>
+		</div>
 		</div>
 		<div class="flourish">
 			<div class="ftext">&nbsp;◆&nbsp;</div>
