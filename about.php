@@ -87,9 +87,18 @@ require("header.php");
 			<div class="ftext">&nbsp;◆&nbsp;</div>
 		</div>
 		<div class="post-text">
-		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln.
-		<br /><br />
-		When I'm not computering I like to go camping in Oregon, play Dungeons &amp; Dragons, noodle around on the guitar, and throw plastic discs at trees. Ask me about being an adult!
+		<div class="project">
+		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-nu-logo.png" width="50" height="50" class="by-the-power-of" /></div>
+		<div class="project-text">
+		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln.&lrm;
+		</div>
+		</div>
+		<div class="project">
+		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-camp-logo.png" width="50" height="50" class="by-the-power-of" /></div>
+		<div class="project-text">
+		When I'm not computering I like to go camping in Oregon, play Dungeons &amp; Dragons, noodle around on the guitar, and throw plastic discs at trees. Ask me about being an adult!&lrm;
+		</div>
+		</div>
 		</div></div></div>
 		<div class="post" style="margin-top:18px;">
 		<h2 class="title">Contact Me</h2>
