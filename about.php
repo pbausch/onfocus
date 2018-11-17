@@ -96,7 +96,7 @@ require("header.php");
 		<div class="project">
 		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-camp-logo.png" width="50" height="50" class="by-the-power-of" /></div>
 		<div class="project-text">
-		When I'm not computering I like to go camping in Oregon, play Dungeons &amp; Dragons, noodle around on the guitar, and throw plastic discs at trees. Ask me about being an adult!&lrm;
+		When I'm not computering I like to go camping, play Dungeons &amp; Dragons, noodle around on the guitar, and throw plastic discs at trees. Ask me about being an adult!&lrm;
 		</div>
 		</div>
 		</div></div></div>
