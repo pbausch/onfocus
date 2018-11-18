@@ -136,11 +136,11 @@ require("header.php");
 		<div class="post">
 		<h2 class="title">About onfocus</h2>
 		<div class="post-text">
-		I share links, photos, and occasional thoughts. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe: <a href="http://xml.onfocus.com/posts"><img src="//o.snapgallery.net/feed.png" width="12" height="12" border="0" style="vertical-align:middle;" title="Subscribe to onfocus" alt="rss"/></a> And here's <a href="/archive">the archive</a> if you want to go back in time.
+		This is my personal weblog where I share recommended links, my photos, and occasional thoughts. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe. And here's <a href="/archive">the archive</a> if you want to go back in time. I wrote the code for this site and most of it is on Github: <a href="https://github.com/pbausch/onfocus">onfocus</a>. It's hosted at <a href="https://www.digitalocean.com/">DigitalOcean</a>.
 		<div class="flourish">
 			<div class="ftext">&nbsp;◆&nbsp;</div>
 		</div>
-		<code>onfocus</code> is the name of a <a href="//en.wikipedia.org/wiki/JavaScript">JavaScript</a> event. In 1998 when I was looking for a domain name to go along with my new blog I was using JavaScript quite a bit and thought it was a good fit. I still use JavaScript quite a bit so it was a lucky bet. If this weblog was about JavaScript it would be even better.
+		<code>onfocus</code> is the name of a <a href="//en.wikipedia.org/wiki/JavaScript">JavaScript</a> event. In 1998 when I was looking for a domain name to go along with my new blog I was using JavaScript quite a bit and thought <em>onfocus</em> was a good fit with my dual interests in coding and photography. Who could have predicted I'd still be using JavaScript in modern times? If this weblog was about JavaScript it would be even better.
 		</div>
 		</div>
 </div>
