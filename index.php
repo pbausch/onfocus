@@ -221,7 +221,7 @@ else {
 		print "<span class=\"updated\" datetime=\"$postDate8601\">$thisDate, <a href=\"$permalink\">$thisTime</a></span>";
 		
 		if ($commentCount > 0) {
-			print " &middot; <a href=\"$permalink#comments\">$commentCount comment";
+			print " &middot; <a href=\"$permalink#comments\">$commentCount&nbsp;comment";
 			if ($commentCount <> 1) {
 				print "s";
 			}
