@@ -26,8 +26,6 @@
 	<style>
 		#logo, .tagline, .selected, #bottom, #infobox .post-text a, .navigation a {color: #<?php print $logocolor ?> !important;}
 		html {
-			background: #<?php print $basebg ?>;
-		    background: radial-gradient(#bbd2c5 0%, #536976 140%);
 			min-height: 100%;
 		}
 		.btn {
