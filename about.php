@@ -79,7 +79,7 @@ require("header.php");
 		<div class="project">
 		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-blogger-logo.png" width="50" height="50" class="by-the-power-of" /></div>
 		<div class="project-text">
-		From 1999-2001 I helped create an early weblog tool called <a href="//www.blogger.com/home">Blogger</a> at Pyra Labs that helped fuel a wave of personal publishing online and defined many conventions we still use in web publishing today. Yay <a href="https://en.wikipedia.org/wiki/Permalink">permalinks</a>!&lrm;
+		From 1999-2001 I helped create an early weblog tool called <a href="//www.blogger.com/home">Blogger</a> at Pyra Labs that fueled a wave of personal publishing online and defined many conventions we still use on the web today. Yay <a href="https://en.wikipedia.org/wiki/Permalink">permalinks</a>!&lrm;
 		</div>
 		</div>
 		</div>
@@ -136,7 +136,7 @@ require("header.php");
 		<div class="post">
 		<h2 class="title">About onfocus</h2>
 		<div class="post-text">
-		This is my personal weblog where I share recommended links, my photos, and occasional thoughts. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe. And here's <a href="/archive">the archive</a> if you want to go back in time. I wrote the code for this site and most of it is on Github: <a href="https://github.com/pbausch/onfocus">onfocus</a>. It's hosted at <a href="https://www.digitalocean.com/">DigitalOcean</a>.
+		This is my personal weblog where I share recommended links, my photos, and occasional thoughts. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe. And here's <a href="/archive">the archive</a> if you want to go back in time. I wrote the code for this site and most of it is on Github: <a href="https://github.com/pbausch/onfocus">onfocus</a>. It's hosted at <a href="https://www.digitalocean.com/">DigitalOcean</a>. The onfocus header font is <a href="http://losttype.com/font/?name=ddc_hardware">DDC Hardware</a>.
 		<div class="flourish">
 			<div class="ftext">&nbsp;◆&nbsp;</div>
 		</div>
