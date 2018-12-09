@@ -79,7 +79,7 @@ require("header.php");
 		<div class="project">
 		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-blogger-logo.png" width="50" height="50" class="by-the-power-of" /></div>
 		<div class="project-text">
-		From 1999-2001 I helped create an early weblog tool called <a href="//www.blogger.com/home">Blogger</a> at Pyra Labs. Yay <a href="https://en.wikipedia.org/wiki/Permalink">permalinks</a>!&lrm;
+		From 1999-2001 I helped create an early weblog tool called <a href="//www.blogger.com/home">Blogger</a> at Pyra Labs that helped fuel a wave of personal publishing online and defined many conventions we still use in web publishing today. Yay <a href="https://en.wikipedia.org/wiki/Permalink">permalinks</a>!&lrm;
 		</div>
 		</div>
 		</div>
