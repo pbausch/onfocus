@@ -16,7 +16,7 @@ while ($tp = mysql_fetch_row($result)) {
 	$maxdate = $tp[2];
 }
 $pageNum = 1;
-$rowsPerPage = 25;
+$rowsPerPage = 12;
 $totalpages = ceil($totalposts / $rowsPerPage);
 if (isset($_GET['page'])) {
 	$pageNum = $_GET['page'];
@@ -90,7 +90,7 @@ else {
 ?>
 
 <div class="welcome other"><div class="post-text">
-	<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji1f327" title="rain_cloud"></span></span> Welcome to onfocus&mdash;a weblog by <a href="https://www.onfocus.com/about">Paul Bausch</a> where I post recommended links, my photos, and occasional thoughts. <span class="nomobile"><a href="http://xml.onfocus.com/posts">Subscribe here</a> if you like RSS.</span> <span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji1f342" title="fallen_leaf"></span></span>
+	<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji1f37a" title="beer"></span></span> Welcome to onfocus&mdash;a weblog by <a href="https://www.onfocus.com/about">Paul Bausch</a> where I post recommended links, my photos, and occasional thoughts. <span class="nomobile"><a href="http://xml.onfocus.com/posts">Subscribe here</a> if you like RSS.</span> <span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji1f3b8" title="guitar"></span></span>
 </div></div>
 
 <?php
@@ -243,12 +243,12 @@ ob_end_flush();
 <?php if (!$isDateArchive) { ?>
 <div id="footer">
 	<div class="navigation">
-		<a href="/page/<?php print $olderPageNum ?>">Older</a>
+		<span class="flourish">&#9670;</span>&nbsp;&nbsp;<a href="/page/<?php print $olderPageNum ?>" class="pulse" style="padding-right:0;">More Posts</a>&nbsp;&nbsp;<span class="flourish">&#9670;</span>
 		<?php if ($pageNum == 2) { ?> 
-		    <span class="flourish">&#9670;</span> <a href="/" style="padding-left:10px;">Newer</a>
+		    <!-- <span class="flourish">&#9670;</span> <a href="/" style="padding-left:10px;">Home</a> -->
 		<?php } elseif ($pageNum > 1) { ?> 
-		    <span class="flourish">&#9670;</span> <a href="/page/<?php print $newerPageNum ?>" style="padding-left:10px;">Newer</a>
-		<?php } elseif ($pageNum == 1) { ?> <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">Archive</a><?php } ?>
+		    <!-- <span class="flourish">&#9670;</span> <a href="/" style="padding-left:10px;">Home</a> -->
+		<?php } elseif ($pageNum == 1) { ?><!-- <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">Archive</a> --><?php } ?>
 	</div>
 </div>
 <?php } else { ?>
