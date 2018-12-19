@@ -91,7 +91,7 @@ else {
 ?>
 
 <div class="welcome other"><div class="post-text">
-	<span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji1f37a" title="beer"></span></span> Welcome to onfocus&mdash;a weblog by <a href="https://www.onfocus.com/about">Paul Bausch</a> where I post recommended links, my photos, and occasional thoughts. <span class="nomobile"><a href="http://xml.onfocus.com/posts">Subscribe here</a> if you like RSS.</span> <span class="emoji-outer emoji-sizer"><span class="emoji-inner emoji1f3b8" title="guitar"></span></span>
+	Welcome to onfocus&mdash;a weblog by <a href="https://www.onfocus.com/about">Paul Bausch</a> where I post recommended links, my photos, and occasional thoughts. <span class="nomobile"><a href="http://xml.onfocus.com/posts">Subscribe here</a> if you like RSS.</span>
 </div></div>
 
 <?php
