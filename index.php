@@ -37,6 +37,7 @@ $pageTitle = APP_TITLE . " by Paul Bausch";
 $pageDescription = "Thoughts and photos from a Web developer in Corvallis, Oregon.";
 
 $isDateArchive = 0;
+$isTagArchive = 0;
 $thisArchiveYear = "";
 $thisArchiveMonth = "";
 if (isset($_GET['year']) && isset($_GET['month'])) {
@@ -51,6 +52,10 @@ if (isset($_GET['xml'])) {
 	else {
 		header('Location: http://www.onfocus.com/');
 	}
+}
+if (isset($_GET['tag'])) {
+	$thisTag = trim($_GET['tag']);
+	$isTagArchive = 1;
 }
 if ($thisArchiveYear != "" && $thisArchiveMonth != "") {
 	if (checkdate($thisArchiveMonth,1,$thisArchiveYear)) {
@@ -80,10 +85,15 @@ if ($thisArchiveYear != "" && $thisArchiveMonth != "") {
 }
 require("header.php");
 if ($isDateArchive) {
-	print "<h2 class=\"subtitle\">Archive of Posts from ".date("F Y",$thisArchiveDate)."</h2>";
+	print "<h2 class=\"subtitle\">Posts from ".date("F Y",$thisArchiveDate)."</h2>";
 	$thisArchiveYear = mysql_real_escape_string($thisArchiveYear);
 	$thisArchiveMonth = mysql_real_escape_string($thisArchiveMonth);
 	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE Year(DateCreated) = $thisArchiveYear AND Month(DateCreated) = $thisArchiveMonth AND hide = 0 ORDER BY DateCreated DESC";
+}
+else if ($isTagArchive) {
+	print "<h2 class=\"subtitle\">Posts tagged <em>". $thisTag ."</em></h2>";
+	$thisTag = mysql_real_escape_string($thisTag);
+	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE tags LIKE '%" . $thisTag . "%' AND hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
 }
 else {
 	if ($pageNum == 1) {

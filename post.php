@@ -282,7 +282,9 @@ if ($thisYear > 2017) {
 }
 print "$thisDate, $thisTime</time>";
 //require("lib/heart.php");
+
 ?>
+<div class="post-byline taglist"><?php echo link_tags($tags); ?></div>
 <div class="vcard" style="display:none;">
  <span class="fn">Paul Bausch</span>
 </div>
