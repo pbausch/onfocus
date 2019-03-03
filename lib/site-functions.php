@@ -17,6 +17,16 @@ function first_x_words($text, $number_of_words) {
    return str_replace("\n", "", $text);
 }
 
+function link_tags($taglist) {
+	$tags = preg_split('/\s+/', $taglist);
+	foreach ($tags as $t) {
+		if (($t == "onfocus") || ($t == "") || ($t == "photo")) { continue; }
+		$out .= "<a href=\"/tag/" . urlencode($t) . "\" class=\"tag\">" . $t . "</a> ";
+	}
+	if ($out != "") { $out = "Browse more &middot; " . $out; }
+	return $out;
+}
+
 function truncate_to_x_words($text, $number_of_words) {
    $text = strip_tags($text);
    $excerpt = first_x_words($text, $number_of_words);

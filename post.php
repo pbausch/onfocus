@@ -282,7 +282,9 @@ if ($thisYear > 2017) {
 }
 print "$thisDate, $thisTime</time>";
 //require("lib/heart.php");
+
 ?>
+<div class="post-byline taglist"><?php echo link_tags($tags); ?></div>
 <div class="vcard" style="display:none;">
  <span class="fn">Paul Bausch</span>
 </div>
@@ -293,7 +295,7 @@ $query = "SELECT author, url, date, comment, comment_id FROM comments WHERE hide
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) > 0) {
-	print "<a name=\"comments\"></a><h2 class=\"archive-title comments-title\">Comments</h2><div class=\"post archive\">";
+	print "<a name=\"comments\"></a><h2 class=\"archive-title comments-title\">Comments</h2><div class=\"post archive\" style=\"margin-bottom:6em;\">";
 	while ($comment = mysql_fetch_array($result)) {
 		$comment_id = $comment['comment_id'];
 		$body = $comment['comment'];
