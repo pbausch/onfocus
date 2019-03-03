@@ -6,36 +6,7 @@ ob_start();
 $cntPost = 0;
 $lastDate = 0;
 
-// Paging
-$query = "SELECT Count(post_id), Min(DateCreated), Max(DateCreated) FROM items WHERE hide = 0";
-if (!$result = @ mysql_query ($query, $connection))
-   	logError();
-while ($tp = mysql_fetch_row($result)) {
-	$totalposts = $tp[0];
-	$mindate = $tp[1];
-	$maxdate = $tp[2];
-}
-$pageNum = 1;
-$rowsPerPage = 12;
-$totalpages = ceil($totalposts / $rowsPerPage);
-if (isset($_GET['page'])) {
-	$pageNum = $_GET['page'];
-	if (!ctype_digit($pageNum) || $pageNum > $totalpages) {
-		send404();
-	}
-}
-$offset = ($pageNum - 1) * $rowsPerPage;
-$olderPageNum = ($pageNum + 1);
-if ($pageNum > 1) {
-	$newerPageNum = ($pageNum - 1);
-}
-else {
-	$newerPageNum = 0;
-}
-
-$pageTitle = APP_TITLE . " by Paul Bausch";
-$pageDescription = "Thoughts and photos from a Web developer in Corvallis, Oregon.";
-
+// Page type
 $isDateArchive = 0;
 $isTagArchive = 0;
 $thisArchiveYear = "";
@@ -83,6 +54,51 @@ if ($thisArchiveYear != "" && $thisArchiveMonth != "") {
 		send404();
 	}
 }
+
+// Paging
+if ($isTagArchive) {
+	$thisTag = mysql_real_escape_string($thisTag);
+	$query = "SELECT Count(post_id) FROM tags WHERE hide = 0 AND tag = '$thisTag'";
+}
+else {
+	$query = "SELECT Count(post_id), Min(DateCreated), Max(DateCreated) FROM items WHERE hide = 0";
+}
+if (!$result = @ mysql_query ($query, $connection))
+   	logError();
+while ($tp = mysql_fetch_row($result)) {
+	$totalposts = $tp[0];
+	$mindate = $tp[1];
+	$maxdate = $tp[2];
+}
+if ($totalposts == 0) {
+	send404();
+}
+$pageNum = 1;
+$rowsPerPage = 12;
+$totalpages = ceil($totalposts / $rowsPerPage);
+if (isset($_GET['page'])) {
+	$pageNum = $_GET['page'];
+	if (!ctype_digit($pageNum) || $pageNum > $totalpages) {
+		send404();
+	}
+}
+$offset = ($pageNum - 1) * $rowsPerPage;
+$olderPageNum = ($pageNum + 1);
+if ($pageNum > 1) {
+	$newerPageNum = ($pageNum - 1);
+}
+else {
+	$newerPageNum = 0;
+}
+$lowpost = ($offset + 1);
+$highpost = ($offset + $rowsPerPage);
+if ($highpost > $totalposts) {
+	$highpost = $totalposts;
+}
+
+$pageTitle = APP_TITLE . " by Paul Bausch";
+$pageDescription = "Thoughts and photos from a Web developer in Corvallis, Oregon.";
+
 require("header.php");
 if ($isDateArchive) {
 	print "<h2 class=\"subtitle\">Posts from ".date("F Y",$thisArchiveDate)."</h2>";
@@ -93,7 +109,7 @@ if ($isDateArchive) {
 else if ($isTagArchive) {
 	print "<h2 class=\"subtitle\">Posts tagged <em>". $thisTag ."</em></h2>";
 	$thisTag = mysql_real_escape_string($thisTag);
-	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE tags LIKE '%" . $thisTag . "%' AND hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
+	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE post_id IN (SELECT post_id FROM tags WHERE tag = '$thisTag') AND hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
 }
 else {
 	if ($pageNum == 1) {
@@ -112,7 +128,9 @@ else {
 if (!$result = @ mysql_query ($query, $connection))
    	logError();
 if (mysql_num_rows($result) == 0) {
-	die("<div class=\"post-text entry-content\">Something went wrong! We'll be back soon.</div>");
+	echo "<article class=\"post\"><div class=\"post-text entry-content\">Something went wrong! We'll be back soon.</div></article>";
+	die;
+	
 } 
 else {
 	while ($post = mysql_fetch_array($result)) {
@@ -250,24 +268,31 @@ else {
 }
 ob_end_flush();
 ?>
+	<?php if (!$isDateArchive) { 
+		$basePageURL = "/";
+		if ($isTagArchive) {
+			$basePageURL = "/tag/$thisTag/";
+		}
+	?>
+		<article class="post" style="margin-bottom:20px;">
+		<div class="pagenav post-text entry-content">
+			<?php if ($pageNum != $totalpages) { ?>
+			<a href="<?php print $basePageURL ?>page/<?php print $olderPageNum ?>">&laquo; Older posts</a>
+			<?php } ?>
+			<?php if ($pageNum == 2) { ?> 
+				<?php if ($pageNum != $totalpages) { print "&nbsp;/&nbsp;&nbsp;"; } ?><a href="<?php print substr($basePageURL,0,-1) ?>">Newer posts &raquo;</a>
+			<?php } elseif ($pageNum > 1) { ?> 
+				<?php if ($pageNum != $totalpages) { print "&nbsp;/&nbsp;&nbsp;"; } ?><a href="<?php print $basePageURL ?>page/<?php print $newerPageNum ?>">Newer posts &raquo;</a>
+			<?php } ?>
+		</div>
+		<div class="post-byline">Showing <?php print $lowpost ?> through <?php print $highpost ?> of <?php print number_format($totalposts) ?> posts<?php if ($isTagArchive) { print " tagged <em>$thisTag</em>"; } ?>.</div> 
+		</article>
+	<?php } ?>
 </div>
 <div class="fill" style="margin-bottom:12px;"><div class="triangle-up-right rot90"></div><div class="triangle-up-left rotn90"></div></div>
-<?php if (!$isDateArchive) { ?>
 <div id="footer">
 	<div class="navigation">
-		<span class="flourish">&#9670;</span>&nbsp;&nbsp;<a href="/page/<?php print $olderPageNum ?>" class="pulse" style="padding-right:0;">More Posts</a>&nbsp;&nbsp;<span class="flourish">&#9670;</span>
-		<?php if ($pageNum == 2) { ?> 
-		    <!-- <span class="flourish">&#9670;</span> <a href="/" style="padding-left:10px;">Home</a> -->
-		<?php } elseif ($pageNum > 1) { ?> 
-		    <!-- <span class="flourish">&#9670;</span> <a href="/" style="padding-left:10px;">Home</a> -->
-		<?php } elseif ($pageNum == 1) { ?><!-- <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">Archive</a> --><?php } ?>
+		<a href="/">Home</a> <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">About</a> <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">Archive</a>
 	</div>
 </div>
-<?php } else { ?>
-<div id="footer">
-	<div class="navigation">
-		<a href="/">Home</a> <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">Archive</a>
-	</div>
-</div>
-<?php } ?>
 <?php require("footer.php"); ?>
