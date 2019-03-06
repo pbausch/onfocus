@@ -33,9 +33,13 @@ if ($thisArchiveYear != "" && $thisArchiveMonth != "") {
 		$thisArchiveDate = strtotime("$thisArchiveMonth/1/$thisArchiveYear");
 		$thisArchiveDate = strtotime("$thisArchiveMonth/1/$thisArchiveYear");
 		$minYear = date("Y",strtotime($mindate));
+		$minYear = date("Y","1999-01-01"); // temp archive fix
 		$maxYear = date("Y",strtotime($maxdate));
+		$maxYear = date("Y","2019-01-01"); // temp archive fix
 		$minMonth = date("m",strtotime($mindate));
+		$minMonth = date("m","1999-08-01"); // temp archive fix
 		$maxMonth = date("m",strtotime($maxdate));
+		$maxMonth = date("m","2019-03-01"); // temp archive fix
 		if (($thisArchiveYear >= $minYear) && ($thisArchiveYear <= $maxYear)) {
 			if ($thisArchiveYear == $minYear && $thisArchiveMonth < $maxMonth) {
 				send404();
