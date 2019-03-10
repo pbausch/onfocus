@@ -296,7 +296,7 @@ ob_end_flush();
 <div class="fill" style="margin-bottom:12px;"><div class="triangle-up-right rot90"></div><div class="triangle-up-left rotn90"></div></div>
 <div id="footer">
 	<div class="navigation">
-		<a href="/">Home</a> <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">About</a> <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">Archive</a>
+		<a href="/">Home</a> <span class="flourish">&#9670;</span> <a href="/about/" style="padding-left:10px;">About</a> <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">Archive</a>
 	</div>
 </div>
 <?php require("footer.php"); ?>
