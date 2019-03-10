@@ -8,7 +8,7 @@ while ($tp = mysql_fetch_row($result)) {
 	$maxdate = $tp[0];
 }
 $pageTitle = "onfocus archive";
-$pageDescription = "Linking 17 years of onfocus.com month by month.";
+$pageDescription = "Linking 19 years of onfocus.com month by month.";
 $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
@@ -50,7 +50,7 @@ require("header.php");
 	<div class="post other">
 		<h2 class="title">Post Archive</h2>
 		<div class="post-text">
-		For serious browsers only: 17 years worth of onfocus posts, month by month:
+		For serious browsers only: 19 years worth of onfocus posts, month by month:
 		<br/><br/>
 		<table border="0" cellpadding="6"><tr valign="top"> 
 		<?php
