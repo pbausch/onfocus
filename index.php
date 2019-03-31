@@ -289,7 +289,7 @@ ob_end_flush();
 				<?php if ($pageNum != $totalpages) { print "&nbsp;/&nbsp;&nbsp;"; } ?><a href="<?php print $basePageURL ?>page/<?php print $newerPageNum ?>">Newer posts &raquo;</a>
 			<?php } ?>
 		</div>
-		<div class="post-byline">Showing <?php print $lowpost ?> through <?php print $highpost ?> of <?php print number_format($totalposts) ?> posts<?php if ($isTagArchive) { print " tagged <em>$thisTag</em>"; } ?>.</div> 
+		<div class="post-byline">Showing <?php print $lowpost ?> through <?php print $highpost ?> of <?php print number_format($totalposts) ?> post<?php if ($totalposts != 1) { echo "s"; } ?><?php if ($isTagArchive) { print " tagged <em>$thisTag</em>"; } ?>.</div> 
 		</article>
 	<?php } ?>
 </div>

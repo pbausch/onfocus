@@ -290,6 +290,57 @@ print "$thisDate, $thisTime</time>";
 </div>
 </article>
 <?php
+// Older/Newer post links
+// OLDER POST LINK
+$query = "SELECT post_id, DateCreated, url_slug FROM items WHERE hide = 0 AND post_id < ". mysql_real_escape_string($_GET['id']) . " ORDER BY post_id DESC LIMIT 1";
+if (!$result = @ mysql_query ($query, $connection))
+   	logError();
+if (mysql_num_rows($result) == 0) {
+	$olderPermalink = "";
+} 
+else {
+	while ($post = mysql_fetch_array($result)) {
+		$id = $post['post_id'];
+		$postDateTime = $post['DateCreated'];
+		$slug = $post['url_slug'];
+		$thisYear = date('Y',strtotime($postDateTime));
+		$thisMonth = date('m',strtotime($postDateTime));
+		$olderPermalink = "/$thisYear/$thisMonth/$id";
+		if ($slug !== '') {
+			$olderPermalink .= "/$slug";
+		}
+	}
+}
+
+// NEWER POST LINK
+$query = "SELECT post_id, DateCreated, url_slug FROM items WHERE hide = 0 AND post_id > ". mysql_real_escape_string($_GET['id']) . " LIMIT 1";
+if (!$result = @ mysql_query ($query, $connection))
+   	logError();
+if (mysql_num_rows($result) == 0) {
+	$newerPermalink = "";
+} 
+else {
+	while ($post = mysql_fetch_array($result)) {
+		$id = $post['post_id'];
+		$postDateTime = $post['DateCreated'];
+		$slug = $post['url_slug'];
+		$thisYear = date('Y',strtotime($postDateTime));
+		$thisMonth = date('m',strtotime($postDateTime));
+		$newerPermalink = "/$thisYear/$thisMonth/$id";
+		if ($slug !== '') {
+			$newerPermalink .= "/$slug";
+		}
+	}
+}
+?>
+<article class="post" style="margin-bottom:90px;">
+<div class="pagenav post-text entry-content">
+	<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">&laquo; Previous post</a> <?php } ?>
+	<?php if ($newerPermalink <> "") { if ($olderPermalink <> "") { echo " / "; } ?><a href="<?php print $newerPermalink ?>">Next post &raquo;</a> <?php } ?>
+</div>
+</article>
+
+<?php
 // BEGIN COMMENTS
 $query = "SELECT author, url, date, comment, comment_id FROM comments WHERE hide = 0 AND trackback = 0 AND post_id = " . $id . " ORDER BY date ASC";
 if (!$result = @ mysql_query ($query, $connection))
@@ -434,55 +485,10 @@ else {
 <?php } ?>
 </div>
 </div>
-<?php
-// OLDER POST LINK
-$query = "SELECT post_id, DateCreated, url_slug FROM items WHERE hide = 0 AND post_id < ". mysql_real_escape_string($_GET['id']) . " ORDER BY post_id DESC LIMIT 1";
-if (!$result = @ mysql_query ($query, $connection))
-   	logError();
-if (mysql_num_rows($result) == 0) {
-	$olderPermalink = "";
-} 
-else {
-	while ($post = mysql_fetch_array($result)) {
-		$id = $post['post_id'];
-		$postDateTime = $post['DateCreated'];
-		$slug = $post['url_slug'];
-		$thisYear = date('Y',strtotime($postDateTime));
-		$thisMonth = date('m',strtotime($postDateTime));
-		$olderPermalink = "/$thisYear/$thisMonth/$id";
-		if ($slug !== '') {
-			$olderPermalink .= "/$slug";
-		}
-	}
-}
-
-// NEWER POST LINK
-$query = "SELECT post_id, DateCreated, url_slug FROM items WHERE hide = 0 AND post_id > ". mysql_real_escape_string($_GET['id']) . " LIMIT 1";
-if (!$result = @ mysql_query ($query, $connection))
-   	logError();
-if (mysql_num_rows($result) == 0) {
-	$newerPermalink = "";
-} 
-else {
-	while ($post = mysql_fetch_array($result)) {
-		$id = $post['post_id'];
-		$postDateTime = $post['DateCreated'];
-		$slug = $post['url_slug'];
-		$thisYear = date('Y',strtotime($postDateTime));
-		$thisMonth = date('m',strtotime($postDateTime));
-		$newerPermalink = "/$thisYear/$thisMonth/$id";
-		if ($slug !== '') {
-			$newerPermalink .= "/$slug";
-		}
-	}
-}
-?>
 <div class="fill" style="margin-bottom:12px;"><div class="triangle-up-right rot90"></div><div class="triangle-up-left rotn90"></div></div>
 <div id="footer">
 	<div class="navigation">
-		<?php if ($olderPermalink <> "") { ?><a href="<?php print $olderPermalink ?>">Prev</a> <span class="flourish">&#9670;</span><?php } ?>
-		<a href="/" style="padding-left:10px;">Home</a>
-		<?php if ($newerPermalink <> "") { ?> <span class="flourish">&#9670;</span> <a href="<?php print $newerPermalink ?>" style="padding-left:10px;">Next</a> <?php } ?>
+		<a href="/">Home</a> <span class="flourish">&#9670;</span> <a href="/about/" style="padding-left:10px;">About</a> <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">Archive</a>
 	</div>
 </div>
 <?php require("footer.php"); ?>
