@@ -300,12 +300,12 @@ if (mysql_num_rows($result) == 0) {
 } 
 else {
 	while ($post = mysql_fetch_array($result)) {
-		$id = $post['post_id'];
+		$oldid = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
 		$slug = $post['url_slug'];
 		$thisYear = date('Y',strtotime($postDateTime));
 		$thisMonth = date('m',strtotime($postDateTime));
-		$olderPermalink = "/$thisYear/$thisMonth/$id";
+		$olderPermalink = "/$thisYear/$thisMonth/$oldid";
 		if ($slug !== '') {
 			$olderPermalink .= "/$slug";
 		}
@@ -321,12 +321,12 @@ if (mysql_num_rows($result) == 0) {
 } 
 else {
 	while ($post = mysql_fetch_array($result)) {
-		$id = $post['post_id'];
+		$newid = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
 		$slug = $post['url_slug'];
 		$thisYear = date('Y',strtotime($postDateTime));
 		$thisMonth = date('m',strtotime($postDateTime));
-		$newerPermalink = "/$thisYear/$thisMonth/$id";
+		$newerPermalink = "/$thisYear/$thisMonth/$newid";
 		if ($slug !== '') {
 			$newerPermalink .= "/$slug";
 		}
