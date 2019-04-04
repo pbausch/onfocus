@@ -20,7 +20,7 @@ require("header.php");
 	#blog .flourish .ftext {
 		position: absolute;
 		display: inline-block;
-		margin-top: -1em;
+		margin-top: -.92em;
 		margin-left: -30px;
 		background-color: #fff;
 		line-height: 1;
