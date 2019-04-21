@@ -37,6 +37,9 @@
 		.flickr-embed-header {
 			visibility:hidden;
 		}
+		iframe[src*=spotify] {
+    			max-width: 100%;
+		}
 		#header, #footer { background-color: #<?php print $bannercolor ?> !important; }
 		.triangle-up-right:after { border-top-color: #<?php print $bannercolor ?> !important;}
 		.triangle-up-left:after { border-left-color: #<?php print $bannercolor ?> !important;}
