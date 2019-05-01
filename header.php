@@ -21,6 +21,8 @@
 <?php if (($pageNum > 1) || ($isDateArchive) || ($isTagArchive)) { print "\t"; ?><meta name="ROBOTS" content="NOINDEX,FOLLOW"><?php }?>
 	<?php if ($_SERVER['REMOTE_ADDR'] <> HOME_IP) { ?><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M6395HJ');</script><!-- End Google Tag Manager --><?php } ?>
 	<link rel="dns-prefetch" href="https://code.jquery.com/" />
+	<link rel="dns-prefetch" href="https://d1x6es5xzge33k.cloudfront.net/" />
+	<link rel="dns-prefetch" href="https://fonts.gstatic.com/" />
 	<link rel="icon" type="image/ico" href="<?php print CDN_URL ?>/<?php print $logocolor ?>.ico?v=<?php print $logocolor ?>" />
 	<link rel="apple-touch-icon" href="<?php print CDN_URL ?>/<?php print $logocolor ?>.apple-touch-icon.png">
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://xml.onfocus.com/posts" />
