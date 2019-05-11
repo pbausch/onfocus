@@ -284,7 +284,7 @@ ob_end_flush();
 			<a href="<?php print $basePageURL ?>page/<?php print $olderPageNum ?>">&laquo; Older posts</a>
 			<?php } ?>
 			<?php if ($pageNum == 2) { ?> 
-				<?php if ($pageNum != $totalpages) { print "&nbsp;/&nbsp;&nbsp;"; } ?><a href="<?php print substr($basePageURL,0,-1) ?>">Newer posts &raquo;</a>
+				<?php if ($pageNum != $totalpages) { print "&nbsp;/&nbsp;&nbsp;"; } ?><a href="/">Newer posts &raquo;</a>
 			<?php } elseif ($pageNum > 1) { ?> 
 				<?php if ($pageNum != $totalpages) { print "&nbsp;/&nbsp;&nbsp;"; } ?><a href="<?php print $basePageURL ?>page/<?php print $newerPageNum ?>">Newer posts &raquo;</a>
 			<?php } ?>
@@ -296,7 +296,7 @@ ob_end_flush();
 <div class="fill" style="margin-bottom:12px;"><div class="triangle-up-right rot90"></div><div class="triangle-up-left rotn90"></div></div>
 <div id="footer">
 	<div class="navigation">
-		<a href="/">Home</a> <span class="flourish">&#9670;</span> <a href="/about/" style="padding-left:10px;">About</a> <span class="flourish">&#9670;</span> <a href="/archive/" style="padding-left:10px;">Archive</a>
+		<a href="/">Home</a> <span class="flourish">&#9670;</span> <a href="/about/">About</a> <span class="flourish">&#9670;</span> <a href="/archive/">Archive</a>
 	</div>
 </div>
 <?php require("footer.php"); ?>
