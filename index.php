@@ -284,7 +284,7 @@ ob_end_flush();
 			<a href="<?php print $basePageURL ?>page/<?php print $olderPageNum ?>">&laquo; Older posts</a>
 			<?php } ?>
 			<?php if ($pageNum == 2) { ?> 
-				<?php if ($pageNum != $totalpages) { print "&nbsp;/&nbsp;&nbsp;"; } ?><a href="/">Newer posts &raquo;</a>
+				<?php if ($pageNum != $totalpages) { print "&nbsp;/&nbsp;&nbsp;"; } ?><a href="<?php print $basePageURL ?>">Newer posts &raquo;</a>
 			<?php } elseif ($pageNum > 1) { ?> 
 				<?php if ($pageNum != $totalpages) { print "&nbsp;/&nbsp;&nbsp;"; } ?><a href="<?php print $basePageURL ?>page/<?php print $newerPageNum ?>">Newer posts &raquo;</a>
 			<?php } ?>
