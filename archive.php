@@ -103,7 +103,7 @@ require("header.php");
 		</div>
 	</div>
 <?php
-$query = "SELECT GalleryName, DateCreated, URL, ThumbURL, TotalPhotos FROM Galleries ORDER BY DateCreated DESC";
+$query = "SELECT GalleryName, DateCreated, URL, ThumbURL, TotalPhotos FROM galleries ORDER BY DateCreated DESC";
 if (!$result = mysqli_query ($connection, $query))
    	logError();
 ?>
