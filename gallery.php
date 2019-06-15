@@ -62,11 +62,11 @@ $pagetitle = "onfocus gallery";
 $GalleryTitle = "onfocus gallery";
 // Defaults
 $baseURL = preg_replace('!c:/sites/www\.onfocus\.com/!is','http://www.onfocus.com/',$dir);
-$query = "SELECT GalleryName, GalleryDescription, DateCreated FROM Galleries WHERE URL = '" . mysql_real_escape_string($baseURL) . "'";
-if (!$result = @ mysql_query ($query, $connection))
+$query = "SELECT GalleryName, GalleryDescription, DateCreated FROM Galleries WHERE URL = '" . mysqli_real_escape_string($connection, $baseURL) . "'";
+if (!$result = mysqli_query ($connection, $query))
    	logError();
-if (mysql_num_rows($result) > 0) {
-	while ($gallery = mysql_fetch_array($result)) {
+if (mysqli_num_rows($result) > 0) {
+	while ($gallery = mysqli_fetch_array($result)) {
 		$GalleryTitle = $gallery['GalleryName'];
 		$GalleryDescription = $gallery['GalleryDescription'];
 		$GalleryDTM = $gallery['DateCreated'];

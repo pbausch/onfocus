@@ -2,9 +2,9 @@
 require("onfocus-ini.inc");
 // Paging
 $query = "SELECT Max(DateCreated) FROM items";
-if (!$result = @ mysql_query ($query, $connection))
+if (!$result = mysqli_query ($connection, $query))
    	logError();
-while ($tp = mysql_fetch_row($result)) {
+while ($tp = mysqli_fetch_row($result)) {
 	$maxdate = $tp[0];
 }
 $pageTitle = "onfocus archive";
@@ -104,7 +104,7 @@ require("header.php");
 	</div>
 <?php
 $query = "SELECT GalleryName, DateCreated, URL, ThumbURL, TotalPhotos FROM Galleries ORDER BY DateCreated DESC";
-if (!$result = @ mysql_query ($query, $connection))
+if (!$result = mysqli_query ($connection, $query))
    	logError();
 ?>
 	<div class="post" id="galleryArchive">
@@ -112,7 +112,7 @@ if (!$result = @ mysql_query ($query, $connection))
 		<div class="post-text">
 			Before Flickr, Facebook, Instagram, and others I posted a lot of pictures here. I used to post one or two pictures in a post and then link to a gallery of more. These are links to those galleries:
 			<br /><br />
-			<?php while ($tp = mysql_fetch_row($result)) {
+			<?php while ($tp = mysqli_fetch_row($result)) {
 				$galleryName = $tp[0];
 				$galleryDTM = $tp[1];
 				$galleryURL = $tp[2];

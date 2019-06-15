@@ -61,15 +61,15 @@ if ($thisArchiveYear != "" && $thisArchiveMonth != "") {
 
 // Paging
 if ($isTagArchive) {
-	$thisTag = mysql_real_escape_string($thisTag);
+	$thisTag = mysqli_real_escape_string($connection,$thisTag);
 	$query = "SELECT Count(post_id) FROM tags WHERE hide = 0 AND tag = '$thisTag'";
 }
 else {
 	$query = "SELECT Count(post_id), Min(DateCreated), Max(DateCreated) FROM items WHERE hide = 0";
 }
-if (!$result = @ mysql_query ($query, $connection))
+if (!$result = mysqli_query ($connection, $query))
    	logError();
-while ($tp = mysql_fetch_row($result)) {
+while ($tp = mysqli_fetch_row($result)) {
 	$totalposts = $tp[0];
 	$mindate = $tp[1];
 	$maxdate = $tp[2];
@@ -106,13 +106,13 @@ $pageDescription = "Thoughts and photos from a Web developer in Corvallis, Orego
 require("header.php");
 if ($isDateArchive) {
 	print "<h2 class=\"subtitle\">Posts from ".date("F Y",$thisArchiveDate)."</h2>";
-	$thisArchiveYear = mysql_real_escape_string($thisArchiveYear);
-	$thisArchiveMonth = mysql_real_escape_string($thisArchiveMonth);
+	$thisArchiveYear = mysqli_real_escape_string($connection,$thisArchiveYear);
+	$thisArchiveMonth = mysqli_real_escape_string($connection,$thisArchiveMonth);
 	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE Year(DateCreated) = $thisArchiveYear AND Month(DateCreated) = $thisArchiveMonth AND hide = 0 ORDER BY DateCreated DESC";
 }
 else if ($isTagArchive) {
 	print "<h2 class=\"subtitle\">Posts tagged <em>". $thisTag ."</em></h2>";
-	$thisTag = mysql_real_escape_string($thisTag);
+	$thisTag = mysqli_real_escape_string($connection,$thisTag);
 	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE post_id IN (SELECT post_id FROM tags WHERE tag = '$thisTag') AND hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
 }
 else {
@@ -129,15 +129,15 @@ else {
 	//print "<h2><span class=\"dmd\">&#9670;</span>&nbsp;&nbsp;a weblog by pb&nbsp;&nbsp;<span class=\"dmd\">&#9670;</span></h2>";
 	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
 }
-if (!$result = @ mysql_query ($query, $connection))
+if (!$result = mysqli_query ($connection, $query))
    	logError();
-if (mysql_num_rows($result) == 0) {
+if (mysqli_num_rows($result) == 0) {
 	echo "<article class=\"post\"><div class=\"post-text entry-content\">Something went wrong! We'll be back soon.</div></article>";
 	die;
 	
 } 
 else {
-	while ($post = mysql_fetch_array($result)) {
+	while ($post = mysqli_fetch_array($result)) {
 		$cntPost++;
 		$slug = $post['url_slug'];
 		$title = $post['title'];

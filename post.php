@@ -2,14 +2,14 @@
 require("onfocus-ini.inc");
 include('lib/emoji.php');
 include('lib/site-functions.php');
-$query = "SELECT post_id, DateCreated, title, body, comments_on, item_type_id, url_slug, tags FROM items WHERE hide = 0 AND post_id = ". mysql_real_escape_string($_GET['id']);
-if (!$result = @ mysql_query ($query, $connection))
+$query = "SELECT post_id, DateCreated, title, body, comments_on, item_type_id, url_slug, tags FROM items WHERE hide = 0 AND post_id = ". mysqli_real_escape_string($connection, $_GET['id']);
+if (!$result = mysqli_query ($connection, $query))
    	logError();
-if (mysql_num_rows($result) == 0) {
+if (mysqli_num_rows($result) == 0) {
 	send404();
 } 
 else {
-	while ($post = mysql_fetch_array($result)) {
+	while ($post = mysqli_fetch_array($result)) {
 		$slug = $post['url_slug'];
 		$type = $post['item_type_id'];
 		$title = $post['title'];
@@ -292,14 +292,14 @@ print "$thisDate, $thisTime</time>";
 <?php
 // Older/Newer post links
 // OLDER POST LINK
-$query = "SELECT post_id, DateCreated, url_slug FROM items WHERE hide = 0 AND post_id < ". mysql_real_escape_string($_GET['id']) . " ORDER BY post_id DESC LIMIT 1";
-if (!$result = @ mysql_query ($query, $connection))
+$query = "SELECT post_id, DateCreated, url_slug FROM items WHERE hide = 0 AND post_id < ". mysqli_real_escape_string($connection, $_GET['id']) . " ORDER BY post_id DESC LIMIT 1";
+if (!$result = mysqli_query ($connection, $query))
    	logError();
-if (mysql_num_rows($result) == 0) {
+if (mysqli_num_rows($result) == 0) {
 	$olderPermalink = "";
 } 
 else {
-	while ($post = mysql_fetch_array($result)) {
+	while ($post = mysqli_fetch_array($result)) {
 		$oldid = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
 		$slug = $post['url_slug'];
@@ -313,14 +313,14 @@ else {
 }
 
 // NEWER POST LINK
-$query = "SELECT post_id, DateCreated, url_slug FROM items WHERE hide = 0 AND post_id > ". mysql_real_escape_string($_GET['id']) . " LIMIT 1";
-if (!$result = @ mysql_query ($query, $connection))
+$query = "SELECT post_id, DateCreated, url_slug FROM items WHERE hide = 0 AND post_id > ". mysqli_real_escape_string($connection, $_GET['id']) . " LIMIT 1";
+if (!$result = mysqli_query ($connection, $query))
    	logError();
-if (mysql_num_rows($result) == 0) {
+if (mysqli_num_rows($result) == 0) {
 	$newerPermalink = "";
 } 
 else {
-	while ($post = mysql_fetch_array($result)) {
+	while ($post = mysqli_fetch_array($result)) {
 		$newid = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
 		$slug = $post['url_slug'];
@@ -343,11 +343,11 @@ else {
 <?php
 // BEGIN COMMENTS
 $query = "SELECT author, url, date, comment, comment_id FROM comments WHERE hide = 0 AND trackback = 0 AND post_id = " . $id . " ORDER BY date ASC";
-if (!$result = @ mysql_query ($query, $connection))
+if (!$result = mysqli_query ($connection, $query))
    	logError();
-if (mysql_num_rows($result) > 0) {
+if (mysqli_num_rows($result) > 0) {
 	print "<a name=\"comments\"></a><h2 class=\"archive-title comments-title\">Comments</h2><div class=\"post archive\" style=\"margin-bottom:6em;\">";
-	while ($comment = mysql_fetch_array($result)) {
+	while ($comment = mysqli_fetch_array($result)) {
 		$comment_id = $comment['comment_id'];
 		$body = $comment['comment'];
 		$body = trim($body);
