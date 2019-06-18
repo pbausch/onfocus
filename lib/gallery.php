@@ -9,7 +9,7 @@ function gallery($con) {
 		$imageCount = count($images);
 	}
 	
-	$query = "SELECT GalleryName, GalleryDescription, DateCreated FROM Galleries WHERE URL = '" . mysqli_real_escape_string($con, $url) . "'";
+	$query = "SELECT GalleryName, GalleryDescription, DateCreated FROM galleries WHERE URL = '" . mysqli_real_escape_string($con, $url) . "'";
 	if (!$result = mysqli_query ($con, $query))
 	   	logError();
 	if ($result && (mysqli_num_rows($result) > 0)) {
