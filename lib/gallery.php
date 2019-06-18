@@ -9,11 +9,11 @@ function gallery($con) {
 		$imageCount = count($images);
 	}
 	
-	$query = "SELECT GalleryName, GalleryDescription, DateCreated FROM Galleries WHERE URL = '" . mysql_real_escape_string($url) . "'";
-	if (!$result = @ mysql_query ($query, $con))
+	$query = "SELECT GalleryName, GalleryDescription, DateCreated FROM Galleries WHERE URL = '" . mysqli_real_escape_string($con, $url) . "'";
+	if (!$result = mysqli_query ($con, $query))
 	   	logError();
-	if ($result && (mysql_num_rows($result) > 0)) {
-		while ($gallery = mysql_fetch_array($result)) {
+	if ($result && (mysqli_num_rows($result) > 0)) {
+		while ($gallery = mysqli_fetch_array($result)) {
 			$galleryTitle = $gallery['GalleryName'];
 			$galleryDescription = $gallery['GalleryDescription'];
 			$galleryDateTime = $gallery['DateCreated'];
