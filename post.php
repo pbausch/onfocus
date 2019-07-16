@@ -28,7 +28,8 @@ else {
 			$images = $dom->getElementsByTagName('img');
 			foreach ($images as $image) {
 				$src = $image->getAttribute('src');
-				$src = str_replace('.jpg','_o.jpg',$src);
+				$src = str_ireplace('.jpg','_o.jpg',$src);
+				$src = str_ireplace('.jpeg','_o.jpeg',$src);
 				$img_width = $image->getAttribute('width');
 				$img_height = $image->getAttribute('height');
 				if ($img_height > $img_width) {
