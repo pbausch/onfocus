@@ -36,9 +36,9 @@ require("header.php");
 	<h2 class="title">About Paul Bausch</h2>
 		<div class="post-text">
 		<div style="margin-top:15px;">
-		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>. I'm a husband, father of two, amateur photographer, and terrible disc golfer.
+		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>. 
 		<br /><br />
-		onfocus is my personal website where I've been posting whatever comes to mind since 1998. These days it's mostly pictures.
+		onfocus is my personal website where I've been posting whatever comes to mind since 1998. I think the web can be a great space for creativity, I think understanding how media is produced is important, and I take a lot of pictures. You'll find a mix of those interests here. 
 		</div>
 		<div class="flourish">
 			<div class="ftext">&nbsp;◆&nbsp;</div>
@@ -96,7 +96,7 @@ require("header.php");
 		<div class="project">
 		<div class="project-icon"><img src="https://d1x6es5xzge33k.cloudfront.net/about-camp-logo.png" width="50" height="50" class="by-the-power-of" /></div>
 		<div class="project-text">
-		When I'm not computering I like to go camping, play Dungeons &amp; Dragons, noodle around on the guitar, and throw plastic discs at trees. Ask me about being an adult!&lrm;
+		When I'm not computering I like to play Dungeons &amp; Dragons, noodle around on the guitar, and throw plastic discs at trees in the form of disc golf.
 		</div>
 		</div>
 		</div></div></div>
