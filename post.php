@@ -278,7 +278,10 @@ if ($thisYear > 2017) {
 	if ($type == 9) {
 		print "Recommended &middot; ";
 	}
-	if (($type == 5) || ($type == 6) || ($type == 8)) {
+	if ($type == 6) {
+		print "Flickr &middot; ";
+	}
+	if (($type == 5) || ($type == 8)) {
 		print "Photos &middot; ";
 	}
 }
