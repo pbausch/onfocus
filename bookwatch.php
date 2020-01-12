@@ -2,7 +2,7 @@
 require("onfocus-ini.inc");
 $pageNum = 1;
 $isDateArchive = 0;
-$pagetitle = "Weblog Bookwatch is Gone | onfocus";
+$pageTitle = "Weblog Bookwatch is Gone | onfocus";
 require("header.php");
 ?><h2 class="subtitle">Weblog Bookwatch No More</h2>
 	<div class="post" style="margin-top:18px;">

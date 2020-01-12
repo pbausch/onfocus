@@ -2,7 +2,7 @@
 require("onfocus-ini.inc");
 $pageNum = 1;
 $isDateArchive = 0;
-$pagetitle = "Google Smackdown is Gone | onfocus";
+$pageTitle = "Google Smackdown is Gone | onfocus";
 require("header.php");
 ?><h2 class="subtitle">Google Smackdown No More</h2>
 	<div class="post" style="margin-top:18px;">

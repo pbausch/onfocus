@@ -48,7 +48,7 @@ if ($thisArchiveYear != "" && $thisArchiveMonth != "") {
 				send404();
 			}
 			$isDateArchive = 1;
-			$pagetitle = "Archive: " . date("F Y",$thisArchiveDate) . " | " . APP_TITLE;
+			$pageTitle = "Archive: " . date("F Y",$thisArchiveDate) . " | " . APP_TITLE;
 		}
 		else {
 			send404();

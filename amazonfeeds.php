@@ -2,7 +2,7 @@
 require("onfocus-ini.inc");
 $pageNum = 1;
 $isDateArchive = 0;
-$pagetitle = "Amazon Feed Generator is Gone | onfocus";
+$pageTitle = "Amazon Feed Generator is Gone | onfocus";
 require("header.php");
 ?><h2 class="subtitle">Amazon Feed Generator No More</h2>
 	<div class="post" style="margin-top:18px;">

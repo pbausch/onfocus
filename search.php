@@ -1,6 +1,6 @@
 <?php
 require("onfocus-ini.inc");
-$pagetitle = "onfocus search";
+$pageTitle = "onfocus search";
 $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");

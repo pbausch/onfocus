@@ -2,7 +2,7 @@
 require("onfocus-ini.inc");
 $pageNum = 1;
 $isDateArchive = 0;
-$pagetitle = "Quotations Are Gone | onfocus";
+$pageTitle = "Quotations Are Gone | onfocus";
 require("header.php");
 ?><h2>Quotations No More</h2>
 	<div class="post" style="margin-top:18px;">

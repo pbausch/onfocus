@@ -58,7 +58,7 @@ if (file_exists($thisCaptionFile)) {
 }
 
 // Defaults
-$pagetitle = "onfocus gallery";
+$pageTitle = "onfocus gallery";
 $GalleryTitle = "onfocus gallery";
 // Defaults
 $baseURL = preg_replace('!c:/sites/www\.onfocus\.com/!is','http://www.onfocus.com/',$dir);
@@ -70,7 +70,7 @@ if (mysqli_num_rows($result) > 0) {
 		$GalleryTitle = $gallery['GalleryName'];
 		$GalleryDescription = $gallery['GalleryDescription'];
 		$GalleryDTM = $gallery['DateCreated'];
-		$pagetitle = $GalleryTitle;
+		$pageTitle = $GalleryTitle;
 	}
 }
 $pageNum = 1;
