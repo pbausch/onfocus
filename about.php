@@ -1,6 +1,6 @@
 <?php
 require("onfocus-ini.inc");
-$pagetitle = "About onfocus by Paul Bausch";
+$pageTitle = "About onfocus by Paul Bausch";
 $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
