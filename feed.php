@@ -1,6 +1,5 @@
 <?php header("Content-Type: application/rss+xml"); ?>
 <?xml version="1.0"?>
-<?xml-stylesheet href="feed.xsl" type="text/xsl" media="screen"?>
 <?php
 require("onfocus-ini.inc");
 require("lib/emoji.php");
@@ -10,10 +9,10 @@ $cntPost = 0;
 $lastDate = 0;
 
 // Paging
-$query = "SELECT Count(post_id) FROM Items";
-if (!$result = @ mysql_query ($query, $connection))
+$query = "SELECT Count(post_id) FROM items";
+if (!$result = mysqli_query ($connection, $query))
    	logError();
-while ($tp = mysql_fetch_row($result)) {
+while ($tp = mysqli_fetch_row($result)) {
 	$totalposts = $tp[0];
 }
 $pageNum = 1;
@@ -42,14 +41,14 @@ else {
 <language>en-us</language>
 <lastBuildDate><?php print date(DATE_RSS_FORMAT); ?></lastBuildDate>
 <?php
-$query = "SELECT post_id, DateCreated, title, body, url_slug, item_type_id FROM Items WHERE hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
-if (!$result = @ mysql_query ($query, $connection))
+$query = "SELECT post_id, DateCreated, title, body, url_slug, item_type_id FROM items WHERE hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
+if (!$result = mysqli_query ($connection, $query))
    	logError();
-if (mysql_num_rows($result) == 0) {
+if (mysqli_num_rows($result) == 0) {
 	die("Couldn't find any posts! WTF?!");
-} 
+}
 else {
-	while ($post = mysql_fetch_array($result)) {
+	while ($post = mysqli_fetch_array($result)) {
 		$cntPost++;
 		$slug = $post['url_slug'];
 		$title = $post['title'];
