@@ -96,7 +96,7 @@ require("header.php");
 		<div class="project">
 		<div class="project-icon"><img alt="National Park Camping Symbol" src="https://d1x6es5xzge33k.cloudfront.net/about-camp-logo.png" width="50" height="50" class="by-the-power-of" /></div>
 		<div class="project-text">
-		When I'm not computering I like to play Dungeons &amp; Dragons, noodle around on the guitar, and throw plastic discs at trees in the form of disc golf.
+		When I'm not computering I like to play Dungeons &amp; Dragons, noodle around on the guitar, and throw plastic discs at trees in the form of disc golf.&lrm;
 		</div>
 		</div>
 		</div></div></div>
