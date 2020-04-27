@@ -65,14 +65,15 @@ else {
 		}
 		// fix up pinboard favicons
 		if ($type == 9) {
-			$dom = new DomDocument();
-			$dom->loadHTML('<?xml encoding="utf-8" ?>' . $body);
+			$dom = new DomDocument('1.0', 'UTF-8');
+			$dom->loadHTML(mb_convert_encoding($body, 'HTML-ENTITIES', 'UTF-8'));
 			$xpath = new DOMXpath($dom);
 			foreach($xpath->query('//div[contains(attribute::class, "recmeta")]') as $e ) {
     			// Delete this node
     			$e->parentNode->removeChild($e);
 			}
-			$body = utf8_decode($dom->saveHTML($dom->documentElement));
+			$body = $dom->saveHTML();
+			$body = str_replace('<html><body>','',$body);
 			$body = str_replace('</body></html>','',$body);
 		}
 		$id = $post['post_id'];
