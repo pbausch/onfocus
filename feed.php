@@ -66,7 +66,7 @@ else {
 		// fix up pinboard favicons
 		if ($type == 9) {
 			$dom = new DomDocument();
-			$dom->loadHTML($body);
+			$dom->loadHTML('<?xml encoding="utf-8" ?>' . $body);
 			$xpath = new DOMXpath($dom);
 			foreach($xpath->query('//div[contains(attribute::class, "recmeta")]') as $e ) {
     			// Delete this node
