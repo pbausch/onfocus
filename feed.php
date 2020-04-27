@@ -72,7 +72,7 @@ else {
     			// Delete this node
     			$e->parentNode->removeChild($e);
 			}
-			$body = $dom->saveHTML($dom->documentElement);
+			$body = utf8_decode($dom->saveHTML($dom->documentElement));
 			$body = str_replace('</body></html>','',$body);
 		}
 		$id = $post['post_id'];
