@@ -63,13 +63,17 @@ else {
 			}
 			$body = str_replace("data-src", "src", $body);
 		}
-		// fix up pinboard link images
+		// fix up pinboard favicons
 		if ($type == 9) {
-			$find = "<div class=\"linkimg\"><img";
-			$pos = strpos($body, $find);
-			if ($pos !== false) {
-			    $body = substr_replace($body, "<div class=\"linkimg\"><img width=\"200\" height=\"auto\" ", $pos, strlen($find));
-			}			
+			$dom = new DomDocument();
+			$dom->loadHTML($body);
+			$xpath = new DOMXpath($dom);
+			foreach($xpath->query('//div[contains(attribute::class, "recmeta")]') as $e ) {
+    			// Delete this node
+    			$e->parentNode->removeChild($e);
+			}
+			$body = $dom->saveHTML($dom->documentElement);
+			$body = str_replace('</body></html>','',$body);
 		}
 		$id = $post['post_id'];
 		$postDateTime = $post['DateCreated'];
