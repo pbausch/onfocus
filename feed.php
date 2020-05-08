@@ -73,6 +73,7 @@ else {
     			$e->parentNode->removeChild($e);
 			}
 			$body = $dom->saveHTML();
+			$body = str_replace('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">','',$body);
 			$body = str_replace('<html><body>','',$body);
 			$body = str_replace('</body></html>','',$body);
 		}
@@ -89,7 +90,7 @@ else {
 ?>
 	<item>
 		<title><![CDATA[<?php print $title ?>]]></title>
-		<link><?php print $permalink ?>?utm_source=onfocus&utm_medium=RSS&utm_campaign=feed</link>
+		<link><?php print $permalink ?>?utm_source=onfocus&amp;utm_medium=RSS&amp;utm_campaign=feed</link>
 		<description><![CDATA[<?php print $body ?>]]></description>
 		<pubDate><?php print $thisDate ?></pubDate>
 	</item>
