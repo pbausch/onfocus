@@ -38,7 +38,7 @@ require("header.php");
 		<div style="margin-top:15px;">
 		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="https://www.onfocus.com/tag/corvallis">Corvallis, Oregon</a>. 
 		<br /><br />
-		onfocus is my personal website where I've been posting whatever comes to mind since 1998. I think the web can be a great space for creativity, I think understanding how media is produced is important, and I take a lot of pictures. You'll find a mix of those interests here. 
+		onfocus is my personal website where I've been posting whatever comes to mind since 1998. I think the web can be a <a href="https://www.onfocus.com/tag/internet">great space for creativity</a>, I think understanding <a href="https://www.onfocus.com/tag/media">how media is produced</a> is important, and <a href="https://www.onfocus.com/tag/photo">I take a lot of pictures</a> (not to mention the historic <a href="https://www.onfocus.com/tag/flickr">flickr</a> and <a href="https://www.onfocus.com/tag/instagram">instagram</a> tags). You'll find a mixed bag of posts about my interests here. 
 		</div>
 		<div class="flourish">
 			<div class="ftext">&nbsp;◆&nbsp;</div>
