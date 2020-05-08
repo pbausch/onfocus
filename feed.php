@@ -89,7 +89,7 @@ else {
 ?>
 	<item>
 		<title><![CDATA[<?php print $title ?>]]></title>
-		<link><?php print $permalink ?></link>
+		<link><?php print $permalink ?>?utm_source=onfocus&utm_medium=RSS&utm_campaign=feed</link>
 		<description><![CDATA[<?php print $body ?>]]></description>
 		<pubDate><?php print $thisDate ?></pubDate>
 	</item>
