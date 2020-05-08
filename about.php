@@ -36,7 +36,7 @@ require("header.php");
 	<h2 class="title">About Paul Bausch</h2>
 		<div class="post-text">
 		<div style="margin-top:15px;">
-		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="//en.wikipedia.org/wiki/Corvallis,_Oregon">Corvallis, Oregon</a>. 
+		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="https://www.onfocus.com/tag/corvallis">Corvallis, Oregon</a>. 
 		<br /><br />
 		onfocus is my personal website where I've been posting whatever comes to mind since 1998. I think the web can be a great space for creativity, I think understanding how media is produced is important, and I take a lot of pictures. You'll find a mix of those interests here. 
 		</div>
