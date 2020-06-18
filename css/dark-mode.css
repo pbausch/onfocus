@@ -1,0 +1,14 @@
+@media (prefers-color-scheme: dark) {
+    html { background: url(https://d1x6es5xzge33k.cloudfront.net/otis-redding.png),radial-gradient(ellipse at 50% 0%, #666677 0%, #666677 140%); }
+    #blog, #blog .flourish .ftext { background-color: #333344 !important; }
+    a:visited { color: #BE939C; text-decoration-color: #BE939C; }
+    a:link, .post-text, .title, .recmeta, .photo-title { color: #eee; } 
+    blockquote {
+        border-left: solid 5px #666677;
+        padding: 1em;
+        background-color: #444455;
+    }
+    .post-byline, .post-byline a { color: #aaa;}
+    img { opacity: .9; transition: all .5s ease-in-out; }
+    img:hover { filter: none; opacity: 1; }
+}
