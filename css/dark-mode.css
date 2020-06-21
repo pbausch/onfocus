@@ -1,5 +1,5 @@
 @media (prefers-color-scheme: dark) {
-    html { background: url(https://d1x6es5xzge33k.cloudfront.net/otis-redding.png),radial-gradient(ellipse at 50% 0%, #666677 0%, #666677 140%); }
+    html { background: url(https://d1x6es5xzge33k.cloudfront.net/otis-redding.png),radial-gradient(ellipse at 50% 0%, #666677 0%, #36363F 140%); }
     #blog, #blog .flourish .ftext { background-color: #333344 !important; }
     a:visited { color: #BE939C; text-decoration-color: #BE939C; }
     a:link, .post-text, .title, .recmeta, .photo-title { color: #eee; } 
