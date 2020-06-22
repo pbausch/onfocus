@@ -11,5 +11,5 @@
     .post-byline, .post-byline a { color: #aaa;}
     img { opacity: .9; transition: all .5s ease-in-out; }
     img:hover { filter: none; opacity: 1; }
-    .post.photo.vert .post-text { background: rgba(0,0,40,.9); }
+    .post.photo.vert .post-text { background-color: rgba(0,0,40,.9); }
 }
