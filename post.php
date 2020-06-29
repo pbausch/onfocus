@@ -20,6 +20,8 @@ else {
 		$body = emoji_unified_to_html($body);
 		$summary = $body;
 		$summary = preg_replace("/<style\\b[^>]*>(.*?)<\\/style>/s", "", $summary);
+		$summary = str_replace("Your browser doesn't support HTML5 video.","",$summary);
+		$summary = preg_replace("/Here is a <a href=\"[^\"]*\">link to the gif</a> instead./s","",$summary);
 		// if this is a photo post, add fancybox
 		$vert = 0;
 		if ($post['item_type_id'] == 8) {
