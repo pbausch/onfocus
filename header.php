@@ -60,7 +60,7 @@
 	</style>
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
 	<link rel="stylesheet" href="<?php print CDN_URL ?>/css/jquery.fancybox.min.css" />
-	<link rel="stylesheet" href="https://dev.onfocus.com/css/dark-mode.css" />
+	<link rel="stylesheet" href="<?php print CDN_URL ?>/css/dark-mode.css" />
 	<?php if (isset($pageHeaderAddition)) { 
 		$pageHeaderAddition = str_replace("200808.twitter-card.png",$logocolor . ".twitter-card.png",$pageHeaderAddition);
 		print $pageHeaderAddition; 
