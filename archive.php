@@ -14,7 +14,7 @@ $isDateArchive = 0;
 
 require("header.php");
 ?>
-<div class="post" style="margin-top:18px;">
+<div class="post other" style="margin-top:0;padding-top:10px;">
 <h2 class="title">onfocus Archive</h2>
 <div class="post-text">
 		Welcome to the stacks. Here are some common tags I use on posts.<br /><br />For photos:
