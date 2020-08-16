@@ -104,6 +104,6 @@ function startHeart() {
 		};
 	}
 }
-addEvent(window, 'load', swapnoimg);
+//addEvent(window, 'load', swapnoimg);
 addEvent(window, 'load', deferVideos);
 //addEvent(window, 'load', startHeart);
