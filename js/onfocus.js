@@ -1,15 +1,17 @@
 function swapnoimg() {
-    for (var i = 0; i < document.images.length; i++) { 
-		img = document.images[i];
-		w = img.naturalWidth;
-		h = img.naturalHeight;
-		if (!img.complete) {
-			img.src = 'https://www.onfocus.com/no-image.gif';
+	setTimeout(function(){ 
+		for (var i = 0; i < document.images.length; i++) { 
+			img = document.images[i];
+			w = img.naturalWidth;
+			h = img.naturalHeight;
+			// if (!img.complete) {
+			// 	img.src = 'https://www.onfocus.com/no-image.gif';
+			// }
+			if ((w == 0) || (h == 0)) {
+				img.src = 'https://www.onfocus.com/no-image.gif';
+			}
 		}
-		else if ((w == 0) || (h == 0)) {
-			img.src = 'https://www.onfocus.com/no-image.gif';
-		}
-	}
+	}, 1000);
 }
 function addEvent(obj, evType, fn){ 
  if (obj.addEventListener){ 
