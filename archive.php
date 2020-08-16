@@ -121,7 +121,7 @@ if (!$result = mysqli_query ($connection, $query))
 				$galleryThumbURL = str_replace("thumbs/","",$galleryThumbURL);
 				$galleryThumbURL = str_replace("https://www.onfocus.com/",LOCAL_CDN_URL . "/",$galleryThumbURL); #."/img/200x130/"
 				$galleryTotalPhotos = $tp[4];
-				print '<div class="galleryThumb blend"><a href="https://www.onfocus.com'.$galleryURL.'" title="'. $galleryName .' ('. date('Y', strtotime($galleryDTM)) .') / '. $galleryTotalPhotos .' photos"><img data-src="'.$galleryThumbURL.'" src="'.$galleryThumbURL.'" width="200" height="130"/></a></div>';
+				print '<div class="galleryThumb"><a href="https://www.onfocus.com'.$galleryURL.'" title="'. $galleryName .' ('. date('Y', strtotime($galleryDTM)) .') / '. $galleryTotalPhotos .' photos"><img data-src="'.$galleryThumbURL.'" src="'.$galleryThumbURL.'" width="200" height="130"/></a></div>';
 			} ?>
 		</div>
 		<div style="clear:both;"></div>
