@@ -44,7 +44,7 @@ require("header.php");
 				background-color: #fff;
 			}
 		}
-		td a {font-weight:400 !important;}
+		td a {font-weight:400 !important; font-size: 1rem !important}
 	</style>
 
 	<div class="post other">
