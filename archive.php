@@ -11,8 +11,49 @@ $pageTitle = "onfocus archive";
 $pageDescription = "Linking 19 years of onfocus.com month by month.";
 $pageNum = 1;
 $isDateArchive = 0;
+
 require("header.php");
 ?>
+<div class="post" style="margin-top:18px;">
+<h2 class="title">onfocus Archive</h2>
+<div class="post-text">
+		Welcome to the stacks. Here are some common tags I use on posts.<br /><br />For photos:
+		<blockquote>
+<?php
+// Image Tags
+$i = 0;
+$tquery = "SELECT COUNT(t.tag) AS count, tag FROM tags t JOIN items i on t.post_id = i.post_id WHERE i.item_type_id IN (5,6,8) AND i.hide = 0 AND t.tag NOT IN ('instagram','flickr','photo','') GROUP BY tag HAVING count > 5 ORDER BY tag ASC";
+if (!$result = mysqli_query ($connection, $tquery))
+   	logError();
+while ($itags = mysqli_fetch_row($result)) {
+	$i++;
+	echo "<a href=\"https://www.onfocus.com/tag/" . urlencode($itags[1]) . "\">" . $itags[1] . "</a>&nbsp;(" . $itags[0] . ")";
+	if ($i !== $result->num_rows) {
+		echo ", ";
+	}
+}
+?>
+	</blockquote>
+	<br />For recommended links:
+	<blockquote>
+	<?php
+// Link Tags
+$i = 0;
+$tquery = "SELECT COUNT(t.tag) AS count, tag FROM tags t JOIN items i on t.post_id = i.post_id WHERE i.item_type_id IN (9) AND i.hide = 0 AND t.tag NOT IN ('instagram','flickr','photo','') GROUP BY tag HAVING count > 5 ORDER BY tag ASC";
+if (!$result = mysqli_query ($connection, $tquery))
+   	logError();
+while ($itags = mysqli_fetch_row($result)) {
+	$i++;
+	echo "<a href=\"https://www.onfocus.com/tag/" . urlencode($itags[1]) . "\">" . $itags[1] . "</a>&nbsp;(" . $itags[0] . ")";
+	if ($i !== $result->num_rows) {
+		echo ", ";
+	}
+}
+?>
+	</blockquote>
+</div>
+</div>
+
 	<!-- <h2><span class="dmd">&#9670;</span>&nbsp;&nbsp;Archive&nbsp;&nbsp;<span class="dmd">&#9670;</span></h2> -->
 	<!--
 	<div class="post" style="margin-top:18px;">
@@ -20,7 +61,6 @@ require("header.php");
 		<div class="post-text">
 		You have to start somewhere.
 		<ul>
-			<li><a href="https://www.onfocus.com/amafeed/">Amazon Feed Generator</a></li>
 			<li><a href="https://www.onfocus.com/eat_generator.asp">What do you want for dinner? I dunno.</a> (1999)</li>
 			<li><a href="https://www.onfocus.com/2016/11/6842/pinboard-popular-tweets">Pinboard Popular Tweets</a> (Nov 2016)</li>
 			<li><a href="https://www.onfocus.com/2004/09/3566/guerilla-media-literacy-list">Media Literacy Reading List</a> (Sep 2004)</li>
@@ -44,14 +84,14 @@ require("header.php");
 				background-color: #fff;
 			}
 		}
-		td {font-size: 1rem !important}
+		td {font-size: .9rem !important}
 		td a {font-weight:400 !important;}
 	</style>
 
 	<div class="post other">
 		<h2 class="title">Post Archive</h2>
 		<div class="post-text">
-		For serious browsers only: 19 years worth of onfocus posts, month by month:
+		For completionists. Start at the beginning and work your way through month by month:
 		<br/><br/>
 		<table border="0" cellpadding="6"><tr valign="top"> 
 		<?php
