@@ -8,6 +8,9 @@
         padding: 1em;
         background-color: #444455;
     }
+    code {
+	background-color: #444455;
+    }
     .post-byline, .post-byline a { color: #aaa;}
     img { opacity: .9; transition: all .5s ease-in-out; }
     img:hover { filter: none; opacity: 1; }
