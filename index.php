@@ -39,7 +39,7 @@ if ($thisArchiveYear != "" && $thisArchiveMonth != "") {
 		$minMonth = date("m",strtotime($mindate));
 		$minMonth = date("m",strtotime("1999-08-01")); // temp archive fix
 		$maxMonth = date("m",strtotime($maxdate));
-		$maxMonth = date("m",strtotime("2020-08-01")); // temp archive fix
+		$maxMonth = date("m",strtotime("2020-11-01")); // temp archive fix
 		if (($thisArchiveYear >= $minYear) && ($thisArchiveYear <= $maxYear)) {
 			if ($thisArchiveYear == $minYear && $thisArchiveMonth < $maxMonth) {
 				send404();
