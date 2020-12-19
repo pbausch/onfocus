@@ -140,7 +140,7 @@ require("header.php");
 		<div class="post">
 		<h2 class="title">About onfocus</h2>
 		<div class="post-text">
-		This is my personal weblog where I share recommended links, my photos, and occasional thoughts. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe. And here's <a href="/archive">the archive</a> if you want to go back in time. I wrote the code for this site and most of it is on Github: <a href="https://github.com/pbausch/onfocus">pbausch/onfocus</a>. It's hosted at <a href="https://m.do.co/c/0427f6ac77e7">DigitalOcean</a>. The onfocus header font is <a href="https://www.fontseed.com/fonts/ddc-hardware">DDC Hardware</a>.
+		This is my personal weblog where I share recommended links, my photos, and occasional thoughts. Here's <a href="http://xml.onfocus.com/posts">the feed</a> for the blog if you want to subscribe. And here's <a href="/archive">the archive</a> if you want to go back in time. I wrote the code for this site and most of it is on Github: <a href="https://github.com/pbausch/onfocus">pbausch/onfocus</a>. It's hosted at <a href="https://m.do.co/c/0427f6ac77e7">DigitalOcean</a>. The onfocus header font is <a href="https://www.ddcfonts.com/fonts/ddc-hardware">DDC Hardware</a>.
 		<div class="flourish">
 			<div class="ftext">&nbsp;◆&nbsp;</div>
 		</div>
