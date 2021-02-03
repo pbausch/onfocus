@@ -15,4 +15,9 @@
     img { opacity: .9; transition: all .5s ease-in-out; }
     img:hover { filter: none; opacity: 1; }
     .post.photo.vert .post-text { background-color: rgba(0,0,40,.9); }
+    .socmeed svg {
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 4px;
+    }
 }
