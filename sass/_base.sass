@@ -3,7 +3,7 @@
   padding: 0
 
 html
-  background: url(https://d1x6es5xzge33k.cloudfront.net/otis-redding.png), radial-gradient(ellipse at 50% 0%, $cold 0%, #536976 140%)
+  background: url(https://d1x6es5xzge33k.cloudfront.net/otis-redding.png), radial-gradient(ellipse at 50% 0%, $colorA 0%, $colorC 140%)
 
 body 
   font-family: $font-body
@@ -22,13 +22,13 @@ a
   &:link 
     color: $link
     text-decoration: underline
-    text-decoration-color: lighten($link,80%)
-    -webkit-text-decoration-color: lighten($link,80%)
+    text-decoration-color: lighten($link,75%)
+    -webkit-text-decoration-color: lighten($link,75%)
   
   &:visited 
     color: $visited
-    text-decoration-color: lighten($visited,50%)
-    -webkit-text-decoration-color: lighten($visited,50%)
+    text-decoration-color: lighten($visited,55%)
+    -webkit-text-decoration-color: lighten($visited,55%)
   
   &:active 
     color: $active
@@ -36,10 +36,10 @@ a
     -webkit-text-decoration-color: lighten($active,70%)
   
   &:hover 
-    color: $hover
+    color: $colorC
     text-decoration: underline
-    text-decoration-color: lighten($hover,70%)
-    -webkit-text-decoration-color: lighten($hover,70%)
+    text-decoration-color: lighten($colorC,55%)
+    -webkit-text-decoration-color: lighten($colorC,55%)
 
 #footer .flourish
   color: $hot
@@ -67,6 +67,7 @@ a
   padding-left: 24px
   padding-bottom: 1.5em
   background-color: $black
+  z-index: 2
   a
     text-decoration: none
     &:hover
@@ -88,20 +89,19 @@ a
     position: absolute
     top: 0
     left: 0
-    opacity: 1
+    opacity: 0
     width: 100%
-    background-color: $black
-    background-image: url(https://d1x6es5xzge33k.cloudfront.net/asfalt-light.png), linear-gradient(135deg, #536976 0%, $hot 100%)
     transition: opacity, background-color .5s
-    z-index: -100
+    z-index: -1
   &:hover
-    background-color: transparent !important
+    background-color: $colorC
+    background-image: url(https://d1x6es5xzge33k.cloudfront.net/asfalt-light.png)
 
 #header:hover + .fill .triangle-up-right:after
-  border-top-color: #536976 !important
+  border-top-color: $colorC !important
 
 #header:hover + .fill .triangle-up-left:after
-  border-left-color: $hot !important
+  border-left-color: $colorC !important
 
 #header:hover #topflourish 
   color: $cold
@@ -171,8 +171,9 @@ a
   padding-top: 10px
   padding-bottom: 1px
   min-height: 400px
-  z-index: 999
+  z-index: 1
   position: relative
+  box-shadow: 0px 0px 18px 1px rgba(0,0,0,0.55)
 
 .single
   /* padding-bottom: 70px */
@@ -324,7 +325,7 @@ blockquote, ol, ul
   margin-bottom: 15px
 
 blockquote
-  border-left: solid 5px $cold
+  border-left: solid 5px $colorB
   padding: 1em
   background-color: #eee
 
@@ -352,8 +353,10 @@ blockquote
   border-radius: 4px
   line-height: normal
   padding: 8px 16px
+  background-color: $colorC
+  color: #fff
   &:hover 
-    background-image: linear-gradient(-15deg, #536976 20%, $hot 80%)
+    background-color: $colorA
 
 .twitter 
   padding-left: 22px
@@ -442,7 +445,7 @@ td
       filter: none
 
 .welcome
-  background-color: #b1a27b
+  background-color: $colorD
   padding: 10px 20px 
   margin-top: -10px		
   font-size: 1rem
@@ -479,15 +482,6 @@ td
     vertical-align: top
     padding: 10px
     direction: ltr !important
-
-.by-the-power-of 
-  -webkit-filter: grayscale(55%)
-  filter: grayscale(55%)
-
-.by-the-power-of:hover 
-  -webkit-filter: none
-  filter: none
-
   
 @media screen and (max-width: 750px) 
   .welcome
@@ -504,3 +498,24 @@ td
   animation: pulse 12s infinite
   animation-direction: alternate
   padding-right: 0
+
+.blend, .blend img 
+  border-radius: 50%
+
+#blog .flourish
+  display: block
+  border-top: solid lighten($hot,35%) 1px
+  color: $hot
+  margin: 3em auto 3em auto
+  width: 66%
+  text-align: center
+
+#blog .flourish .ftext
+  position: absolute
+  display: inline-block
+  margin-top: -1em
+  margin-left: -30px
+  background-color: #fff
+  line-height: 1
+  padding: 10px .5em 5px .5em
+  font-size: 1.3em

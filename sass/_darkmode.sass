@@ -1,0 +1,54 @@
+@media (prefers-color-scheme: dark)
+  #blog
+    background-color: $colorC !important
+
+    .flourish .ftext
+      background-color: $colorC !important
+
+  a
+    &:visited
+      color: #BE939C
+      text-decoration-color: #BE939C
+
+    &:link
+      color: #eee
+
+  .post-text, .title, .recmeta, .photo-title, .subtitle
+    color: #eee
+
+  blockquote
+    border-left: solid 5px $colorG
+    background-color: $colorF
+
+  code
+    background-color: $colorF
+
+  .post-byline
+    color: #ccc !important
+
+    a
+      color: #ccc !important
+
+  img
+    opacity: .9
+    transition: all .5s ease-in-out
+
+    &:hover
+      filter: none
+      opacity: 1
+
+  .post.photo.vert .post-text
+    background-color: rgba(0, 0, 40, 0.9)
+
+  .socmeed svg
+    background-color: #fff
+    padding: 10px
+    border-radius: 4px
+
+  audio
+    filter: contrast(100%) invert(78%) grayscale(1)
+    border-radius: 4px
+
+  .recmeta img
+    background-color: #fff
+    border-radius: 4px

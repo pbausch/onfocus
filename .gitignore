@@ -25,3 +25,4 @@ lib/set-stylesheet.php
 lib/set-includes.php
 twitter-archive/*
 .DS_Store
+onfocus-ini.inc

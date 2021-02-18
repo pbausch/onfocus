@@ -31,20 +31,20 @@
 		html {
 			min-height: 100%;
 		}
-		.btn {
+		/* .btn {
 		    background-color: #<?php print $gradcolor ?>;
 		    border: 1px solid #<?php print $logocolor ?>;
 		    color: #<?php print $logocolor ?>;
-		}
+		} */
 		.flickr-embed-header {
 			visibility:hidden;
 		}
 		iframe[src*=spotify] {
     			max-width: 100%;
 		}
-		#header, #footer { background-color: #<?php print $bannercolor ?> !important; }
+		/* #header, #footer { background-color: #<?php print $bannercolor ?> !important; }
 		.triangle-up-right:after { border-top-color: #<?php print $bannercolor ?> !important;}
-		.triangle-up-left:after { border-left-color: #<?php print $bannercolor ?> !important;}
+		.triangle-up-left:after { border-left-color: #<?php print $bannercolor ?> !important;} */
         #footer {
             min-height: 46px;
         }
@@ -60,7 +60,6 @@
 	</style>
 	<link rel="stylesheet" href="<?php print LIVE_STYLESHEET ?>" />
 	<link rel="stylesheet" href="<?php print CDN_URL ?>/css/jquery.fancybox.min.css" />
-	<link rel="stylesheet" href="/css/dark-mode.css" />
 	<?php if (isset($pageHeaderAddition)) { 
 		$pageHeaderAddition = str_replace("200808.twitter-card.png",$logocolor . ".twitter-card.png",$pageHeaderAddition);
 		print $pageHeaderAddition; 

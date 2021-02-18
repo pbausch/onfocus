@@ -5,29 +5,6 @@ $pageNum = 1;
 $isDateArchive = 0;
 require("header.php");
 ?>
-<style>
-	.blend, .blend img {
-		border-radius: 50%;
-	}
-	#blog .flourish {
-		display: block;
-		border-top: solid #bbd2c5 1px;
-		color: #90485f;
-		margin: 3em auto 3em auto;
-		width: 66%;
-		text-align: center;
-	}
-	#blog .flourish .ftext {
-		position: absolute;
-		display: inline-block;
-		margin-top: -.92em;
-		margin-left: -30px;
-		background-color: #fff;
-		line-height: 1;
-		padding: 10px .5em 5px .5em;
-		font-size: 1.5em;
-	}
-</style>
 	<!-- <h2><span class="dmd">&#9670;</span>&nbsp;&nbsp;About&nbsp;&nbsp;<span class="dmd">&#9670;</span></h2> -->
 	<div class="post other">
 	<div style="text-align:center;">
