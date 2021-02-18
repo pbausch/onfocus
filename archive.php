@@ -74,7 +74,7 @@ while ($itags = mysqli_fetch_row($result)) {
 			background-color: #eee;
 		}
 		.odd {
-			backgaround-color: #fff;
+			background-color: #fff;
 		}
 		table {
 			line-height:150%;border:solid #eee 3px;
