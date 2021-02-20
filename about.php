@@ -67,7 +67,7 @@ require("header.php");
 		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln.&lrm;
 		</div>
 		</div>
-		</div></div>
+		</div></div></div>
 		<div class="post" style="margin-top:18px;">
 		<h2 class="title">Contact Me</h2>
 		<div class="post-text">
