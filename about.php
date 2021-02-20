@@ -15,7 +15,7 @@ require("header.php");
 		<div style="margin-top:15px;">
 		Hi, how's it going? I'm pb&mdash;a Web Developer in <a href="https://www.onfocus.com/tag/corvallis">Corvallis, Oregon</a>. 
 		<br /><br />
-		onfocus is my personal website where I've been posting whatever comes to mind since 1998. I think the web can be a <a href="https://www.onfocus.com/tag/internet">great space for creativity</a>, I think understanding <a href="https://www.onfocus.com/tag/media">how media is produced</a> is important, and <a href="https://www.onfocus.com/tag/photo">I take a lot of pictures</a> (not to mention the historic <a href="https://www.onfocus.com/tag/flickr">flickr</a> and <a href="https://www.onfocus.com/tag/instagram">instagram</a> tags). You'll find a mixed bag of posts about my interests here. 
+		onfocus is my personal website where I've been posting whatever comes to mind since 1998. I think the web can be a <a href="https://www.onfocus.com/tag/internet">great space for creativity</a>, I think understanding <a href="https://www.onfocus.com/tag/media">how media is produced</a> is important, and <a href="https://www.onfocus.com/tag/photo">I take a lot of pictures</a> (not to mention the historic <a href="https://www.onfocus.com/tag/flickr">flickr</a> and <a href="https://www.onfocus.com/tag/instagram">instagram</a> tags). When I'm not computering I like to <a href="https://www.onfocus.com/tag/dnd">play Dungeons &amp; Dragons</a>, <a href="https://www.onfocus.com/tag/garageband">noodle around on the guitar</a>, and <a href="https://www.onfocus.com/tag/discgolf">throw plastic discs at trees</a> aka disc golf. You'll find a mix of posts about my interests here. 
 		</div>
 		<div class="flourish">
 			<div class="ftext">&nbsp;◆&nbsp;</div>
@@ -60,9 +60,6 @@ require("header.php");
 		</div>
 		</div>
 		</div>
-		<div class="flourish">
-			<div class="ftext">&nbsp;◆&nbsp;</div>
-		</div>
 		<div class="post-text">
 		<div class="project">
 		<div class="project-icon"><img alt="Univeristy of Nebraska Logo" src="https://d1x6es5xzge33k.cloudfront.net/about-nu-logo.png" width="50" height="50" class="by-the-power-of" /></div>
@@ -70,13 +67,7 @@ require("header.php");
 		Before 1999 I studied broadcast journalism at the University of Nebraska in Lincoln.&lrm;
 		</div>
 		</div>
-		<div class="project">
-		<div class="project-icon"><img alt="National Park Camping Symbol" src="https://d1x6es5xzge33k.cloudfront.net/about-camp-logo.png" width="50" height="50" class="by-the-power-of" /></div>
-		<div class="project-text">
-		When I'm not computering I like to <a href="https://www.onfocus.com/tag/dnd">play Dungeons &amp; Dragons</a>, <a href="https://www.onfocus.com/tag/garageband">noodle around on the guitar</a>, and <a href="https://www.onfocus.com/tag/discgolf">throw plastic discs at trees</a> aka disc golf.&lrm;
-		</div>
-		</div>
-		</div></div></div>
+		</div></div>
 		<div class="post" style="margin-top:18px;">
 		<h2 class="title">Contact Me</h2>
 		<div class="post-text">
