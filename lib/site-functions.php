@@ -23,7 +23,7 @@ function link_tags($taglist) {
 		if (($t == "onfocus") || ($t == "") || ($t == "photo")) { continue; }
 		$out .= "<a href=\"/tag/" . urlencode($t) . "\" class=\"tag\">" . $t . "</a> ";
 	}
-	if ($out != "") { $out = "Browse more &middot; " . $out; }
+	if ($out != "") { $out = "" . $out; }
 	return $out;
 }
 

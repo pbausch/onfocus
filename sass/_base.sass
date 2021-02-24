@@ -38,8 +38,11 @@ a
   &:hover 
     color: $colorC
     text-decoration: underline
-    text-decoration-color: lighten($colorC,55%)
-    -webkit-text-decoration-color: lighten($colorC,55%)
+    text-decoration-color: $colorC
+    -webkit-text-decoration-color: $colorC
+
+audio
+  border-radius: 4px
 
 #footer .flourish
   color: $hot
@@ -258,12 +261,15 @@ ul.delicious
 
 .subtitle 
   font-family: $font-system
-  font-size: $font-large-a
+  font-size: $font-large-b
+  margin-top: 10px
   margin-left: 40px
   margin-right: 40px
   color: #333
   font-weight: 600
-  padding-bottom: 0.1em
+  padding-bottom: 0.15em
+  border-bottom: solid lighten($hot,35%) 1px
+  text-transform: capitalize
 
 .navigation 
   margin: 5px auto

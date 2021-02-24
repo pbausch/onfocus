@@ -111,7 +111,7 @@ if ($isDateArchive) {
 	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE Year(DateCreated) = $thisArchiveYear AND Month(DateCreated) = $thisArchiveMonth AND hide = 0 ORDER BY DateCreated DESC";
 }
 else if ($isTagArchive) {
-	print "<h2 class=\"subtitle\">Posts tagged <em>". $thisTag ."</em></h2>";
+	print "<h2 class=\"subtitle\">". $thisTag ."</h2>";
 	$thisTag = mysqli_real_escape_string($connection,$thisTag);
 	$query = "SELECT post_id, DateCreated, title, body, (SELECT count(comment_id) FROM comments WHERE post_id = items.post_id AND hide = 0 AND trackback = 0) AS comment_count, comments_on, item_type_id, url_slug FROM items WHERE post_id IN (SELECT post_id FROM tags WHERE tag = '$thisTag') AND hide = 0 ORDER BY DateCreated DESC LIMIT $offset, $rowsPerPage";
 }
