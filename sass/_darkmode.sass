@@ -6,12 +6,27 @@
       background-color: $colorC !important
 
   a
-    &:visited
-      color: #BE939C
-      text-decoration-color: #BE939C
-
-    &:link
-      color: #eee
+    &:link 
+      color: lighten($link,100)
+      text-decoration: underline
+      text-decoration-color: lighten($link,75)
+      -webkit-text-decoration-color: lighten($link,75%)
+    
+    &:visited 
+      color: lighten($visited,25)
+      text-decoration-color: lighten($visited,25)
+      -webkit-text-decoration-color: lighten($visited,25)
+    
+    &:active 
+      color: lighten($active,20)
+      text-decoration-color: lighten($active,20)
+      -webkit-text-decoration-color: lighten($active,20)
+    
+    &:hover 
+      color: lighten($colorC,100)
+      text-decoration: underline
+      text-decoration-color: lighten($colorC,100)
+      -webkit-text-decoration-color: lighten($colorC,100)
 
   .post-text, .title, .recmeta, .photo-title, .subtitle
     color: #eee
