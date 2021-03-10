@@ -102,7 +102,12 @@ if ($highpost > $totalposts) {
 
 $pageTitle = APP_TITLE . " by Paul Bausch";
 $pageDescription = "Thoughts and photos from a Web developer in Corvallis, Oregon.";
-
+if ($isDateArchive) {
+	$pageTitle = "Posts from " . date("F Y",$thisArchiveDate) . " | onfocus";
+}
+else if ($isTagArchive) {
+	$pageTitle = "Posts tagged " . $thisTag . " | onfocus";
+}
 require("header.php");
 if ($isDateArchive) {
 	print "<h2 class=\"subtitle\">Posts from ".date("F Y",$thisArchiveDate)."</h2>";

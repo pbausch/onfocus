@@ -3,14 +3,7 @@
 <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="<?php print LIVE_SCRIPT ?>"></script>
 <script src="/js/jquery.fancybox.min.js"></script>
-<script>
-//$(function() {
-//	if ($.fancybox.isMobile) { 
-//	    $.fancybox.destroy();
-//	}
-//});
-</script>
 <?php if (isset($pageFooterAddition)) { print $pageFooterAddition; } ?>
-<?php //include_once("lib/analyticstracking.php") ?>
+<?php echo $tag_code; ?>
 </body>
 </html>

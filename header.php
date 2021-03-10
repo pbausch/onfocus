@@ -1,4 +1,14 @@
 <?php require_once('lib/set-includes.php'); ?>
+<?php
+        require_once(OWA_LOCAL.'owa_env.php');
+        require_once(OWA_DIR.'owa_php.php');
+        $owa = new owa_php();
+        $owa->setSiteId(OWA_ID);
+		if (isset($pageTitle)) { $owa->setPageTitle($pageTitle); } else { $owa->setPageTitle('onfocus'); }
+        $owa->setPageType(basename($_SERVER["SCRIPT_FILENAME"], '.php'));
+		$tag_code = $owa->placeHelperPageTags(false);
+        $owa->trackPageView();
+?>
 <?php $page = $_SERVER["PHP_SELF"]; ?>
 <?php
 	$logocolor = "fefefd"; //fefefd
