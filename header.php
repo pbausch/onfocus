@@ -31,9 +31,6 @@
 <?php if (($pageNum > 1) || ($isDateArchive) || ($isTagArchive)) { print "\t"; ?><meta name="ROBOTS" content="NOINDEX,FOLLOW"><?php }?>
 	<link rel="dns-prefetch" href="https://code.jquery.com/" />
 	<link rel="dns-prefetch" href="https://d1x6es5xzge33k.cloudfront.net/" />
-	<link rel="preload" href="https://d1x6es5xzge33k.cloudfront.net/fonts/DDCHardware-Regular.woff2" as="font" type="font/woff2" crossorigin>
-	<link rel="preload" href="https://d1x6es5xzge33k.cloudfront.net/css/Inter/Inter-Regular.woff2?v=3.11" as="font" type="font/woff2" crossorigin>
-	<link rel="preload" href="https://d1x6es5xzge33k.cloudfront.net/css/Inter/Inter-SemiBold.woff2?v=3.11" as="font" type="font/woff2" crossorigin>
 	<link rel="icon" type="image/ico" href="<?php print CDN_URL ?>/<?php print $logocolor ?>.ico?v=<?php print $logocolor ?>" />
 	<link rel="apple-touch-icon" href="<?php print CDN_URL ?>/<?php print $logocolor ?>.apple-touch-icon.png">
 	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://xml.onfocus.com/posts" />
