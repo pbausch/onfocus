@@ -10,17 +10,13 @@
 function link_is_external(link_element) {
     return (link_element.host !== window.location.host);
 }
-function ue(value,type) {
-    interval = setInterval(function () {
-        umami.trackEvent(value, type);
-        clearInterval(interval);
-    },0);
-}
 $(function() {
     $('a').each(function() {
         if (link_is_external(this)) {
-           $(this).click(function() {
-                ue($(this).text(), 'link click');
+           $(this).click(function(e) {
+                e.preventDefault();
+                umami.trackEvent($(this).text(), 'link click');
+                location.href = $(this).attr('href');
            }); 
         }
     });
