@@ -4,7 +4,7 @@
 <script src="<?php print LIVE_SCRIPT ?>"></script>
 <script src="/js/jquery.fancybox.min.js"></script>
 <?php if (isset($pageFooterAddition)) { print $pageFooterAddition; } ?>
-<?php if ($_SERVER['REMOTE_ADDR'] <> HOME_IP) { ?>
+<?php //if ($_SERVER['REMOTE_ADDR'] <> HOME_IP) { ?>
 <script async defer data-website-id="03ed9b9b-a963-4b3c-8c40-7bd8ba62eefd" src="https://umami.onfocus.com/umami.js"></script>
 <script>
 function link_is_external(link_element) {
@@ -22,7 +22,7 @@ $(function() {
 });
 
 </script>
-<?php } ?>
+<?php //} ?>
 <!-- Start Open Web Analytics Tracker -->
 <script type="text/javascript">
 //<![CDATA[
