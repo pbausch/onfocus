@@ -16,7 +16,8 @@ $(function() {
            $(this).click(function(e) {
                 e.preventDefault();
                 umami.trackEvent($(this).text(), 'link click');
-                setTimeout(function () { window.location.href = $(this).attr('href'); }, 250); 
+                var url = $(this).attr('href');
+                setTimeout(function () { window.location.href = url; }, 250); 
            }); 
         }
     });
