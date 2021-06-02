@@ -10,12 +10,18 @@
 function link_is_external(link_element) {
     return (link_element.host !== window.location.host);
 }
+function ue(value,type) {
+    interval = setInterval(function () {
+        umami.trackEvent(value, type);
+        clearInterval(interval);
+    },0);
+}
 $(function() {
     $('a').each(function() {
         if (link_is_external(this)) {
             console.log($(this));
            $(this).click(function() {
-                umami.trackEvent($(this).text(), 'link click');
+                ue($(this).text(), 'link click');
            }); 
         }
     });
