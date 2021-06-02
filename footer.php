@@ -21,6 +21,9 @@ $(function() {
            }); 
         }
     });
+    $('audio').on("play", function (me) {
+        umami.trackEvent($(this).attr('id'), 'audio play');
+    });
 });
 
 </script>
