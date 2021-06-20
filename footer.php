@@ -8,7 +8,7 @@
 <script async defer data-website-id="03ed9b9b-a963-4b3c-8c40-7bd8ba62eefd" src="https://umami.onfocus.com/umami.js"></script>
 <script>
 function link_is_external(link_element) {
-    return (link_element.host !== window.location.host);
+    return ((link_element.host !== window.location.host) && (link_element.host !== 'd1x6es5xzge33k.cloudfront.net'));
 }
 $(function() {
     $('a').each(function() {
